@@ -1,0 +1,101 @@
+/* positioning */
+
+div.main {
+	position: absolute;
+	margin: 10px;
+
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+}
+
+div.code-area {
+	position: absolute;
+	margin: 2px;
+
+	left: 0px;
+	right: 50%;
+	top: 0px;
+	bottom: 0px;
+}
+
+.code-window {
+	position: absolute;
+
+	left: 0px;
+	right: 0px;
+	top: -60px;
+	margin-top: 60px;	
+	bottom: 0px;
+}
+
+.log-window {
+	position: absolute;
+
+	left: 0px;
+	right: 0px;
+	top: -60px;
+	margin-top: 100%;
+	bottom: 0px;
+}
+
+div.items-area {
+	position: absolute;
+	margin: 2px;
+
+	left: 50%;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+}
+
+/* code editor style */
+
+.code-window {
+	padding: 3px;
+	background-color: #252525;
+	color: #ddddaa;
+	font-weight: bold;
+	font-family: monospace;
+}
+
+.log-window {
+	background-color: white;
+	border: 1px solid black;
+}
+
+/* items area style */
+
+.items-area {
+	background-image: url("http://screenshots.en.sftcdn.net/en/scrn/69654000/69654141/path-of-exile-04-700x393.jpg");
+	background-size: cover;
+	background-position: center;
+}
+
+.item {
+	display: inline-block;
+	margin: 3px;
+	padding: 1px 6px;
+
+	background-color: rgba(0, 0, 0, 0.75);
+	color: white;
+	
+	font-family: Fontin,Verdana,sans-serif;
+	font-size: 13px;
+	font-variant: small-caps;
+}
+
+.item > .sockets {
+	position: relative;
+	display: inline-block;
+	width: 10px;
+	height: 16px;
+	margin-left: 2px;
+
+	background-color: white;
+}
+
+/* generic stuff */
+
+* { box-sizing: border-box; }
