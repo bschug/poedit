@@ -2,21 +2,27 @@
 <head>
 <title>PoE ItemScript Editor</title>
 <link rel="stylesheet" href="poedit.css"/>
+<script type="text/javascript" src="utils.js"></script>
 <script type="text/javascript" src="item.js"></script>
 <script type="text/javascript" src="rule.js"></script>
 <script type="text/javascript" src="parser.js"></script>
 <script type="text/javascript" src="main.js"></script>
 </head>
 <body>
-<div class="main">
- <div class="code-area">
-  <div class="code-window" contenteditable="true"></div>
-  <div class="log-window">This is a log message</div>
+<div id="main">
+ <div id="code-area">
+  <div id="code-window" contenteditable="true"></div>
+  <div id="log-window">This is a log message</div>
  </div>
- <div class="items-area">
-  <div class="item">My Test Item<div class="sockets"></div></div>
-  <div class="item">My Other Test Item<div class="sockets"></div></div>
+ <div id="items-area">
+<!--  <div class="item">My Test Item<div class="sockets"></div></div>
+  <div class="item">My Other Test Item<div class="sockets"></div></div> -->
  </div>
 </div>
+
+<script type='text/javascript'>
+PoEdit.init();
+</script>
+
 </body>
 </html>

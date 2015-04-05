@@ -10,5 +10,22 @@ var StrUtils = {
 	// Does not take locale into account.
 	sortChars: function (str) {
 		return str.split('').sort().join('');
+	},
+	
+	// Checks if string A consists only of the characters in string B
+	consistsOf: function (a, b) {
+		var validChars = b.split('');
+		return !a.split('').some( function(c) { return StrUtils.contains( c, validChars ); } );
+	},
+	
+	// Counts how often a character occurs in the string.
+	countChar: function (c, str) {
+		var count = 0;
+		for (var i=0; i < str.length; i++) {
+			if (str[i] === c) {
+				count++;
+			}
+		}
+		return count;
 	}
 };

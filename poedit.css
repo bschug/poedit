@@ -1,6 +1,6 @@
 /* positioning */
 
-div.main {
+#main {
 	position: absolute;
 	margin: 10px;
 
@@ -10,7 +10,7 @@ div.main {
 	bottom: 0px;
 }
 
-div.code-area {
+#code-area {
 	position: absolute;
 	margin: 2px;
 
@@ -20,7 +20,7 @@ div.code-area {
 	bottom: 0px;
 }
 
-.code-window {
+#code-window {
 	position: absolute;
 
 	left: 0px;
@@ -30,7 +30,7 @@ div.code-area {
 	bottom: 0px;
 }
 
-.log-window {
+#log-window {
 	position: absolute;
 
 	left: 0px;
@@ -40,7 +40,7 @@ div.code-area {
 	bottom: 0px;
 }
 
-div.items-area {
+#items-area {
 	position: absolute;
 	margin: 2px;
 
@@ -52,7 +52,7 @@ div.items-area {
 
 /* code editor style */
 
-.code-window {
+#code-window {
 	padding: 3px;
 	background-color: #252525;
 	color: #ddddaa;
@@ -60,14 +60,14 @@ div.items-area {
 	font-family: monospace;
 }
 
-.log-window {
+#log-window {
 	background-color: white;
 	border: 1px solid black;
 }
 
 /* items area style */
 
-.items-area {
+#items-area {
 	background-image: url("http://screenshots.en.sftcdn.net/en/scrn/69654000/69654141/path-of-exile-04-700x393.jpg");
 	background-size: cover;
 	background-position: center;
@@ -79,10 +79,17 @@ div.items-area {
 	padding: 1px 6px;
 
 	background-color: rgba(0, 0, 0, 0.75);
+}
+
+.item > span {
+	display: inline-block;
+	margin: 0px;
+	margin-top: -2px;
+	padding: 0px;
+
 	color: white;
-	
 	font-family: Fontin,Verdana,sans-serif;
-	font-size: 13px;
+	font-size: 15px;
 	font-variant: small-caps;
 }
 
@@ -92,8 +99,32 @@ div.items-area {
 	width: 10px;
 	height: 16px;
 	margin-left: 2px;
+}
 
+.item > .sockets > .socket {
+	position: absolute;
+	z-index: 5;
+	width: 4px;
+	height: 4px;
+	/* position and color is set by script */
+}
+
+.item > .sockets > .link-vertical {
+	position: absolute;
+	z-index: 10;
+	width: 2px;
+	height: 4px;
 	background-color: white;
+	/* position is set by script */
+}
+
+.item > .sockets > .link-horizontal {
+	position: absolute;
+	z-index: 10;
+	width: 4px;
+	height: 2px;
+	background-color: white;
+	/* position is set by script */
 }
 
 /* generic stuff */
