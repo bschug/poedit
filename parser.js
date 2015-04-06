@@ -17,7 +17,7 @@ function Parser() {
 		this.currentRule = null;
 		this.ruleSet = [];
 		this.errors = [];
-		this.errorLines = [];
+		this.lineTypes = [];
 		
 		var lines = code.split('\n');
 		for (var i = 0; i < lines.length; i++) {

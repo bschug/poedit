@@ -9,6 +9,7 @@ function Editor() {
 	this.formatCode = function (code, lineTypes) {
 		
 		var rawLines = code.split( '\n' );
+		
 		if (rawLines.length != lineTypes.length) {
 			console.log( rawLines.length.toString() + ' code lines, ' + lineTypes.length.toString() + ' line types' );
 			return;
