@@ -11,7 +11,7 @@ function Parser() {
 	
 	this.ruleSet = [];
 	this.errors = [];
-	this.errorLines = [];
+	this.lineTypes = [];
 	
 	this.parse = function (code) {
 		this.currentRule = null;
@@ -22,14 +22,13 @@ function Parser() {
 		var lines = code.split('\n');
 		for (var i = 0; i < lines.length; i++) {
 			this.currentLineNr = i;
+
+			if (lines[i].trim() === '' || lines[i].trim()[0] === '#') {
+				this.lineTypes[i] = 'Empty';
+				continue;
+			}
 		
-			if (this.currentRule === null) {
-				parseVisibility( this, lines[i] );
-			}
-			else if (lines[i].trim().length == 0) {
-				parseEndOfRule( this );
-			}
-			else if (VISIBILITY_TOKENS.indexOf( lines[i].trim() ) >= 0) {
+			if (VISIBILITY_TOKENS.indexOf( lines[i].trim() ) >= 0) {
 				if (this.currentRule !== null) {
 					parseEndOfRule( this );
 				}
@@ -48,7 +47,8 @@ function Parser() {
 			reportTokenError( self, token, 'Show or Hide' );
 			return;
 		}
-		
+
+		self.lineTypes[self.currentLineNr] = 'Visibility';		
 		self.currentRule = new Rule( token === 'Show' );
 	}
 	
@@ -84,6 +84,8 @@ function Parser() {
 	// ----------- FILTERS ---------------------------------------------------
 	
 	function parseFilter (self, token, arguments) {
+		self.lineTypes[self.currentLineNr] = 'Filter';
+	
 		var filters = {
 			'ItemLevel': ItemLevelFilter,
 			'DropLevel': DropLevelFilter,
@@ -183,6 +185,8 @@ function Parser() {
 	// ----------- MODIFIERS ---------------------------------------------------
 	
 	function parseModifier (self, token, arguments) {
+		self.lineTypes[self.currentLineNr] = 'Modifier';
+	
 		var modifiers = {
 			'SetBackgroundColor': SetBackgroundColorModifier, 
 			'SetBorderColor': SetBorderColorModifier, 
@@ -226,6 +230,7 @@ function Parser() {
 	
 	function parseNumericModifier (self, modifier, arguments) {
 		var numbers = parseNumbers( self, arguments );
+		if (numbers === null) return;
 		if (numbers.length != 1) {
 			reportTokenError( self, arguments, 'one number' );
 			return;
@@ -326,17 +331,17 @@ function Parser() {
 	
 	function reportTokenError (self, token, expected) {
 		self.errors.push( 'Invalid token "' + token + '" at line ' + self.currentLineNr.toString() + ' (expected ' + expected + ')' );
-		self.errorLines.push( self.currentLineNr );
+		self.lineTypes[self.currentLineNr] = 'Error';
 	}
 	
 	function reportInvalidSocketGroup (self, socketGroup) {
 		self.errors.push( 'Invalid socket group "' + socketGroup + '" + at line ' + self.currentLineNr.toString() + ' (allowed characters are R,G,B)' );
-		self.errorLines.push( self.currentLineNr );
+		self.lineTypes[self.currentLineNr] = 'Error';
 	}
 	
 	function reportParseError (self, text, reason) {
 		self.errors.push( 'Cannot parse "' + text + '" (' + reason + ')' );
-		self.errorLines.push( self.currentLineNr );
+		self.lineTypes[self.currentLineNr] = 'Error';
 	}
 };
 

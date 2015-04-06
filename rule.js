@@ -64,7 +64,7 @@ function LinkedSocketsFilter (comparer, numLinkedSockets) {
 	this.match = function (item) {
 		var largestSocketGroup = item.sockets
 			.map( function (grp) { return grp.length; } )
-			.reduce( Math.max );
+			.reduce( Math.max, 0 );
 		
 		return comparer( largestSocketGroup, numLinkedSockets );
 	};

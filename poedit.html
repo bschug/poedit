@@ -2,28 +2,22 @@
 <head>
 <title>PoE ItemScript Editor</title>
 <link rel="stylesheet" href="poedit.css"/>
+
+<script type="text/javascript" src="rangy-core.js"></script>
+<script type="text/javascript" src="rangy-textrange.js"></script>
+
 <script type="text/javascript" src="utils.js"></script>
 <script type="text/javascript" src="item.js"></script>
 <script type="text/javascript" src="rule.js"></script>
 <script type="text/javascript" src="parser.js"></script>
+<script type="text/javascript" src="editor.js"></script>
 <script type="text/javascript" src="main.js"></script>
+
 </head>
 <body>
 <div id="main">
  <div id="code-area">
-  <div id="code-window" contenteditable="true" onkeypress="PoEdit.onKeyPress">
-<pre>
-Hide
-    Class Gem
-
-Show
-    Rarity Rare
-    SetBorderColor 255 255 255
-    SetBackgroundColor 255 0 0
-    SetTextColor 0 0 0 
-
-Show 
-</pre> 
+  <div id="code-window" contenteditable="true">
   </div>
   <div id="log-window">This is a log message</div>
  </div>

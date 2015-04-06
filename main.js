@@ -8,6 +8,7 @@ var PoEdit = new function()
 			quality: 8,
 			rarity: Rarity.Normal,
 			itemClass: 'Body Armour',
+			baseType: 'Full Plate',
 			sockets: ['RRRRRR']
 		},
 		{ 
@@ -15,8 +16,9 @@ var PoEdit = new function()
 			itemLevel: 43,
 			dropLevel: 1,
 			quality: 12,
-			itemClass: 'Gem',
 			rarity: Rarity.Normal,
+			itemClass: 'Gem',
+			baseType: 'Heavy Strike',
 			sockets: []
 		},
 		{ 
@@ -25,6 +27,7 @@ var PoEdit = new function()
 			dropLevel: 1,
 			quality: 0,
 			itemClass: 'Currency',
+			baseType: 'Armourer\'s Scrap',
 			rarity: Rarity.Normal,
 			sockets: []
 		},
@@ -34,6 +37,7 @@ var PoEdit = new function()
 			dropLevel: 1,
 			quality: 0,
 			itemClass: 'Currency',
+			baseType: 'Orb of Alchemy',
 			rarity: Rarity.Normal,
 			sockets: []
 		},
@@ -43,6 +47,7 @@ var PoEdit = new function()
 			dropLevel: 1,
 			quality: 0,
 			itemClass: 'Currency',
+			baseType: 'Orb of Augmentation',
 			rarity: Rarity.Normal,
 			sockets: []
 		},
@@ -52,6 +57,7 @@ var PoEdit = new function()
 			dropLevel: 1,
 			quality: 0,
 			itemClass: 'Currency',
+			baseType: 'Chromatic Orb',
 			rarity: Rarity.Normal,
 			sockets: []
 		},
@@ -61,6 +67,7 @@ var PoEdit = new function()
 			dropLevel: 1,
 			quality: 0,
 			itemClass: 'One Hand Sword',
+			baseType: 'Rusted Sword',
 			rarity: Rarity.Rare,
 			sockets: ['B', 'G']
 		},
@@ -70,6 +77,7 @@ var PoEdit = new function()
 			dropLevel: 30,
 			quality: 0,
 			itemClass: 'Gem',
+			baseType: 'Summon Chaos Golem',
 			rarity: Rarity.Normal,
 			sockets: []
 		},
@@ -79,6 +87,7 @@ var PoEdit = new function()
 			dropLevel: 12,
 			quality: 0,
 			itemClass: 'Gem',
+			baseType: 'Added Fire Damage',
 			rarity: Rarity.Normal,
 			sockets: []
 		},
@@ -88,6 +97,7 @@ var PoEdit = new function()
 			dropLevel: 1,
 			quality: 0,
 			itemClass: 'Currency',
+			baseType: 'Exalted Orb',
 			rarity: Rarity.Normal,
 			sockets: []
 		},
@@ -129,6 +139,27 @@ var PoEdit = new function()
 			item.setBorderColor( color );
 		}
 	}
+	
+	function addDefaultScript() {
+		var codeWindow = document.getElementById( 'code-window' );
+		codeWindow.innerText = 
+			'Show\n' +
+			'    Class Gem\n' +
+			'    Quality > 0\n' +
+			'    SetBorderColor 128 128 255 \n' +
+    		'\n' +
+			'Show\n' +
+			'    BaseType "Exalted Orb"\n' +
+			'    SetTextColor 255 0 255\n' +
+			'\n' +
+			'Show\n' +
+			'    LinkedSockets >= 5\n' +
+			'    SetBackgroundColor 0 128 0\n' +
+			'\n' +
+			'Show\n' +
+			'    SocketGroup 6\n' +
+			'    PlayAlertSound 1    \n';
+	}
 
 	function createItems() {
 		var items = [];
@@ -161,13 +192,19 @@ var PoEdit = new function()
 	}
 
 	this.parser = new Parser();
+	this.editor = new Editor();
 
 	this.init = function() {
 		this.items = createItems();
 		drawItems( this.items );
 		
+		addDefaultScript();
+		this.editor.init();
+		
 		var self = this;
-		setInterval( function() { self.update(); }, 1000 );
+		setInterval( function() { self.update(); }, 250 );
+		
+		document.getElementById( 'code-window' ).addEventListener( 'textInput', self.editor.onKeyPressed, true );
 	}
 	
 	this.update = function() {
@@ -176,10 +213,10 @@ var PoEdit = new function()
 		clearLog();
 		this.parser.errors.forEach( addErrorMessage );
 		
+		this.editor.formatCode( this.parser.lineTypes );
+		
 		this.items.forEach( function(item) {
-			if (this.parser.ruleSet.length == 0) {
-				applyDefaultStyle( item );
-			}
+			applyDefaultStyle( item );
 		
 			for (var i=0; i < this.parser.ruleSet.length; i++) {
 				var rule = this.parser.ruleSet[i];
@@ -192,3 +229,5 @@ var PoEdit = new function()
 	}
 	
 };
+
+
