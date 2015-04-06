@@ -16,6 +16,7 @@ function Editor() {
 		}
 		
 		var codeHTML = '';
+		var indent = false;
 		
 		var selection = saveSelection( this.codeWindow );
 		var selectionOffset = 0;
@@ -35,8 +36,23 @@ function Editor() {
 		
 			codeHTML += '<span id="line' + i.toString() + '" class="' + className[lineTypes[i]] + '">';
 			
-			// indentation
+			// Indentation:
+			// Filters and Modifiers are always indented, Visibility is never indented.
+			// For erraneous / incomplete lines and empty lines, indentation is guessed based on the previous line.
+			// If the previous line was visibility, the current line is indented.
+			// If the previous line was empty, the new line is NOT indented (we assume the user wants a new block).
+			// If the previous line was erraneous too, we just keep the indentation level from before.
+			if (lineTypes[i] === 'Visibility') {
+				indent = false;
+			}
 			if (lineTypes[i] === 'Filter' || lineTypes[i] === 'Modifier') {
+				indent = true;
+			}
+			else if (lineTypes[i] === 'Empty') {
+				indent = false;
+			}
+
+			if (indent) {
 				codeHTML += '&nbsp; &nbsp; ';
 				lineCharacters += 4;
 			}
@@ -48,7 +64,10 @@ function Editor() {
 			if (i < rawLines.length - 1) {
 				codeHTML += '<br>';
 			}
-			
+
+			// We need to count now many readable characters we have generated so far,
+			// and how many readable characters there were in the original, unmodified code.
+			// Otherwise, we could not know if and by how much to move the cursor.
 			lineCharacters += trimmedLine.length;
 			generatedCharacters += lineCharacters;
 			var originalLineStart = originalCharacters;
@@ -58,7 +77,6 @@ function Editor() {
 				var selectionStart = selection[0].characterRange.start;
 				if (selectionStart > originalLineStart && selectionStart <= originalCharacters) {
 					selectionOffset = generatedCharacters - originalCharacters;
-					console.log('offset ' + selectionOffset);
 				}
 			}
 		}
