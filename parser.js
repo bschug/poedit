@@ -311,7 +311,7 @@ function Parser() {
 			var withoutQuotes = tokens[i].replace( '"', '' );
 			
 			if (currentToken.length > 0) {
-				currentToken += withoutQuotes;
+				currentToken += ' ' + withoutQuotes;
 			}
 			else {
 				currentToken = withoutQuotes;
