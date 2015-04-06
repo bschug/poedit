@@ -37,6 +37,10 @@ function Parser() {
 			else {
 				parseFilterOrModifier( this, lines[i] );
 			}
+			
+			if (this.currentRule !== null) {
+				this.currentRule.codeLines.push( i );
+			}
 		}
 		parseEndOfRule( this );
 	};
@@ -48,7 +52,7 @@ function Parser() {
 			return;
 		}
 
-		self.lineTypes[self.currentLineNr] = 'Visibility';		
+		self.lineTypes[self.currentLineNr] = 'Visibility';	
 		self.currentRule = new Rule( token === 'Show' );
 	}
 	

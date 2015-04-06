@@ -72,6 +72,10 @@
 	color: red;
 }
 
+#code-window > .highlighted {
+	background-color: #404040;
+}
+
 /* items area style */
 
 #items-area {

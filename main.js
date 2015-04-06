@@ -254,6 +254,16 @@ var PoEdit = new function()
 		items.forEach( function(item) {
 			item.draw();
 			applyDefaultStyle( item );
+
+			item.domElement.addEventListener( 'mouseover', function() { 
+				if (item.matchingRule !== null) {
+					PoEdit.editor.highlightLines = item.matchingRule.codeLines; 
+				}
+			} );
+				
+			item.domElement.addEventListener( 'mouseout', function() { 
+				PoEdit.editor.highlightLines = []; 
+			} );
 		});
 	}
 	
@@ -303,6 +313,7 @@ var PoEdit = new function()
 			for (var i=0; i < this.parser.ruleSet.length; i++) {
 				var rule = this.parser.ruleSet[i];
 				if (rule.match( item )) {
+					item.matchingRule = rule;
 					rule.applyTo( item );
 					break;
 				}

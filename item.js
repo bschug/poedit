@@ -41,7 +41,7 @@ function Item (itemdata)
 	this.sockets = itemdata.sockets;
 	
 	this.domElement = null;
-	
+	this.matchingRule = null;
 
 	this.getDisplayName = function() {
 		if (this.quality > 0) {

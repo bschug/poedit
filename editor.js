@@ -1,6 +1,7 @@
 function Editor() {
 
 	this.codeWindow = null;
+	this.highlightLines = [];
 
 	this.init = function() {
 		this.codeWindow = document.getElementById( 'code-window' );
@@ -33,8 +34,11 @@ function Editor() {
 				Modifier: 'code-modifier',
 				Error: 'code-error'
 			};
+			
+			var hasHighlight = this.highlightLines.indexOf( i ) >= 0;
+			var highlightClass = hasHighlight ? ' highlighted' : '';
 		
-			codeHTML += '<span id="line' + i.toString() + '" class="' + className[lineTypes[i]] + '">';
+			codeHTML += '<span id="line' + i.toString() + '" class="' + className[lineTypes[i]] + highlightClass + '">';
 			
 			// Indentation:
 			// Filters and Modifiers are always indented, Visibility is never indented.

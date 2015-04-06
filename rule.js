@@ -3,6 +3,7 @@ function Rule (visibility) {
 	this.show = visibility;
 	this.filters = [];
 	this.modifiers = [];
+	this.codeLines = [];
 	
 	this.match = function (item) {
 		return this.filters.every( function (filter) { return filter.match( item ); } );
