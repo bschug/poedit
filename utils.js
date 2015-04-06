@@ -15,7 +15,7 @@ var StrUtils = {
 	// Checks if string A consists only of the characters in string B
 	consistsOf: function (a, b) {
 		var validChars = b.split('');
-		return !a.split('').some( function(c) { return StrUtils.contains( c, validChars ); } );
+		return a.split('').every( function(c) { return validChars.indexOf(c) >= 0; } );
 	},
 	
 	// Counts how often a character occurs in the string.

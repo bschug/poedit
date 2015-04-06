@@ -171,7 +171,7 @@ function Parser() {
 			// Then check for invalid characters.
 			var isInvalid = args.some( function(socketGroup) { 
 				if (!StrUtils.consistsOf( socketGroup, 'RGB' )) {
-					reportInvalidSocket( self, socketGroup );
+					reportInvalidSocketGroup( self, socketGroup );
 					return true;
 				}
 				return false;

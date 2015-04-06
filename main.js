@@ -234,12 +234,13 @@ var PoEdit = new function()
 			'    SetTextColor 255 0 255\n' +
 			'\n' +
 			'Show\n' +
-			'    LinkedSockets >= 5\n' +
-			'    SetBackgroundColor 0 128 0\n' +
+			'    SocketGroup RGB\n' +
+			'    PlayAlertSound 1    \n' +
 			'\n' +
 			'Show\n' +
-			'    SocketGroup 6\n' +
-			'    PlayAlertSound 1    \n';
+			'    LinkedSockets >= 5\n' +
+			'    SetBackgroundColor 0 128 0\n';
+			
 	}
 
 	function createItems() {

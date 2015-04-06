@@ -73,7 +73,9 @@ function LinkedSocketsFilter (comparer, numLinkedSockets) {
 
 function SocketGroupFilter (group) {
 	this.match = function (item) {
-		return item.sockets.some( function (grp) { return StrUtils.contains( group, grp ); } );
+		return item.sockets.some( function (grp) { 
+			return StrUtils.contains( group, StrUtils.sortChars( grp ) ); 
+		} );
 	}
 }
 			
