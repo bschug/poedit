@@ -51,6 +51,9 @@ function Editor() {
 			else if (lineTypes[i] === 'Empty') {
 				indent = false;
 			}
+			else if (lineTypes[i] === 'Error' && (i > 0) && lineTypes[i-1] === 'Visibility') {
+				indent = true;
+			}
 
 			if (indent) {
 				codeHTML += '&nbsp; &nbsp; ';
