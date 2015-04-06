@@ -1,6 +1,6 @@
 
-function Rule () {
-	this.show = true;
+function Rule (visibility) {
+	this.show = visibility;
 	this.filters = [];
 	this.modifiers = [];
 	
@@ -44,13 +44,13 @@ function RarityFilter (comparer, rarity) {
 
 function ClassFilter (itemClasses) {
 	this.match = function (item) {
-		return itemClasses.some( function (cls) { StrUtils.contains( cls, item.itemClass ); } );
+		return itemClasses.some( function (cls) { return StrUtils.contains( cls, item.itemClass ); } );
 	};
 }
 
 function BaseTypeFilter (baseTypes) {
 	this.match = function (item) {
-		return baseTypes.some( function (bt) { StrUtils.contains( bt, item.baseType ); } );
+		return baseTypes.some( function (bt) { return StrUtils.contains( bt, item.baseType ); } );
 	};
 }
 

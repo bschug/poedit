@@ -10,10 +10,13 @@ function Parser() {
 	this.currentRule = null;
 	
 	this.ruleSet = [];
+	this.errors = [];
 	this.errorLines = [];
 	
 	this.parse = function (code) {
 		this.currentRule = null;
+		this.ruleSet = [];
+		this.errors = [];
 		this.errorLines = [];
 		
 		var lines = code.split('\n');
@@ -25,6 +28,12 @@ function Parser() {
 			}
 			else if (lines[i].trim().length == 0) {
 				parseEndOfRule( this );
+			}
+			else if (VISIBILITY_TOKENS.indexOf( lines[i].trim() ) >= 0) {
+				if (this.currentRule !== null) {
+					parseEndOfRule( this );
+				}
+				parseVisibility( this, lines[i] );
 			}
 			else {
 				parseFilterOrModifier( this, lines[i] );
@@ -40,12 +49,13 @@ function Parser() {
 			return;
 		}
 		
-		self.currentRule = new Rule( token );
+		self.currentRule = new Rule( token === 'Show' );
 	}
 	
 	function parseEndOfRule (self) {
 		if (self.currentRule !== null) {
 			self.ruleSet.push( self.currentRule );
+			self.currentRule = null;
 		}
 	}
 	
@@ -57,8 +67,8 @@ function Parser() {
 			return;
 		}
 		
-		var operation = tokens[0].trim();
-		var arguments = tokens.length > 1 ? tokens[1] : null;
+		var token = tokens[0].trim();
+		var arguments = line.trim().substring( token.length, line.length );
 		
 		if (FILTER_TOKENS.indexOf( token ) >= 0) {
 			parseFilter( self, token, arguments );
@@ -118,7 +128,7 @@ function Parser() {
 		var args = parseOperatorAndValue( self, arguments );
 		if (args !== null) {
 			if (isNaN( args.value )) {
-				reportInvalidToken( self, args.value, 'number' );
+				reportTokenError( self, args.value, 'number' );
 				return;
 			}
 		
@@ -137,11 +147,11 @@ function Parser() {
 		var args = parseOperatorAndValue( self, arguments );
 		if (args != null) {
 			if (RARITY_TOKENS.indexOf( args.value ) < 0) {
-				reportInvalidToken( self, args.value, 'rarity' );
+				reportTokenError( self, args.value, 'rarity' );
 				return;
 			}
 			
-			self.currentRule.filters.push( new filter( args.comparer, Rarity[args.rarity] ) );
+			self.currentRule.filters.push( new filter( args.comparer, Rarity[args.value] ) );
 		}
 	}
 	
@@ -198,9 +208,9 @@ function Parser() {
 	}
 
 	function parseColorModifier (self, modifier, arguments) {
-		var numbers = parseNumbers( arguments );
+		var numbers = parseNumbers( self, arguments );
 		if (numbers.length != 3) {
-			reportParseError( self, arguments, 'three numbers' );
+			reportTokenError( self, arguments, 'three numbers' );
 			return;
 		}
 		
@@ -209,15 +219,15 @@ function Parser() {
 			return;
 		}
 		
-		var color = { r:numbers[0], g:numbers[1], b:number[2] };
+		var color = { r:numbers[0], g:numbers[1], b:numbers[2] };
 		
 		self.currentRule.modifiers.push( new modifier( color ) );
 	}
 	
 	function parseNumericModifier (self, modifier, arguments) {
-		var numbers = parseNumbers( arguments );
+		var numbers = parseNumbers( self, arguments );
 		if (numbers.length != 1) {
-			reportParseError( self, arguments, 'one number' );
+			reportTokenError( self, arguments, 'one number' );
 			return;
 		}
 		
@@ -271,11 +281,11 @@ function Parser() {
 			.filter( function (element, index, array) { return element.trim().length > 0; } );
 						
 		if (tokens.some( isNaN )) {
-			reportParseError( self, arguments, 'numbers' );
+			reportTokenError( self, arguments, 'numbers' );
 			return null;
 		}
 		
-		return tokens.map( parseInt );
+		return tokens.map( function(n) { return parseInt( n ); } );
 	}
 
 	function parseStringArguments (self, arguments) {
@@ -321,6 +331,11 @@ function Parser() {
 	
 	function reportInvalidSocketGroup (self, socketGroup) {
 		self.errors.push( 'Invalid socket group "' + socketGroup + '" + at line ' + self.currentLineNr.toString() + ' (allowed characters are R,G,B)' );
+		self.errorLines.push( self.currentLineNr );
+	}
+	
+	function reportParseError (self, text, reason) {
+		self.errors.push( 'Cannot parse "' + text + '" (' + reason + ')' );
 		self.errorLines.push( self.currentLineNr );
 	}
 };

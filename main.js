@@ -120,6 +120,7 @@ var PoEdit = new function()
 			color = CYAN;
 		}
 		
+		item.setVisibility( true );
 		item.removeBorder();
 		item.setBackgroundColor( BLACK );
 		item.setTextColor( color );
@@ -130,28 +131,64 @@ var PoEdit = new function()
 	}
 
 	function createItems() {
-		this.items = [];
+		var items = [];
 		defaultItems.forEach( function(item) {
-			this.items.push( new Item(item) );
+			items.push( new Item(item) );
 		});
+		return items;
 	}
 
-	function drawItems() {
-		this.items.forEach( function(item) {
+	function drawItems (items) {
+		items.forEach( function(item) {
 			item.draw();
 			applyDefaultStyle( item );
 		});
+	}
+	
+	function getCode() {
+		var codeWindow = document.getElementById( 'code-window' );
+		return codeWindow.innerText;
+	}
+	
+	function clearLog() {
+		var logWindow = document.getElementById( 'log-window' );
+		logWindow.innerText = '';
+	}
+	
+	function addErrorMessage (message) {
+		var logWindow = document.getElementById( 'log-window' );
+		logWindow.innerText += '\n' + message;
 	}
 
 	this.parser = new Parser();
 
 	this.init = function() {
-		createItems();
-		drawItems();
+		this.items = createItems();
+		drawItems( this.items );
+		
+		var self = this;
+		setInterval( function() { self.update(); }, 1000 );
 	}
 	
 	this.update = function() {
+		this.parser.parse( getCode() );
 		
+		clearLog();
+		this.parser.errors.forEach( addErrorMessage );
+		
+		this.items.forEach( function(item) {
+			if (this.parser.ruleSet.length == 0) {
+				applyDefaultStyle( item );
+			}
+		
+			for (var i=0; i < this.parser.ruleSet.length; i++) {
+				var rule = this.parser.ruleSet[i];
+				if (rule.match( item )) {
+					rule.applyTo( item );
+					break;
+				}
+			}
+		}, this );
 	}
 	
 };

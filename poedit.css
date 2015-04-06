@@ -63,6 +63,9 @@
 #log-window {
 	background-color: white;
 	border: 1px solid black;
+	
+	font-family: sans-serif;
+	color: red;
 }
 
 /* items area style */
