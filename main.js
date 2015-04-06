@@ -101,6 +101,87 @@ var PoEdit = new function()
 			rarity: Rarity.Normal,
 			sockets: []
 		},
+		{ 
+			name: 'Crypt Map', 
+			itemLevel: 67,
+			dropLevel: 66,
+			quality: 0,
+			itemClass: 'Map',
+			baseType: 'Crypt Map',
+			rarity: Rarity.Unique,
+			sockets: []
+		},
+		{ 
+			name: 'Great White Claw', 
+			itemLevel: 62,
+			dropLevel: 58,
+			quality: 8,
+			itemClass: 'Claw',
+			baseType: 'Great White Claw',
+			rarity: Rarity.Magic,
+			sockets: ['R','GG']
+		},
+		{ 
+			name: 'Occultist\'s Vestment', 
+			itemLevel: 67,
+			dropLevel: 57,
+			quality: 0,
+			itemClass: 'Body Armour',
+			baseType: 'Occultist\'s Vestment',
+			rarity: Rarity.Normal,
+			sockets: ['RB','GBB','B']
+		},
+		{ 
+			name: 'Highland Blade', 
+			itemLevel: 54,
+			dropLevel: 44,
+			quality: 0,
+			itemClass: 'Two Handed Sword',
+			baseType: 'Highland Blade',
+			rarity: Rarity.Magic,
+			sockets: ['RRGRR']
+		},
+		{ 
+			name: 'Iron Hat', 
+			itemLevel: 70,
+			dropLevel: 1,
+			quality: 0,
+			itemClass: 'Helmet',
+			baseType: 'Iron Hat',
+			rarity: Rarity.Normal,
+			sockets: ['B']
+		},
+		{ 
+			name: 'Leather Cap', 
+			itemLevel: 23,
+			dropLevel: 1,
+			quality: 0,
+			itemClass: 'Helmet',
+			baseType: 'Leather Cap',
+			rarity: Rarity.Normal,
+			sockets: ['RGB','G']
+		},
+		{ 
+			name: 'Tropical Island Map', 
+			itemLevel: 67,
+			dropLevel: 66,
+			quality: 0,
+			itemClass: 'Map',
+			baseType: 'Tropical Island Map',
+			rarity: Rarity.Magic,
+			sockets: []
+		},
+		{ 
+			name: 'Torture Chamber Map', 
+			itemLevel: 72,
+			dropLevel: 72,
+			quality: 0,
+			itemClass: 'Map',
+			baseType: 'Torture Chamber Map',
+			rarity: Rarity.Normal,
+			sockets: []
+		},
+		
 	];
 	
 	function applyDefaultStyle (item) {
@@ -163,7 +244,7 @@ var PoEdit = new function()
 
 	function createItems() {
 		var items = [];
-		defaultItems.forEach( function(item) {
+		ArrayUtils.shuffle( defaultItems ).forEach( function(item) {
 			items.push( new Item(item) );
 		});
 		return items;
