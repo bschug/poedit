@@ -56,7 +56,7 @@ function Editor() {
 			
 			if (selection !== null && selection.length > 0) {
 				var selectionStart = selection[0].characterRange.start;
-				if (selectionStart >= originalLineStart && selectionStart < originalLineStart) {
+				if (selectionStart > originalLineStart && selectionStart <= originalCharacters) {
 					selectionOffset = generatedCharacters - originalCharacters;
 					console.log('offset ' + selectionOffset);
 				}
