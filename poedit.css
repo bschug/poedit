@@ -58,6 +58,7 @@
 	color: #ddddaa;
 	font-weight: bold;
 	font-family: monospace;
+	overflow-y: scroll;
 }
 
 #log-window {
