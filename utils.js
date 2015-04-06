@@ -27,5 +27,13 @@ var StrUtils = {
 			}
 		}
 		return count;
-	}
+	},
+	
+	ltrim: function (stringToTrim) {
+		return stringToTrim.replace(/^\s+/,"");
+	},
+	
+	rtrim: function (stringToTrim) {
+		return stringToTrim.replace(/\s+$/,"");
+	}	
 };

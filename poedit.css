@@ -68,6 +68,10 @@
 	color: red;
 }
 
+#code-window > .code-error {
+	color: red;
+}
+
 /* items area style */
 
 #items-area {

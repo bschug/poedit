@@ -208,12 +208,13 @@ var PoEdit = new function()
 	}
 	
 	this.update = function() {
-		this.parser.parse( getCode() );
+		var code = getCode();
+		this.parser.parse( code );
 		
 		clearLog();
 		this.parser.errors.forEach( addErrorMessage );
 		
-		this.editor.formatCode( this.parser.lineTypes );
+		this.editor.formatCode( code, this.parser.lineTypes );
 		
 		this.items.forEach( function(item) {
 			applyDefaultStyle( item );
