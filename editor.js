@@ -8,25 +8,25 @@ function Editor() {
 	}
 
 	this.formatCode = function (code, lineTypes) {
-		
+
 		var rawLines = code.split( '\n' );
-		
+
 		if (rawLines.length != lineTypes.length) {
 			console.log( rawLines.length.toString() + ' code lines, ' + lineTypes.length.toString() + ' line types' );
 			return;
 		}
-		
+
 		var codeHTML = '';
 		var indent = false;
-		
+
 		var selection = saveSelection( this.codeWindow );
 		var selectionOffset = 0;
 		var generatedCharacters = 0;
 		var originalCharacters = 0;
-		
+
 		for (var i=0; i < rawLines.length; i++) {
 			var lineCharacters = 0;
-		
+
 			var className = {
 				Empty: 'code-empty',
 				Visibility: 'code-visibility',
@@ -34,12 +34,12 @@ function Editor() {
 				Modifier: 'code-modifier',
 				Error: 'code-error'
 			};
-			
+
 			var hasHighlight = this.highlightLines.indexOf( i ) >= 0;
 			var highlightClass = hasHighlight ? ' highlighted' : '';
-		
+
 			codeHTML += '<span id="line' + i.toString() + '" class="' + className[lineTypes[i]] + highlightClass + '">';
-			
+
 			// Indentation:
 			// Filters and Modifiers are always indented, Visibility is never indented.
 			// For erraneous / incomplete lines and empty lines, indentation is guessed based on the previous line.
@@ -63,10 +63,10 @@ function Editor() {
 				codeHTML += '&nbsp; &nbsp; ';
 				lineCharacters += 4;
 			}
-			
+
 			var trimmedLine = StrUtils.ltrim( rawLines[i] );
 			codeHTML += trimmedLine + '</span>';
-			
+
 			// Must not add <br> for the last line, otherwise we would create more and more newlines at the end
 			if (i < rawLines.length - 1) {
 				codeHTML += '<br>';
@@ -76,10 +76,10 @@ function Editor() {
 			// and how many readable characters there were in the original, unmodified code.
 			// Otherwise, we could not know if and by how much to move the cursor.
 			lineCharacters += trimmedLine.length;
-			generatedCharacters += lineCharacters;
+			generatedCharacters += lineCharacters + 1;			// add 1 for the newline
 			var originalLineStart = originalCharacters;
-			originalCharacters += rawLines[i].length;
-			
+			originalCharacters += rawLines[i].length + 1;		// add 1 for the newline
+
 			if (selection !== null && selection.length > 0) {
 				var selectionStart = selection[0].characterRange.start;
 				if (selectionStart > originalLineStart && selectionStart <= originalCharacters) {
@@ -87,11 +87,11 @@ function Editor() {
 				}
 			}
 		}
-		
+
 		this.codeWindow.innerHTML = codeHTML;
 		restoreSelection( this.codeWindow, selection, selectionOffset );
 	}
-	
+
     function saveSelection (codeWindow) {
     	return rangy.getSelection().saveCharacterRanges( codeWindow );
     }
@@ -105,8 +105,5 @@ function Editor() {
     }
 
 
-	
+
 }
-
-
-
