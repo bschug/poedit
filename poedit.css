@@ -20,7 +20,7 @@
 	bottom: 0px;
 }
 
-#code-window {
+#code-window-container {
 	position: absolute;
 
 	left: 0px;
@@ -28,6 +28,12 @@
 	top: 0px;
 	bottom: 0px;
 	padding-bottom: 60px;
+}
+
+#code-window {
+	position: relative;
+	width: 100%;
+	height: 100%;
 }
 
 #log-window {
@@ -63,6 +69,7 @@
 #log-window {
 	background-color: white;
 	border: 1px solid black;
+	overflow-y: scroll;
 
 	font-family: sans-serif;
 	color: red;
