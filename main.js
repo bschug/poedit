@@ -1,5 +1,7 @@
 var PoEdit = new function()
 {
+	var MANUAL_UPDATE = false;
+
 	var defaultItems = [
 		{
 			name: 'Full Plate',
@@ -301,7 +303,14 @@ var PoEdit = new function()
 		this.itemDetails.init();
 
 		var self = this;
-		setInterval( function() { self.update(); }, 250 );
+		if (MANUAL_UPDATE) {
+			var button = document.getElementById( 'manual-update-button' );
+			button.style.display = 'block';
+			button.addEventListener('click', function() { self.update(); });
+		}
+		else {
+			setInterval( function() { self.update(); }, 250 );
+		}
 
 		document.getElementById( 'code-window' ).addEventListener( 'textInput', self.editor.onKeyPressed, true );
 	}
