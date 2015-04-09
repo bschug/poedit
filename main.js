@@ -225,7 +225,7 @@ var PoEdit = new function()
 
 	function addDefaultScript() {
 		var codeWindow = document.getElementById( 'code-window' );
-		codeWindow.innerText =
+		var code =
 			'Show\n' +
 			'    Class Gem\n' +
 			'    Quality > 0\n' +
@@ -243,6 +243,9 @@ var PoEdit = new function()
 			'    LinkedSockets >= 5\n' +
 			'    SetBackgroundColor 0 128 0\n';
 
+		code = StrUtils.replaceAll( code, '\n', '<br>' );
+		code = StrUtils.replaceAll( code, '  ', '&nbsp; ' );
+		codeWindow.innerHTML = code;
 	}
 
 	function createItems() {
@@ -276,7 +279,7 @@ var PoEdit = new function()
 
 	function getCode() {
 		var codeWindow = document.getElementById( 'code-window' );
-		return codeWindow.innerText;
+		return DomUtils.getText( [codeWindow] ); // cannot use innerText on Firefox
 	}
 
 	function clearLog() {
