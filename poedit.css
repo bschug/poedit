@@ -151,6 +151,7 @@
 	display: none; /* this is set to block by script */
 	position: absolute;
 	margin: 0px;
+	z-index: 20;
 	/* position is also set by script */
 
 	border: 1px solid white;
