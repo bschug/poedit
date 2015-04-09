@@ -148,10 +148,10 @@
 /* item details */
 
 #item-details {
+	display: none; /* this is set to block by script */
 	position: absolute;
 	margin: 0px;
-	left: 100px;
-	top: 100px;
+	/* position is also set by script */
 
 	border: 1px solid white;
 	background-color: rgba(0, 0, 0, 0.75);
