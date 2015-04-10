@@ -4,11 +4,11 @@ function Rule (visibility) {
 	this.filters = [];
 	this.modifiers = [];
 	this.codeLines = [];
-	
+
 	this.match = function (item) {
 		return this.filters.every( function (filter) { return filter.match( item ); } );
 	}
-	
+
 	this.applyTo = function (item) {
 		item.setVisibility( this.show );
 		this.modifiers.forEach( function (modifier) { modifier.applyTo( item ); } );
@@ -65,28 +65,28 @@ function LinkedSocketsFilter (comparer, numLinkedSockets) {
 	this.match = function (item) {
 		var largestSocketGroup = item.sockets
 			.map( function (grp) { return grp.length; } )
-			.reduce( Math.max, 0 );
-		
+			.reduce( function (prev, cur) { return Math.max(prev, cur); }, 0 );
+
 		return comparer( largestSocketGroup, numLinkedSockets );
 	};
 }
 
 function SocketGroupFilter (group) {
 	this.match = function (item) {
-		return item.sockets.some( function (grp) { 
-			return StrUtils.contains( group, StrUtils.sortChars( grp ) ); 
+		return item.sockets.some( function (grp) {
+			return StrUtils.contains( group, StrUtils.sortChars( grp ) );
 		} );
 	}
 }
-			
+
 // ------------------------ Modifiers --------------------------------------
-			
+
 function SetBackgroundColorModifier (color) {
 	this.applyTo = function (item) {
 		item.setBackgroundColor( color );
 	}
 }
-			
+
 function SetBorderColorModifier (color) {
 	this.applyTo = function (item) {
 		item.setBorderColor( color );
@@ -104,10 +104,3 @@ function PlayAlertSoundModifier (soundId) {
 		// not implemented
 	}
 }
-			
-			
-			
-			
-			
-			
-			
