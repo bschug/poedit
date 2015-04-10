@@ -21,7 +21,7 @@
 <div id="main">
  <div id="code-area">
   <div id="code-window-container">
-   <div id="code-window" contenteditable="true"></div>
+   <div id="code-window" contenteditable="true" tabindex="1"></div>
   </div>
   <div id="log-window">This is a log message</div>
  </div>
@@ -41,6 +41,7 @@
 </div>
 
 <button type="button" id="manual-update-button">Update</button>
+<div id="tab-focus-catcher" tabindex="2" contenteditable="true"></div>
 
 <script type='text/javascript'>
 PoEdit.init();

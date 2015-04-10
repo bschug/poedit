@@ -21,7 +21,7 @@ function Editor() {
 		var codeHTML = '';
 		var indent = false;
 
-		var selection = saveSelection( this.codeWindow );
+		var selection = DomUtils.saveSelection( this.codeWindow );
 		var selectionOffset = 0;
 		var generatedCharacters = 0;
 		var originalCharacters = 0;
@@ -91,20 +91,8 @@ function Editor() {
 		}
 
 		this.codeWindow.innerHTML = codeHTML;
-		restoreSelection( this.codeWindow, selection, selectionOffset );
+		DomUtils.restoreSelection( this.codeWindow, selection, selectionOffset );
 	}
-
-    function saveSelection (codeWindow) {
-    	return rangy.getSelection().saveCharacterRanges( codeWindow );
-    }
-
-    function restoreSelection (codeWindow, selection, offset) {
-    	if (selection !== null && selection.length > 0) {
-	    	selection[0].characterRange.start += offset;
-    		selection[0].characterRange.end += offset;
-    	}
-    	rangy.getSelection().restoreCharacterRanges( codeWindow, selection );
-    }
 
 	function removeTrailingNewlines (rawLines, lineTypes, numAllowed) {
 		var linesToRemove = 0;

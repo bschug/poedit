@@ -122,5 +122,22 @@ var DomUtils = {
 		}
 
 		return text;
-	}
+	},
+
+	// Returns the current selection in the given element.
+	// Selection is stored as character offsets.
+    saveSelection: function (element) {
+    	return rangy.getSelection().saveCharacterRanges( element );
+    },
+
+	// Restores a saved selection on the given element.
+	// Selection is applied based on character counts.
+	// If text is inserted, you need to manually adjust the selection by providing an offset.
+    restoreSelection: function (element, selection, offset) {
+    	if (selection !== null && selection.length > 0) {
+	    	selection[0].characterRange.start += offset;
+    		selection[0].characterRange.end += offset;
+    	}
+    	rangy.getSelection().restoreCharacterRanges( element, selection );
+    }
 };

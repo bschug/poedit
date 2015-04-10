@@ -292,9 +292,37 @@ var PoEdit = new function()
 		logWindow.innerText += '\n' + message;
 	}
 
+	function onKeyDown (event) {
+
+		// There are different ways how the key code may be stored in the event on different browsers
+		var code;
+		if (event.keyCode) {
+			code = event.keyCode;
+		}
+		else if (event.which) {
+			code = event.which;
+		}
+
+		// Tab
+		if (code === 9) {
+			console.log('Tab');
+			event.stopPropagation ? event.stopPropagation() : (event.cancelBubble = true);
+			PoEdit.codeCursorPos = DomUtils.saveSelection( document.getElementById( 'code-window' ) );
+		}
+	}
+
+	// Called when the focus switches to the hidden tab focus catcher.
+	// This happens whenever the user presses tab (and should not happen otherwise).
+	function onFocusCaught (event) {
+		var codeWindow = document.getElementById( 'code-window' );
+		codeWindow.focus();
+		DomUtils.restoreSelection( codeWindow, PoEdit.codeCursorPos, 0 );
+	}
+
 	this.parser = new Parser();
 	this.editor = new Editor();
 	this.itemDetails = new ItemDetails();
+	this.codeCursorPos = 0;
 
 	this.init = function() {
 		this.items = createItems();
@@ -315,7 +343,8 @@ var PoEdit = new function()
 			setInterval( function() { self.update(); }, 250 );
 		}
 
-		document.getElementById( 'code-window' ).addEventListener( 'textInput', self.editor.onKeyPressed, true );
+		document.getElementById( 'code-window' ).addEventListener( 'keydown', onKeyDown, true );
+		document.getElementById( 'tab-focus-catcher' ).addEventListener( 'focus', onFocusCaught );
 	}
 
 	this.update = function() {
