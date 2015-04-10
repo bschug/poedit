@@ -323,6 +323,7 @@ var PoEdit = new function()
 	this.editor = new Editor();
 	this.itemDetails = new ItemDetails();
 	this.codeCursorPos = 0;
+	this.intellisense = new Intellisense();
 
 	this.init = function() {
 		this.items = createItems();
@@ -330,7 +331,7 @@ var PoEdit = new function()
 
 		addDefaultScript();
 		this.editor.init();
-
+		this.intellisense.init();
 		this.itemDetails.init();
 
 		var self = this;
@@ -369,6 +370,7 @@ var PoEdit = new function()
 			}
 		}, this );
 
+		this.intellisense.update();
 		this.itemDetails.update();
 	}
 

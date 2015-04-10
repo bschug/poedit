@@ -83,6 +83,28 @@
 	background-color: #404040;
 }
 
+/* intellisense */
+
+#intellisense {
+	position: absolute;
+	display: none;
+
+	border: 1px solid grey;
+	background-color: rgba(0, 0, 0, 0.75);
+}
+
+#intellisense > p {
+	font-family: monospace;
+	font-weight: bold;
+	color: white;
+	margin: 0px;
+	padding: 0px 5px;
+}
+
+#intellisense > p.selected {
+	background-color: rgba(100, 100, 200, 0.75);
+}
+
 /* items area style */
 
 #items-area {
