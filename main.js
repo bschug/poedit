@@ -370,7 +370,15 @@ var PoEdit = new function()
 			}
 		}, this );
 
-		this.intellisense.update();
+		var codeWindow = document.getElementById( 'code-window' );
+		if (codeWindow === document.activeElement) {
+			this.codeCursorPos = DomUtils.saveSelection( codeWindow );
+			if (this.codeCursorPos !== null && this.codeCursorPos.length > 0) {
+				var cp = this.codeCursorPos[0].characterRange.start;
+				this.intellisense.update( code, cp );
+			}
+		}
+
 		this.itemDetails.update();
 	}
 

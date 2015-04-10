@@ -2,7 +2,12 @@ var StrUtils = {
 
 	// Checks if string haystack contains needle
 	contains: function (needle, haystack) {
-		return haystack.indexOf(needle) > -1;
+		return haystack.indexOf( needle ) > -1;
+	},
+
+	// Checks if str starts with prefix.
+	startsWith: function (str, prefix) {
+		return str.indexOf( prefix ) === 0;
 	},
 
 	// Alphabetically sorts all characters in the string.
@@ -139,5 +144,11 @@ var DomUtils = {
     		selection[0].characterRange.end += offset;
     	}
     	rangy.getSelection().restoreCharacterRanges( element, selection );
-    }
+    },
+
+	removeAllChildren: function (elem) {
+		while (elem.lastChild) {
+			elem.removeChild( elem.lastChild );
+		}
+	}
 };
