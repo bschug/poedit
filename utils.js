@@ -53,26 +53,67 @@ var ArrayUtils = {
 
 var DomUtils = {
 
+	endsWithBR: function (elem) {
+		if (elem.childNodes.length == 0) {
+			return false;
+		}
+
+		// look at child nodes, start at the end
+		for (var i = elem.childNodes.length - 1; i >= 0; i++) {
+			var child = elem.childNodes[i];
+
+			// skip comments
+			if (child.nodeType === 8) {
+				continue;
+			}
+
+			if (child.nodeType === 1) {
+				if (child.nodeName === 'BR') {
+					return true;
+				}
+			}
+
+			return false;
+		}
+	},
+
 	// Returns all text inside the given node(s).
-	// <br> elements appear as newlines in the text.
+	// <br> elements and blocks like <div> appear as newlines in the text.
 	// This behaves similarly to the innerText property available in Chrome and IE.
-	// Note that this does NOT create newlines from the end of block elements.
-	getText: function ( elems ) {
+	getText: function (elems) {
 		var text = '';
 
-		for ( var i = 0; elems[i]; i++ ) {
+		for (var i = 0; elems[i]; i++) {
 			var elem = elems[i];
 
 			// Get the text from Text and CDATA nodes
-			if ( elem.nodeType === 3 || elem.nodeType === 4 ) {
+			if (elem.nodeType === 3 || elem.nodeType === 4) {
 				text += elem.nodeValue;
 			}
-			// Add newlines for <br> tags
-			else if ( elem.nodeType === 1 ) {
-				if ( elem.nodeName === 'BR' ) {
+			// Special handling for certain elements:
+			else if (elem.nodeType === 1) {
+				// Insert newlines for <br> elements
+				if (elem.nodeName === 'BR') {
 					text += '\n';
+					continue;
 				}
+
+				// Ignore invisible elements
+				var style = window.getComputedStyle( elem );
+				if (style.display === 'none' || style.visibility === 'hidden') {
+					continue;
+				}
+
+				// Traverse child nodes
 				text += DomUtils.getText( elem.childNodes );
+
+				// Add newline after each block.
+				if (style.display === 'block') {
+					// Special case: div ends with <br>, don't create two newlines
+					if (!DomUtils.endsWithBR( elem )) {
+						text += '\n';
+					}
+				}
 			}
 			// Traverse all other nodes, except for comments
 			else if ( elem.nodeType !== 8 ) {
