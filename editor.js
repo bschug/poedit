@@ -16,6 +16,8 @@ function Editor() {
 			return;
 		}
 
+		removeTrailingNewlines( rawLines, lineTypes, 3 );
+
 		var codeHTML = '';
 		var indent = false;
 
@@ -104,6 +106,20 @@ function Editor() {
     	rangy.getSelection().restoreCharacterRanges( codeWindow, selection );
     }
 
+	function removeTrailingNewlines (rawLines, lineTypes, numAllowed) {
+		var linesToRemove = 0;
+		for (var i = rawLines.length - 1; i >= 0; i--) {
+			if (lineTypes[i] != 'Empty') {
+				break;
+			}
+			linesToRemove++;
+		}
 
+		if (linesToRemove > numAllowed) {
+			linesToRemove -= numAllowed;
+			rawLines.splice( -linesToRemove, linesToRemove );
+			lineTypes.splice( -linesToRemove, linesToRemove );
+		}
+	}
 
 }
