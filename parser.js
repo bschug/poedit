@@ -22,8 +22,12 @@ function Parser() {
 		for (var i = 0; i < lines.length; i++) {
 			this.currentLineNr = i;
 
-			if (lines[i].trim() === '' || lines[i].trim()[0] === '#') {
+			if (lines[i].trim() === '') {
 				this.lineTypes[i] = 'Empty';
+				continue;
+			}
+			if (lines[i].trim()[0] === '#') {
+				this.lineTypes[i] = 'Comment';
 				continue;
 			}
 

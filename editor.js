@@ -29,6 +29,7 @@ function Editor() {
 
 			var className = {
 				Empty: 'code-empty',
+				Comment: 'code-comment',
 				Visibility: 'code-visibility',
 				Filter: 'code-filter',
 				Modifier: 'code-modifier',

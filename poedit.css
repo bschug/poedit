@@ -79,6 +79,11 @@
 	color: red;
 }
 
+#code-window > .code-comment {
+	color: rgb(0, 200, 0);
+	font-style: italic;
+}
+
 #code-window > .highlighted {
 	color: black;
 	background-color: rgba(220, 180, 80, 0.75);
