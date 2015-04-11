@@ -15,6 +15,7 @@
 <script type="text/javascript" src="editor.js"></script>
 <script type="text/javascript" src="intellisense.js"></script>
 <script type="text/javascript" src="itemDetails.js"></script>
+<script type="text/javascript" src="colorpicker.js"></script>
 <script type="text/javascript" src="main.js"></script>
 
 </head>
@@ -23,6 +24,12 @@
  <div id="code-area">
   <div id="code-window-container">
    <div id="code-window" contenteditable="true" tabindex="1"></div>
+  </div>
+  <div id="colorpicker">
+    <form id="RGB-picker">
+      <input type="color" name="colorchooser" id="color-picker" onchange="getRGB();">
+      <div id="RGB-color" contenteditable="true"></div>
+    </form>
   </div>
   <div id="log-window">This is a log message</div>
  </div>
@@ -48,6 +55,7 @@
 <div id="tab-focus-catcher" tabindex="2" contenteditable="true"></div>
 
 <script type='text/javascript'>
+getRGB();
 PoEdit.init();
 </script>
 

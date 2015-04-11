@@ -27,7 +27,7 @@
 	right: 0px;
 	top: 0px;
 	bottom: 0px;
-	padding-bottom: 60px;
+	padding-bottom: 90px;
 }
 
 #code-window {
@@ -55,6 +55,19 @@
 	bottom: 0px;
 }
 
+#colorpicker {
+	position: absolute;
+	height: 30px;
+
+	left: 0px;
+	right: 0px;
+	bottom: 60px;
+}
+
+#RGB-color {
+	height: 22px;
+	margin: 2px 0px 1px 0px;
+}
 /* code editor style */
 
 #code-window {
@@ -87,6 +100,24 @@
 #code-window > .highlighted {
 	color: black;
 	background-color: rgba(220, 180, 80, 0.75);
+}
+
+#colorpicker {
+	padding: 2px 0px 0px 2px;
+	background-color: white;
+	border: 1px solid black;
+	border-bottom: none;
+}
+
+#RGB-picker > input {
+	width: 49%;
+}
+
+#RGB-color {
+	display: inline-block;
+	width: 49%;
+	border: 1px solid black;
+	font-family: sans-serif;
 }
 
 /* intellisense */
