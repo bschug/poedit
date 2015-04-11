@@ -80,7 +80,8 @@
 }
 
 #code-window > .highlighted {
-	background-color: #404040;
+	color: black;
+	background-color: rgba(220, 180, 80, 0.75);
 }
 
 /* intellisense */
@@ -102,7 +103,7 @@
 }
 
 #intellisense > p.selected {
-	background-color: rgba(100, 100, 200, 0.75);
+	background-color: rgba(220, 180, 80, 0.75);
 }
 
 /* items area style */
