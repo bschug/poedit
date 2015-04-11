@@ -3,27 +3,39 @@ function Intellisense() {
     this.suggestions = [];
     this.selected = 0;
     this.selectedLineId = 0;
+    this.enabled = true;
+
+    this.previousLineId = 0;
+    this.previousLineLength = 0;
 
     this.init = function() {
         this.div = document.getElementById( 'intellisense' );
     }
 
-    this.update = function (code, cursorPos) {
-        var rawLines = code.split( '\n' );
+    this.isVisible = function() {
+        return this.div.style.display !== 'none';
+    }
+
+    this.update = function (rawLines, cursorPos) {
         var selectedLineId = getSelectedLineId( rawLines, cursorPos );
         buildSuggestions( this.suggestions, rawLines[selectedLineId].trim() );
 
-        if (this.suggestions.length === 0) {
+        // re-enable when writing something
+        if (selectedLineId === this.previousLineId && rawLines[selectedLineId].length !== this.previousLineLength) {
+            this.enabled = true;
+        }
+        this.previousLineId = selectedLineId;
+        this.previousLineLength = rawLines[selectedLineId].length;
+
+        if (this.suggestions.length === 0 || !this.enabled) {
             this.div.style.display = 'none';
             return;
         }
         this.div.style.display = 'block';
 
-        positionDiv( this.div, selectedLineId );
+        adjustDivPosition( this.div, selectedLineId );
 
-        if (this.selected >= this.suggestions.length) {
-            this.selected = this.suggestions.length - 1;
-        }
+        this.selected = MathUtils.clamp( this.selected, 0, this.suggestions.length - 1 );
 
         DomUtils.removeAllChildren( this.div );
         for (var i=0; i < this.suggestions.length; i++) {
@@ -50,12 +62,27 @@ function Intellisense() {
         }
     }
 
+    // Applies the current suggestion.
+    this.applySuggestion = function() {
+        var suggestion = this.suggestions[this.selected];
+        var line = document.getElementById( 'line' + this.previousLineId );
+        var selection = DomUtils.saveSelection( line );
+        DomUtils.removeAllChildren( line );
+        line.appendChild( document.createTextNode( suggestion ) );
+        DomUtils.restoreSelection( line, selection, suggestion.length - this.previousLineLength );
+    }
+
     function buildSuggestions (suggestions, line) {
+        suggestions.splice( 0, suggestions.length );
+
+        if (line.length === 0) {
+            return;
+        }
+
         var visibilityTokens = [ 'Show', 'Hide' ];
         var filterTokens = [ 'ItemLevel', 'DropLevel', 'Quality', 'Rarity', 'Class', 'BaseType', 'Sockets', 'LinkedSockets', 'SocketGroup' ];
         var modifierTokens = [ 'SetBackgroundColor', 'SetBorderColor', 'SetTextColor', 'PlayAlertSound' ];
 
-        suggestions.splice( 0, suggestions.length );
         visibilityTokens.forEach( function(token) { considerSuggestion( token, line, suggestions ); } );
         filterTokens.forEach( function(token) { considerSuggestion( token, line, suggestions ); } );
         modifierTokens.forEach( function(token) { considerSuggestion( token, line, suggestions ); } );
@@ -70,17 +97,23 @@ function Intellisense() {
             }
         }
 
+        var totalChars = lines
+            .map( function(line) { return line.length + 1; } )
+            .reduce( function(prev, cur) { return prev + cur; } );
+
         console.log( 'invalid cursor position ' + cursorPos.toString() + ' in '
-                     + code.length.toString() + ' character string' );
+                     + totalChars.toString() + ' character string' );
     }
 
     function considerSuggestion (suggestion, line, list) {
         if (StrUtils.startsWith( suggestion, line )) {
-            list.push( suggestion );
+            if (suggestion !== line) {
+                list.push( suggestion );
+            }
         }
     }
 
-    function positionDiv (div, selectedLineId) {
+    function adjustDivPosition (div, selectedLineId) {
         var selectedLine = document.getElementById( 'line' + selectedLineId );
         var bounds = selectedLine.getBoundingClientRect();
         div.style.left = bounds.left;

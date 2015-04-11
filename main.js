@@ -292,31 +292,51 @@ var PoEdit = new function()
 		logWindow.innerText += '\n' + message;
 	}
 
-	function onKeyDown (event) {
-
-		// There are different ways how the key code may be stored in the event on different browsers
-		var code;
+	// There are different ways how the key code may be stored in the event on different browsers
+	function getKeyCode (event) {
 		if (event.keyCode) {
-			code = event.keyCode;
+			return event.keyCode;
 		}
 		else if (event.which) {
-			code = event.which;
-		}
-
-		// Tab
-		if (code === 9) {
-			console.log('Tab');
-			event.stopPropagation ? event.stopPropagation() : (event.cancelBubble = true);
-			PoEdit.codeCursorPos = DomUtils.saveSelection( document.getElementById( 'code-window' ) );
+			return event.which;
 		}
 	}
 
-	// Called when the focus switches to the hidden tab focus catcher.
-	// This happens whenever the user presses tab (and should not happen otherwise).
-	function onFocusCaught (event) {
-		var codeWindow = document.getElementById( 'code-window' );
-		codeWindow.focus();
-		DomUtils.restoreSelection( codeWindow, PoEdit.codeCursorPos, 0 );
+	function onKeyDown (event) {
+		var code = getKeyCode( event );
+
+		// Tab
+		if (code === 9) {
+			if (PoEdit.intellisense.isVisible()) {
+				event.stopPropagation ? event.stopPropagation() : (event.cancelBubble = true);
+				event.preventDefault();
+				PoEdit.intellisense.applySuggestion();
+			}
+		}
+		// Arrow Up
+		else if (code === 38) {
+			if (PoEdit.intellisense.isVisible()) {
+				event.stopPropagation ? event.stopPropagation() : (event.cancelBubble = true);
+				event.preventDefault();
+				PoEdit.intellisense.selectPrevious();
+			}
+		}
+		// Arrow Down
+		else if (code === 40) {
+			if (PoEdit.intellisense.isVisible()) {
+				event.stopPropagation ? event.stopPropagation() : (event.cancelBubble = true);
+				event.preventDefault();
+				PoEdit.intellisense.selectNext();
+			}
+		}
+		// Escape
+		else if (code === 27) {
+			if (PoEdit.intellisense.isVisible()) {
+				event.stopPropagation ? event.stopPropagation() : (event.cancelBubble = true);
+				event.preventDefault();
+				PoEdit.intellisense.enabled = false;
+			}
+		}
 	}
 
 	this.parser = new Parser();
@@ -345,17 +365,17 @@ var PoEdit = new function()
 		}
 
 		document.getElementById( 'code-window' ).addEventListener( 'keydown', onKeyDown, true );
-		document.getElementById( 'tab-focus-catcher' ).addEventListener( 'focus', onFocusCaught );
 	}
 
 	this.update = function() {
 		var code = getCode();
-		this.parser.parse( code );
+		var rawLines = code.split( '\n' );
+		this.parser.parse( rawLines );
 
 		clearLog();
 		this.parser.errors.forEach( addErrorMessage );
 
-		this.editor.formatCode( code, this.parser.lineTypes );
+		this.editor.formatCode( rawLines, this.parser.lineTypes );
 
 		this.items.forEach( function(item) {
 			applyDefaultStyle( item );
@@ -370,12 +390,15 @@ var PoEdit = new function()
 			}
 		}, this );
 
+		// If code window is in focus
 		var codeWindow = document.getElementById( 'code-window' );
 		if (codeWindow === document.activeElement) {
+			// Get cursor position from code window
 			this.codeCursorPos = DomUtils.saveSelection( codeWindow );
 			if (this.codeCursorPos !== null && this.codeCursorPos.length > 0) {
+				// Update intellisense
 				var cp = this.codeCursorPos[0].characterRange.start;
-				this.intellisense.update( code, cp );
+				this.intellisense.update( rawLines, cp );
 			}
 		}
 

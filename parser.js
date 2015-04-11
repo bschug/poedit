@@ -1,25 +1,24 @@
 function Parser() {
-	
+
 	var VISIBILITY_TOKENS = [ 'Show', 'Hide' ];
 	var FILTER_TOKENS = [ 'ItemLevel', 'DropLevel', 'Quality', 'Rarity', 'Class', 'BaseType', 'Sockets', 'LinkedSockets', 'SocketGroup' ];
 	var MODIFIER_TOKENS = [ 'SetBackgroundColor', 'SetBorderColor', 'SetTextColor', 'PlayAlertSound' ];
 	var OPERATOR_TOKENS = [ '=', '<', '>', '<=', '>=' ];
 	var RARITY_TOKENS = [ 'Normal', 'Magic', 'Rare', 'Unique' ];
 
-	this.currentLineNr = 0;	
+	this.currentLineNr = 0;
 	this.currentRule = null;
-	
+
 	this.ruleSet = [];
 	this.errors = [];
 	this.lineTypes = [];
-	
-	this.parse = function (code) {
+
+	this.parse = function (lines) {
 		this.currentRule = null;
 		this.ruleSet = [];
 		this.errors = [];
 		this.lineTypes = [];
-		
-		var lines = code.split('\n');
+
 		for (var i = 0; i < lines.length; i++) {
 			this.currentLineNr = i;
 
@@ -27,7 +26,7 @@ function Parser() {
 				this.lineTypes[i] = 'Empty';
 				continue;
 			}
-		
+
 			if (VISIBILITY_TOKENS.indexOf( lines[i].trim() ) >= 0) {
 				if (this.currentRule !== null) {
 					parseEndOfRule( this );
@@ -37,14 +36,14 @@ function Parser() {
 			else {
 				parseFilterOrModifier( this, lines[i] );
 			}
-			
+
 			if (this.currentRule !== null) {
 				this.currentRule.codeLines.push( i );
 			}
 		}
 		parseEndOfRule( this );
 	};
-	
+
 	function parseVisibility (self, line) {
 		var token = line.trim();
 		if (VISIBILITY_TOKENS.indexOf( token ) < 0) {
@@ -52,28 +51,28 @@ function Parser() {
 			return;
 		}
 
-		self.lineTypes[self.currentLineNr] = 'Visibility';	
+		self.lineTypes[self.currentLineNr] = 'Visibility';
 		self.currentRule = new Rule( token === 'Show' );
 	}
-	
+
 	function parseEndOfRule (self) {
 		if (self.currentRule !== null) {
 			self.ruleSet.push( self.currentRule );
 			self.currentRule = null;
 		}
 	}
-	
+
 	function parseFilterOrModifier (self, line) {
 		var tokens = line.trim().split(' ', 1);
-		
+
 		if (tokens.length == 0) {
 			reportTokenError( self, '', 'filter or modifier' );
 			return;
 		}
-		
+
 		var token = tokens[0].trim();
 		var arguments = line.trim().substring( token.length, line.length );
-		
+
 		if (FILTER_TOKENS.indexOf( token ) >= 0) {
 			parseFilter( self, token, arguments );
 		}
@@ -84,12 +83,12 @@ function Parser() {
 			reportTokenError( self, token, 'filter or modifier' );
 		}
 	}
-	
+
 	// ----------- FILTERS ---------------------------------------------------
-	
+
 	function parseFilter (self, token, arguments) {
 		self.lineTypes[self.currentLineNr] = 'Filter';
-	
+
 		var filters = {
 			'ItemLevel': ItemLevelFilter,
 			'DropLevel': DropLevelFilter,
@@ -110,11 +109,11 @@ function Parser() {
 			case 'LinkedSockets':
 				parseNumericFilter( self, filters[token], arguments );
 				return;
-				
+
 			case 'Rarity':
 				parseRarityFilter( self, filters[token], arguments );
 				return;
-			
+
 			case 'Class':
 			case 'BaseType':
 				parseMultiStringFilter( self, filters[token], arguments );
@@ -123,13 +122,13 @@ function Parser() {
 			case 'SocketGroup':
 				parseSocketGroupFilter( self, filters[token], arguments );
 				return;
-				
+
 			default:
 				// We can only get to this function if token is valid
 				reportTokenError( self, token, 'this should never happen' );
 		}
 	}
-	
+
 	function parseNumericFilter (self, filter, arguments) {
 		var args = parseOperatorAndValue( self, arguments );
 		if (args !== null) {
@@ -137,18 +136,18 @@ function Parser() {
 				reportTokenError( self, args.value, 'number' );
 				return;
 			}
-		
+
 			self.currentRule.filters.push( new filter( args.comparer, parseInt( args.value ) ) );
 		}
 	}
-	
+
 	function parseMultiStringFilter (self, filter, arguments) {
 		var args = parseStringArguments( self, arguments );
 		if (args !== null) {
 			self.currentRule.filters.push( new filter( args ) );
 		}
 	}
-	
+
 	function parseRarityFilter (self, filter, arguments) {
 		var args = parseOperatorAndValue( self, arguments );
 		if (args != null) {
@@ -156,59 +155,59 @@ function Parser() {
 				reportTokenError( self, args.value, 'rarity' );
 				return;
 			}
-			
+
 			self.currentRule.filters.push( new filter( args.comparer, Rarity[args.value] ) );
 		}
 	}
-	
+
 	function parseSocketGroupFilter (self, filter, arguments) {
 		var args = parseStringArguments( self, arguments );
 		if (args != null) {
 			// Make sure socket group is all uppercase.
 			// Don't sort yet because we want to display error messages correctly.
 			args = args.map( function(a) { return a.toUpperCase(); } );
-			
+
 			// Then check for invalid characters.
-			var isInvalid = args.some( function(socketGroup) { 
+			var isInvalid = args.some( function(socketGroup) {
 				if (!StrUtils.consistsOf( socketGroup, 'RGB' )) {
 					reportInvalidSocketGroup( self, socketGroup );
 					return true;
 				}
 				return false;
 			} );
-			
+
 			// Now sort alphabetically because the filter requires that.
 			args = args.map( StrUtils.sortChars );
-			
+
 			if (!isInvalid) {
 				self.currentRule.filters.push( new filter( args ) );
 			}
 		}
 	}
-	
+
 	// ----------- MODIFIERS ---------------------------------------------------
-	
+
 	function parseModifier (self, token, arguments) {
 		self.lineTypes[self.currentLineNr] = 'Modifier';
-	
+
 		var modifiers = {
-			'SetBackgroundColor': SetBackgroundColorModifier, 
-			'SetBorderColor': SetBorderColorModifier, 
-			'SetTextColor': SetTextColorModifier, 
+			'SetBackgroundColor': SetBackgroundColorModifier,
+			'SetBorderColor': SetBorderColorModifier,
+			'SetTextColor': SetTextColorModifier,
 			'PlayAlertSound': PlayAlertSoundModifier
 		};
-		
+
 		switch (token) {
 			case 'SetBackgroundColor':
 			case 'SetBorderColor':
 			case 'SetTextColor':
 				parseColorModifier( self, modifiers[token], arguments );
 				break;
-				
+
 			case 'PlayAlertSound':
 				parseNumericModifier( self, modifiers[token], arguments );
 				break;
-				
+
 			default:
 				// We can only get to this function if token is valid
 				reportTokenError( self, token, 'this should never happen' );
@@ -221,17 +220,17 @@ function Parser() {
 			reportTokenError( self, arguments, 'three numbers' );
 			return;
 		}
-		
+
 		if (numbers.some( function(c) { return c < 0 || c > 255; } )) {
 			reportParseError( self, arguments, 'color values must be between 0 and 255' );
 			return;
 		}
-		
+
 		var color = { r:numbers[0], g:numbers[1], b:numbers[2] };
-		
+
 		self.currentRule.modifiers.push( new modifier( color ) );
 	}
-	
+
 	function parseNumericModifier (self, modifier, arguments) {
 		var numbers = parseNumbers( self, arguments );
 		if (numbers === null) return;
@@ -239,20 +238,20 @@ function Parser() {
 			reportTokenError( self, arguments, 'one number' );
 			return;
 		}
-		
+
 		self.currentRule.modifiers.push( new modifier( numbers[0] ) );
 	}
-	
+
 	// ------------------------ GENERIC PARSING ---------------------------------
-	
+
 	function parseOperatorAndValue (self, arguments) {
 		var tokens = arguments
 			.trim()
 			.split(' ')
 			.filter( function (element, index, array) { return element.trim().length > 0; } );
-		
+
 		var operator, value;
-		
+
 		if (tokens.length == 1) {
 			// Special case: For equality checks, you specify only the value
 			operator = '=';
@@ -266,12 +265,12 @@ function Parser() {
 			reportTokenError( self, arguments, 'operator and value' );
 			return null;
 		}
-		
+
 		if (OPERATOR_TOKENS.indexOf( operator ) < 0) {
 			reportTokenError( self, operator, 'operator' );
 			return null;
 		}
-		
+
 		var comparers = {
 			'=': function(a,b) { return a == b; },
 			'<': function(a,b) { return a < b; },
@@ -279,21 +278,21 @@ function Parser() {
 			'<=': function(a,b) { return a <= b; },
 			'>=': function(a,b) { return a >= b; }
 		};
-		
+
 		return { comparer:comparers[operator], value:value };
 	}
-	
+
 	function parseNumbers (self, arguments) {
 		var tokens = arguments
 			.trim()
 			.split(' ')
 			.filter( function (element, index, array) { return element.trim().length > 0; } );
-						
+
 		if (tokens.some( isNaN )) {
 			reportTokenError( self, arguments, 'numbers' );
 			return null;
 		}
-		
+
 		return tokens.map( function(n) { return parseInt( n ); } );
 	}
 
@@ -302,70 +301,49 @@ function Parser() {
 			.trim()
 			.split(' ');
 			// Don't remove empty tokens because they might represent multiple spaces inside quoted strings
-			
+
 		var actualTokens = [];
 		var numQuotes = 0;
 		var currentToken = '';
 		for (var i=0; i < tokens.length; i++) {
 			numQuotes += StrUtils.countChar( '"', tokens[i] );
 			var withoutQuotes = tokens[i].replace( '"', '' );
-			
+
 			if (currentToken.length > 0) {
 				currentToken += ' ' + withoutQuotes;
 			}
 			else {
 				currentToken = withoutQuotes;
 			}
-			
+
 			if (numQuotes % 2 == 0) {
 				actualTokens.push( currentToken );
 				currentToken = '';
 			}
 		}
-		
+
 		if (numQuotes % 2 != 0) {
 			reportParseError( self, arguments, 'no matching quote' );
 			actualTokens.push( currentToken );
 		}
-		
+
 		return actualTokens;
 	}
-	
+
 	// ------------------- ERROR MESSAGES --------------------------------------
-	
+
 	function reportTokenError (self, token, expected) {
 		self.errors.push( 'Invalid token "' + token + '" at line ' + self.currentLineNr.toString() + ' (expected ' + expected + ')' );
 		self.lineTypes[self.currentLineNr] = 'Error';
 	}
-	
+
 	function reportInvalidSocketGroup (self, socketGroup) {
 		self.errors.push( 'Invalid socket group "' + socketGroup + '" + at line ' + self.currentLineNr.toString() + ' (allowed characters are R,G,B)' );
 		self.lineTypes[self.currentLineNr] = 'Error';
 	}
-	
+
 	function reportParseError (self, text, reason) {
 		self.errors.push( 'Cannot parse "' + text + '" (' + reason + ')' );
 		self.lineTypes[self.currentLineNr] = 'Error';
 	}
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

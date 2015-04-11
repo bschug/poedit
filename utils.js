@@ -152,3 +152,9 @@ var DomUtils = {
 		}
 	}
 };
+
+var MathUtils = {
+	clamp: function (value, min, max) {
+		return Math.min( max, Math.max( min, value ) );
+	}
+};
