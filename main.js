@@ -164,6 +164,27 @@ var PoEdit = new function()
 			sockets: ['RGB','G']
 		},
 		{
+			name: 'Crusader Plate',
+			itemLevel: 69,
+			dropLevel: 59,
+			quality: 0,
+			itemClass: 'Body Armor',
+			baseType: 'Crusader Plate',
+			rarity: Rarity.Unique,
+			sockets: ['RR','RR']
+		},
+		{
+			name: 'Imperial Staff',
+			itemLevel: 66,
+			dropLevel: 66,
+			quality: 0,
+			itemClass: 'Staff',
+			baseType: 'Imperial Staff',
+			rarity: Rarity.Unique,
+			sockets: ['B']
+		},
+
+		{
 			name: 'Tropical Island Map',
 			itemLevel: 67,
 			dropLevel: 66,
