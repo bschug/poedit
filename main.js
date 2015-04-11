@@ -308,7 +308,6 @@ var PoEdit = new function()
 		// Tab
 		if (code === 9) {
 			if (PoEdit.intellisense.isVisible()) {
-				event.stopPropagation ? event.stopPropagation() : (event.cancelBubble = true);
 				event.preventDefault();
 				PoEdit.intellisense.applySuggestion();
 			}
@@ -316,7 +315,6 @@ var PoEdit = new function()
 		// Arrow Up
 		else if (code === 38) {
 			if (PoEdit.intellisense.isVisible()) {
-				event.stopPropagation ? event.stopPropagation() : (event.cancelBubble = true);
 				event.preventDefault();
 				PoEdit.intellisense.selectPrevious();
 			}
@@ -324,7 +322,6 @@ var PoEdit = new function()
 		// Arrow Down
 		else if (code === 40) {
 			if (PoEdit.intellisense.isVisible()) {
-				event.stopPropagation ? event.stopPropagation() : (event.cancelBubble = true);
 				event.preventDefault();
 				PoEdit.intellisense.selectNext();
 			}
@@ -332,9 +329,16 @@ var PoEdit = new function()
 		// Escape
 		else if (code === 27) {
 			if (PoEdit.intellisense.isVisible()) {
-				event.stopPropagation ? event.stopPropagation() : (event.cancelBubble = true);
 				event.preventDefault();
 				PoEdit.intellisense.enabled = false;
+			}
+		}
+		// Ctrl+Space
+		else if (code === 32) {
+			if (event.ctrlKey) {
+				event.preventDefault();
+				PoEdit.intellisense.enabled = true;
+				PoEdit.intellisense.enabledOnEmptyLine = true;
 			}
 		}
 	}

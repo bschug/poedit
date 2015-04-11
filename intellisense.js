@@ -4,6 +4,7 @@ function Intellisense() {
     this.selected = 0;
     this.selectedLineId = 0;
     this.enabled = true;
+    this.enabledOnEmptyLine = false;
 
     this.previousLineId = 0;
     this.previousLineLength = 0;
@@ -18,7 +19,17 @@ function Intellisense() {
 
     this.update = function (rawLines, cursorPos) {
         var selectedLineId = getSelectedLineId( rawLines, cursorPos );
-        buildSuggestions( this.suggestions, rawLines[selectedLineId].trim() );
+        var selectedLine = rawLines[selectedLineId].trim();
+
+        this.suggestions = [];
+        if (selectedLine.length > 0 || this.enabledOnEmptyLine) {
+            buildSuggestions( this.suggestions, selectedLine );
+        }
+
+        // Disable the empty-line flag once we are on a line with something written on it
+        if (selectedLine.length > 0) {
+            this.enabledOnEmptyLine = false;
+        }
 
         // re-enable when writing something
         if (selectedLineId === this.previousLineId && rawLines[selectedLineId].length !== this.previousLineLength) {
@@ -73,16 +84,11 @@ function Intellisense() {
     }
 
     function buildSuggestions (suggestions, line) {
-        suggestions.splice( 0, suggestions.length );
-
-        if (line.length === 0) {
-            return;
-        }
-
         var visibilityTokens = [ 'Show', 'Hide' ];
         var filterTokens = [ 'ItemLevel', 'DropLevel', 'Quality', 'Rarity', 'Class', 'BaseType', 'Sockets', 'LinkedSockets', 'SocketGroup' ];
         var modifierTokens = [ 'SetBackgroundColor', 'SetBorderColor', 'SetTextColor', 'PlayAlertSound' ];
 
+        suggestions.splice( 0, suggestions.length );
         visibilityTokens.forEach( function(token) { considerSuggestion( token, line, suggestions ); } );
         filterTokens.forEach( function(token) { considerSuggestion( token, line, suggestions ); } );
         modifierTokens.forEach( function(token) { considerSuggestion( token, line, suggestions ); } );
