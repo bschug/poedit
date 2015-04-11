@@ -183,6 +183,46 @@ var PoEdit = new function()
 			rarity: Rarity.Normal,
 			sockets: []
 		},
+		{
+			name: 'Crimson Jewel',
+			itemLevel: 20,
+			dropLevel: 12,
+			quality: 0,
+			itemClass: 'Jewel',
+			baseType: 'Crimson Jewel',
+			rarity: Rarity.Magic,
+			sockets: []
+		},
+		{
+			name: 'Viridian Jewel',
+			itemLevel: 72,
+			dropLevel: 61,
+			quality: 0,
+			itemClass: 'Jewel',
+			baseType: 'Viridian Jewel',
+			rarity: Rarity.Unique,
+			sockets: []
+		},
+		{
+			name: 'Scroll of Wisdom',
+			itemLevel: 75,
+			dropLevel: 1,
+			quality: 0,
+			itemClass: 'Currency',
+			baseType: 'Scroll of Wisdom',
+			rarity: Rarity.Normal,
+			sockets: []
+		},
+		{
+			name: 'Portal Scroll',
+			itemLevel: 5,
+			dropLevel: 1,
+			quality: 0,
+			itemClass: 'Currency',
+			baseType: 'Portal Scroll',
+			rarity: Rarity.Normal,
+			sockets: []
+		},
 
 	];
 
