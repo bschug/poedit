@@ -66,7 +66,7 @@ var PoEdit = new function()
 
 	function createItems() {
 		var items = [];
-		ArrayUtils.shuffle( defaultItems ).forEach( function(item) {
+		ArrayUtils.shuffle( getDefaultItems() ).forEach( function(item) {
 			items.push( new Item(item) );
 		});
 		return items;
