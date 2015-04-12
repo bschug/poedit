@@ -67,6 +67,10 @@
 	display: none; /* initially hidden */
 }
 
+#items-editor > p {
+	margin: 1px 5px;
+}
+
 #items-edit-button {
 	position: absolute;
 	margin: 2px;

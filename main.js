@@ -64,9 +64,9 @@ var PoEdit = new function()
 		codeWindow.innerHTML = code;
 	}
 
-	function createItems() {
+	function createItems (itemDefinitions) {
 		var items = [];
-		ArrayUtils.shuffle( getDefaultItems() ).forEach( function(item) {
+		ArrayUtils.shuffle( itemDefinitions ).forEach( function(item) {
 			items.push( new Item(item) );
 		});
 		return items;
@@ -182,8 +182,32 @@ var PoEdit = new function()
 		}
 	}
 
+	function onItemsEditButton() {
+		if (PoEdit.itemsEditor.isOpen()) {
+			PoEdit.itemsEditor.close();
+
+			// close() may fail if invalid item data was given.
+			// In that case, ItemsEditor.items will be null.
+			// We keep our item list as it is in that case.
+			if (PoEdit.itemsEditor.items !== null) {
+				PoEdit.itemsDefinition = PoEdit.itemsEditor.items;
+				DomUtils.removeAllChildren( document.getElementById( 'items-area' ) );
+				createItems( PoEdit.itemsDefinition );
+				PoEdit.dirty = true;
+				this.innerHTML = 'Edit';
+			}
+		}
+		else {
+			PoEdit.itemsEditor.open( PoEdit.itemsDefinition );
+			this.innerHTML = 'Save';
+		}
+	}
+
+	this.items = null;
+	this.itemsDefinition = null;
 	this.parser = new Parser();
 	this.editor = new Editor();
+	this.itemsEditor = new ItemsEditor();
 	this.itemDetails = new ItemDetails();
 	this.codeCursorPos = 0;
 	this.intellisense = new Intellisense();
@@ -191,11 +215,13 @@ var PoEdit = new function()
 	this.dirty = true;
 
 	this.init = function() {
-		this.items = createItems();
+		this.itemsDefinition = getDefaultItems();
+		this.items = createItems( this.itemsDefinition );
 		drawItems( this.items );
 
 		addDefaultScript();
 		this.editor.init();
+		this.itemsEditor.init();
 		this.intellisense.init();
 		this.itemDetails.init();
 
@@ -209,6 +235,7 @@ var PoEdit = new function()
 			setInterval( function() { self.update(); }, 250 );
 		}
 
+		document.getElementById( 'items-edit-button' ).addEventListener( 'click', onItemsEditButton );
 		document.getElementById( 'code-window' ).addEventListener( 'keydown', onKeyDown, true );
 	}
 
