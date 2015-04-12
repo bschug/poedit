@@ -55,6 +55,26 @@
 	bottom: 0px;
 }
 
+#items-editor {
+	position: absolute;
+	margin: 2px;
+
+	left: 50%;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+
+	display: none; /* initially hidden */
+}
+
+#items-edit-button {
+	position: absolute;
+	margin: 2px;
+
+	right: 0px;
+	bottom: 0px;
+}
+
 /* code editor style */
 
 #code-window {
@@ -214,6 +234,16 @@
 
 #item-details > p > .value {
 	color: white;
+}
+
+/* items editor */
+
+#items-editor {
+	padding: 3px;
+	background-color: white;
+	color: black;
+	font-family: monospace;
+	overflow-y: scroll;
 }
 
 /* debug button */
