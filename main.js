@@ -136,6 +136,7 @@ var PoEdit = new function()
 			if (PoEdit.intellisense.isVisible()) {
 				event.preventDefault();
 				PoEdit.intellisense.selectPrevious();
+				updateIntellisense();
 			}
 		}
 		// Arrow Down
@@ -143,6 +144,7 @@ var PoEdit = new function()
 			if (PoEdit.intellisense.isVisible()) {
 				event.preventDefault();
 				PoEdit.intellisense.selectNext();
+				updateIntellisense();
 			}
 		}
 		// Escape
