@@ -93,6 +93,7 @@ var PoEdit = new function()
 	function onHoverItemEnd (item) {
 		PoEdit.editor.highlightLines = [];
 		PoEdit.itemDetails.item = null;
+		PoEdit.dirty = true;
 	}
 
 	function getCode() {
