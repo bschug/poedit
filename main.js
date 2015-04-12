@@ -66,10 +66,10 @@ var PoEdit = new function()
 
 	function createItems (itemDefinitions) {
 		var items = [];
-		ArrayUtils.shuffle( itemDefinitions ).forEach( function(item) {
+		itemDefinitions.forEach( function(item) {
 			items.push( new Item(item) );
 		});
-		return items;
+		return ArrayUtils.shuffle( items );
 	}
 
 	function drawItems (items) {
@@ -192,7 +192,7 @@ var PoEdit = new function()
 			if (PoEdit.itemsEditor.items !== null) {
 				PoEdit.itemsDefinition = PoEdit.itemsEditor.items;
 				DomUtils.removeAllChildren( document.getElementById( 'items-area' ) );
-				createItems( PoEdit.itemsDefinition );
+				drawItems( createItems( PoEdit.itemsDefinition ) );
 				PoEdit.dirty = true;
 				this.innerHTML = 'Edit';
 			}

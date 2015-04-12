@@ -12,6 +12,7 @@ function ItemsEditor() {
         this.items = null;
         var json = itemsToJson( items );
         renderText( this.itemsEditorWindow, json );
+
         this.itemsEditorWindow.style.display = 'block';
         this.itemsArea.style.display = 'none';
     }
@@ -29,6 +30,9 @@ function ItemsEditor() {
         }
 
         this.items = items;
+
+        this.itemsEditorWindow.style.display = 'none';
+        this.itemsArea.style.display = 'block';
     }
 
     function itemsToJson (items) {
@@ -41,21 +45,33 @@ function ItemsEditor() {
         DomUtils.removeAllChildren( container );
 
         var lines = text.split( '\n' );
-        lines = lines.map( function(line) { return StrUtils.replaceAll( line, '  ', '\u00a0 ' ); } );
 
         for (var i=0; i < lines.length; i++) {
+
+            // We replace all double spaces by a unicode non-breaking space and a normal one.
+            // This is the same as &nbsp;, but we can use this in createTextNode.
+            // We need to use createTextNode because the text may contain some HTML control characters.
+            var line = StrUtils.replaceAll( lines[i], '  ', '\u00a0 ' );
+
             var p = document.createElement( 'p' );
-            p.appendChild( document.createTextNode( lines[i] ) );
+            p.appendChild( document.createTextNode( lines[i] ));
             container.appendChild( p );
         }
     }
 
     function jsonToItems (json) {
+        // Need to remove all whitespace because we have those unicode spaces for indentation
+        // and the JSON parser does not like them.
+        json = json.split( '\n' )
+            .map( function (line) { return line.trim(); } )
+            .join( '\n' );
+
         try {
             var data = JSON.parse( json );
         }
         catch( ex ) {
             alert( 'Item Data is not valid JSON. Try http://jsonlint.com to find the error.' );
+            console.log( ex.toString() );
             return null;
         }
 
