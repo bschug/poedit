@@ -49,6 +49,7 @@ function Item (itemdata)
 
 	this.sockets = itemdata.sockets;
 
+	this.outerElement = null;
 	this.domElement = null;
 	this.matchingRule = null;
 
@@ -70,6 +71,9 @@ function Item (itemdata)
 	}
 
 	this.draw = function() {
+		var outerDiv = document.createElement( 'div' );
+		outerDiv.className = 'item-container';
+
 		var itemDiv = document.createElement( 'div' );
 		itemDiv.className = 'item';
 
@@ -81,25 +85,29 @@ function Item (itemdata)
 			itemDiv.appendChild( drawSockets(this) );
 		}
 
+		outerDiv.appendChild( itemDiv );
+
 		var itemsArea = document.getElementById( 'items-area' );
-		itemsArea.appendChild( itemDiv );
+		itemsArea.appendChild( outerDiv );
 
 		var self = this;
-		itemDiv.addEventListener('mouseover', function() {
+		outerDiv.addEventListener('mouseover', function() {
 			if (self.onMouseOver !== null) {
 				self.onMouseOver( self );
 			}
 		});
-		itemDiv.addEventListener('mouseout', function() {
+		outerDiv.addEventListener('mouseout', function() {
 			if (self.onMouseOut !== null) {
 				self.onMouseOut( self );
 			}
 		});
 
+		this.outerElement = outerDiv;
 		this.domElement = itemDiv;
 	}
 
 	this.setVisibility = function (visibility) {
+		this.outerElement.className = (visibility ? 'item-container' : 'hidden-item-container');
 		this.domElement.style.visibility = (visibility ? 'visible' : 'hidden');
 	}
 

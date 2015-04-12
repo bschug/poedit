@@ -119,11 +119,23 @@
 	background-position: center;
 }
 
-.item {
+.item-container {
 	display: inline-block;
-	margin: 3px;
-	padding: 1px 6px;
+	margin: 2px;
+}
 
+.hidden-item-container {
+	display: inline-block;
+	margin: 2px;
+}
+
+.hidden-item-container:hover {
+	border: 1px dashed grey;
+}
+
+.item {
+	margin: 0px;
+	padding: 1px 6px;
 	background-color: rgba(0, 0, 0, 0.75);
 }
 
