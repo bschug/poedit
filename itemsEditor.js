@@ -54,7 +54,7 @@ function ItemsEditor() {
             var line = StrUtils.replaceAll( lines[i], '  ', '\u00a0 ' );
 
             var p = document.createElement( 'p' );
-            p.appendChild( document.createTextNode( lines[i] ));
+            p.appendChild( document.createTextNode( line ));
             container.appendChild( p );
         }
     }
