@@ -407,5 +407,99 @@ function getDefaultItems() {
 
     ];
 
-    return weapons.concat( armor, jewelry, gems, currency, maps, jewels );
+    var flasks = [
+        {
+            name: 'Grand Life Flask',
+            itemLevel: 31,
+            dropLevel: 26,
+            quality: 0,
+            itemClass: 'Flask',
+            baseType: 'Grand Life Flask',
+            rarity: Rarity.Normal,
+            sockets: []
+        },
+        {
+    		name: 'Grand Life Flask',
+    		itemLevel: 59,
+    		dropLevel: 26,
+    		quality: 0,
+    		itemClass: 'Flask',
+    		baseType: 'Grand Life Flask',
+    		rarity: Rarity.Magic,
+    		sockets: []
+    	},
+        {
+    		name: 'Hallowed Mana Flask',
+    		itemLevel: 59,
+    		dropLevel: 53,
+    		quality: 0,
+    		itemClass: 'Flask',
+    		baseType: 'Hallowed Mana Flask',
+    		rarity: Rarity.Magic,
+    		sockets: []
+    	},
+        {
+    		name: 'Large Hybrid Flask',
+    		itemLevel: 35,
+    		dropLevel: 30,
+    		quality: 0,
+    		itemClass: 'Flask',
+    		baseType: 'Large Hybrid Flask',
+    		rarity: Rarity.Magic,
+    		sockets: []
+    	},
+        {
+    		name: 'Medium Hybrid Flask',
+    		itemLevel: 35,
+    		dropLevel: 20,
+    		quality: 0,
+    		itemClass: 'Flask',
+    		baseType: 'Medium Hybrid Flask',
+    		rarity: Rarity.Normal,
+    		sockets: []
+    	},
+        {
+    		name: 'Granite Flask',
+    		itemLevel: 51,
+    		dropLevel: 27,
+    		quality: 0,
+    		itemClass: 'Flask',
+    		baseType: 'Granite Flask',
+    		rarity: Rarity.Normal,
+    		sockets: []
+    	},
+        {
+    		name: 'Topaz Flask',
+    		itemLevel: 46,
+    		dropLevel: 18,
+    		quality: 0,
+    		itemClass: 'Flask',
+    		baseType: 'Topaz Flask',
+    		rarity: Rarity.Magic,
+    		sockets: []
+    	},
+        {
+    		name: 'Small Hybrid Flask',
+    		itemLevel: 71,
+    		dropLevel: 10,
+    		quality: 9,
+    		itemClass: 'Flask',
+    		baseType: 'Small Hybrid Flask',
+    		rarity: Rarity.Normal,
+    		sockets: []
+    	},
+        {
+    		name: 'Sapphire Flask',
+    		itemLevel: 76,
+    		dropLevel: 18,
+    		quality: 0,
+    		itemClass: 'Flask',
+    		baseType: 'Sapphire Flask',
+    		rarity: Rarity.Unique,
+    		sockets: []
+    	},
+
+    ];
+
+    return weapons.concat( armor, jewelry, gems, currency, maps, jewels, flasks );
 }
