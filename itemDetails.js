@@ -8,6 +8,7 @@ function ItemDetails() {
     this.rarityLabel = null;
     this.itemClassLabel = null;
     this.baseTypeLabel = null;
+    this.socketsLabel = null;
 
     this.init = function() {
         this.div = document.getElementById( 'item-details' );
@@ -32,6 +33,9 @@ function ItemDetails() {
                 case 'base-type':
                     this.baseTypeLabel = getValueLabel( child );
                     break;
+                case 'sockets':
+                    this.socketsLabel = getValueLabel( child );
+                    break;
             }
         }
     }
@@ -53,6 +57,7 @@ function ItemDetails() {
         this.rarityLabel.innerText = Rarity.getName( this.item.rarity );
         this.itemClassLabel.innerText = this.item.itemClass;
         this.baseTypeLabel.innerText = this.item.baseType;
+        this.socketsLabel.innerText = this.item.sockets.join(' ');
     }
 
     function getValueLabel (elem) {
