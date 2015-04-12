@@ -130,6 +130,16 @@ function getDefaultItems() {
     		rarity: Rarity.Normal,
     		sockets: ['R']
     	},
+        {
+    		name: 'Midnight Blade',
+    		itemLevel: 71,
+    		dropLevel: 68,
+    		quality: 0,
+    		itemClass: 'One Hand Sword',
+    		baseType: 'Midnight Blade',
+    		rarity: Rarity.Rare,
+    		sockets: ['B','G']
+    	},
 
     ];
 
@@ -204,7 +214,26 @@ function getDefaultItems() {
     		rarity: Rarity.Unique,
     		sockets: ['R','B']
     	},
-
+        {
+    		name: 'Vaal Regalia',
+    		itemLevel: 72,
+    		dropLevel: 68,
+    		quality: 0,
+    		itemClass: 'Body Armor',
+    		baseType: 'Vaal Regalia',
+    		rarity: Rarity.Rare,
+    		sockets: ['B','B']
+    	},
+        {
+    		name: 'Sacrificial Garb',
+    		itemLevel: 77,
+    		dropLevel: 72,
+    		quality: 0,
+    		itemClass: 'Body Armor',
+    		baseType: 'Sacrificial Garb',
+    		rarity: Rarity.Normal,
+    		sockets: ['RRB','G']
+    	},
     ];
 
     var jewelry = [
@@ -238,7 +267,26 @@ function getDefaultItems() {
     		rarity: Rarity.Rare,
     		sockets: []
     	},
-
+        {
+    		name: 'Coral Ring',
+    		itemLevel: 78,
+    		dropLevel: 2,
+    		quality: 0,
+    		itemClass: 'Ring',
+    		baseType: 'Coral Ring',
+    		rarity: Rarity.Normal,
+    		sockets: []
+    	},
+        {
+    		name: 'Unset Ring',
+    		itemLevel: 53,
+    		dropLevel: 45,
+    		quality: 0,
+    		itemClass: 'Ring',
+    		baseType: 'Unset Ring',
+    		rarity: Rarity.Rare,
+    		sockets: []
+    	},
     ];
 
     var gems = [
