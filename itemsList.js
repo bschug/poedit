@@ -306,6 +306,16 @@ function getDefaultItems() {
     		rarity: Rarity.Normal,
     		sockets: []
     	},
+        {
+    		name: 'Blacksmith\'s Whetstone',
+    		itemLevel: 53,
+    		dropLevel: 1,
+    		quality: 0,
+    		itemClass: 'Currency',
+    		baseType: 'Blacksmith\'s Whetstone',
+    		rarity: Rarity.Normal,
+    		sockets: []
+    	},
     	{
     		name: 'Orb of Alchemy',
     		itemLevel: 17,
@@ -316,13 +326,63 @@ function getDefaultItems() {
     		rarity: Rarity.Normal,
     		sockets: []
     	},
-    	{
+        {
     		name: 'Orb of Augmentation',
     		itemLevel: 29,
     		dropLevel: 1,
     		quality: 0,
     		itemClass: 'Currency',
     		baseType: 'Orb of Augmentation',
+    		rarity: Rarity.Normal,
+    		sockets: []
+    	},
+        {
+    		name: 'Orb of Alteration',
+    		itemLevel: 71,
+    		dropLevel: 1,
+    		quality: 0,
+    		itemClass: 'Currency',
+    		baseType: 'Orb of Alteration',
+    		rarity: Rarity.Normal,
+    		sockets: []
+    	},
+        {
+    		name: 'Orb of Chance',
+    		itemLevel: 9,
+    		dropLevel: 1,
+    		quality: 0,
+    		itemClass: 'Currency',
+    		baseType: 'Orb of Chance',
+    		rarity: Rarity.Normal,
+    		sockets: []
+    	},
+        {
+    		name: 'Orb of Fusing',
+    		itemLevel: 47,
+    		dropLevel: 1,
+    		quality: 0,
+    		itemClass: 'Currency',
+    		baseType: 'Orb of Fusing',
+    		rarity: Rarity.Normal,
+    		sockets: []
+    	},
+        {
+    		name: 'Orb of Transmutation',
+    		itemLevel: 13,
+    		dropLevel: 1,
+    		quality: 0,
+    		itemClass: 'Currency',
+    		baseType: 'Orb of Transmutation',
+    		rarity: Rarity.Normal,
+    		sockets: []
+    	},
+        {
+    		name: 'Regal Orb',
+    		itemLevel: 29,
+    		dropLevel: 1,
+    		quality: 0,
+    		itemClass: 'Currency',
+    		baseType: 'Regal Orb',
     		rarity: Rarity.Normal,
     		sockets: []
     	},
@@ -337,12 +397,132 @@ function getDefaultItems() {
     		sockets: []
     	},
         {
+    		name: 'Chaos Orb',
+    		itemLevel: 35,
+    		dropLevel: 1,
+    		quality: 0,
+    		itemClass: 'Currency',
+    		baseType: 'Chaos Orb',
+    		rarity: Rarity.Normal,
+    		sockets: []
+    	},
+        {
+    		name: 'Glassblower\'s Bauble',
+    		itemLevel: 9,
+    		dropLevel: 1,
+    		quality: 0,
+    		itemClass: 'Currency',
+    		baseType: 'Glassblower\'s Bauble',
+    		rarity: Rarity.Normal,
+    		sockets: []
+    	},
+        {
+    		name: 'Gemcutter\'s Prism',
+    		itemLevel: 13,
+    		dropLevel: 1,
+    		quality: 0,
+    		itemClass: 'Currency',
+    		baseType: 'Gemcutter\'s Prism',
+    		rarity: Rarity.Normal,
+    		sockets: []
+    	},
+        {
+    		name: 'Jeweller\'s Orb',
+    		itemLevel: 13,
+    		dropLevel: 1,
+    		quality: 0,
+    		itemClass: 'Currency',
+    		baseType: 'Jeweller\'s Orb',
+    		rarity: Rarity.Normal,
+    		sockets: []
+    	},
+        {
+    		name: 'Cartographer\'s Chisel',
+    		itemLevel: 62,
+    		dropLevel: 1,
+    		quality: 0,
+    		itemClass: 'Currency',
+    		baseType: 'Cartographer\'s Chisel',
+    		rarity: Rarity.Normal,
+    		sockets: []
+    	},
+        {
+    		name: 'Divine Orb',
+    		itemLevel: 49,
+    		dropLevel: 1,
+    		quality: 0,
+    		itemClass: 'Currency',
+    		baseType: 'Divine Orb',
+    		rarity: Rarity.Normal,
+    		sockets: []
+    	},
+        {
+    		name: 'Blessed Orb',
+    		itemLevel: 41,
+    		dropLevel: 1,
+    		quality: 0,
+    		itemClass: 'Currency',
+    		baseType: 'Blessed Orb',
+    		rarity: Rarity.Normal,
+    		sockets: []
+    	},
+        {
+    		name: 'Regal Orb',
+    		itemLevel: 71,
+    		dropLevel: 1,
+    		quality: 0,
+    		itemClass: 'Currency',
+    		baseType: 'Regal Orb',
+    		rarity: Rarity.Normal,
+    		sockets: []
+    	},
+        {
+    		name: 'Vaal Orb',
+    		itemLevel: 9,
+    		dropLevel: 1,
+    		quality: 0,
+    		itemClass: 'Currency',
+    		baseType: 'Vaal Orb',
+    		rarity: Rarity.Normal,
+    		sockets: []
+    	},
+        {
+    		name: 'Orb of Regret',
+    		itemLevel: 22,
+    		dropLevel: 1,
+    		quality: 0,
+    		itemClass: 'Currency',
+    		baseType: 'Orb of Regret',
+    		rarity: Rarity.Normal,
+    		sockets: []
+    	},
+        {
+    		name: 'Orb of Scouring',
+    		itemLevel: 78,
+    		dropLevel: 1,
+    		quality: 0,
+    		itemClass: 'Currency',
+    		baseType: 'Orb of Scouring',
+    		rarity: Rarity.Normal,
+    		sockets: []
+    	},
+        {
     		name: 'Exalted Orb',
     		itemLevel: 67,
     		dropLevel: 1,
     		quality: 0,
     		itemClass: 'Currency',
     		baseType: 'Exalted Orb',
+    		rarity: Rarity.Normal,
+    		sockets: []
+    	},
+        {
+    		name: 'Mirror of Kalandra',
+    		itemLevel: 77,
+    		dropLevel: 1,
+    		quality: 0,
+    		itemClass: 'Currency',
+    		baseType: 'Mirror of Kalandra',
     		rarity: Rarity.Normal,
     		sockets: []
     	},
