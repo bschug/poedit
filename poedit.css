@@ -1,3 +1,10 @@
+/* font definitions */
+
+@font-face {
+	font-family: Fontin;
+	src: url(Fontin-SmallCaps.ttf);
+}
+
 /* positioning */
 
 #main {
@@ -170,9 +177,8 @@
 	padding: 0px;
 
 	color: white;
-	font-family: Fontin,Verdana,sans-serif;
-	font-size: 15px;
-	font-variant: small-caps;
+	font-family: Fontin;
+	font-size: 16px;
 
 	cursor: default;
 }
@@ -223,9 +229,8 @@
 	border: 1px solid white;
 	background-color: rgba(0, 0, 0, 0.75);
 
-	font-family: Fontin,Verdana,sans-serif;
+	font-family: Fontin;
 	font-size: 15px;
-	font-variant: small-caps;
 }
 
 #item-details > p {

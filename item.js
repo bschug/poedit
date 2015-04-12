@@ -124,7 +124,12 @@ function Item (itemdata)
 	}
 
 	this.setBackgroundColor = function (color) {
-		this.domElement.style.backgroundColor = buildColor( color.r, color.g, color.b );
+		if (color.hasOwnProperty( 'a' )) {
+			this.domElement.style.backgroundColor = buildColorA( color.r, color.g, color.b, color.a );
+		}
+		else {
+			this.domElement.style.backgroundColor = buildColor( color.r, color.g, color.b );
+		}
 	}
 
 	function buildColor (r, g, b) {

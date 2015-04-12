@@ -3,7 +3,7 @@ var PoEdit = new function()
 	var MANUAL_UPDATE = false;
 
 	function applyDefaultStyle (item) {
-		var BLACK = {r:0, g:0, b:0};
+		var BLACK_75 = {r:0, g:0, b:0, a:0.75};
 		var WHITE = {r:255, g:255, b:255};
 		var BLUE = {r:128, g:128, b:255};
 		var YELLOW = {r:255, g:255, b:50};
@@ -31,7 +31,7 @@ var PoEdit = new function()
 
 		item.setVisibility( true );
 		item.removeBorder();
-		item.setBackgroundColor( BLACK );
+		item.setBackgroundColor( BLACK_75 );
 		item.setTextColor( color );
 
 		if (item.itemClass === 'Map') {
