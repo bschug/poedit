@@ -84,6 +84,7 @@ var PoEdit = new function()
 	function onHoverItemStart (item) {
 		if (item.matchingRule !== null) {
 			PoEdit.editor.highlightLines = item.matchingRule.codeLines;
+			PoEdit.editor.scrollToLine( item.matchingRule.codeLines[0] );
 		}
 		PoEdit.itemDetails.item = item;
 	}

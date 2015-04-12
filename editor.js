@@ -3,8 +3,39 @@ function Editor() {
 	this.codeWindow = null;
 	this.highlightLines = [];
 
+	this.scrollTarget = null;
+	this.scrollSpeed = 0;
+
+	var SCROLL_ANIM_INTERVAL = 30;
+	var SCROLL_DURATION_FACTOR = 1;
+	var SCROLL_ACC = 0.1;
+	var MIN_SCROLL_DISTANCE = 10;
+
 	this.init = function() {
 		this.codeWindow = document.getElementById( 'code-window' );
+
+		var self = this;
+		setInterval( function() { self.updateAnimation(); }, SCROLL_ANIM_INTERVAL );
+	}
+
+	this.updateAnimation = function() {
+		if (this.scrollTarget !== null) {
+			var distance = this.scrollTarget - this.codeWindow.scrollTop;
+
+			if (Math.abs( distance ) < MIN_SCROLL_DISTANCE) {
+				this.codeWindow.scrollTop = this.scrollTarget;
+				this.scrollTarget = null;
+				return;
+			}
+
+			var targetScrollSpeed = Math.abs( distance ) / SCROLL_DURATION_FACTOR * Math.sign( distance );
+			var scrollSpeed = this.scrollSpeed * (1 - SCROLL_ACC) + targetScrollSpeed * SCROLL_ACC;
+			if (Math.abs( distance ) < Math.abs( scrollSpeed )) {
+				scrollSpeed = distance;
+			}
+			this.codeWindow.scrollTop += scrollSpeed;
+			this.scrollSpeed = scrollSpeed;
+		}
 	}
 
 	this.formatCode = function (rawLines, lineTypes) {
@@ -91,6 +122,13 @@ function Editor() {
 
 		this.codeWindow.innerHTML = codeHTML;
 		DomUtils.restoreSelection( this.codeWindow, selection, selectionOffset );
+	}
+
+	this.scrollToLine = function (lineNr) {
+		var line = document.getElementById( 'line' + lineNr.toString() );
+		var codeWindowHeight = this.codeWindow.getBoundingClientRect().height;
+		var centeredScrollPos = line.offsetTop - codeWindowHeight / 2;
+		this.scrollTarget = MathUtils.clamp( centeredScrollPos, 0, this.codeWindow.scrollHeight );
 	}
 
 	function removeTrailingNewlines (rawLines, lineTypes, numAllowed) {
