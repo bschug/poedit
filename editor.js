@@ -128,7 +128,8 @@ function Editor() {
 		var line = document.getElementById( 'line' + lineNr.toString() );
 		var codeWindowHeight = this.codeWindow.getBoundingClientRect().height;
 		var centeredScrollPos = line.offsetTop - codeWindowHeight / 2;
-		this.scrollTarget = MathUtils.clamp( centeredScrollPos, 0, this.codeWindow.scrollHeight );
+		var bottomScrollPos = Math.max( 0, this.codeWindow.scrollHeight - codeWindowHeight );
+		this.scrollTarget = MathUtils.clamp( centeredScrollPos, 0, bottomScrollPos );
 	}
 
 	function removeTrailingNewlines (rawLines, lineTypes, numAllowed) {

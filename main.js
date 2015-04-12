@@ -85,6 +85,7 @@ var PoEdit = new function()
 		if (item.matchingRule !== null) {
 			PoEdit.editor.highlightLines = item.matchingRule.codeLines;
 			PoEdit.editor.scrollToLine( item.matchingRule.codeLines[0] );
+			PoEdit.dirty = true;
 		}
 		PoEdit.itemDetails.item = item;
 	}
@@ -148,6 +149,7 @@ var PoEdit = new function()
 			if (PoEdit.intellisense.isVisible()) {
 				event.preventDefault();
 				PoEdit.intellisense.enabled = false;
+				updateIntellisense();
 			}
 		}
 		// Ctrl+Space
@@ -156,6 +158,25 @@ var PoEdit = new function()
 				event.preventDefault();
 				PoEdit.intellisense.enabled = true;
 				PoEdit.intellisense.enabledOnEmptyLine = true;
+				updateIntellisense();
+			}
+		}
+	}
+
+	function updateIntellisense (rawLines) {
+		if (typeof rawLines === 'undefined') {
+			rawLines = getCode().split( '\n' );
+		}
+
+		// If code window is in focus
+		var codeWindow = document.getElementById( 'code-window' );
+		if (codeWindow === document.activeElement) {
+			// Get cursor position from code window
+			PoEdit.codeCursorPos = DomUtils.saveSelection( codeWindow );
+			if (PoEdit.codeCursorPos !== null && PoEdit.codeCursorPos.length > 0) {
+				// Update intellisense
+				var cp = PoEdit.codeCursorPos[0].characterRange.start;
+				PoEdit.intellisense.update( rawLines, cp );
 			}
 		}
 	}
@@ -165,6 +186,8 @@ var PoEdit = new function()
 	this.itemDetails = new ItemDetails();
 	this.codeCursorPos = 0;
 	this.intellisense = new Intellisense();
+	this.previousCode = '';
+	this.dirty = true;
 
 	this.init = function() {
 		this.items = createItems();
@@ -190,6 +213,19 @@ var PoEdit = new function()
 
 	this.update = function() {
 		var code = getCode();
+
+		// mark as dirty if code was changed
+		if (code !== this.previousCode) {
+			this.dirty = true;
+		}
+		this.previousCode = code;
+
+		// don't do expensive update if nothing has changed
+		if (!this.dirty) {
+			return;
+		}
+		this.dirty = false;
+
 		var rawLines = code.split( '\n' );
 		this.parser.parse( rawLines );
 
@@ -211,18 +247,7 @@ var PoEdit = new function()
 			}
 		}, this );
 
-		// If code window is in focus
-		var codeWindow = document.getElementById( 'code-window' );
-		if (codeWindow === document.activeElement) {
-			// Get cursor position from code window
-			this.codeCursorPos = DomUtils.saveSelection( codeWindow );
-			if (this.codeCursorPos !== null && this.codeCursorPos.length > 0) {
-				// Update intellisense
-				var cp = this.codeCursorPos[0].characterRange.start;
-				this.intellisense.update( rawLines, cp );
-			}
-		}
-
+		updateIntellisense( rawLines );
 		this.itemDetails.update();
 	}
 
