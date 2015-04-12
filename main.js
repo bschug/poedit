@@ -174,6 +174,16 @@ var PoEdit = new function()
 			sockets: ['RR','RR']
 		},
 		{
+			name: 'Simple Robe',
+			itemLevel: 68,
+			dropLevel: 1,
+			quality: 0,
+			itemClass: 'Body Armor',
+			baseType: 'Simple Robe',
+			rarity: Rarity.Unique,
+			sockets: ['WWWWWW']
+		},
+		{
 			name: 'Imperial Staff',
 			itemLevel: 66,
 			dropLevel: 66,

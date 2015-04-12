@@ -170,6 +170,9 @@ function Item (itemdata)
 			case 'B':
 				socket.style.backgroundColor = '#4444ff';
 				break;
+			case 'W':
+				socket.style.backgroundColor = '#ffffff';
+				break;
 		}
 
 		return socket;
