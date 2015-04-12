@@ -138,7 +138,7 @@ var PoEdit = new function()
 			itemLevel: 54,
 			dropLevel: 44,
 			quality: 0,
-			itemClass: 'Two Handed Sword',
+			itemClass: 'Two Hand Sword',
 			baseType: 'Highland Blade',
 			rarity: Rarity.Magic,
 			sockets: ['RRGRR']
@@ -184,6 +184,16 @@ var PoEdit = new function()
 			sockets: ['WWWWWW']
 		},
 		{
+			name: 'Holy Chainmail',
+			itemLevel: 66,
+			dropLevel: 35,
+			quality: 0,
+			itemClass: 'Body Armor',
+			baseType: 'Holy Chainmail',
+			rarity: Rarity.Unique,
+			sockets: ['R','B']
+		},
+		{
 			name: 'Imperial Staff',
 			itemLevel: 66,
 			dropLevel: 66,
@@ -193,7 +203,136 @@ var PoEdit = new function()
 			rarity: Rarity.Unique,
 			sockets: ['B']
 		},
-
+		{
+			name: 'Royal Bow',
+			itemLevel: 69,
+			dropLevel: 28,
+			quality: 0,
+			itemClass: 'Bow',
+			baseType: 'Royal Bow',
+			rarity: Rarity.Rare,
+			sockets: ['G','GG','B']
+		},
+		{
+			name: 'Royal Bow',
+			itemLevel: 41,
+			dropLevel: 28,
+			quality: 0,
+			itemClass: 'Bow',
+			baseType: 'Royal Bow',
+			rarity: Rarity.Rare,
+			sockets: ['R','GG','R']
+		},
+		{
+			name: 'Rusted Spike',
+			itemLevel: 3,
+			dropLevel: 3,
+			quality: 0,
+			itemClass: 'One Hand Sword',
+			baseType: 'Rusted Spike',
+			rarity: Rarity.Normal,
+			sockets: ['G']
+		},
+		{
+			name: 'Rusted Spike',
+			itemLevel: 38,
+			dropLevel: 3,
+			quality: 0,
+			itemClass: 'One Hand Sword',
+			baseType: 'Rusted Spike',
+			rarity: Rarity.Normal,
+			sockets: ['GG','R']
+		},
+		{
+			name: 'Basket Rapier',
+			itemLevel: 19,
+			dropLevel: 17,
+			quality: 0,
+			itemClass: 'One Hand Sword',
+			baseType: 'Basket Rapier',
+			rarity: Rarity.Magic,
+			sockets: ['GG']
+		},
+		{
+			name: 'Karui Chopper',
+			itemLevel: 62,
+			dropLevel: 58,
+			quality: 0,
+			itemClass: 'Two Hand Mace',
+			baseType: 'Karui Chopper',
+			rarity: Rarity.Magic,
+			sockets: ['RRR','B']
+		},
+		{
+			name: 'Rusted Spike',
+			itemLevel: 38,
+			dropLevel: 3,
+			quality: 0,
+			itemClass: 'One Hand Sword',
+			baseType: 'Rusted Spike',
+			rarity: Rarity.Normal,
+			sockets: ['GG','R']
+		},
+		{
+			name: 'Stone Hammer',
+			itemLevel: 38,
+			dropLevel: 15,
+			quality: 0,
+			itemClass: 'One Hand Mace',
+			baseType: 'Stone Hammer',
+			rarity: Rarity.Normal,
+			sockets: ['R']
+		},
+		{
+			name: 'Rock Breaker',
+			itemLevel: 73,
+			dropLevel: 41,
+			quality: 0,
+			itemClass: 'One Hand Mace',
+			baseType: 'Rock Breaker',
+			rarity: Rarity.Magic,
+			sockets: ['G']
+		},
+		{
+			name: 'Gavel',
+			itemLevel: 66,
+			dropLevel: 60,
+			quality: 0,
+			itemClass: 'One Hand Mace',
+			baseType: 'Gavel',
+			rarity: Rarity.Normal,
+			sockets: ['R']
+		},
+		{
+			name: 'Jade Amulet',
+			itemLevel: 44,
+			dropLevel: 7,
+			quality: 0,
+			itemClass: 'Amulet',
+			baseType: 'Jade Amulet',
+			rarity: Rarity.Magic,
+			sockets: []
+		},
+		{
+			name: 'Coral Amulet',
+			itemLevel: 8,
+			dropLevel: 2,
+			quality: 0,
+			itemClass: 'Amulet',
+			baseType: 'Coral Amulet',
+			rarity: Rarity.Normal,
+			sockets: []
+		},
+		{
+			name: 'Leather Belt',
+			itemLevel: 72,
+			dropLevel: 10,
+			quality: 0,
+			itemClass: 'Belt',
+			baseType: 'Leather Belt',
+			rarity: Rarity.Rare,
+			sockets: []
+		},
 		{
 			name: 'Tropical Island Map',
 			itemLevel: 67,
