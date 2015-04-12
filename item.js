@@ -176,7 +176,7 @@ function Item (itemdata)
 				socket.style.backgroundColor = '#80ff33';
 				break;
 			case 'B':
-				socket.style.backgroundColor = '#4444ff';
+				socket.style.backgroundColor = '#8888ff';
 				break;
 			case 'W':
 				socket.style.backgroundColor = '#ffffff';
