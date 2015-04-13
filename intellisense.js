@@ -112,7 +112,7 @@ function Intellisense() {
     }
 
     function considerSuggestion (suggestion, line, list) {
-        if (StrUtils.startsWith( suggestion, line )) {
+        if (StrUtils.startsWith( suggestion.toLowerCase(), line.toLowerCase() )) {
             if (suggestion !== line) {
                 list.push( suggestion );
             }
