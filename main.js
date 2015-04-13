@@ -58,10 +58,8 @@ var PoEdit = new function()
 				'    SetBackgroundColor 0 128 0\n';
 	}
 
-	function addDefaultScript() {
+	function setScript (code) {
 		var codeWindow = document.getElementById( 'code-window' );
-		var code = StorageUtils.load( 'poedit-code', getDefaultScript() );
-
 		code = StrUtils.replaceAll( code, '\n', '<br>' );
 		code = StrUtils.replaceAll( code, '  ', '&nbsp; ' );
 		codeWindow.innerHTML = code;
@@ -187,6 +185,26 @@ var PoEdit = new function()
 		}
 	}
 
+	function onResetButton() {
+		setItems( getDefaultItems() );
+	}
+
+	function setItems (itemsDefinition) {
+		// Store the new items definition
+		PoEdit.itemsDefinition = itemsDefinition;
+		PoEdit.items = createItems( itemsDefinition );
+
+		// Redraw all items
+		DomUtils.removeAllChildren( document.getElementById( 'items-area' ) );
+		drawItems( PoEdit.items );
+
+		PoEdit.dirty = true;
+		this.innerHTML = 'Edit';
+
+		// Save items definition to local storage
+		StorageUtils.save( 'poedit-items', ItemsEditor.itemsToJson( itemsDefinition ) );
+	}
+
 	function onItemsEditButton() {
 		if (PoEdit.itemsEditor.isOpen()) {
 			PoEdit.itemsEditor.close();
@@ -195,19 +213,7 @@ var PoEdit = new function()
 			// In that case, ItemsEditor.items will be null.
 			// We keep our item list as it is in that case.
 			if (PoEdit.itemsEditor.items !== null) {
-				// Store the new items definition
-				PoEdit.itemsDefinition = PoEdit.itemsEditor.items;
-				PoEdit.items = createItems( PoEdit.itemsDefinition );
-
-				// Redraw all items
-				DomUtils.removeAllChildren( document.getElementById( 'items-area' ) );
-				drawItems( PoEdit.items );
-
-				PoEdit.dirty = true;
-				this.innerHTML = 'Edit';
-
-				// Save items definition to local storage
-				StorageUtils.save( 'poedit-items', PoEdit.itemsEditor.getJSON() );
+				setItems( PoEdit.itemsEditor.items );
 			}
 		}
 		else {
@@ -232,7 +238,7 @@ var PoEdit = new function()
 		this.items = createItems( this.itemsDefinition );
 		drawItems( this.items );
 
-		addDefaultScript();
+		setScript( StorageUtils.load( 'poedit-code', getDefaultScript() ) );
 		this.editor.init();
 		this.itemsEditor.init();
 		this.intellisense.init();
@@ -248,6 +254,7 @@ var PoEdit = new function()
 			setInterval( function() { self.update(); }, 250 );
 		}
 
+		document.getElementById( 'reset-button' ).addEventListener( 'click', onResetButton );
 		document.getElementById( 'items-edit-button' ).addEventListener( 'click', onItemsEditButton );
 		document.getElementById( 'code-window' ).addEventListener( 'keydown', onKeyDown, true );
 	}

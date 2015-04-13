@@ -78,12 +78,21 @@
 	margin: 1px 5px;
 }
 
-#items-edit-button {
+#buttons {
 	position: absolute;
 	margin: 2px;
-
-	right: 0px;
 	bottom: 0px;
+	right: 0px;
+}
+
+#reset-button {
+	display: inline-block;
+	margin: 0px;
+}
+
+#items-edit-button {
+	display: inline-block;
+	margin: 0px;
 }
 
 #colorpicker {

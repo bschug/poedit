@@ -34,15 +34,14 @@ function ItemsEditor() {
         this.itemsArea.style.display = 'block';
     }
 
-    this.getJSON = function() {
-        return itemsToJson( this.items );
-    }
-
     function itemsToJson (items) {
         var json = '[\n';
         items = items.map( itemDefinitionToItemData );
         return JSON.stringify( items, null, 4 );
     }
+
+    // Make statically available
+    ItemsEditor.itemsToJson = itemsToJson;
 
     function renderText (container, text) {
         DomUtils.removeAllChildren( container );
