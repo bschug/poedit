@@ -39,25 +39,28 @@ var PoEdit = new function()
 		}
 	}
 
+	function getDefaultScript() {
+		return	'Show\n' +
+				'    Class Gem\n' +
+				'    Quality > 0\n' +
+				'    SetBorderColor 128 128 255 \n' +
+		    	'\n' +
+				'Show\n' +
+				'    BaseType "Exalted Orb"\n' +
+				'    SetTextColor 255 0 255\n' +
+				'\n' +
+				'Show\n' +
+				'    SocketGroup RGB\n' +
+				'    PlayAlertSound 1    \n' +
+				'\n' +
+				'Show\n' +
+				'    LinkedSockets >= 5\n' +
+				'    SetBackgroundColor 0 128 0\n';
+	}
+
 	function addDefaultScript() {
 		var codeWindow = document.getElementById( 'code-window' );
-		var code =
-			'Show\n' +
-			'    Class Gem\n' +
-			'    Quality > 0\n' +
-			'    SetBorderColor 128 128 255 \n' +
-    		'\n' +
-			'Show\n' +
-			'    BaseType "Exalted Orb"\n' +
-			'    SetTextColor 255 0 255\n' +
-			'\n' +
-			'Show\n' +
-			'    SocketGroup RGB\n' +
-			'    PlayAlertSound 1    \n' +
-			'\n' +
-			'Show\n' +
-			'    LinkedSockets >= 5\n' +
-			'    SetBackgroundColor 0 128 0\n';
+		var code = StorageUtils.load( 'poedit-code', getDefaultScript() );
 
 		code = StrUtils.replaceAll( code, '\n', '<br>' );
 		code = StrUtils.replaceAll( code, '  ', '&nbsp; ' );
@@ -250,6 +253,7 @@ var PoEdit = new function()
 			this.dirty = true;
 		}
 		this.previousCode = code;
+		StorageUtils.save( 'poedit-code', code );
 
 		// don't do expensive update if nothing has changed
 		if (!this.dirty) {

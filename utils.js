@@ -158,3 +158,20 @@ var MathUtils = {
 		return Math.min( max, Math.max( min, value ) );
 	}
 };
+
+var StorageUtils = {
+	save: function (key, value) {
+		if (typeof(Storage) !== 'undefined') {
+			localStorage.setItem( key, value );
+		}
+	},
+
+	load: function (key, defaultValue) {
+		if (typeof(Storage) !== 'undefined') {
+			if (key in localStorage) {
+				return localStorage[key];
+			}
+		}
+		return defaultValue;
+	},
+};
