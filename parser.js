@@ -22,6 +22,9 @@ function Parser() {
 		for (var i = 0; i < lines.length; i++) {
 			this.currentLineNr = i;
 
+			// Replace all special Unicode whitespace with regular spaces
+			lines[i] = lines[i].replace(/\s/g, ' ');
+
 			if (lines[i].trim() === '') {
 				this.lineTypes[i] = 'Empty';
 				continue;
