@@ -214,6 +214,7 @@ var PoEdit = new function()
 			// We keep our item list as it is in that case.
 			if (PoEdit.itemsEditor.items !== null) {
 				setItems( PoEdit.itemsEditor.items );
+				this.innerHTML = 'Edit';
 			}
 		}
 		else {
