@@ -167,6 +167,46 @@ var PoEdit = new function()
 		}
 	}
 
+	function onKeyDown_Global (event) {
+		var code = getKeyCode( event );
+
+		// Alt
+		if (code === 18) {
+			event.preventDefault();
+			PoEdit.showHiddenItems = true;
+			updateItems();
+		}
+	}
+
+	function onKeyUp_Global (event) {
+		var code = getKeyCode( event );
+
+		// Alt
+		if (code === 18) {
+			PoEdit.showHiddenItems = false;
+			updateItems();
+		}
+	}
+
+	function updateItems () {
+		PoEdit.items.forEach( function(item) {
+			applyDefaultStyle( item );
+
+			for (var i=0; i < PoEdit.parser.ruleSet.length; i++) {
+				var rule = PoEdit.parser.ruleSet[i];
+				if (rule.match( item )) {
+					item.matchingRule = rule;
+					rule.applyTo( item );
+
+					if (PoEdit.showHiddenItems) {
+						item.setVisibility( true );
+					}
+					break;
+				}
+			}
+		} );
+	}
+
 	function updateIntellisense (rawLines) {
 		if (typeof rawLines === 'undefined') {
 			rawLines = getCode().split( '\n' );
@@ -232,6 +272,7 @@ var PoEdit = new function()
 	this.codeCursorPos = 0;
 	this.intellisense = new Intellisense();
 	this.previousCode = '';
+	this.showHiddenItems = false;
 	this.dirty = true;
 
 	this.init = function() {
@@ -258,6 +299,8 @@ var PoEdit = new function()
 		document.getElementById( 'reset-button' ).addEventListener( 'click', onResetButton );
 		document.getElementById( 'items-edit-button' ).addEventListener( 'click', onItemsEditButton );
 		document.getElementById( 'code-window' ).addEventListener( 'keydown', onKeyDown, true );
+		document.addEventListener( 'keydown', onKeyDown_Global, true );
+		document.addEventListener( 'keyup', onKeyUp_Global, true );
 	}
 
 	this.update = function() {
@@ -284,19 +327,7 @@ var PoEdit = new function()
 
 		this.editor.formatCode( rawLines, this.parser.lineTypes );
 
-		this.items.forEach( function(item) {
-			applyDefaultStyle( item );
-
-			for (var i=0; i < this.parser.ruleSet.length; i++) {
-				var rule = this.parser.ruleSet[i];
-				if (rule.match( item )) {
-					item.matchingRule = rule;
-					rule.applyTo( item );
-					break;
-				}
-			}
-		}, this );
-
+		updateItems();
 		updateIntellisense( rawLines );
 		this.itemDetails.update();
 	}
