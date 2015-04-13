@@ -729,7 +729,20 @@ function getDefaultItems() {
 
     ];
 
-    return weapons.concat( armor, jewelry, gems, currency, maps, jewels, flasks );
+    var fishingRods = [
+        {
+            name: 'Fishing Rod',
+    		itemLevel: 59,
+    		dropLevel: 1,
+    		quality: 0,
+    		itemClass: 'Fishing Rod',
+    		baseType: 'Fishing Rod',
+    		rarity: Rarity.Normal,
+    		sockets: []
+        },
+    ];
+
+    return weapons.concat( armor, jewelry, gems, currency, maps, jewels, flasks, fishingRods );
 }
 
 function loadItems() {
