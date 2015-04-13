@@ -195,12 +195,19 @@ var PoEdit = new function()
 			// In that case, ItemsEditor.items will be null.
 			// We keep our item list as it is in that case.
 			if (PoEdit.itemsEditor.items !== null) {
+				// Store the new items definition
 				PoEdit.itemsDefinition = PoEdit.itemsEditor.items;
-				DomUtils.removeAllChildren( document.getElementById( 'items-area' ) );
 				PoEdit.items = createItems( PoEdit.itemsDefinition );
+
+				// Redraw all items
+				DomUtils.removeAllChildren( document.getElementById( 'items-area' ) );
 				drawItems( PoEdit.items );
+
 				PoEdit.dirty = true;
 				this.innerHTML = 'Edit';
+
+				// Save items definition to local storage
+				StorageUtils.save( 'poedit-items', PoEdit.itemsEditor.getJSON() );
 			}
 		}
 		else {
@@ -221,7 +228,7 @@ var PoEdit = new function()
 	this.dirty = true;
 
 	this.init = function() {
-		this.itemsDefinition = getDefaultItems();
+		this.itemsDefinition = loadItems();
 		this.items = createItems( this.itemsDefinition );
 		drawItems( this.items );
 

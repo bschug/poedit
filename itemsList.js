@@ -731,3 +731,19 @@ function getDefaultItems() {
 
     return weapons.concat( armor, jewelry, gems, currency, maps, jewels, flasks );
 }
+
+function loadItems() {
+    // Try to load from local storage
+    var json = StorageUtils.load( 'poedit-items', null );
+    if (json !== null) {
+        var items = ItemsEditor.jsonToItems( json );
+        if (items !== null) {
+            return items;
+        }
+        else {
+            console.log( 'failed to parse stored items JSON, loading defaults');
+        }
+    }
+
+    return getDefaultItems();
+}

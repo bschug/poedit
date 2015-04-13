@@ -22,8 +22,7 @@ function ItemsEditor() {
     }
 
     this.close = function() {
-        var json = DomUtils.getText( [ this.itemsEditorWindow ] );
-        var items = jsonToItems( json );
+        var items = jsonToItems( DomUtils.getText( [this.itemsEditorWindow] ) );
         if (items === null) {
             // User has already been notified about the error
             return;
@@ -33,6 +32,10 @@ function ItemsEditor() {
 
         this.itemsEditorWindow.style.display = 'none';
         this.itemsArea.style.display = 'block';
+    }
+
+    this.getJSON = function() {
+        return itemsToJson( this.items );
     }
 
     function itemsToJson (items) {
@@ -89,6 +92,9 @@ function ItemsEditor() {
 
         return data.map( itemDataToDefinition );
     }
+
+    // Make statically available
+    ItemsEditor.jsonToItems = jsonToItems;
 
     function isValidItem (data, itemNr) {
         if (typeof data !== 'object') {
