@@ -8,6 +8,7 @@ function ItemDetails() {
     this.rarityLabel = null;
     this.itemClassLabel = null;
     this.baseTypeLabel = null;
+    this.socketsLabel = null;
 
     this.init = function() {
         this.div = document.getElementById( 'item-details' );
@@ -32,6 +33,9 @@ function ItemDetails() {
                 case 'base-type':
                     this.baseTypeLabel = getValueLabel( child );
                     break;
+                case 'sockets':
+                    this.socketsLabel = getValueLabel( child );
+                    break;
             }
         }
     }
@@ -47,12 +51,13 @@ function ItemDetails() {
         this.div.style.left = itemPos.left;
         this.div.style.top = itemPos.bottom;
 
-        this.itemLevelLabel.innerText = this.item.itemLevel.toString();
-        this.dropLevelLabel.innerText = this.item.dropLevel.toString();
-        this.qualityLabel.innerText = this.item.quality.toString();
-        this.rarityLabel.innerText = Rarity.getName( this.item.rarity );
-        this.itemClassLabel.innerText = this.item.itemClass;
-        this.baseTypeLabel.innerText = this.item.baseType;
+        this.itemLevelLabel.innerHTML = this.item.itemLevel.toString();
+        this.dropLevelLabel.innerHTML = this.item.dropLevel.toString();
+        this.qualityLabel.innerHTML = this.item.quality.toString();
+        this.rarityLabel.innerHTML = Rarity.getName( this.item.rarity );
+        this.itemClassLabel.innerHTML = this.item.itemClass;
+        this.baseTypeLabel.innerHTML = this.item.baseType;
+        this.socketsLabel.innerHTML = this.item.sockets.join(' ');
     }
 
     function getValueLabel (elem) {

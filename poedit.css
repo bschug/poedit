@@ -1,3 +1,10 @@
+/* font definitions */
+
+@font-face {
+	font-family: Fontin;
+	src: url(fontin-smallcaps-webfont.woff);
+}
+
 /* positioning */
 
 #main {
@@ -52,6 +59,30 @@
 	left: 50%;
 	right: 0px;
 	top: 0px;
+	bottom: 0px;
+}
+
+#items-editor {
+	position: absolute;
+	margin: 2px;
+
+	left: 50%;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+
+	display: none; /* initially hidden */
+}
+
+#items-editor > p {
+	margin: 1px 5px;
+}
+
+#items-edit-button {
+	position: absolute;
+	margin: 2px;
+
+	right: 0px;
 	bottom: 0px;
 }
 
@@ -150,11 +181,23 @@
 	background-position: center;
 }
 
-.item {
+.item-container {
 	display: inline-block;
-	margin: 3px;
-	padding: 1px 6px;
+	margin: 2px;
+}
 
+.hidden-item-container {
+	display: inline-block;
+	margin: 2px;
+}
+
+.hidden-item-container:hover {
+	border: 1px dashed grey;
+}
+
+.item {
+	margin: 0px;
+	padding: 1px 6px;
 	background-color: rgba(0, 0, 0, 0.75);
 }
 
@@ -165,9 +208,10 @@
 	padding: 0px;
 
 	color: white;
-	font-family: Fontin,Verdana,sans-serif;
-	font-size: 15px;
-	font-variant: small-caps;
+	font-family: Fontin;
+	font-size: 16px;
+
+	cursor: default;
 }
 
 .item > .sockets {
@@ -216,9 +260,8 @@
 	border: 1px solid white;
 	background-color: rgba(0, 0, 0, 0.75);
 
-	font-family: Fontin,Verdana,sans-serif;
+	font-family: Fontin;
 	font-size: 15px;
-	font-variant: small-caps;
 }
 
 #item-details > p {
@@ -231,6 +274,16 @@
 
 #item-details > p > .value {
 	color: white;
+}
+
+/* items editor */
+
+#items-editor {
+	padding: 3px;
+	background-color: white;
+	color: black;
+	font-family: monospace;
+	overflow-y: scroll;
 }
 
 /* debug button */

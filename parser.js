@@ -173,7 +173,7 @@ function Parser() {
 
 			// Then check for invalid characters.
 			var isInvalid = args.some( function(socketGroup) {
-				if (!StrUtils.consistsOf( socketGroup, 'RGB' )) {
+				if (!StrUtils.consistsOf( socketGroup, 'RGBW' )) {
 					reportInvalidSocketGroup( self, socketGroup );
 					return true;
 				}
@@ -311,7 +311,7 @@ function Parser() {
 		var currentToken = '';
 		for (var i=0; i < tokens.length; i++) {
 			numQuotes += StrUtils.countChar( '"', tokens[i] );
-			var withoutQuotes = tokens[i].replace( '"', '' );
+			var withoutQuotes = StrUtils.replaceAll( tokens[i], '"', '' );
 
 			if (currentToken.length > 0) {
 				currentToken += ' ' + withoutQuotes;

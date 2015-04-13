@@ -49,6 +49,7 @@ function Item (itemdata)
 
 	this.sockets = itemdata.sockets;
 
+	this.outerElement = null;
 	this.domElement = null;
 	this.matchingRule = null;
 
@@ -70,6 +71,9 @@ function Item (itemdata)
 	}
 
 	this.draw = function() {
+		var outerDiv = document.createElement( 'div' );
+		outerDiv.className = 'item-container';
+
 		var itemDiv = document.createElement( 'div' );
 		itemDiv.className = 'item';
 
@@ -81,25 +85,29 @@ function Item (itemdata)
 			itemDiv.appendChild( drawSockets(this) );
 		}
 
+		outerDiv.appendChild( itemDiv );
+
 		var itemsArea = document.getElementById( 'items-area' );
-		itemsArea.appendChild( itemDiv );
+		itemsArea.appendChild( outerDiv );
 
 		var self = this;
-		itemDiv.addEventListener('mouseover', function() {
+		outerDiv.addEventListener('mouseover', function() {
 			if (self.onMouseOver !== null) {
 				self.onMouseOver( self );
 			}
 		});
-		itemDiv.addEventListener('mouseout', function() {
+		outerDiv.addEventListener('mouseout', function() {
 			if (self.onMouseOut !== null) {
 				self.onMouseOut( self );
 			}
 		});
 
+		this.outerElement = outerDiv;
 		this.domElement = itemDiv;
 	}
 
 	this.setVisibility = function (visibility) {
+		this.outerElement.className = (visibility ? 'item-container' : 'hidden-item-container');
 		this.domElement.style.visibility = (visibility ? 'visible' : 'hidden');
 	}
 
@@ -116,7 +124,12 @@ function Item (itemdata)
 	}
 
 	this.setBackgroundColor = function (color) {
-		this.domElement.style.backgroundColor = buildColorA( color.r, color.g, color.b, 0.75 );
+		if (color.hasOwnProperty( 'a' )) {
+			this.domElement.style.backgroundColor = buildColorA( color.r, color.g, color.b, color.a );
+		}
+		else {
+			this.domElement.style.backgroundColor = buildColor( color.r, color.g, color.b );
+		}
 	}
 
 	function buildColor (r, g, b) {
@@ -168,7 +181,10 @@ function Item (itemdata)
 				socket.style.backgroundColor = '#80ff33';
 				break;
 			case 'B':
-				socket.style.backgroundColor = '#4444ff';
+				socket.style.backgroundColor = '#8888ff';
+				break;
+			case 'W':
+				socket.style.backgroundColor = '#ffffff';
 				break;
 		}
 

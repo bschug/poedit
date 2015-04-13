@@ -98,13 +98,13 @@ function Intellisense() {
         var pos = 0;
         for (var i=0; i < lines.length; i++) {
             pos += lines[i].length + 1;
-            if (pos >= cursorPos) {
+            if (pos > cursorPos) {
                 return i;
             }
         }
 
         var totalChars = lines
-            .map( function(line) { return line.length + 1; } )
+            .map( function(line, i) { return i == 0 ? line.length : line.length + 1; } )
             .reduce( function(prev, cur) { return prev + cur; } );
 
         console.log( 'invalid cursor position ' + cursorPos.toString() + ' in '
