@@ -4,12 +4,12 @@ var PoEdit = new function()
 
 	function applyDefaultStyle (item) {
 		var BLACK_75 = {r:0, g:0, b:0, a:0.75};
-		var WHITE = {r:255, g:255, b:255};
-		var BLUE = {r:128, g:128, b:255};
-		var YELLOW = {r:255, g:255, b:50};
-		var ORANGE = {r:220, g:150, b:50};
-		var GOLD = {r:200, g:180, b:100};
-		var CYAN = {r:50, g:255, b:255};
+		var WHITE = {r:200, g:200, b:200};
+		var BLUE = {r:136, g:136, b:255};
+		var YELLOW = {r:255, g:255, b:119};
+		var ORANGE = {r:175, g:96, b:37};
+		var GOLD = {r:170, g:158, b:130};
+		var CYAN = {r:27, g:162, b:155};
 
 		var color = WHITE;
 
