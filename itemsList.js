@@ -5,7 +5,7 @@ function getDefaultItems() {
     		itemLevel: 9,
     		dropLevel: 1,
     		quality: 0,
-    		itemClass: 'One Hand Sword',
+    		itemClass: 'One Hand Swords',
     		baseType: 'Rusted Sword',
     		rarity: Rarity.Rare,
     		sockets: ['B', 'G']
@@ -15,7 +15,7 @@ function getDefaultItems() {
     		itemLevel: 62,
     		dropLevel: 58,
     		quality: 8,
-    		itemClass: 'Claw',
+    		itemClass: 'Claws',
     		baseType: 'Great White Claw',
     		rarity: Rarity.Magic,
     		sockets: ['R','GG']
@@ -25,7 +25,7 @@ function getDefaultItems() {
     		itemLevel: 54,
     		dropLevel: 44,
     		quality: 0,
-    		itemClass: 'Two Hand Sword',
+    		itemClass: 'Two Hand Swords',
     		baseType: 'Highland Blade',
     		rarity: Rarity.Magic,
     		sockets: ['RRGRR']
@@ -35,7 +35,7 @@ function getDefaultItems() {
     		itemLevel: 66,
     		dropLevel: 66,
     		quality: 0,
-    		itemClass: 'Staff',
+    		itemClass: 'Staves',
     		baseType: 'Imperial Staff',
     		rarity: Rarity.Unique,
     		sockets: ['B']
@@ -45,7 +45,7 @@ function getDefaultItems() {
     		itemLevel: 69,
     		dropLevel: 28,
     		quality: 0,
-    		itemClass: 'Bow',
+    		itemClass: 'Bows',
     		baseType: 'Royal Bow',
     		rarity: Rarity.Rare,
     		sockets: ['G','GG','B']
@@ -55,7 +55,7 @@ function getDefaultItems() {
     		itemLevel: 41,
     		dropLevel: 28,
     		quality: 0,
-    		itemClass: 'Bow',
+    		itemClass: 'Bows',
     		baseType: 'Royal Bow',
     		rarity: Rarity.Rare,
     		sockets: ['R','GG','R']
@@ -65,7 +65,7 @@ function getDefaultItems() {
     		itemLevel: 3,
     		dropLevel: 3,
     		quality: 0,
-    		itemClass: 'One Hand Sword',
+    		itemClass: 'One Hand Swords',
     		baseType: 'Rusted Spike',
     		rarity: Rarity.Normal,
     		sockets: ['G']
@@ -75,7 +75,7 @@ function getDefaultItems() {
     		itemLevel: 38,
     		dropLevel: 3,
     		quality: 0,
-    		itemClass: 'One Hand Sword',
+    		itemClass: 'One Hand Swords',
     		baseType: 'Rusted Spike',
     		rarity: Rarity.Normal,
     		sockets: ['GG','R']
@@ -85,7 +85,7 @@ function getDefaultItems() {
     		itemLevel: 19,
     		dropLevel: 17,
     		quality: 0,
-    		itemClass: 'One Hand Sword',
+    		itemClass: 'One Hand Swords',
     		baseType: 'Basket Rapier',
     		rarity: Rarity.Magic,
     		sockets: ['GG']
@@ -95,7 +95,7 @@ function getDefaultItems() {
     		itemLevel: 62,
     		dropLevel: 58,
     		quality: 0,
-    		itemClass: 'Two Hand Mace',
+    		itemClass: 'Two Hand Maces',
     		baseType: 'Karui Chopper',
     		rarity: Rarity.Magic,
     		sockets: ['RRR','B']
@@ -105,7 +105,7 @@ function getDefaultItems() {
     		itemLevel: 38,
     		dropLevel: 15,
     		quality: 0,
-    		itemClass: 'One Hand Mace',
+    		itemClass: 'One Hand Maces',
     		baseType: 'Stone Hammer',
     		rarity: Rarity.Normal,
     		sockets: ['R']
@@ -115,7 +115,7 @@ function getDefaultItems() {
     		itemLevel: 73,
     		dropLevel: 41,
     		quality: 0,
-    		itemClass: 'One Hand Mace',
+    		itemClass: 'One Hand Maces',
     		baseType: 'Rock Breaker',
     		rarity: Rarity.Magic,
     		sockets: ['G']
@@ -125,7 +125,7 @@ function getDefaultItems() {
     		itemLevel: 66,
     		dropLevel: 60,
     		quality: 0,
-    		itemClass: 'One Hand Mace',
+    		itemClass: 'One Hand Maces',
     		baseType: 'Gavel',
     		rarity: Rarity.Normal,
     		sockets: ['R']
@@ -135,7 +135,7 @@ function getDefaultItems() {
     		itemLevel: 71,
     		dropLevel: 68,
     		quality: 0,
-    		itemClass: 'One Hand Sword',
+    		itemClass: 'One Hand Swords',
     		baseType: 'Midnight Blade',
     		rarity: Rarity.Rare,
     		sockets: ['B','G']
@@ -150,7 +150,7 @@ function getDefaultItems() {
     		dropLevel: 28,
     		quality: 8,
     		rarity: Rarity.Normal,
-    		itemClass: 'Body Armour',
+    		itemClass: 'Body Armours',
     		baseType: 'Full Plate',
     		sockets: ['RRRRRR']
     	},
@@ -159,7 +159,7 @@ function getDefaultItems() {
     		itemLevel: 67,
     		dropLevel: 57,
     		quality: 0,
-    		itemClass: 'Body Armour',
+    		itemClass: 'Body Armours',
     		baseType: 'Occultist\'s Vestment',
     		rarity: Rarity.Normal,
     		sockets: ['RB','GBB','B']
@@ -169,7 +169,7 @@ function getDefaultItems() {
     		itemLevel: 78,
     		dropLevel: 1,
     		quality: 0,
-    		itemClass: 'Helmet',
+    		itemClass: 'Helmets',
     		baseType: 'Iron Hat',
     		rarity: Rarity.Normal,
     		sockets: ['B']
@@ -179,7 +179,7 @@ function getDefaultItems() {
     		itemLevel: 23,
     		dropLevel: 1,
     		quality: 0,
-    		itemClass: 'Helmet',
+    		itemClass: 'Helmets',
     		baseType: 'Leather Cap',
     		rarity: Rarity.Normal,
     		sockets: ['RGB','G']
@@ -189,7 +189,7 @@ function getDefaultItems() {
     		itemLevel: 69,
     		dropLevel: 59,
     		quality: 0,
-    		itemClass: 'Body Armor',
+    		itemClass: 'Body Armours',
     		baseType: 'Crusader Plate',
     		rarity: Rarity.Unique,
     		sockets: ['RR','RR']
@@ -199,7 +199,7 @@ function getDefaultItems() {
     		itemLevel: 68,
     		dropLevel: 1,
     		quality: 0,
-    		itemClass: 'Body Armor',
+    		itemClass: 'Body Armours',
     		baseType: 'Simple Robe',
     		rarity: Rarity.Unique,
     		sockets: ['WWWWWW']
@@ -209,7 +209,7 @@ function getDefaultItems() {
     		itemLevel: 66,
     		dropLevel: 35,
     		quality: 0,
-    		itemClass: 'Body Armor',
+    		itemClass: 'Body Armours',
     		baseType: 'Holy Chainmail',
     		rarity: Rarity.Unique,
     		sockets: ['R','B']
@@ -219,7 +219,7 @@ function getDefaultItems() {
     		itemLevel: 72,
     		dropLevel: 68,
     		quality: 0,
-    		itemClass: 'Body Armor',
+    		itemClass: 'Body Armours',
     		baseType: 'Vaal Regalia',
     		rarity: Rarity.Rare,
     		sockets: ['B','B']
@@ -229,7 +229,7 @@ function getDefaultItems() {
     		itemLevel: 77,
     		dropLevel: 72,
     		quality: 0,
-    		itemClass: 'Body Armor',
+    		itemClass: 'Body Armours',
     		baseType: 'Sacrificial Garb',
     		rarity: Rarity.Normal,
     		sockets: ['RRB','G']
@@ -242,7 +242,7 @@ function getDefaultItems() {
     		itemLevel: 44,
     		dropLevel: 7,
     		quality: 0,
-    		itemClass: 'Amulet',
+    		itemClass: 'Amulets',
     		baseType: 'Jade Amulet',
     		rarity: Rarity.Magic,
     		sockets: []
@@ -252,7 +252,7 @@ function getDefaultItems() {
     		itemLevel: 8,
     		dropLevel: 2,
     		quality: 0,
-    		itemClass: 'Amulet',
+    		itemClass: 'Amulets',
     		baseType: 'Coral Amulet',
     		rarity: Rarity.Normal,
     		sockets: []
@@ -262,7 +262,7 @@ function getDefaultItems() {
     		itemLevel: 72,
     		dropLevel: 10,
     		quality: 0,
-    		itemClass: 'Belt',
+    		itemClass: 'Belts',
     		baseType: 'Leather Belt',
     		rarity: Rarity.Rare,
     		sockets: []
@@ -272,7 +272,7 @@ function getDefaultItems() {
     		itemLevel: 78,
     		dropLevel: 2,
     		quality: 0,
-    		itemClass: 'Ring',
+    		itemClass: 'Rings',
     		baseType: 'Coral Ring',
     		rarity: Rarity.Normal,
     		sockets: []
@@ -282,7 +282,7 @@ function getDefaultItems() {
     		itemLevel: 53,
     		dropLevel: 45,
     		quality: 0,
-    		itemClass: 'Ring',
+    		itemClass: 'Rings',
     		baseType: 'Unset Ring',
     		rarity: Rarity.Rare,
     		sockets: []
@@ -296,7 +296,7 @@ function getDefaultItems() {
     		dropLevel: 1,
     		quality: 12,
     		rarity: Rarity.Normal,
-    		itemClass: 'Gem',
+    		itemClass: 'Active Skill Gems',
     		baseType: 'Heavy Strike',
     		sockets: []
     	},
@@ -305,7 +305,7 @@ function getDefaultItems() {
     		itemLevel: 68,
     		dropLevel: 30,
     		quality: 0,
-    		itemClass: 'Gem',
+    		itemClass: 'Active Skill Gems',
     		baseType: 'Summon Chaos Golem',
     		rarity: Rarity.Normal,
     		sockets: []
@@ -315,7 +315,7 @@ function getDefaultItems() {
     		itemLevel: 54,
     		dropLevel: 12,
     		quality: 0,
-    		itemClass: 'Gem',
+    		itemClass: 'Support Skill Gems',
     		baseType: 'Added Fire Damage',
     		rarity: Rarity.Normal,
     		sockets: []
@@ -583,7 +583,7 @@ function getDefaultItems() {
     		itemLevel: 67,
     		dropLevel: 66,
     		quality: 0,
-    		itemClass: 'Map',
+    		itemClass: 'Maps',
     		baseType: 'Crypt Map',
     		rarity: Rarity.Unique,
     		sockets: []
@@ -593,7 +593,7 @@ function getDefaultItems() {
     		itemLevel: 67,
     		dropLevel: 66,
     		quality: 0,
-    		itemClass: 'Map',
+    		itemClass: 'Maps',
     		baseType: 'Tropical Island Map',
     		rarity: Rarity.Magic,
     		sockets: []
@@ -603,7 +603,7 @@ function getDefaultItems() {
     		itemLevel: 72,
     		dropLevel: 72,
     		quality: 0,
-    		itemClass: 'Map',
+    		itemClass: 'Maps',
     		baseType: 'Torture Chamber Map',
     		rarity: Rarity.Normal,
     		sockets: []
@@ -617,7 +617,7 @@ function getDefaultItems() {
     		itemLevel: 20,
     		dropLevel: 12,
     		quality: 0,
-    		itemClass: 'Jewel',
+    		itemClass: 'Jewels',
     		baseType: 'Crimson Jewel',
     		rarity: Rarity.Magic,
     		sockets: []
@@ -627,7 +627,7 @@ function getDefaultItems() {
     		itemLevel: 72,
     		dropLevel: 61,
     		quality: 0,
-    		itemClass: 'Jewel',
+    		itemClass: 'Jewels',
     		baseType: 'Viridian Jewel',
     		rarity: Rarity.Unique,
     		sockets: []
@@ -641,7 +641,7 @@ function getDefaultItems() {
             itemLevel: 31,
             dropLevel: 26,
             quality: 0,
-            itemClass: 'Flask',
+            itemClass: 'Flasks',
             baseType: 'Grand Life Flask',
             rarity: Rarity.Normal,
             sockets: []
@@ -651,7 +651,7 @@ function getDefaultItems() {
     		itemLevel: 59,
     		dropLevel: 26,
     		quality: 0,
-    		itemClass: 'Flask',
+    		itemClass: 'Flasks',
     		baseType: 'Grand Life Flask',
     		rarity: Rarity.Magic,
     		sockets: []
@@ -661,7 +661,7 @@ function getDefaultItems() {
     		itemLevel: 59,
     		dropLevel: 53,
     		quality: 0,
-    		itemClass: 'Flask',
+    		itemClass: 'Flasks',
     		baseType: 'Hallowed Mana Flask',
     		rarity: Rarity.Magic,
     		sockets: []
@@ -671,7 +671,7 @@ function getDefaultItems() {
     		itemLevel: 35,
     		dropLevel: 30,
     		quality: 0,
-    		itemClass: 'Flask',
+    		itemClass: 'Flasks',
     		baseType: 'Large Hybrid Flask',
     		rarity: Rarity.Magic,
     		sockets: []
@@ -681,7 +681,7 @@ function getDefaultItems() {
     		itemLevel: 35,
     		dropLevel: 20,
     		quality: 0,
-    		itemClass: 'Flask',
+    		itemClass: 'Flasks',
     		baseType: 'Medium Hybrid Flask',
     		rarity: Rarity.Normal,
     		sockets: []
@@ -691,7 +691,7 @@ function getDefaultItems() {
     		itemLevel: 51,
     		dropLevel: 27,
     		quality: 0,
-    		itemClass: 'Flask',
+    		itemClass: 'Flasks',
     		baseType: 'Granite Flask',
     		rarity: Rarity.Normal,
     		sockets: []
@@ -701,7 +701,7 @@ function getDefaultItems() {
     		itemLevel: 46,
     		dropLevel: 18,
     		quality: 0,
-    		itemClass: 'Flask',
+    		itemClass: 'Flasks',
     		baseType: 'Topaz Flask',
     		rarity: Rarity.Magic,
     		sockets: []
@@ -711,7 +711,7 @@ function getDefaultItems() {
     		itemLevel: 71,
     		dropLevel: 10,
     		quality: 9,
-    		itemClass: 'Flask',
+    		itemClass: 'Flasks',
     		baseType: 'Small Hybrid Flask',
     		rarity: Rarity.Normal,
     		sockets: []
@@ -721,7 +721,7 @@ function getDefaultItems() {
     		itemLevel: 76,
     		dropLevel: 18,
     		quality: 0,
-    		itemClass: 'Flask',
+    		itemClass: 'Flasks',
     		baseType: 'Sapphire Flask',
     		rarity: Rarity.Unique,
     		sockets: []
@@ -735,7 +735,7 @@ function getDefaultItems() {
     		itemLevel: 59,
     		dropLevel: 1,
     		quality: 0,
-    		itemClass: 'Fishing Rod',
+    		itemClass: 'Fishing Rods',
     		baseType: 'Fishing Rod',
     		rarity: Rarity.Normal,
     		sockets: []
