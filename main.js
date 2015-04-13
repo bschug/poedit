@@ -194,7 +194,8 @@ var PoEdit = new function()
 			if (PoEdit.itemsEditor.items !== null) {
 				PoEdit.itemsDefinition = PoEdit.itemsEditor.items;
 				DomUtils.removeAllChildren( document.getElementById( 'items-area' ) );
-				drawItems( createItems( PoEdit.itemsDefinition ) );
+				PoEdit.items = createItems( PoEdit.itemsDefinition );
+				drawItems( PoEdit.items );
 				PoEdit.dirty = true;
 				this.innerHTML = 'Edit';
 			}
