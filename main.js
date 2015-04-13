@@ -43,7 +43,7 @@ var PoEdit = new function()
 		return	'Show\n' +
 				'    Class Gem\n' +
 				'    Quality > 0\n' +
-				'    SetBorderColor 128 128 255 \n' +
+				'    SetBorderColor 128 128 255\n' +
 		    	'\n' +
 				'Show\n' +
 				'    BaseType "Exalted Orb"\n' +
@@ -51,7 +51,7 @@ var PoEdit = new function()
 				'\n' +
 				'Show\n' +
 				'    SocketGroup RGB\n' +
-				'    PlayAlertSound 1    \n' +
+				'    PlayAlertSound 1\n' +
 				'\n' +
 				'Show\n' +
 				'    LinkedSockets >= 5\n' +
