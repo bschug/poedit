@@ -334,6 +334,10 @@ function Parser() {
 			actualTokens.push( currentToken );
 		}
 
+		// Remove any empty or pure whitespace tokens.
+		// These may happen with certain unicode characters.
+		actualTokens = actualTokens.filter( function(token) { return token.trim().length > 0; } );
+
 		return actualTokens;
 	}
 
