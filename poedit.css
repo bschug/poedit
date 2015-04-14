@@ -78,19 +78,28 @@
 	margin: 1px 5px;
 }
 
+#help-window {
+	position: absolute;
+	margin: 2px;
+	z-index: 0;
+
+	left: 50%;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+
+	display: none; /* initially hidden */
+}
+
 #buttons {
 	position: absolute;
 	margin: 2px;
 	bottom: 0px;
 	right: 0px;
+	z-index: 100;
 }
 
-#reset-button {
-	display: inline-block;
-	margin: 0px;
-}
-
-#items-edit-button {
+#buttons > button {
 	display: inline-block;
 	margin: 0px;
 }
@@ -294,6 +303,31 @@
 	font-family: monospace;
 	overflow-y: scroll;
 }
+
+/* help window */
+
+#help-window {
+	padding: 3px 10px;
+	background-color: #252525;
+	color: #ddddaa;
+	font-family: sans-serif;
+	font-size: 16px;
+}
+
+#help-window > h1 {
+	font-family: Fontin;
+}
+
+#help-window > p {
+	padding: 2px 10px;
+}
+
+#help-window li {
+	padding: 5px;
+}
+
+#help-window a:link { color: rgb(80, 80, 200); }
+#help-window a:visited { color: rgb(250, 150, 50); }
 
 /* debug button */
 

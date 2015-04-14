@@ -261,6 +261,18 @@ var PoEdit = new function()
 		StorageUtils.save( 'poedit-items', ItemsEditor.itemsToJson( itemsDefinition ) );
 	}
 
+	// Returns all buttons that don't have the given id
+	function getOtherButtons (id) {
+		var otherButtons = [];
+		var buttons = document.getElementById( 'buttons' ).children;
+		for (var i=0; i < buttons.length; i++) {
+			if (buttons[i].id !== id) {
+				otherButtons.push( buttons[i] );
+			}
+		}
+		return otherButtons;
+	}
+
 	function onItemsEditButton() {
 		if (PoEdit.itemsEditor.isOpen()) {
 			PoEdit.itemsEditor.close();
@@ -271,11 +283,40 @@ var PoEdit = new function()
 			if (PoEdit.itemsEditor.items !== null) {
 				setItems( PoEdit.itemsEditor.items );
 				this.innerHTML = 'Edit';
+
+				// enable other buttons
+				getOtherButtons( 'items-edit-button' ).forEach( function(btn) {
+					btn.style.display = 'inline-block';
+				} );
 			}
 		}
 		else {
 			PoEdit.itemsEditor.open( PoEdit.itemsDefinition );
 			this.innerHTML = 'Save';
+
+			// disable other buttons
+			getOtherButtons( 'items-edit-button' ).forEach( function(btn) {
+				btn.style.display = 'none';
+			});
+		}
+	}
+
+	function onHelpButton() {
+		var helpButton = document.getElementById( 'help-button' );
+		var helpWindow = document.getElementById( 'help-window' );
+		var itemsArea = document.getElementById( 'items-area' );
+
+		if (helpWindow.style.display === 'block') {
+			helpWindow.style.display = 'none';
+			itemsArea.style.display = 'block';
+			helpButton.innerHTML = 'Help'
+			getOtherButtons( 'help-button' ).forEach( function(btn) { btn.style.display = 'inline-block'; } );
+		}
+		else {
+			itemsArea.style.display = 'none';
+			helpWindow.style.display = 'block';
+			helpButton.innerHTML = 'Close';
+			getOtherButtons( 'help-button' ).forEach( function(btn) { btn.style.display = 'none'; } );
 		}
 	}
 
@@ -312,6 +353,7 @@ var PoEdit = new function()
 			setInterval( function() { self.update(); }, 250 );
 		}
 
+		document.getElementById( 'help-button' ).addEventListener( 'click', onHelpButton );
 		document.getElementById( 'reset-button' ).addEventListener( 'click', onResetButton );
 		document.getElementById( 'items-edit-button' ).addEventListener( 'click', onItemsEditButton );
 		document.getElementById( 'code-window' ).addEventListener( 'keydown', onKeyDown, true );
