@@ -34,7 +34,7 @@ var PoEdit = new function()
 		item.setBackgroundColor( BLACK_75 );
 		item.setTextColor( color );
 
-		if (item.itemClass === 'Maps') {
+		if (item.itemClass === 'Maps' || item.itemClass === 'Map Fragments') {
 			item.setBorderColor( color );
 		}
 	}
