@@ -164,13 +164,21 @@ var PoEdit = new function()
 				updateIntellisense();
 			}
 		}
-		// Ctrl+Space
+		// Space
 		else if (code === 32) {
+			// Ctrl+Space
 			if (event.ctrlKey) {
 				event.preventDefault();
 				PoEdit.intellisense.enabled = true;
 				PoEdit.intellisense.enabledOnEmptyLine = true;
 				updateIntellisense();
+			}
+			// Without Ctrl
+			else {
+				if (PoEdit.intellisense.isVisible()) {
+					event.preventDefault();
+					PoEdit.intellisense.applySuggestion();
+				}
 			}
 		}
 	}

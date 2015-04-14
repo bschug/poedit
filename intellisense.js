@@ -73,9 +73,9 @@ function Intellisense() {
         }
     }
 
-    // Applies the current suggestion.
+    // Applies the current suggestion
     this.applySuggestion = function() {
-        var suggestion = this.suggestions[this.selected];
+        var suggestion = this.suggestions[this.selected] + ' ';
         var line = document.getElementById( 'line' + this.previousLineId );
         var selection = DomUtils.saveSelection( line );
         DomUtils.removeAllChildren( line );
