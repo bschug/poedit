@@ -100,9 +100,11 @@ var DomUtils = {
 	// Returns all text inside the given node(s).
 	// <br> elements and blocks like <div> appear as newlines in the text.
 	// This behaves similarly to the innerText property available in Chrome and IE.
-	getText: function (elems) {
-		var text = '';
+	getText: function (elem) {
+		return DomUtils._getText( elem.childNodes, '' );
+	},
 
+	_getText: function (elems, text) {
 		for (var i = 0; elems[i]; i++) {
 			var elem = elems[i];
 
@@ -124,20 +126,27 @@ var DomUtils = {
 					continue;
 				}
 
-				// Traverse child nodes
-				text += DomUtils.getText( elem.childNodes );
-
-				// Add newline after each block.
+				// Add newline before each block, unless we are already on a new line
+				// or this is the very first block in the list
 				if (style.display === 'block') {
-					// Special case: div ends with <br>, don't create two newlines
-					if (!DomUtils.endsWithBR( elem )) {
+					if (text.length > 0 && text[text.length - 1] !== '\n') {
+						text += '\n';
+					}
+				}
+
+				// Traverse child nodes
+				text = DomUtils._getText( elem.childNodes, text );
+
+				// Add newline after each block unless there already is a new line.
+				if (style.display === 'block') {
+					if (text.length > 0 && text[text.length - 1] !== '\n') {
 						text += '\n';
 					}
 				}
 			}
 			// Traverse all other nodes, except for comments
 			else if ( elem.nodeType !== 8 ) {
-				text += DomUtils.getText( elem.childNodes );
+				text = DomUtils._getText( elem.childNodes, text );
 			}
 		}
 

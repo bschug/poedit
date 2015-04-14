@@ -99,7 +99,7 @@ var PoEdit = new function()
 
 	function getCode() {
 		var codeWindow = document.getElementById( 'code-window' );
-		return DomUtils.getText( [codeWindow] ); // cannot use innerText on Firefox
+		return DomUtils.getText( codeWindow ); // cannot use innerText on Firefox
 	}
 
 	function clearLog() {

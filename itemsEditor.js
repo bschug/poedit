@@ -22,7 +22,7 @@ function ItemsEditor() {
     }
 
     this.close = function() {
-        var items = jsonToItems( DomUtils.getText( [this.itemsEditorWindow] ) );
+        var items = jsonToItems( DomUtils.getText( this.itemsEditorWindow ) );
         if (items === null) {
             // User has already been notified about the error
             return;
