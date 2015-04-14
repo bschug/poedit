@@ -132,6 +132,14 @@ var PoEdit = new function()
 				PoEdit.intellisense.applySuggestion();
 			}
 		}
+		// Enter
+		else if (code === 13) {
+			if (PoEdit.intellisense.isVisible()) {
+				event.preventDefault();
+				event.stopPropagation();
+				PoEdit.intellisense.applySuggestion();
+			}
+		}
 		// Arrow Up
 		else if (code === 38) {
 			if (PoEdit.intellisense.isVisible()) {
