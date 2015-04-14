@@ -641,7 +641,7 @@ function getDefaultItems() {
             itemLevel: 31,
             dropLevel: 26,
             quality: 0,
-            itemClass: 'Flasks',
+            itemClass: 'Life Flasks',
             baseType: 'Grand Life Flask',
             rarity: Rarity.Normal,
             sockets: []
@@ -651,7 +651,7 @@ function getDefaultItems() {
     		itemLevel: 59,
     		dropLevel: 26,
     		quality: 0,
-    		itemClass: 'Flasks',
+    		itemClass: 'Life Flasks',
     		baseType: 'Grand Life Flask',
     		rarity: Rarity.Magic,
     		sockets: []
@@ -661,7 +661,7 @@ function getDefaultItems() {
     		itemLevel: 59,
     		dropLevel: 53,
     		quality: 0,
-    		itemClass: 'Flasks',
+    		itemClass: 'Mana Flasks',
     		baseType: 'Hallowed Mana Flask',
     		rarity: Rarity.Magic,
     		sockets: []
@@ -671,7 +671,7 @@ function getDefaultItems() {
     		itemLevel: 35,
     		dropLevel: 30,
     		quality: 0,
-    		itemClass: 'Flasks',
+    		itemClass: 'Hybrid Flasks',
     		baseType: 'Large Hybrid Flask',
     		rarity: Rarity.Magic,
     		sockets: []
@@ -681,7 +681,7 @@ function getDefaultItems() {
     		itemLevel: 35,
     		dropLevel: 20,
     		quality: 0,
-    		itemClass: 'Flasks',
+    		itemClass: 'Hybrid Flasks',
     		baseType: 'Medium Hybrid Flask',
     		rarity: Rarity.Normal,
     		sockets: []
@@ -691,7 +691,7 @@ function getDefaultItems() {
     		itemLevel: 51,
     		dropLevel: 27,
     		quality: 0,
-    		itemClass: 'Flasks',
+    		itemClass: 'Utility Flasks',
     		baseType: 'Granite Flask',
     		rarity: Rarity.Normal,
     		sockets: []
@@ -701,7 +701,7 @@ function getDefaultItems() {
     		itemLevel: 46,
     		dropLevel: 18,
     		quality: 0,
-    		itemClass: 'Flasks',
+    		itemClass: 'Utility Flasks',
     		baseType: 'Topaz Flask',
     		rarity: Rarity.Magic,
     		sockets: []
@@ -711,7 +711,7 @@ function getDefaultItems() {
     		itemLevel: 71,
     		dropLevel: 10,
     		quality: 9,
-    		itemClass: 'Flasks',
+    		itemClass: 'Hybrid Flasks',
     		baseType: 'Small Hybrid Flask',
     		rarity: Rarity.Normal,
     		sockets: []
@@ -721,7 +721,7 @@ function getDefaultItems() {
     		itemLevel: 76,
     		dropLevel: 18,
     		quality: 0,
-    		itemClass: 'Flasks',
+    		itemClass: 'Utility Flasks',
     		baseType: 'Sapphire Flask',
     		rarity: Rarity.Unique,
     		sockets: []
