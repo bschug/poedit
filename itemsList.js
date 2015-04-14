@@ -608,7 +608,16 @@ function getDefaultItems() {
     		rarity: Rarity.Normal,
     		sockets: []
     	},
-
+        {
+    		name: 'Sacrifice at Midnight',
+    		itemLevel: 21,
+    		dropLevel: 1,
+    		quality: 0,
+    		itemClass: 'Map Fragments',
+    		baseType: 'Sacrifice at Midnight',
+    		rarity: Rarity.Normal,
+    		sockets: []
+    	},
     ];
 
     var jewels = [
