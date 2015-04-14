@@ -71,11 +71,32 @@ function LinkedSocketsFilter (comparer, numLinkedSockets) {
 	};
 }
 
-function SocketGroupFilter (group) {
+function SocketGroupFilter (groups) {
+	this.minSocketCounts = groups.map( StrUtils.countChars );
+
+	function isSubsetOf (subsetCounts, containerCounts) {
+		for (var s in containerCounts) {
+			if (!(s in subsetCounts)) {
+				return false;
+			}
+			if (subsetCounts[s] < containerCounts[s]) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	function matchSocketGroups (grp, refGroups) {
+		var socketCounts = StrUtils.countChars( grp );
+		return refGroups.some( function (refGrp) {
+			return isSubsetOf( socketCounts, refGrp );
+		} );
+	}
+
 	this.match = function (item) {
 		return item.sockets.some( function (grp) {
-			return StrUtils.contains( group, StrUtils.sortChars( grp ) );
-		} );
+			return matchSocketGroups( grp, this.minSocketCounts );
+		}, this );
 	}
 }
 

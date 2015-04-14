@@ -34,6 +34,21 @@ var StrUtils = {
 		return count;
 	},
 
+	// Counts all chars in the string. Returns an object with char -> amount.
+	countChars: function (str) {
+		var result = { };
+		for (var i=0; i < str.length; i++) {
+			var c = str[i];
+			if (c in result) {
+				result[c]++;
+			}
+			else {
+				result[c] = 1;
+			}
+		}
+		return result;
+	},
+
 	ltrim: function (stringToTrim) {
 		return stringToTrim.replace(/^\s+/,"");
 	},
