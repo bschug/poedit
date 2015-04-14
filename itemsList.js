@@ -65,7 +65,7 @@ function getDefaultItems() {
     		itemLevel: 3,
     		dropLevel: 3,
     		quality: 0,
-    		itemClass: 'One Hand Swords',
+    		itemClass: 'Thrusting One Hand Swords',
     		baseType: 'Rusted Spike',
     		rarity: Rarity.Normal,
     		sockets: ['G']
@@ -75,7 +75,7 @@ function getDefaultItems() {
     		itemLevel: 38,
     		dropLevel: 3,
     		quality: 0,
-    		itemClass: 'One Hand Swords',
+    		itemClass: 'Thrusting One Hand Swords',
     		baseType: 'Rusted Spike',
     		rarity: Rarity.Normal,
     		sockets: ['GG','R']
@@ -85,7 +85,7 @@ function getDefaultItems() {
     		itemLevel: 19,
     		dropLevel: 17,
     		quality: 0,
-    		itemClass: 'One Hand Swords',
+    		itemClass: 'Thrusting One Hand Swords',
     		baseType: 'Basket Rapier',
     		rarity: Rarity.Magic,
     		sockets: ['GG']
