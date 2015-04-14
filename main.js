@@ -25,7 +25,7 @@ var PoEdit = new function()
 		else if (item.itemClass == 'Currency') {
 			color = GOLD;
 		}
-		else if (item.itemClass == 'Gem') {
+		else if (StrUtils.contains( 'Gem', item.itemClass )) {
 			color = CYAN;
 		}
 
