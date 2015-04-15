@@ -761,7 +761,20 @@ function getDefaultItems() {
         },
     ];
 
-    return weapons.concat( armor, jewelry, gems, currency, maps, jewels, flasks, fishingRods );
+    var questItems = [
+        {
+            name: 'Thaumetic Sulphite',
+    		itemLevel: 32,
+    		dropLevel: 1,
+    		quality: 0,
+    		itemClass: 'Quest Items',
+    		baseType: 'Thaumetic Sulphite',
+    		rarity: Rarity.Normal,
+    		sockets: []
+        },
+    ]
+
+    return weapons.concat( armor, jewelry, gems, currency, maps, jewels, flasks, fishingRods, questItems );
 }
 
 function loadItems() {

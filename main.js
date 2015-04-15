@@ -10,6 +10,7 @@ var PoEdit = new function()
 		var ORANGE = {r:175, g:96, b:37};
 		var GOLD = {r:170, g:158, b:130};
 		var CYAN = {r:27, g:162, b:155};
+		var GREEN = {r:74, g:230, b:58};
 
 		var color = WHITE;
 
@@ -27,6 +28,9 @@ var PoEdit = new function()
 		}
 		else if (StrUtils.contains( 'Gem', item.itemClass )) {
 			color = CYAN;
+		}
+		else if (item.itemClass == 'Quest Items') {
+			color = GREEN;
 		}
 
 		item.setVisibility( true );
