@@ -618,6 +618,16 @@ function getDefaultItems() {
     		rarity: Rarity.Normal,
     		sockets: []
     	},
+        {
+    		name: 'Mortal Grief',
+    		itemLevel: 80,
+    		dropLevel: 70,
+    		quality: 0,
+    		itemClass: 'Map Fragments',
+    		baseType: 'Mortal Grief',
+    		rarity: Rarity.Normal,
+    		sockets: []
+    	},
     ];
 
     var jewels = [
