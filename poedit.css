@@ -326,7 +326,7 @@
 	padding: 5px;
 }
 
-#help-window a:link { color: rgb(80, 80, 200); }
+#help-window a:link { color: rgb(250, 150, 50); }
 #help-window a:visited { color: rgb(250, 150, 50); }
 
 /* debug button */
