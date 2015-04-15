@@ -41,7 +41,12 @@ function Parser() {
 				parseVisibility( this, lines[i] );
 			}
 			else {
-				parseFilterOrModifier( this, lines[i] );
+				if (this.currentRule === null) {
+					reportTokenError( this, lines[i].trim(), 'Show or Hide' );
+				}
+				else {
+					parseFilterOrModifier( this, lines[i] );
+				}
 			}
 
 			if (this.currentRule !== null) {
@@ -223,6 +228,7 @@ function Parser() {
 
 	function parseColorModifier (self, modifier, arguments) {
 		var numbers = parseNumbers( self, arguments );
+		if (numbers === null) return;
 		if (numbers.length != 3) {
 			reportTokenError( self, arguments, 'three numbers' );
 			return;
