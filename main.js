@@ -64,9 +64,7 @@ var PoEdit = new function()
 
 	function setScript (code) {
 		var codeWindow = document.getElementById( 'code-window' );
-		code = StrUtils.replaceAll( code, '\n', '<br>' );
-		code = StrUtils.replaceAll( code, '  ', '&nbsp; ' );
-		codeWindow.innerHTML = code;
+		DomUtils.setText( codeWindow, code );
 	}
 
 	function createItems (itemDefinitions) {
@@ -104,16 +102,6 @@ var PoEdit = new function()
 	function getCode() {
 		var codeWindow = document.getElementById( 'code-window' );
 		return DomUtils.getText( codeWindow ); // cannot use innerText on Firefox
-	}
-
-	function clearLog() {
-		var logWindow = document.getElementById( 'log-window' );
-		logWindow.innerText = '';
-	}
-
-	function addErrorMessage (message) {
-		var logWindow = document.getElementById( 'log-window' );
-		logWindow.innerText += '\n' + message;
 	}
 
 	// There are different ways how the key code may be stored in the event on different browsers
@@ -384,8 +372,8 @@ var PoEdit = new function()
 		var rawLines = code.split( '\n' );
 		this.parser.parse( rawLines );
 
-		clearLog();
-		this.parser.errors.forEach( addErrorMessage );
+		var log = document.getElementById( 'log-window' );
+		DomUtils.setText( log, this.parser.errors.join( '\n' ) );
 
 		this.editor.formatCode( rawLines, this.parser.lineTypes );
 

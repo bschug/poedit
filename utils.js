@@ -153,6 +153,19 @@ var DomUtils = {
 		return text;
 	},
 
+	setText: function (elem, text) {
+//		text = StrUtils.replaceAll( text, '\n', '<br>' );
+		var lines = StrUtils.replaceAll( text, '  ', '&nbsp; ' ).split( '\n' );
+
+		DomUtils.removeAllChildren( elem );
+		for (var i=0; i < lines.length; i++) {
+			elem.appendChild( document.createTextNode( lines[i] ) );
+			if (i < lines.length - 1) {
+				elem.appendChild( document.createElement( 'br' ) );
+			}
+		}
+	},
+
 	// Returns the current selection in the given element.
 	// Selection is stored as character offsets.
     saveSelection: function (element) {
