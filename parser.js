@@ -155,9 +155,13 @@ function Parser() {
 
 	function parseMultiStringFilter (self, filter, arguments) {
 		var args = parseStringArguments( self, arguments );
-		if (args !== null) {
-			self.currentRule.filters.push( new filter( args ) );
+		if (args === null) return;
+		if (args.length === 0) {
+			reportUnexpectedEndOfLine( self, 'one or more strings' );
+			return;
 		}
+
+		self.currentRule.filters.push( new filter( args ) );
 	}
 
 	function parseRarityFilter (self, filter, arguments) {
@@ -174,26 +178,30 @@ function Parser() {
 
 	function parseSocketGroupFilter (self, filter, arguments) {
 		var args = parseStringArguments( self, arguments );
-		if (args != null) {
-			// Make sure socket group is all uppercase.
-			// Don't sort yet because we want to display error messages correctly.
-			args = args.map( function(a) { return a.toUpperCase(); } );
+		if (args === null) return;
+		if (args.length === 0) {
+			reportUnexpectedEndOfLine( self, 'one or more strings' );
+			return;
+		}
 
-			// Then check for invalid characters.
-			var isInvalid = args.some( function(socketGroup) {
-				if (!StrUtils.consistsOf( socketGroup, 'RGBW' )) {
-					reportInvalidSocketGroup( self, socketGroup );
-					return true;
-				}
-				return false;
-			} );
+		// Make sure socket group is all uppercase.
+		// Don't sort yet because we want to display error messages correctly.
+		args = args.map( function(a) { return a.toUpperCase(); } );
 
-			// Now sort alphabetically because the filter requires that.
-			args = args.map( StrUtils.sortChars );
-
-			if (!isInvalid) {
-				self.currentRule.filters.push( new filter( args ) );
+		// Then check for invalid characters.
+		var isInvalid = args.some( function(socketGroup) {
+			if (!StrUtils.consistsOf( socketGroup, 'RGBW' )) {
+				reportInvalidSocketGroup( self, socketGroup );
+				return true;
 			}
+			return false;
+		} );
+
+		// Now sort alphabetically because the filter requires that.
+		args = args.map( StrUtils.sortChars );
+
+		if (!isInvalid) {
+			self.currentRule.filters.push( new filter( args ) );
 		}
 	}
 
@@ -351,6 +359,11 @@ function Parser() {
 
 	function reportTokenError (self, token, expected) {
 		self.errors.push( 'Invalid token "' + token + '" at line ' + self.currentLineNr.toString() + ' (expected ' + expected + ')' );
+		self.lineTypes[self.currentLineNr] = 'Error';
+	}
+
+	function reportUnexpectedEndOfLine (self, expected) {
+		self.errors.push( 'Unexpected end of line (expected ' + expected + ' in line ' + self.currentLineNr.toString() + ')');
 		self.lineTypes[self.currentLineNr] = 'Error';
 	}
 
