@@ -82,6 +82,7 @@
 	position: absolute;
 	margin: 2px;
 	z-index: 0;
+	overflow-y: scroll;
 
 	left: 50%;
 	right: 0px;
@@ -328,6 +329,9 @@
 
 #help-window a:link { color: rgb(250, 150, 50); }
 #help-window a:visited { color: rgb(250, 150, 50); }
+
+#help-window .url { font-style: italic; }
+#help-window .url .highlight { font-weight: bold; color: red; }
 
 /* debug button */
 
