@@ -67,6 +67,40 @@ var PoEdit = new function()
 		DomUtils.setText( codeWindow, code );
 	}
 
+	function loadLocalScript() {
+		var code = StorageUtils.load( 'poedit-code', getDefaultScript() );
+		setScript( code );
+	}
+
+	function loadPastebinScript() {
+		PoEdit.pastebin.load(
+			StrUtils.replaceAll( window.location.hash, '#', '' ),
+			function(code) {
+				setScript(code);
+			},
+			function() {
+				alert('Could not load pastebin data.');
+				loadLocalScript();
+			}
+		);
+	}
+
+	function loadScript() {
+		if (hasPastebinData()) {
+			loadPastebinScript();
+		}
+		else {
+			loadLocalScript();
+		}
+	}
+
+	function hasPastebinData() {
+		if (PoEdit.pastebin.status === 'Error') {
+			return false;
+		}
+		return window.location.hash ? true : false;
+	}
+
 	function createItems (itemDefinitions) {
 		var items = [];
 		itemDefinitions.forEach( function(item) {
@@ -317,6 +351,7 @@ var PoEdit = new function()
 	this.parser = new Parser();
 	this.editor = new Editor();
 	this.itemsEditor = new ItemsEditor();
+	this.pastebin = new Pastebin();
 	this.itemDetails = new ItemDetails();
 	this.codeCursorPos = 0;
 	this.intellisense = new Intellisense();
@@ -329,7 +364,7 @@ var PoEdit = new function()
 		this.items = createItems( this.itemsDefinition );
 		drawItems( this.items );
 
-		setScript( StorageUtils.load( 'poedit-code', getDefaultScript() ) );
+		loadScript();
 		this.editor.init();
 		this.itemsEditor.init();
 		this.intellisense.init();
@@ -361,7 +396,11 @@ var PoEdit = new function()
 			this.dirty = true;
 		}
 		this.previousCode = code;
-		StorageUtils.save( 'poedit-code', code );
+
+		// Save code changes only if not in Pastebin mode
+		if (!hasPastebinData()) {
+			StorageUtils.save( 'poedit-code', code );
+		}
 
 		// don't do expensive update if nothing has changed
 		if (!this.dirty) {
