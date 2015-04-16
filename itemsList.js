@@ -565,6 +565,16 @@ function getDefaultItems() {
     		sockets: []
     	},
         {
+    		name: 'Eternal Orb',
+    		itemLevel: 52,
+    		dropLevel: 1,
+    		quality: 0,
+    		itemClass: 'Currency',
+    		baseType: 'Eternal Orb',
+    		rarity: Rarity.Normal,
+    		sockets: []
+    	},
+        {
     		name: 'Mirror of Kalandra',
     		itemLevel: 77,
     		dropLevel: 1,
