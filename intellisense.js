@@ -11,6 +11,7 @@ function Intellisense() {
 
     this.init = function() {
         this.div = document.getElementById( 'intellisense' );
+        this.div.style.display = 'none';
     }
 
     this.isVisible = function() {
