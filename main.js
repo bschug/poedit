@@ -404,16 +404,16 @@ var PoEdit = new function()
 		}
 		this.previousCode = code;
 
-		// Save code changes only if not in Pastebin mode
-		if (!this.urlArgs.hasCodePastebin()) {
-			StorageUtils.save( 'poedit-code', code );
-		}
-
 		// don't do expensive update if nothing has changed
 		if (!this.dirty) {
 			return;
 		}
 		this.dirty = false;
+
+		// Save code changes only if not in Pastebin mode
+		if (!this.urlArgs.hasCodePastebin()) {
+			StorageUtils.save( 'poedit-code', code );
+		}
 
 		var rawLines = code.split( '\n' );
 		this.parser.parse( rawLines );
