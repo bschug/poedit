@@ -787,7 +787,7 @@ function getDefaultItems() {
     return weapons.concat( armor, jewelry, gems, currency, maps, jewels, flasks, fishingRods, questItems );
 }
 
-function loadItems() {
+function loadItemsLocal() {
     // Try to load from local storage
     var json = StorageUtils.load( 'poedit-items', null );
     if (json !== null) {
@@ -802,3 +802,79 @@ function loadItems() {
 
     return getDefaultItems();
 }
+
+function loadItemsPastebin (urlArgs, successCb, errorCb) {
+    urlArgs.loadItemsPastebin( 
+        function (json) {
+            var items = ItemsEditor.jsonToItems( json );
+            if (items !== null) {
+                successCb( items );
+                return;
+            }
+            else {
+                errorCb();
+            }
+        },
+        errorCb
+    );
+}
+
+function loadItems (urlArgs, successCb) {
+    // Try to load pastebin if available, fallback to local on errors.
+    if (urlArgs.hasItemsPastebin()) {
+        loadItemsPastebin( urlArgs, successCb, function() { 
+            alert( 'Could not load Items from Pastebin, using defaults' );
+            successCb( loadItemsLocal ); 
+        } );
+        return;
+    }
+
+    // Otherwise use local right away.
+    successCb( getDefaultItems() );
+}
+
+// ---------------------------------- Script -------------------------------------
+
+function getDefaultScript() {
+    return  'Show\n' +
+            '    Class Gem\n' +
+            '    Quality > 0\n' +
+            '    SetBorderColor 128 128 255\n' +
+            '\n' +
+            'Show\n' +
+            '    BaseType "Exalted Orb"\n' +
+            '    SetTextColor 255 0 255\n' +
+            '\n' +
+            'Show\n' +
+            '    SocketGroup RGB\n' +
+            '    PlayAlertSound 1\n' +
+            '\n' +
+            'Show\n' +
+            '    LinkedSockets >= 5\n' +
+            '    SetBackgroundColor 0 128 0\n';
+}
+
+function loadLocalScript () {
+    var code = StorageUtils.load( 'poedit-code', getDefaultScript() );
+    return code;
+}
+
+function loadPastebinScript (urlArgs, successCb, errorCb) {
+    urlArgs.loadCodePastebin( 
+        successCb,
+        function() {
+            alert( 'Could not load filter script from Pastebin. Using default.' );
+            errorCb();
+        }
+    );
+}
+
+function loadScript (urlArgs, successCb) {
+    if (urlArgs.hasCodePastebin()) {
+        loadPastebinScript( urlArgs, successCb, function() { successCb( loadLocalScript() ); } );
+    }
+    else {
+        successCb( loadLocalScript() );
+    }
+}
+

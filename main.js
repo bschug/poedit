@@ -43,62 +43,9 @@ var PoEdit = new function()
 		}
 	}
 
-	function getDefaultScript() {
-		return	'Show\n' +
-				'    Class Gem\n' +
-				'    Quality > 0\n' +
-				'    SetBorderColor 128 128 255\n' +
-		    	'\n' +
-				'Show\n' +
-				'    BaseType "Exalted Orb"\n' +
-				'    SetTextColor 255 0 255\n' +
-				'\n' +
-				'Show\n' +
-				'    SocketGroup RGB\n' +
-				'    PlayAlertSound 1\n' +
-				'\n' +
-				'Show\n' +
-				'    LinkedSockets >= 5\n' +
-				'    SetBackgroundColor 0 128 0\n';
-	}
-
 	function setScript (code) {
 		var codeWindow = document.getElementById( 'code-window' );
 		DomUtils.setText( codeWindow, code );
-	}
-
-	function loadLocalScript() {
-		var code = StorageUtils.load( 'poedit-code', getDefaultScript() );
-		setScript( code );
-	}
-
-	function loadPastebinScript() {
-		PoEdit.pastebin.load(
-			StrUtils.replaceAll( window.location.hash, '#', '' ),
-			function(code) {
-				setScript(code);
-			},
-			function() {
-				alert('Could not load pastebin data.');
-				loadLocalScript();
-			}
-		);
-	}
-
-	function loadScript() {
-		if (hasPastebinData()) {
-			loadPastebinScript();
-		}
-		else {
-			loadLocalScript();
-		}
-	}
-
-	function hasPastebinData() {
-		if (PoEdit.pastebin.status === 'Error') {
-			return false;
-		}
-		return window.location.hash ? true : false;
 	}
 
 	function createItems (itemDefinitions) {
@@ -351,24 +298,84 @@ var PoEdit = new function()
 	this.parser = new Parser();
 	this.editor = new Editor();
 	this.itemsEditor = new ItemsEditor();
-	this.pastebin = new Pastebin();
+	this.urlArgs = new UrlArgs();
 	this.itemDetails = new ItemDetails();
 	this.codeCursorPos = 0;
 	this.intellisense = new Intellisense();
 	this.previousCode = '';
 	this.showHiddenItems = false;
 	this.dirty = true;
+	this.initSteps = [];
+
+	function AsyncOperation (name, operation, callback) {
+		this.name = name;
+		this.operation = operation;
+		this.callback = callback;
+		this.status = 'Pending';
+
+		this.run = function() {
+			// Need to store instance in closure because otherwise the callback will be run on a different this object
+			var self = this;
+
+			self.status = 'Running';
+			console.log( 'Starting Async Operation ' + self.name );
+
+			operation( function () { 
+				self.status = 'Complete';
+				console.log( 'Completed Async Operation ' + self.name );
+				self.callback();
+			} );
+		}
+	}
+
+	function addAsyncInitStep (name, operation) {
+		PoEdit.initSteps.push( 
+			new AsyncOperation( name, operation, function() { PoEdit.onInitStepComplete(); } )
+		);
+	}
+
+	function runAsyncInitSteps() {
+		PoEdit.initSteps.forEach( function (step) { step.run(); } );
+	}
+
+	function allInitStepsComplete() {
+		return PoEdit.initSteps.every( function (step) { return step.status === 'Complete'; } );
+	}
+
+	this.loadScript = function (callback) {
+		loadScript( this.urlArgs, function (code) {
+			setScript( code );
+			callback();
+		});
+	}
+
+	this.loadItems = function (callback) {
+		loadItems( this.urlArgs, function (items) {
+			PoEdit.itemsDefinition = items;
+			PoEdit.items = createItems( PoEdit.itemsDefinition );
+			drawItems( PoEdit.items );
+			callback();
+		});
+	}
 
 	this.init = function() {
-		this.itemsDefinition = loadItems();
-		this.items = createItems( this.itemsDefinition );
-		drawItems( this.items );
+		addAsyncInitStep( 'LoadScript', function(cb) { PoEdit.loadScript( cb ); } );
+		addAsyncInitStep( 'LoadItems', function(cb) { PoEdit.loadItems( cb ); } );
+		runAsyncInitSteps();
+	}
 
-		loadScript();
+	this.onInitStepComplete = function() {
+		// This method is called after each completed async init step.
+		// As long as there are still other init steps running, we abort here.
+		if (!allInitStepsComplete()) {
+			return;
+		}
+
 		this.editor.init();
 		this.itemsEditor.init();
 		this.intellisense.init();
 		this.itemDetails.init();
+
 
 		var self = this;
 		if (MANUAL_UPDATE) {
@@ -398,7 +405,7 @@ var PoEdit = new function()
 		this.previousCode = code;
 
 		// Save code changes only if not in Pastebin mode
-		if (!hasPastebinData()) {
+		if (!this.urlArgs.hasCodePastebin()) {
 			StorageUtils.save( 'poedit-code', code );
 		}
 

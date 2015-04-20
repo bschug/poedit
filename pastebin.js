@@ -23,6 +23,6 @@ function Pastebin() {
             },
             error: function () { errorCb(); },
         });
-
     }
+
 }
