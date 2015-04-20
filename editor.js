@@ -107,10 +107,11 @@ function Editor() {
 			// We need to count now many readable characters we have generated so far,
 			// and how many readable characters there were in the original, unmodified code.
 			// Otherwise, we could not know if and by how much to move the cursor.
-			lineCharacters += trimmedLine.length;
+			// Doing this, we must keep in mind that rangy counts all trailing whitespace as one.
+			lineCharacters += removeAllButOneTrailingWhitespace( trimmedLine ).length;
 			generatedCharacters += lineCharacters + 1;			// add 1 for the newline
 			var originalLineStart = originalCharacters;
-			originalCharacters += rawLines[i].length + 1;		// add 1 for the newline
+			originalCharacters += removeAllButOneTrailingWhitespace( rawLines[i] ).length + 1;		// add 1 for the newline
 
 			if (selection !== null && selection.length > 0) {
 				var selectionStart = selection[0].characterRange.start;
@@ -148,4 +149,15 @@ function Editor() {
 		}
 	}
 
+	function removeAllButOneTrailingWhitespace (line) {
+		var rTrimmedLine = StrUtils.rtrim( line );
+		var originalLength = line.length;
+		var rTrimmedLength = rTrimmedLine.length;
+		if (originalLength === rTrimmedLength) {
+			return line;
+		}
+		else {
+			return rTrimmedLine + ' ';
+		}
+	}
 }
