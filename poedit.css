@@ -332,6 +332,7 @@
 
 #help-window .url { font-style: italic; }
 #help-window .url .highlight { font-weight: bold; color: red; }
+#help-window .url .highlight2 { font-weight: bold; color: green; }
 
 /* debug button */
 

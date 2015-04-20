@@ -77,9 +77,23 @@
     <h1>Pastebin Integration</h1>
     <p>You can share your script with others using <a href="http://pastebin.com">Pastebin</a>.
         To do this, upload it to pastebin and look at the url of that paste.
-        It will look like <span class="url">http://pastebin.com/<span class="highlight">xu2fiBCm</span></span>.
+        It will look like <span class="url">http://pastebin.com/<span class="highlight">xu2fiBCm</span></span>.<br>
         Copy the pastebin id found at the end of that url and append it to the poedit url like this:
-        <span class="url">http://bschug.github.io/poedit/poedit.html#<span class="highlight">xu2fiBCm</span></span>.
+        <span class="url">http://bschug.github.io/poedit/poedit.html#<span class="highlight">xu2fiBCm</span></span>.<br>
+        This link will automatically display the content of your pastebin in the script window.
+    </p>
+    <p>You can also share custom items sets like this. If your item definition is stored at
+       <span class="url">http://pastebin.com/<span class="highlight2">19mWjnKb</span></span>,
+       then <span class="url">http://bschug.github.io/poedit/poedit.html#<span class="highlight2">items=19mWjnKb</span></span>
+       will create a version of the preview tool that uses your item set.
+    </p>
+    <p>You can combine script and item pastebins by separating them with a comma:
+       <span class="url">http://bschug.github.io/poedit/poedit.html#<span class="highlight">xu2fiBCm</span>,<span class="highlight2">items=19mWjnKb</span></span>
+    </p>
+    <p>Note that the pastebin integration requires an actual reload of the page to work, so if you're playing around with this feature
+       and it seems like the page is not reloading or applying your changes correctly, try pressing F5 or opening it in a new tab.
+       This is a problem only when you are editing the url in your browser's address bar while the page is open. Clicking the link
+       should always work as expected.
     </p>
     <h1>Contact</h1>
     <p><a href="http://www.pathofexile.com/forum/view-thread/1239574/page/1">Forum Thread</a></p>
