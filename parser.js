@@ -11,12 +11,14 @@ function Parser() {
 
 	this.ruleSet = [];
 	this.errors = [];
+	this.warnings = [];
 	this.lineTypes = [];
 
 	this.parse = function (lines) {
 		this.currentRule = null;
 		this.ruleSet = [];
 		this.errors = [];
+		this.warnings = []
 		this.lineTypes = [];
 
 		for (var i = 0; i < lines.length; i++) {
@@ -69,8 +71,24 @@ function Parser() {
 
 	function parseEndOfRule (self) {
 		if (self.currentRule !== null) {
+			validateRule( self, self.currentRule );
 			self.ruleSet.push( self.currentRule );
 			self.currentRule = null;
+		}
+	}
+
+	function validateRule (self, rule) {
+		var ruleLine = "(unknown)";
+		if (rule.codeLines.length > 0) {
+			ruleLine = rule.codeLines[0].toString();
+		}
+
+		var soundModifiers = rule.modifiers.filter( (m) => m instanceof PlayAlertSoundModifier );
+		if (soundModifiers.length > 1) {
+			reportWarning( self,
+				"Multiple PlayAlertSound modifiers found in rule at line " + ruleLine + ". " +
+				"Only the last sound will be played."
+			);
 		}
 	}
 
@@ -378,5 +396,9 @@ function Parser() {
 	function reportParseError (self, text, reason) {
 		self.errors.push( 'Cannot parse "' + text + '" (' + reason + ')' );
 		self.lineTypes[self.currentLineNr] = 'Error';
+	}
+
+	function reportWarning (self, text) {
+		self.warnings.push( text );
 	}
 };

@@ -419,7 +419,8 @@ var PoEdit = new function()
 		this.parser.parse( rawLines );
 
 		var log = document.getElementById( 'log-window' );
-		DomUtils.setText( log, this.parser.errors.join( '\n' ) );
+		var logText = this.parser.errors.concat( this.parser.warnings ).join( '\n' );
+		DomUtils.setText( log, logText );
 
 		this.editor.formatCode( rawLines, this.parser.lineTypes );
 
