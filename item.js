@@ -112,7 +112,7 @@ function Item (itemdata)
 	}
 
 	this.setTextColor = function (color) {
-		getLabel( this ).style.color = buildColor( color.r, color.g, color.b );
+		getLabel( this ).style.color = buildColor( color.r, color.g, color.b, color.a );
 	}
 
 	this.removeBorder = function() {
@@ -120,23 +120,15 @@ function Item (itemdata)
 	}
 
 	this.setBorderColor = function (color) {
-		this.domElement.style.border = '1px solid ' + buildColor( color.r, color.g, color.b );
+		this.domElement.style.border = '1px solid ' + buildColor( color.r, color.g, color.b, color.a );
 	}
 
 	this.setBackgroundColor = function (color) {
-		if (color.hasOwnProperty( 'a' )) {
-			this.domElement.style.backgroundColor = buildColorA( color.r, color.g, color.b, color.a );
-		}
-		else {
-			this.domElement.style.backgroundColor = buildColor( color.r, color.g, color.b );
-		}
+		this.domElement.style.backgroundColor = buildColor( color.r, color.g, color.b, color.a );
 	}
 
-	function buildColor (r, g, b) {
-		return 'rgb(' + r.toString() + ',' + g.toString() + ',' + b.toString() + ')';
-	}
-
-	function buildColorA (r, g, b, a) {
+	function buildColor (r, g, b, a) {
+		a = a / 255; // CSS wants its alpha value between 0 and 1
 		return 'rgba(' + r.toString() + ',' + g.toString() + ',' + b.toString() + ',' + a.toString() + ')';
 	}
 

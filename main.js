@@ -3,7 +3,7 @@ var PoEdit = new function()
 	var MANUAL_UPDATE = false;
 
 	function applyDefaultStyle (item) {
-		var BLACK_75 = {r:0, g:0, b:0, a:0.75};
+		var BLACK_75 = {r:0, g:0, b:0, a:190};
 		var WHITE = {r:200, g:200, b:200};
 		var BLUE = {r:136, g:136, b:255};
 		var YELLOW = {r:255, g:255, b:119};
@@ -320,7 +320,7 @@ var PoEdit = new function()
 			self.status = 'Running';
 			console.log( 'Starting Async Operation ' + self.name );
 
-			operation( function () { 
+			operation( function () {
 				self.status = 'Complete';
 				console.log( 'Completed Async Operation ' + self.name );
 				self.callback();
@@ -329,7 +329,7 @@ var PoEdit = new function()
 	}
 
 	function addAsyncInitStep (name, operation) {
-		PoEdit.initSteps.push( 
+		PoEdit.initSteps.push(
 			new AsyncOperation( name, operation, function() { PoEdit.onInitStepComplete(); } )
 		);
 	}

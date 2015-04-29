@@ -237,8 +237,8 @@ function Parser() {
 	function parseColorModifier (self, modifier, arguments) {
 		var numbers = parseNumbers( self, arguments );
 		if (numbers === null) return;
-		if (numbers.length != 3) {
-			reportTokenError( self, arguments, 'three numbers' );
+		if (numbers.length < 3 || numbers.length > 4) {
+			reportTokenError( self, arguments, 'three or four numbers' );
 			return;
 		}
 
@@ -247,7 +247,10 @@ function Parser() {
 			return;
 		}
 
-		var color = { r:numbers[0], g:numbers[1], b:numbers[2] };
+		var color = { r:numbers[0], g:numbers[1], b:numbers[2], a:255 };
+		if (numbers.length === 4) {
+			color['a'] = numbers[3];
+		}
 
 		self.currentRule.modifiers.push( new modifier( color ) );
 	}
