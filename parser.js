@@ -83,7 +83,7 @@ function Parser() {
 			ruleLine = rule.codeLines[0].toString();
 		}
 
-		var soundModifiers = rule.modifiers.filter( (m) => m instanceof PlayAlertSoundModifier );
+		var soundModifiers = rule.modifiers.filter( function(m) { return m instanceof PlayAlertSoundModifier; } );
 		if (soundModifiers.length > 1) {
 			reportWarning( self,
 				"Multiple PlayAlertSound modifiers found in rule at line " + ruleLine + ". " +
