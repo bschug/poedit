@@ -112,7 +112,7 @@ function Item (itemdata)
 	}
 
 	this.setTextColor = function (color) {
-		getLabel( this ).style.color = buildColor( color.r, color.g, color.b, color.a );
+		getLabel( this ).style.color = buildCssColor( color );
 	}
 
 	this.removeBorder = function() {
@@ -120,15 +120,21 @@ function Item (itemdata)
 	}
 
 	this.setBorderColor = function (color) {
-		this.domElement.style.border = '1px solid ' + buildColor( color.r, color.g, color.b, color.a );
+		this.domElement.style.border = '1px solid ' + buildCssColor( color );
 	}
 
 	this.setBackgroundColor = function (color) {
-		this.domElement.style.backgroundColor = buildColor( color.r, color.g, color.b, color.a );
+		this.domElement.style.backgroundColor = buildCssColor( color );
 	}
 
-	function buildColor (r, g, b, a) {
-		a = a / 255; // CSS wants its alpha value between 0 and 1
+	function buildCssColor (color) {
+		var r = color.r;
+		var g = color.g;
+		var b = color.b;
+		var a = 1;
+		if (color.hasOwnProperty( 'a' )) {
+			a = color.a / 255; // CSS wants its alpha value between 0 and 1
+		}
 		return 'rgba(' + r.toString() + ',' + g.toString() + ',' + b.toString() + ',' + a.toString() + ')';
 	}
 
