@@ -127,6 +127,11 @@ function Item (itemdata)
 		this.domElement.style.backgroundColor = buildCssColor( color );
 	}
 
+	this.setFontSize = function (size) {
+		var scale = size / 35;
+		this.outerElement.style.transform = 'scale(' + scale.toString() + ')';
+	}
+
 	function buildCssColor (color) {
 		var r = color.r;
 		var g = color.g;

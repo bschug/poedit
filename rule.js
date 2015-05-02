@@ -125,3 +125,9 @@ function PlayAlertSoundModifier (soundId) {
 		// not implemented
 	}
 }
+
+function SetFontSizeModifier (fontSize) {
+	this.applyTo = function (item) {
+		item.setFontSize( fontSize );
+	}
+}

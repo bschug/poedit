@@ -2,7 +2,7 @@ function Parser() {
 
 	var VISIBILITY_TOKENS = [ 'Show', 'Hide' ];
 	var FILTER_TOKENS = [ 'ItemLevel', 'DropLevel', 'Quality', 'Rarity', 'Class', 'BaseType', 'Sockets', 'LinkedSockets', 'SocketGroup' ];
-	var MODIFIER_TOKENS = [ 'SetBackgroundColor', 'SetBorderColor', 'SetTextColor', 'PlayAlertSound' ];
+	var MODIFIER_TOKENS = [ 'SetBackgroundColor', 'SetBorderColor', 'SetTextColor', 'PlayAlertSound', 'SetFontSize' ];
 	var OPERATOR_TOKENS = [ '=', '<', '>', '<=', '>=' ];
 	var RARITY_TOKENS = [ 'Normal', 'Magic', 'Rare', 'Unique' ];
 
@@ -232,7 +232,8 @@ function Parser() {
 			'SetBackgroundColor': SetBackgroundColorModifier,
 			'SetBorderColor': SetBorderColorModifier,
 			'SetTextColor': SetTextColorModifier,
-			'PlayAlertSound': PlayAlertSoundModifier
+			'PlayAlertSound': PlayAlertSoundModifier,
+			'SetFontSize': SetFontSizeModifier,
 		};
 
 		switch (token) {
@@ -243,6 +244,7 @@ function Parser() {
 				break;
 
 			case 'PlayAlertSound':
+			case 'SetFontSize':
 				parseNumericModifier( self, modifiers[token], arguments );
 				break;
 
