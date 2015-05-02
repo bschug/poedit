@@ -129,8 +129,10 @@ function Item (itemdata)
 
 	this.setFontSize = function (size) {
 		getLabel( this ).style.fontSize = (size / 2).toString() + 'px';
-		getSocketsDiv( this ).style.transformOrigin = 'left bottom';
-		getSocketsDiv( this ).style.transform = 'scale(' + (size / 35).toString() + ')';
+		if (getSocketsDiv( this )) {
+			getSocketsDiv( this ).style.transformOrigin = 'left bottom';
+			getSocketsDiv( this ).style.transform = 'scale(' + (size / 35).toString() + ')';
+		}
 	}
 
 	function buildCssColor (color) {
