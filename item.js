@@ -128,8 +128,9 @@ function Item (itemdata)
 	}
 
 	this.setFontSize = function (size) {
-		var scale = size / 35;
-		this.outerElement.style.transform = 'scale(' + scale.toString() + ')';
+		getLabel( this ).style.fontSize = (size / 2).toString() + 'px';
+		getSocketsDiv( this ).style.transformOrigin = 'left bottom';
+		getSocketsDiv( this ).style.transform = 'scale(' + (size / 35).toString() + ')';
 	}
 
 	function buildCssColor (color) {
@@ -151,6 +152,15 @@ function Item (itemdata)
 			}
 		}
 		return null;
+	}
+
+	function getSocketsDiv (self) {
+		for (var i=0; i < self.domElement.children.length; i++) {
+			var child = self.domElement.children[i];
+			if (child.className === 'sockets') {
+				return child;
+			}
+		}
 	}
 
 	function computeSocketPadding (numSockets) {
