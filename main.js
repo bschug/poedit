@@ -66,6 +66,20 @@ var PoEdit = new function()
 	}
 
 	function onHoverItemStart (item) {
+		if (PoEdit.hoverItemTimeout !== null) {
+			clearTimeout( PoEdit.hoverItemTimeout );
+		}
+		PoEdit.hoverItemTimeout = setTimeout( function() { showItemDetails( item ); }, 250 );
+	}
+
+	function onHoverItemEnd (item) {
+		if (PoEdit.hoverItemTimeout !== null) {
+			clearTimeout( PoEdit.hoverItemTimeout );
+		}
+		hideItemDetails();
+	}
+
+	function showItemDetails (item) {
 		if (item.matchingRule !== null) {
 			PoEdit.editor.highlightLines = item.matchingRule.codeLines;
 			PoEdit.editor.scrollToLine( item.matchingRule.codeLines[0] );
@@ -74,7 +88,7 @@ var PoEdit = new function()
 		PoEdit.itemDetails.item = item;
 	}
 
-	function onHoverItemEnd (item) {
+	function hideItemDetails() {
 		PoEdit.editor.highlightLines = [];
 		PoEdit.itemDetails.item = null;
 		PoEdit.dirty = true;
@@ -306,6 +320,7 @@ var PoEdit = new function()
 	this.showHiddenItems = false;
 	this.dirty = true;
 	this.initSteps = [];
+	this.itemMouseoverTimeout = null;
 
 	function AsyncOperation (name, operation, callback) {
 		this.name = name;
