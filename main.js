@@ -220,9 +220,9 @@ var PoEdit = new function()
 		if (codeWindow === document.activeElement) {
 			// Get cursor position from code window
 			PoEdit.codeCursorPos = DomUtils.saveSelection( codeWindow );
-			if (PoEdit.codeCursorPos !== null && PoEdit.codeCursorPos.length > 0) {
+			if (DomUtils.isValidSelection( PoEdit.codeCursorPos )) {
 				// Update intellisense
-				var cp = PoEdit.codeCursorPos[0].characterRange.start;
+				var cp = DomUtils.getSelectionCharOffset( codeWindow, PoEdit.codeCursorPos );
 				PoEdit.intellisense.update( rawLines, cp );
 			}
 		}

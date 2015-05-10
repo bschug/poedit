@@ -183,6 +183,15 @@ var DomUtils = {
     	rangy.getSelection().restoreCharacterRanges( element, selection );
     },
 
+	// Returns the number of characters before the cursor in the given selection.
+	getSelectionCharOffset: function (element, selection) {
+		return selection[0].characterRange.start;
+	},
+
+	isValidSelection: function (selection) {
+		return selection && selection.length;
+	},
+
 	removeAllChildren: function (elem) {
 		while (elem.lastChild) {
 			elem.removeChild( elem.lastChild );
