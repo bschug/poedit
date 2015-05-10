@@ -113,8 +113,8 @@ function Editor() {
 			var originalLineStart = originalCharacters;
 			originalCharacters += removeAllButOneTrailingWhitespace( rawLines[i] ).length + 1;		// add 1 for the newline
 
-			if (selection !== null && selection.length > 0) {
-				var selectionStart = selection[0].characterRange.start;
+			if (DomUtils.isValidSelection( selection )) {
+				var selectionStart = DomUtils.getSelectionCharOffset( selection );
 				if (selectionStart > originalLineStart && selectionStart <= originalCharacters) {
 					selectionOffset = generatedCharacters - originalCharacters;
 				}

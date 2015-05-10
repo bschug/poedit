@@ -222,7 +222,7 @@ var PoEdit = new function()
 			PoEdit.codeCursorPos = DomUtils.saveSelection( codeWindow );
 			if (DomUtils.isValidSelection( PoEdit.codeCursorPos )) {
 				// Update intellisense
-				var cp = DomUtils.getSelectionCharOffset( codeWindow, PoEdit.codeCursorPos );
+				var cp = DomUtils.getSelectionCharOffset( PoEdit.codeCursorPos );
 				PoEdit.intellisense.update( rawLines, cp );
 			}
 		}

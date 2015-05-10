@@ -184,7 +184,7 @@ var DomUtils = {
     },
 
 	// Returns the number of characters before the cursor in the given selection.
-	getSelectionCharOffset: function (element, selection) {
+	getSelectionCharOffset: function (selection) {
 		return selection[0].characterRange.start;
 	},
 
