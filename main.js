@@ -374,6 +374,15 @@ var PoEdit = new function()
 	}
 
 	this.init = function() {
+		if (UrlUtils.isSSL() && (this.urlArgs.hasCodePastebin() || this.urlArgs.hasItemsPastebin())) {
+			alert("Due to technical restrictions, we cannot load data from Pastebin " +
+			      "while browing with https. Redirecting to plain http now. " +
+				  "If this message keeps popping up, please make sure to disable any browser " +
+				  "extensions that redirect you back to https.");
+			UrlUtils.redirectToProtocol( 'http' );
+			return;
+		}
+
 		addAsyncInitStep( 'LoadScript', function(cb) { PoEdit.loadScript( cb ); } );
 		addAsyncInitStep( 'LoadItems', function(cb) { PoEdit.loadItems( cb ); } );
 		runAsyncInitSteps();

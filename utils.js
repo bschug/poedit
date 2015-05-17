@@ -221,3 +221,13 @@ var StorageUtils = {
 		return defaultValue;
 	},
 };
+
+var UrlUtils = {
+	isSSL: function() {
+		return window.location.protocol === 'https:';
+	},
+
+	redirectToProtocol: function (protocol) {
+		window.location.href = protocol + ':' + window.location.href.substring( window.location.protocol.length );
+	}
+};
