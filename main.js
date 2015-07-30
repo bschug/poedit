@@ -11,6 +11,7 @@ var PoEdit = new function()
 		var GOLD = {r:170, g:158, b:130};
 		var CYAN = {r:27, g:162, b:155};
 		var GREEN = {r:74, g:230, b:58};
+		var LIGHT_CYAN = {r:170, g:230, b:230};
 
 		var color = WHITE;
 
@@ -31,6 +32,9 @@ var PoEdit = new function()
 		}
 		else if (item.itemClass == 'Quest Items') {
 			color = GREEN;
+		}
+		else if (item.itemClass == 'Divination Card') {
+			color = LIGHT_CYAN;
 		}
 
 		item.setVisibility( true );

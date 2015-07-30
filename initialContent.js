@@ -904,6 +904,45 @@ function getDefaultItems() {
 
     ];
 
+    var divinationCards = [
+        {
+            name: 'The Pact',
+    		itemLevel: 23,
+    		dropLevel: 1,
+    		quality: 0,
+    		itemClass: 'Divination Card',
+    		baseType: 'The Pact',
+    		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
+    		sockets: []
+        },
+        {
+            name: 'The Gemcutter',
+    		itemLevel: 68,
+    		dropLevel: 1,
+    		quality: 0,
+    		itemClass: 'Divination Card',
+    		baseType: 'The Gemcutter',
+    		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
+    		sockets: []
+        },
+        {
+            name: 'Jack in the Box',
+    		itemLevel: 72,
+    		dropLevel: 1,
+    		quality: 0,
+    		itemClass: 'Divination Card',
+    		baseType: 'Jack in the Box',
+    		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
+    		sockets: []
+        }
+    ];
+
     var fishingRods = [
         {
             name: 'Fishing Rod',
@@ -934,7 +973,7 @@ function getDefaultItems() {
         },
     ]
 
-    return weapons.concat( armor, jewelry, gems, currency, maps, jewels, flasks, fishingRods, questItems );
+    return weapons.concat( armor, jewelry, gems, currency, maps, jewels, flasks, divinationCards, fishingRods, questItems );
 }
 
 function loadItemsLocal() {
