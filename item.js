@@ -26,10 +26,14 @@ function ItemData() {
 	this.itemClass = '';
 	this.baseType = '';
 
+	this.width = 1;
+	this.height = 1;
+
 	// Sockets are stored as an array of linked socket groups.
 	// An item with a single red socket and linked red and blue sockets (R R=B)
 	// would store ['R','RB'] here.
 	this.sockets = [];
+
 
 	return this;
 }
@@ -46,6 +50,9 @@ function Item (itemdata)
 
 	this.itemClass = itemdata.itemClass;
 	this.baseType = itemdata.baseType;
+
+	this.width = itemdata.width;
+	this.height = itemdata.height;
 
 	this.sockets = itemdata.sockets;
 

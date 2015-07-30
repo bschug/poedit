@@ -8,6 +8,8 @@ function getDefaultItems() {
     		itemClass: 'One Hand Swords',
     		baseType: 'Rusted Sword',
     		rarity: Rarity.Rare,
+            width: 1,
+            height: 3,
     		sockets: ['B', 'G']
     	},
         {
@@ -18,6 +20,8 @@ function getDefaultItems() {
     		itemClass: 'Claws',
     		baseType: 'Great White Claw',
     		rarity: Rarity.Magic,
+            width: 2,
+            height: 2,
     		sockets: ['R','GG']
     	},
         {
@@ -28,6 +32,8 @@ function getDefaultItems() {
     		itemClass: 'Two Hand Swords',
     		baseType: 'Highland Blade',
     		rarity: Rarity.Magic,
+            width: 2,
+            height: 4,
     		sockets: ['RRGRR']
     	},
         {
@@ -38,6 +44,8 @@ function getDefaultItems() {
     		itemClass: 'Staves',
     		baseType: 'Imperial Staff',
     		rarity: Rarity.Unique,
+            width: 2,
+            height: 4,
     		sockets: ['B']
     	},
     	{
@@ -48,6 +56,8 @@ function getDefaultItems() {
     		itemClass: 'Bows',
     		baseType: 'Royal Bow',
     		rarity: Rarity.Rare,
+            width: 2,
+            height: 4,
     		sockets: ['G','GG','B']
     	},
     	{
@@ -58,6 +68,8 @@ function getDefaultItems() {
     		itemClass: 'Bows',
     		baseType: 'Royal Bow',
     		rarity: Rarity.Rare,
+            width: 2,
+            height: 4,
     		sockets: ['R','GG','R']
     	},
     	{
@@ -68,6 +80,8 @@ function getDefaultItems() {
     		itemClass: 'Thrusting One Hand Swords',
     		baseType: 'Rusted Spike',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 4,
     		sockets: ['G']
     	},
     	{
@@ -78,6 +92,8 @@ function getDefaultItems() {
     		itemClass: 'Thrusting One Hand Swords',
     		baseType: 'Rusted Spike',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 4,
     		sockets: ['GG','R']
     	},
     	{
@@ -88,6 +104,8 @@ function getDefaultItems() {
     		itemClass: 'Thrusting One Hand Swords',
     		baseType: 'Basket Rapier',
     		rarity: Rarity.Magic,
+            width: 1,
+            height: 4,
     		sockets: ['GG']
     	},
     	{
@@ -98,6 +116,8 @@ function getDefaultItems() {
     		itemClass: 'Two Hand Maces',
     		baseType: 'Karui Chopper',
     		rarity: Rarity.Magic,
+            width: 2,
+            height: 4,
     		sockets: ['RRR','B']
     	},
     	{
@@ -108,6 +128,8 @@ function getDefaultItems() {
     		itemClass: 'One Hand Maces',
     		baseType: 'Stone Hammer',
     		rarity: Rarity.Normal,
+            width: 2,
+            height: 3,
     		sockets: ['R']
     	},
     	{
@@ -118,6 +140,8 @@ function getDefaultItems() {
     		itemClass: 'One Hand Maces',
     		baseType: 'Rock Breaker',
     		rarity: Rarity.Magic,
+            width: 2,
+            height: 3,
     		sockets: ['G']
     	},
     	{
@@ -128,6 +152,8 @@ function getDefaultItems() {
     		itemClass: 'One Hand Maces',
     		baseType: 'Gavel',
     		rarity: Rarity.Normal,
+            width: 2,
+            height: 3,
     		sockets: ['R']
     	},
         {
@@ -138,6 +164,8 @@ function getDefaultItems() {
     		itemClass: 'One Hand Swords',
     		baseType: 'Midnight Blade',
     		rarity: Rarity.Rare,
+            width: 2,
+            height: 3,
     		sockets: ['B','G']
     	},
 
@@ -152,6 +180,8 @@ function getDefaultItems() {
     		rarity: Rarity.Normal,
     		itemClass: 'Body Armours',
     		baseType: 'Full Plate',
+            width: 2,
+            height: 3,
     		sockets: ['RRRRRR']
     	},
         {
@@ -162,6 +192,8 @@ function getDefaultItems() {
     		itemClass: 'Body Armours',
     		baseType: 'Occultist\'s Vestment',
     		rarity: Rarity.Normal,
+            width: 2,
+            height: 3,
     		sockets: ['RB','GBB','B']
     	},
     	{
@@ -172,6 +204,8 @@ function getDefaultItems() {
     		itemClass: 'Helmets',
     		baseType: 'Iron Hat',
     		rarity: Rarity.Normal,
+            width: 2,
+            height: 2,
     		sockets: ['B']
     	},
     	{
@@ -182,6 +216,8 @@ function getDefaultItems() {
     		itemClass: 'Helmets',
     		baseType: 'Leather Cap',
     		rarity: Rarity.Normal,
+            width: 2,
+            height: 2,
     		sockets: ['RGB','G']
     	},
     	{
@@ -192,6 +228,8 @@ function getDefaultItems() {
     		itemClass: 'Body Armours',
     		baseType: 'Crusader Plate',
     		rarity: Rarity.Unique,
+            width: 2,
+            height: 3,
     		sockets: ['RR','RR']
     	},
     	{
@@ -202,6 +240,8 @@ function getDefaultItems() {
     		itemClass: 'Body Armours',
     		baseType: 'Simple Robe',
     		rarity: Rarity.Unique,
+            width: 2,
+            height: 3,
     		sockets: ['WWWWWW']
     	},
     	{
@@ -212,6 +252,8 @@ function getDefaultItems() {
     		itemClass: 'Body Armours',
     		baseType: 'Holy Chainmail',
     		rarity: Rarity.Unique,
+            width: 2,
+            height: 3,
     		sockets: ['R','B']
     	},
         {
@@ -222,6 +264,8 @@ function getDefaultItems() {
     		itemClass: 'Body Armours',
     		baseType: 'Vaal Regalia',
     		rarity: Rarity.Rare,
+            width: 2,
+            height: 3,
     		sockets: ['B','B']
     	},
         {
@@ -232,6 +276,8 @@ function getDefaultItems() {
     		itemClass: 'Body Armours',
     		baseType: 'Sacrificial Garb',
     		rarity: Rarity.Normal,
+            width: 2,
+            height: 3,
     		sockets: ['RRB','G']
     	},
     ];
@@ -245,6 +291,8 @@ function getDefaultItems() {
     		itemClass: 'Amulets',
     		baseType: 'Jade Amulet',
     		rarity: Rarity.Magic,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
     	{
@@ -255,6 +303,8 @@ function getDefaultItems() {
     		itemClass: 'Amulets',
     		baseType: 'Coral Amulet',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
     	{
@@ -265,6 +315,8 @@ function getDefaultItems() {
     		itemClass: 'Belts',
     		baseType: 'Leather Belt',
     		rarity: Rarity.Rare,
+            width: 2,
+            height: 1,
     		sockets: []
     	},
         {
@@ -275,6 +327,8 @@ function getDefaultItems() {
     		itemClass: 'Rings',
     		baseType: 'Coral Ring',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
         {
@@ -285,6 +339,8 @@ function getDefaultItems() {
     		itemClass: 'Rings',
     		baseType: 'Unset Ring',
     		rarity: Rarity.Rare,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
     ];
@@ -298,6 +354,8 @@ function getDefaultItems() {
     		rarity: Rarity.Normal,
     		itemClass: 'Active Skill Gems',
     		baseType: 'Heavy Strike',
+            width: 1,
+            height: 1,
     		sockets: []
     	},
         {
@@ -308,6 +366,8 @@ function getDefaultItems() {
     		itemClass: 'Active Skill Gems',
     		baseType: 'Summon Chaos Golem',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
     	{
@@ -318,6 +378,8 @@ function getDefaultItems() {
     		itemClass: 'Support Skill Gems',
     		baseType: 'Added Fire Damage',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
 
@@ -332,6 +394,8 @@ function getDefaultItems() {
     		itemClass: 'Currency',
     		baseType: 'Scroll of Wisdom',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
     	{
@@ -342,6 +406,8 @@ function getDefaultItems() {
     		itemClass: 'Currency',
     		baseType: 'Portal Scroll',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
         {
@@ -352,6 +418,8 @@ function getDefaultItems() {
     		itemClass: 'Currency',
     		baseType: 'Armourer\'s Scrap',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
         {
@@ -362,6 +430,8 @@ function getDefaultItems() {
     		itemClass: 'Currency',
     		baseType: 'Blacksmith\'s Whetstone',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
     	{
@@ -372,6 +442,8 @@ function getDefaultItems() {
     		itemClass: 'Currency',
     		baseType: 'Orb of Alchemy',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
         {
@@ -382,6 +454,8 @@ function getDefaultItems() {
     		itemClass: 'Currency',
     		baseType: 'Orb of Augmentation',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
         {
@@ -392,6 +466,8 @@ function getDefaultItems() {
     		itemClass: 'Currency',
     		baseType: 'Orb of Alteration',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
         {
@@ -402,6 +478,8 @@ function getDefaultItems() {
     		itemClass: 'Currency',
     		baseType: 'Orb of Chance',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
         {
@@ -412,6 +490,8 @@ function getDefaultItems() {
     		itemClass: 'Currency',
     		baseType: 'Orb of Fusing',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
         {
@@ -422,6 +502,8 @@ function getDefaultItems() {
     		itemClass: 'Currency',
     		baseType: 'Orb of Transmutation',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
         {
@@ -432,6 +514,8 @@ function getDefaultItems() {
     		itemClass: 'Currency',
     		baseType: 'Regal Orb',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
     	{
@@ -442,6 +526,8 @@ function getDefaultItems() {
     		itemClass: 'Currency',
     		baseType: 'Chromatic Orb',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
         {
@@ -452,6 +538,8 @@ function getDefaultItems() {
     		itemClass: 'Currency',
     		baseType: 'Chaos Orb',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
         {
@@ -462,6 +550,8 @@ function getDefaultItems() {
     		itemClass: 'Currency',
     		baseType: 'Glassblower\'s Bauble',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
         {
@@ -472,6 +562,8 @@ function getDefaultItems() {
     		itemClass: 'Currency',
     		baseType: 'Gemcutter\'s Prism',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
         {
@@ -482,6 +574,8 @@ function getDefaultItems() {
     		itemClass: 'Currency',
     		baseType: 'Jeweller\'s Orb',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
         {
@@ -492,6 +586,8 @@ function getDefaultItems() {
     		itemClass: 'Currency',
     		baseType: 'Cartographer\'s Chisel',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
         {
@@ -502,6 +598,8 @@ function getDefaultItems() {
     		itemClass: 'Currency',
     		baseType: 'Divine Orb',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
         {
@@ -512,6 +610,8 @@ function getDefaultItems() {
     		itemClass: 'Currency',
     		baseType: 'Blessed Orb',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
         {
@@ -522,6 +622,8 @@ function getDefaultItems() {
     		itemClass: 'Currency',
     		baseType: 'Regal Orb',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
         {
@@ -532,6 +634,8 @@ function getDefaultItems() {
     		itemClass: 'Currency',
     		baseType: 'Vaal Orb',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
         {
@@ -542,6 +646,8 @@ function getDefaultItems() {
     		itemClass: 'Currency',
     		baseType: 'Orb of Regret',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
         {
@@ -552,6 +658,8 @@ function getDefaultItems() {
     		itemClass: 'Currency',
     		baseType: 'Orb of Scouring',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
         {
@@ -562,6 +670,8 @@ function getDefaultItems() {
     		itemClass: 'Currency',
     		baseType: 'Exalted Orb',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
         {
@@ -572,6 +682,8 @@ function getDefaultItems() {
     		itemClass: 'Currency',
     		baseType: 'Eternal Orb',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
         {
@@ -582,6 +694,8 @@ function getDefaultItems() {
     		itemClass: 'Currency',
     		baseType: 'Mirror of Kalandra',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
 
@@ -596,6 +710,8 @@ function getDefaultItems() {
     		itemClass: 'Maps',
     		baseType: 'Crypt Map',
     		rarity: Rarity.Unique,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
         {
@@ -606,6 +722,8 @@ function getDefaultItems() {
     		itemClass: 'Maps',
     		baseType: 'Tropical Island Map',
     		rarity: Rarity.Magic,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
     	{
@@ -616,6 +734,8 @@ function getDefaultItems() {
     		itemClass: 'Maps',
     		baseType: 'Torture Chamber Map',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
         {
@@ -626,6 +746,8 @@ function getDefaultItems() {
     		itemClass: 'Map Fragments',
     		baseType: 'Sacrifice at Midnight',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
         {
@@ -636,6 +758,8 @@ function getDefaultItems() {
     		itemClass: 'Map Fragments',
     		baseType: 'Mortal Grief',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
     ];
@@ -649,6 +773,8 @@ function getDefaultItems() {
     		itemClass: 'Jewels',
     		baseType: 'Crimson Jewel',
     		rarity: Rarity.Magic,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
     	{
@@ -659,6 +785,8 @@ function getDefaultItems() {
     		itemClass: 'Jewels',
     		baseType: 'Viridian Jewel',
     		rarity: Rarity.Unique,
+            width: 1,
+            height: 1,
     		sockets: []
     	},
 
@@ -673,6 +801,8 @@ function getDefaultItems() {
             itemClass: 'Life Flasks',
             baseType: 'Grand Life Flask',
             rarity: Rarity.Normal,
+            width: 1,
+            height: 2,
             sockets: []
         },
         {
@@ -683,6 +813,8 @@ function getDefaultItems() {
     		itemClass: 'Life Flasks',
     		baseType: 'Grand Life Flask',
     		rarity: Rarity.Magic,
+            width: 1,
+            height: 2,
     		sockets: []
     	},
         {
@@ -693,6 +825,8 @@ function getDefaultItems() {
     		itemClass: 'Mana Flasks',
     		baseType: 'Hallowed Mana Flask',
     		rarity: Rarity.Magic,
+            width: 1,
+            height: 2,
     		sockets: []
     	},
         {
@@ -703,6 +837,8 @@ function getDefaultItems() {
     		itemClass: 'Hybrid Flasks',
     		baseType: 'Large Hybrid Flask',
     		rarity: Rarity.Magic,
+            width: 1,
+            height: 2,
     		sockets: []
     	},
         {
@@ -713,6 +849,8 @@ function getDefaultItems() {
     		itemClass: 'Hybrid Flasks',
     		baseType: 'Medium Hybrid Flask',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 2,
     		sockets: []
     	},
         {
@@ -723,6 +861,8 @@ function getDefaultItems() {
     		itemClass: 'Utility Flasks',
     		baseType: 'Granite Flask',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 2,
     		sockets: []
     	},
         {
@@ -733,6 +873,8 @@ function getDefaultItems() {
     		itemClass: 'Utility Flasks',
     		baseType: 'Topaz Flask',
     		rarity: Rarity.Magic,
+            width: 1,
+            height: 2,
     		sockets: []
     	},
         {
@@ -743,6 +885,8 @@ function getDefaultItems() {
     		itemClass: 'Hybrid Flasks',
     		baseType: 'Small Hybrid Flask',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 2,
     		sockets: []
     	},
         {
@@ -753,6 +897,8 @@ function getDefaultItems() {
     		itemClass: 'Utility Flasks',
     		baseType: 'Sapphire Flask',
     		rarity: Rarity.Unique,
+            width: 1,
+            height: 2,
     		sockets: []
     	},
 
@@ -767,6 +913,8 @@ function getDefaultItems() {
     		itemClass: 'Fishing Rods',
     		baseType: 'Fishing Rod',
     		rarity: Rarity.Normal,
+            width: 1,
+            height: 4,
     		sockets: []
         },
     ];
@@ -780,6 +928,8 @@ function getDefaultItems() {
     		itemClass: 'Quest Items',
     		baseType: 'Thaumetic Sulphite',
     		rarity: Rarity.Normal,
+            width: 2,
+            height: 2,
     		sockets: []
         },
     ]
@@ -804,7 +954,7 @@ function loadItemsLocal() {
 }
 
 function loadItemsPastebin (urlArgs, successCb, errorCb) {
-    urlArgs.loadItemsPastebin( 
+    urlArgs.loadItemsPastebin(
         function (json) {
             var items = ItemsEditor.jsonToItems( json );
             if (items !== null) {
@@ -822,9 +972,9 @@ function loadItemsPastebin (urlArgs, successCb, errorCb) {
 function loadItems (urlArgs, successCb) {
     // Try to load pastebin if available, fallback to local on errors.
     if (urlArgs.hasItemsPastebin()) {
-        loadItemsPastebin( urlArgs, successCb, function() { 
+        loadItemsPastebin( urlArgs, successCb, function() {
             alert( 'Could not load Items from Pastebin, using defaults' );
-            successCb( loadItemsLocal ); 
+            successCb( loadItemsLocal );
         } );
         return;
     }
@@ -860,7 +1010,7 @@ function loadLocalScript () {
 }
 
 function loadPastebinScript (urlArgs, successCb, errorCb) {
-    urlArgs.loadCodePastebin( 
+    urlArgs.loadCodePastebin(
         successCb,
         function() {
             alert( 'Could not load filter script from Pastebin. Using default.' );
@@ -877,4 +1027,3 @@ function loadScript (urlArgs, successCb) {
         successCb( loadLocalScript() );
     }
 }
-

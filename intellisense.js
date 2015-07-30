@@ -86,7 +86,7 @@ function Intellisense() {
 
     function buildSuggestions (suggestions, line) {
         var visibilityTokens = [ 'Show', 'Hide' ];
-        var filterTokens = [ 'ItemLevel', 'DropLevel', 'Quality', 'Rarity', 'Class', 'BaseType', 'Sockets', 'LinkedSockets', 'SocketGroup' ];
+        var filterTokens = [ 'ItemLevel', 'DropLevel', 'Quality', 'Rarity', 'Class', 'BaseType', 'Sockets', 'LinkedSockets', 'SocketGroup', 'Width', 'Height' ];
         var modifierTokens = [ 'SetBackgroundColor', 'SetBorderColor', 'SetTextColor', 'PlayAlertSound', 'SetFontSize' ];
 
         suggestions.splice( 0, suggestions.length );

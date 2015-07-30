@@ -109,6 +109,8 @@ function ItemsEditor() {
             itemClass: 'string',
             baseType: 'string',
             rarity: 'string',
+            width: 'number',
+            height: 'number',
             sockets: 'string'
         };
 
@@ -156,6 +158,8 @@ function ItemsEditor() {
             itemClass: item.itemClass,
             baseType: item.baseType,
             rarity: Rarity.getName( item.rarity ),
+            width: item.width,
+            height: item.height,
             sockets: item.sockets.join(' '),
         };
     }
@@ -169,6 +173,8 @@ function ItemsEditor() {
             itemClass: data.itemClass,
             baseType: data.baseType,
             rarity: Rarity[ data.rarity ],
+            width: data.width,
+            height: data.height,
             sockets: data.sockets.split(' '),
         };
     }

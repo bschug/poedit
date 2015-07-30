@@ -1,7 +1,7 @@
 function Parser() {
 
 	var VISIBILITY_TOKENS = [ 'Show', 'Hide' ];
-	var FILTER_TOKENS = [ 'ItemLevel', 'DropLevel', 'Quality', 'Rarity', 'Class', 'BaseType', 'Sockets', 'LinkedSockets', 'SocketGroup' ];
+	var FILTER_TOKENS = [ 'ItemLevel', 'DropLevel', 'Quality', 'Rarity', 'Class', 'BaseType', 'Sockets', 'LinkedSockets', 'SocketGroup', 'Width', 'Height' ];
 	var MODIFIER_TOKENS = [ 'SetBackgroundColor', 'SetBorderColor', 'SetTextColor', 'PlayAlertSound', 'SetFontSize' ];
 	var OPERATOR_TOKENS = [ '=', '<', '>', '<=', '>=' ];
 	var RARITY_TOKENS = [ 'Normal', 'Magic', 'Rare', 'Unique' ];
@@ -128,7 +128,9 @@ function Parser() {
 			'BaseType': BaseTypeFilter,
 			'Sockets': SocketsFilter,
 			'LinkedSockets': LinkedSocketsFilter,
-			'SocketGroup': SocketGroupFilter
+			'SocketGroup': SocketGroupFilter,
+			'Width': WidthFilter,
+			'Height': HeightFilter
 		};
 
 		switch (token) {
@@ -137,6 +139,8 @@ function Parser() {
 			case 'Quality':
 			case 'Sockets':
 			case 'LinkedSockets':
+			case 'Width':
+			case 'Height':
 				parseNumericFilter( self, filters[token], arguments );
 				return;
 

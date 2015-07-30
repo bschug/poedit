@@ -100,6 +100,18 @@ function SocketGroupFilter (groups) {
 	}
 }
 
+function WidthFilter (comparer, width) {
+	this.match = function (item) {
+		return comparer( item.width, width );
+	}
+}
+
+function HeightFilter (comparer, height) {
+	this.match = function (item) {
+		return comparer( item.height, height );
+	}
+}
+
 // ------------------------ Modifiers --------------------------------------
 
 function SetBackgroundColorModifier (color) {
