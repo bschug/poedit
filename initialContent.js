@@ -1025,22 +1025,15 @@ function loadItems (urlArgs, successCb) {
 // ---------------------------------- Script -------------------------------------
 
 function getDefaultScript() {
-    return  'Show\n' +
-            '    Class Gem\n' +
-            '    Quality > 0\n' +
-            '    SetBorderColor 128 128 255\n' +
-            '\n' +
-            'Show\n' +
-            '    BaseType "Exalted Orb"\n' +
-            '    SetTextColor 255 0 255\n' +
-            '\n' +
-            'Show\n' +
-            '    SocketGroup RGB\n' +
-            '    PlayAlertSound 1\n' +
-            '\n' +
-            'Show\n' +
-            '    LinkedSockets >= 5\n' +
-            '    SetBackgroundColor 0 128 0\n';
+    var result =
+        '# Welcome to the Path of Exile ItemScript Preview and Debug Tool.\n' +
+        '# \n' +
+        '# Your item filter code goes here.\n' +
+        '# You see the effects of your filter on the right side.\n' +
+        '# Hover over an item to see the filter rule that applied to it.\n' +
+        '# Press Alt to see hidden items.\n' +
+        '# Click the Help button on the bottom right for more tips and instructions.';
+    return result;
 }
 
 function loadLocalScript () {
