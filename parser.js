@@ -248,6 +248,9 @@ function Parser() {
 				break;
 
 			case 'PlayAlertSound':
+				parseAlertSoundModifier( self, modifiers[token], arguments );
+				break;
+
 			case 'SetFontSize':
 				parseNumericModifier( self, modifiers[token], arguments );
 				break;
@@ -277,6 +280,30 @@ function Parser() {
 		}
 
 		self.currentRule.modifiers.push( new modifier( color ) );
+	}
+
+	function parseAlertSoundModifier (self, modifier, arguments) {
+		var numbers = parseNumbers( self, arguments );
+		if (numbers === null) return;
+		if (numbers.length < 1 || numbers.length > 2) {
+			reportTokenError( self, arguments, 'two numbers' );
+			return;
+		}
+
+		if (numbers[0] < 1 || numbers[0] > 9) {
+			reportParseError( self, arguments, 'sound ID must be between 1 and 9' );
+			return;
+		}
+
+		if (numbers[1] < 0 || numbers[1] > 300) {
+			reportParseError( self, arguments, 'volume must be between 0 and 300' );
+			return;
+		}
+
+		var soundId = numbers[0];
+		var volume = numbers.length < 2 ? 100 : numbers[1];
+
+		self.currentRule.modifiers.push( new modifier( volume ) );
 	}
 
 	function parseNumericModifier (self, modifier, arguments) {

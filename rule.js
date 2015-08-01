@@ -132,7 +132,7 @@ function SetTextColorModifier (color) {
 	}
 }
 
-function PlayAlertSoundModifier (soundId) {
+function PlayAlertSoundModifier (soundId, volume) {
 	this.applyTo = function (item) {
 		// not implemented
 	}
