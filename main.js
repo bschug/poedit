@@ -444,6 +444,7 @@ var PoEdit = new function()
 		}
 
 		var rawLines = code.split( '\n' );
+		normalizeWhitespace( rawLines );
 		this.parser.parse( rawLines );
 
 		var log = document.getElementById( 'log-window' );
@@ -457,4 +458,10 @@ var PoEdit = new function()
 		this.itemDetails.update();
 	}
 
+	function normalizeWhitespace( lines ) {
+		for (var i=0; i < lines.length; i++) {
+			// Replace all special Unicode whitespace with regular spaces
+			lines[i] = lines[i].replace(/\s/g, ' ');
+		}
+	}
 };

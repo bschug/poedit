@@ -23,31 +23,30 @@ function Parser() {
 
 		for (var i = 0; i < lines.length; i++) {
 			this.currentLineNr = i;
+			var line = lines[i];
 
-			// Replace all special Unicode whitespace with regular spaces
-			lines[i] = lines[i].replace(/\s/g, ' ');
-
-			if (lines[i].trim() === '') {
+			if (line.trim() === '') {
 				this.lineTypes[i] = 'Empty';
 				continue;
 			}
-			if (lines[i].trim()[0] === '#') {
+			if (line.trim()[0] === '#') {
 				this.lineTypes[i] = 'Comment';
 				continue;
 			}
+			line = removeComment( line );
 
-			if (VISIBILITY_TOKENS.indexOf( lines[i].trim() ) >= 0) {
+			if (VISIBILITY_TOKENS.indexOf( line.trim() ) >= 0) {
 				if (this.currentRule !== null) {
 					parseEndOfRule( this );
 				}
-				parseVisibility( this, lines[i] );
+				parseVisibility( this, line );
 			}
 			else {
 				if (this.currentRule === null) {
-					reportTokenError( this, lines[i].trim(), 'Show or Hide' );
+					reportTokenError( this, line.trim(), 'Show or Hide' );
 				}
 				else {
-					parseFilterOrModifier( this, lines[i] );
+					parseFilterOrModifier( this, line );
 				}
 			}
 
@@ -57,6 +56,14 @@ function Parser() {
 		}
 		parseEndOfRule( this );
 	};
+
+	function removeComment (line) {
+		var commentStart = line.indexOf("#");
+		if (commentStart < 0) {
+			return line;
+		}
+		return line.substring( 0, commentStart );
+	}
 
 	function parseVisibility (self, line) {
 		var token = line.trim();
