@@ -997,14 +997,19 @@ function loadItemsPastebin (urlArgs, successCb, errorCb) {
         function (json) {
             var items = ItemsEditor.jsonToItems( json );
             if (items !== null) {
+				ga('send', 'event', 'pastebin-items', 'success');
                 successCb( items );
                 return;
             }
             else {
+				ga('send', 'event', 'pastebin-items', 'invalid');
                 errorCb();
             }
         },
-        errorCb
+		function() {
+			ga('send', 'event', 'pastebin-items', 'error');
+			errorCb
+		}
     );
 }
 
@@ -1043,8 +1048,12 @@ function loadLocalScript () {
 
 function loadPastebinScript (urlArgs, successCb, errorCb) {
     urlArgs.loadCodePastebin(
-        successCb,
+		function(result) {
+			ga('send', 'event', 'pastebin-script', 'success');
+			successCb(result);
+		},
         function() {
+			ga('send', 'event', 'pastebin-script', 'error');
             alert( 'Could not load filter script from Pastebin. Using default.' );
             errorCb();
         }

@@ -234,6 +234,7 @@ var PoEdit = new function()
 
 	function onResetButton() {
 		setItems( getDefaultItems() );
+		ga('send', 'event', 'items-editor', 'reset');
 	}
 
 	function setItems (itemsDefinition) {
@@ -279,6 +280,10 @@ var PoEdit = new function()
 				getOtherButtons( 'items-edit-button' ).forEach( function(btn) {
 					btn.style.display = 'inline-block';
 				} );
+				ga('send', 'event', 'items-editor', 'save');
+			} 
+			else {
+				ga('send', 'event', 'items-editor', 'invalid');
 			}
 		}
 		else {
@@ -289,6 +294,7 @@ var PoEdit = new function()
 			getOtherButtons( 'items-edit-button' ).forEach( function(btn) {
 				btn.style.display = 'none';
 			});
+			ga('send', 'event', 'items-editor', 'open');
 		}
 	}
 
@@ -309,6 +315,8 @@ var PoEdit = new function()
 			helpButton.innerHTML = 'Close';
 			getOtherButtons( 'help-button' ).forEach( function(btn) { btn.style.display = 'none'; } );
 		}
+		
+		ga('send', 'event', 'help');
 	}
 
 	this.items = null;
@@ -363,6 +371,8 @@ var PoEdit = new function()
 
 	this.loadScript = function (callback) {
 		loadScript( this.urlArgs, function (code) {
+			ga('send', 'event', 'performance', 'characters', 'count', code.length);
+			ga('send', 'event', 'performance', 'lines', 'count', code.split(/\r?\n/).length);
 			setScript( code );
 			callback();
 		});
@@ -370,6 +380,7 @@ var PoEdit = new function()
 
 	this.loadItems = function (callback) {
 		loadItems( this.urlArgs, function (items) {
+			ga('send', 'event', 'performance', 'items', 'count', items.length);
 			PoEdit.itemsDefinition = items;
 			PoEdit.items = createItems( PoEdit.itemsDefinition );
 			drawItems( PoEdit.items );
