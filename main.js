@@ -281,7 +281,7 @@ var PoEdit = new function()
 					btn.style.display = 'inline-block';
 				} );
 				ga('send', 'event', 'items-editor', 'save');
-			} 
+			}
 			else {
 				ga('send', 'event', 'items-editor', 'invalid');
 			}
@@ -315,7 +315,7 @@ var PoEdit = new function()
 			helpButton.innerHTML = 'Close';
 			getOtherButtons( 'help-button' ).forEach( function(btn) { btn.style.display = 'none'; } );
 		}
-		
+
 		ga('send', 'event', 'help');
 	}
 
@@ -371,16 +371,29 @@ var PoEdit = new function()
 
 	this.loadScript = function (callback) {
 		loadScript( this.urlArgs, function (code) {
-			ga('send', 'event', 'performance', 'characters', 'count', code.length);
-			ga('send', 'event', 'performance', 'lines', 'count', code.split(/\r?\n/).length);
+			trackCodeLength( code );
 			setScript( code );
 			callback();
 		});
 	}
 
+	function trackCodeLength (code) {
+		var lineCount = code.split(/\r?\n/).length;
+		ga('send', 'event', 'performance', 'characters', 'count', code.length);
+		ga('send', 'event', 'performance', 'lines', 'count', lineCount);
+
+		var sizeClass = "";
+		if (lineCount < 500) { sizeClass = "0 - 500"; }
+		else if (lineCount < 1000) { sizeClass = "500+"; }
+		else if (lineCount < 2000) { sizeClass = "1000+"; }
+		else if (lineCount < 5000) { sizeClass = "2000+"; }
+		else if (lineCount < 10000) { sizeClass = "5000+"; }
+		else { sizeClass = "10k+"; }
+		ga( 'send', 'performance', 'lines', sizeClass );
+	}
+
 	this.loadItems = function (callback) {
 		loadItems( this.urlArgs, function (items) {
-			ga('send', 'event', 'performance', 'items', 'count', items.length);
 			PoEdit.itemsDefinition = items;
 			PoEdit.items = createItems( PoEdit.itemsDefinition );
 			drawItems( PoEdit.items );

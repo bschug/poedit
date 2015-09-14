@@ -982,6 +982,7 @@ function loadItemsLocal() {
     if (json !== null) {
         var items = ItemsEditor.jsonToItems( json );
         if (items !== null) {
+            ga('send', 'event', 'performance', 'items', 'local', items.length);
             return items;
         }
         else {
@@ -989,6 +990,7 @@ function loadItemsLocal() {
         }
     }
 
+    ga('send', 'event', 'performance', 'items', 'default');
     return getDefaultItems();
 }
 
@@ -997,18 +999,18 @@ function loadItemsPastebin (urlArgs, successCb, errorCb) {
         function (json) {
             var items = ItemsEditor.jsonToItems( json );
             if (items !== null) {
-				ga('send', 'event', 'pastebin-items', 'success');
+				ga('send', 'event', 'performance', 'items', 'pastebin', items.length);
                 successCb( items );
                 return;
             }
             else {
-				ga('send', 'event', 'pastebin-items', 'invalid');
+				ga('send', 'event', 'error', 'items', 'pastebin/parse');
                 errorCb();
             }
         },
 		function() {
-			ga('send', 'event', 'pastebin-items', 'error');
-			errorCb
+			ga('send', 'event', 'error', 'items', 'pastebin/load');
+			errorCb();
 		}
     );
 }
@@ -1024,7 +1026,7 @@ function loadItems (urlArgs, successCb) {
     }
 
     // Otherwise use local right away.
-    successCb( getDefaultItems() );
+    successCb( loadItemsLocal() );
 }
 
 // ---------------------------------- Script -------------------------------------
@@ -1053,7 +1055,7 @@ function loadPastebinScript (urlArgs, successCb, errorCb) {
 			successCb(result);
 		},
         function() {
-			ga('send', 'event', 'pastebin-script', 'error');
+			ga('send', 'event', 'error', 'script', 'pastebin/load');
             alert( 'Could not load filter script from Pastebin. Using default.' );
             errorCb();
         }
