@@ -295,6 +295,36 @@
 	color: white;
 }
 
+/* add item dialog */
+
+#additem-dialog {
+	display: block; /* this is set to block by script */
+	position: absolute;
+	padding: 5px;
+	margin: 0px;
+	z-index: 30;
+	/* position is also set by script */
+
+	border: 1px solid white;
+	background-color: rgba(0, 0, 0, 0.75);
+
+	font-family: Fontin;
+	font-size: 15px;
+}
+
+#additem-dialog > p {
+	margin: 1px 0px 2px 0px;
+	text-align: right;
+}
+
+#additem-dialog > p > .label {
+	color: #aaaaaa;
+}
+
+#additem-dialog > p > .value {
+	color: white;
+}
+
 /* items editor */
 
 #items-editor {
