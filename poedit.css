@@ -298,7 +298,7 @@
 /* add item dialog */
 
 #additem-dialog {
-	display: block; /* this is set to block by script */
+	display: none; /* this is set to block by script */
 	position: absolute;
 	padding: 5px;
 	margin: 0px;

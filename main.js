@@ -73,7 +73,9 @@ var PoEdit = new function()
 
 	function drawAddItemButton() {
 		var plus = document.createElement( 'img' );
+		plus.id = 'additem-button';
 		plus.src = 'plus.png';
+		plus.addEventListener( 'click', onAddItemButton );
 		var itemsArea = document.getElementById( 'items-area' );
 		itemsArea.appendChild( plus );
 	}
@@ -307,6 +309,23 @@ var PoEdit = new function()
 		}
 	}
 
+	function onAddItemButton() {
+		PoEdit.addItemDialog.show();
+	}
+
+	function onAddItemCancel() {
+		PoEdit.addItemDialog.hide();
+		PoEdit.addItemDialog.clear();
+	}
+
+	function onAddItemOk() {
+		var item = PoEdit.addItemDialog.getItem();
+		PoEdit.itemsDefinition.push( item );
+		setItems( PoEdit.itemsDefinition );
+		PoEdit.addItemDialog.hide();
+		PoEdit.addItemDialog.clear();
+	}
+
 	function onHelpButton() {
 		var helpButton = document.getElementById( 'help-button' );
 		var helpWindow = document.getElementById( 'help-window' );
@@ -335,6 +354,7 @@ var PoEdit = new function()
 	this.itemsEditor = new ItemsEditor();
 	this.urlArgs = new UrlArgs();
 	this.itemDetails = new ItemDetails();
+	this.addItemDialog = new AddItemDialog();
 	this.codeCursorPos = null;
 	this.intellisense = new Intellisense();
 	this.previousCode = '';
@@ -436,7 +456,7 @@ var PoEdit = new function()
 		this.itemsEditor.init();
 		this.intellisense.init();
 		this.itemDetails.init();
-
+		this.addItemDialog.init();
 
 		var self = this;
 		if (MANUAL_UPDATE) {
@@ -454,6 +474,8 @@ var PoEdit = new function()
 		document.getElementById( 'code-window' ).addEventListener( 'keydown', onKeyDown, true );
 		document.addEventListener( 'keydown', onKeyDown_Global, true );
 		document.addEventListener( 'keyup', onKeyUp_Global, true );
+		document.getElementById( 'additem-ok-button' ).addEventListener( 'click', onAddItemOk );
+		document.getElementById( 'additem-cancel-button' ).addEventListener( 'click', onAddItemCancel );
 	}
 
 	this.update = function() {
