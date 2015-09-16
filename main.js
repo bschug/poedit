@@ -389,7 +389,7 @@ var PoEdit = new function()
 		else if (lineCount < 5000) { sizeClass = "2000+"; }
 		else if (lineCount < 10000) { sizeClass = "5000+"; }
 		else { sizeClass = "10k+"; }
-		ga( 'send', 'performance', 'lines', sizeClass );
+		ga( 'send', 'event', 'performance', 'codesize', sizeClass );
 	}
 
 	this.loadItems = function (callback) {
