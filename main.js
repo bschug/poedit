@@ -67,6 +67,15 @@ var PoEdit = new function()
 			item.onMouseOver = function() { onHoverItemStart(item); }
 			item.onMouseOut = function() { onHoverItemEnd(item); }
 		});
+
+		drawAddItemButton();
+	}
+
+	function drawAddItemButton() {
+		var plus = document.createElement( 'img' );
+		plus.src = 'plus.png';
+		var itemsArea = document.getElementById( 'items-area' );
+		itemsArea.appendChild( plus );
 	}
 
 	function onHoverItemStart (item) {
