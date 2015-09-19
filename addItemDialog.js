@@ -48,6 +48,9 @@ function AddItemDialog() {
     }
 
     this.show = function() {
+        var position = this.findOptimalPosition();
+        this.dialog.style.left = position.x;
+        this.dialog.style.top = position.y;
         this.dialog.style.display = 'block';
     }
 
@@ -107,4 +110,37 @@ function AddItemDialog() {
         }
     }
 
+    this.findOptimalPosition = function() {
+        // make visible so we can read actual size
+        var previousDisplay = this.dialog.style.display;
+        this.dialog.style.display = 'block';
+
+        var button = document.getElementById( 'additem-button' );
+        var buttonRect = button.getBoundingClientRect();
+        var dialogRect = this.dialog.getBoundingClientRect();
+
+        var canPlaceRight = buttonRect.right + dialogRect.width <= window.innerWidth;
+        var canPlaceBottom = buttonRect.bottom + dialogRect.height <= window.innerHeight;
+        var canPlaceLeft = buttonRect.left - dialogRect.width >= 0;
+        var canPlaceTop = buttonRect.top - dialogRect.height >= 0;
+
+        var optimalX = 0;
+        var optimalY = 0;
+
+        if (canPlaceRight) { optimalX = buttonRect.right; }
+        else if (canPlaceLeft) { optimalX = buttonRect.left - dialogRect.width; }
+        else { optimalX = window.innerWidth - dialogRect.width; }
+
+        if (canPlaceBottom) { optimalY = buttonRect.bottom; }
+        else if (canPlaceTop) { optimalY = buttonRect.top - dialogRect.height; }
+        else { optimalX = window.innerHeight - dialogRect.height; }
+
+        // undo any changes to visibility
+        this.dialog.style.display = previousDisplay;
+
+        return {
+            x: optimalX,
+            y: optimalY
+        };
+    }
 }
