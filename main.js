@@ -351,11 +351,13 @@ var PoEdit = new function()
 	function onAddItemButton() {
 		PoEdit.addItemDialog.show();
 		PoEdit.addItemDialog.focus();
+		ga('send', 'event', 'additem', 'open');
 	}
 
 	function onAddItemCancel() {
 		PoEdit.addItemDialog.hide();
 		PoEdit.addItemDialog.clear();
+		ga('send', 'event', 'additem', 'cancel');
 	}
 
 	function onAddItemOk() {
@@ -364,9 +366,11 @@ var PoEdit = new function()
 			addItem( item );
 			PoEdit.addItemDialog.hide();
 			PoEdit.addItemDialog.clear();
+			ga('send', 'event', 'additem', 'success');
 		}
 		catch (msg) {
 			alert( msg );
+			ga('send', 'event', 'additem', 'error', msg);
 		}
 	}
 
