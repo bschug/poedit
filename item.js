@@ -71,6 +71,19 @@ ItemData.validate = function (item) {
     assertInRange( item.height, 1, 5, 'Invalid height' );
 }
 
+ItemData.areEqual = function (data, item) {
+	return data.name === item.name
+		&& data.itemLevel === item.itemLevel
+		&& data.dropLevel === item.dropLevel
+		&& data.quality === item.quality
+		&& data.rarity === item.rarity
+		&& data.itemClass === item.itemClass
+		&& data.baseType === item.baseType
+		&& data.width === item.width
+		&& data.height === item.height
+		&& ArrayUtils.areEqual( data.sockets, item.sockets );
+}
+
 function Item (itemdata)
 {
 	this.name = itemdata.name;
@@ -132,13 +145,19 @@ function Item (itemdata)
 
 		var self = this;
 		outerDiv.addEventListener('mouseover', function() {
-			if (self.onMouseOver !== null) {
+			if (self.onMouseOver) {
 				self.onMouseOver( self );
 			}
 		});
 		outerDiv.addEventListener('mouseout', function() {
-			if (self.onMouseOut !== null) {
+			if (self.onMouseOut) {
 				self.onMouseOut( self );
+			}
+		});
+		outerDiv.addEventListener('contextmenu', function(ev) {
+			if (self.onRightClick) {
+				ev.preventDefault();
+				self.onRightClick( self );
 			}
 		});
 

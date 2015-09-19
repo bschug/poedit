@@ -68,6 +68,14 @@ var ArrayUtils = {
 	shuffle: function(o) {
 		for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
 		return o;
+	},
+
+	areEqual: function (a, b) {
+		if (a.length !== b.length) return false;
+		for (var i=0; i < a.length; i++) {
+			if (a[i] !== b[i]) return false;
+		}
+		return true;
 	}
 };
 

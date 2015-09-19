@@ -64,8 +64,9 @@ var PoEdit = new function()
 		items.forEach( function(item) {
 			item.draw();
 			applyDefaultStyle( item );
-			item.onMouseOver = function() { onHoverItemStart(item); }
-			item.onMouseOut = function() { onHoverItemEnd(item); }
+			item.onMouseOver = function() { onHoverItemStart(item); };
+			item.onMouseOut = function() { onHoverItemEnd(item); };
+			item.onRightClick = function() { deleteItem(item); };
 		});
 
 		drawAddItemButton();
@@ -92,6 +93,22 @@ var PoEdit = new function()
 			clearTimeout( PoEdit.hoverItemTimeout );
 		}
 		hideItemDetails();
+	}
+
+	function deleteItem (item) {
+		// Deletes the item without redrawing the entire item list because that
+		// would involve shuffling them and be very confusing to the user.
+		// We can't just move the suffling out of the setItems function because
+		// then we would need to shuffle the input to setItems (the actual item
+		// definitions) instead of just the output.
+		PoEdit.items = PoEdit.items.filter( function(e) {
+			return !ItemData.areEqual( item, e );
+		});
+		PoEdit.itemsDefinition = PoEdit.itemsDefinition.filter( function(e) {
+			return !ItemData.areEqual( item, e );
+		});
+		item.outerElement.parentNode.removeChild( item.outerElement );
+		saveItems( PoEdit.itemsDefinition );
 	}
 
 	function showItemDetails (item) {
@@ -260,7 +277,11 @@ var PoEdit = new function()
 		PoEdit.dirty = true;
 		this.innerHTML = 'Edit';
 
-		// Save items definition to local storage
+		saveItems( itemsDefinition );
+	}
+
+	// Save items definition to local storage
+	function saveItems (itemsDefinition) {
 		StorageUtils.save( 'poedit-items', ItemsEditor.itemsToJson( itemsDefinition ) );
 	}
 
