@@ -61,15 +61,16 @@ var PoEdit = new function()
 	}
 
 	function drawItems (items) {
-		items.forEach( function(item) {
-			item.draw();
-			applyDefaultStyle( item );
-			item.onMouseOver = function() { onHoverItemStart(item); };
-			item.onMouseOut = function() { onHoverItemEnd(item); };
-			item.onRightClick = function() { deleteItem(item); };
-		});
-
+		items.forEach( drawItem );
 		drawAddItemButton();
+	}
+
+	function drawItem (item) {
+		item.draw();
+		applyDefaultStyle( item );
+		item.onMouseOver = function() { onHoverItemStart(item); };
+		item.onMouseOut = function() { onHoverItemEnd(item); };
+		item.onRightClick = function() { deleteItem(item); };
 	}
 
 	function drawAddItemButton() {
@@ -79,6 +80,11 @@ var PoEdit = new function()
 		plus.addEventListener( 'click', onAddItemButton );
 		var itemsArea = document.getElementById( 'items-area' );
 		itemsArea.appendChild( plus );
+	}
+
+	function removeAddItemButton() {
+		var button = document.getElementById( 'additem-button' );
+		button.parentNode.removeChild( button );
 	}
 
 	function onHoverItemStart (item) {
@@ -93,6 +99,18 @@ var PoEdit = new function()
 			clearTimeout( PoEdit.hoverItemTimeout );
 		}
 		hideItemDetails();
+	}
+
+	function addItem (itemData) {
+		var item = new Item(itemData);
+		PoEdit.itemsDefinition.push( itemData );
+		PoEdit.items.push( item );
+
+		// Remove the Add Item Button first and add it again after adding the item
+		// to ensure that it's always at the end of the item list.
+		removeAddItemButton();
+		drawItem( item );
+		drawAddItemButton();
 	}
 
 	function deleteItem (item) {
@@ -342,8 +360,7 @@ var PoEdit = new function()
 	function onAddItemOk() {
 		try {
 			var item = PoEdit.addItemDialog.getItem();
-			PoEdit.itemsDefinition.push( item );
-			setItems( PoEdit.itemsDefinition );
+			addItem( item );
 			PoEdit.addItemDialog.hide();
 			PoEdit.addItemDialog.clear();
 		}
