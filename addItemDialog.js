@@ -68,27 +68,22 @@ function AddItemDialog() {
     }
 
     this.getItem = function() {
-        this.validate();
-
         var inventorySize = parseInventorySize( this.inventorySizeInput.value );
-        var sockets = parseSockets( this.socketsInput.value );
-
-        return {
+        var result = {
             name: this.nameInput.value,
             itemLevel: parseInt( this.itemLevelInput.value ),
             dropLevel: parseInt( this.dropLevelInput.value ),
             quality: parseInt( this.qualityInput.value ),
-            rarity: this.rarityInput.value,
+            rarity: Rarity.parse( this.rarityInput.value ),
             itemClass: this.itemClassInput.value,
             baseType: this.baseTypeInput.value,
             width: inventorySize.width,
             height: inventorySize.height,
-            sockets: sockets
-        }
-    }
+            sockets: parseSockets( this.socketsInput.value )
+        };
 
-    this.validate = function() {
-
+        ItemData.validate( result );
+        return result;
     }
 
     function parseInventorySize (str) {

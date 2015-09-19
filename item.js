@@ -11,6 +11,16 @@ var Rarity = {
 			case 2: return "Rare";
 			case 3: return "Unique";
 		}
+	},
+
+	parse: function (str) {
+		switch (str.toLowerCase()) {
+			case 'normal': return 0;
+			case 'magic': return 1;
+			case 'rare': return 2;
+			case 'unique': return 3;
+			default: throw "Invalid Rarity: " + str;
+		}
 	}
 };
 
@@ -34,8 +44,31 @@ function ItemData() {
 	// would store ['R','RB'] here.
 	this.sockets = [];
 
-
 	return this;
+}
+
+ItemData.validate = function (item) {
+	function assertNotNullOrEmpty (str, msg) {
+        if (!str || (str === '')) {
+            throw msg;
+        }
+    }
+
+    function assertInRange (value, min, max, msg) {
+        if (value < min || value > max) {
+            throw msg;
+        }
+    }
+
+	assertNotNullOrEmpty( item.name, 'Item has no name' );
+    assertInRange( item.itemLevel, 1, 99, 'Invalid ItemLevel' );
+    assertInRange( item.dropLevel, 1, 99, 'Invalid DropLevel' );
+    assertInRange( item.quality, 0, 20, 'Invalid Quality' );
+	assertInRange( item.rarity, 0, 3, 'Invalid Rarity' );
+    assertNotNullOrEmpty( item.itemClass, 'Item has no Class' );
+    assertNotNullOrEmpty( item.baseType, 'Item has no BaseType' );
+    assertInRange( item.width, 1, 3, 'Invalid width' );
+    assertInRange( item.height, 1, 5, 'Invalid height' );
 }
 
 function Item (itemdata)

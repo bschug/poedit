@@ -319,11 +319,16 @@ var PoEdit = new function()
 	}
 
 	function onAddItemOk() {
-		var item = PoEdit.addItemDialog.getItem();
-		PoEdit.itemsDefinition.push( item );
-		setItems( PoEdit.itemsDefinition );
-		PoEdit.addItemDialog.hide();
-		PoEdit.addItemDialog.clear();
+		try {
+			var item = PoEdit.addItemDialog.getItem();
+			PoEdit.itemsDefinition.push( item );
+			setItems( PoEdit.itemsDefinition );
+			PoEdit.addItemDialog.hide();
+			PoEdit.addItemDialog.clear();
+		}
+		catch (msg) {
+			alert( msg );
+		}
 	}
 
 	function onHelpButton() {
