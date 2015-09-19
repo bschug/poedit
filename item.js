@@ -55,20 +55,22 @@ ItemData.validate = function (item) {
     }
 
     function assertInRange (value, min, max, msg) {
-        if (value < min || value > max) {
+        if (isNaN(value) || value < min || value > max) {
             throw msg;
         }
     }
 
 	assertNotNullOrEmpty( item.name, 'Item has no name' );
-    assertInRange( item.itemLevel, 1, 99, 'Invalid ItemLevel' );
-    assertInRange( item.dropLevel, 1, 99, 'Invalid DropLevel' );
+    assertInRange( item.itemLevel, 1, 100, 'Invalid ItemLevel' );
+    assertInRange( item.dropLevel, 1, 100, 'Invalid DropLevel' );
     assertInRange( item.quality, 0, 20, 'Invalid Quality' );
 	assertInRange( item.rarity, 0, 3, 'Invalid Rarity' );
     assertNotNullOrEmpty( item.itemClass, 'Item has no Class' );
     assertNotNullOrEmpty( item.baseType, 'Item has no BaseType' );
     assertInRange( item.width, 1, 3, 'Invalid width' );
     assertInRange( item.height, 1, 5, 'Invalid height' );
+	var maxSockets = Math.min( 6, item.width * item.height );
+	assertInRange( ItemData.countSockets( item.sockets ), 0, maxSockets, 'Too many sockets for this item size' );
 }
 
 ItemData.areEqual = function (data, item) {
@@ -82,6 +84,14 @@ ItemData.areEqual = function (data, item) {
 		&& data.width === item.width
 		&& data.height === item.height
 		&& ArrayUtils.areEqual( data.sockets, item.sockets );
+}
+
+ItemData.countSockets = function (sockets) {
+	var result = 0;
+	sockets.forEach( function(group) {
+		result += group.length;
+	});
+	return result;
 }
 
 function Item (itemdata)
@@ -116,11 +126,7 @@ function Item (itemdata)
 	}
 
 	this.getNumSockets = function() {
-		var num = 0;
-		this.sockets.forEach( function(group) {
-			num += group.length;
-		});
-		return num;
+		return ItemData.countSockets( this.sockets );
 	}
 
 	this.draw = function() {

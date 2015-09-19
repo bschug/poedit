@@ -91,6 +91,9 @@ function AddItemDialog() {
 
     function parseInventorySize (str) {
         var parts = str.split( 'x' );
+        if (parts.length !== 2 || isNaN(parseInt(parts[0])) || isNaN(parseInt(parts[1]))) {
+            throw "Invalid Item Size. Expected {width}x{height}. Example: 2x3";
+        }
         return {
             width: parseInt( parts[0] ),
             height: parseInt( parts[1] )
@@ -98,6 +101,17 @@ function AddItemDialog() {
     }
 
     function parseSockets (str) {
+        for (var i=0; i < str.length; i++) {
+            switch (str[i]) {
+                case ' ':
+                case 'R':
+                case 'G':
+                case 'B':
+                    break;
+                default:
+                    throw "Invalid '" + str[i] + "' character in socket definition. Please use only R, G, B and Space";
+            }
+        }
         return str.split( ' ' );
     }
 
