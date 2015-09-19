@@ -364,6 +364,8 @@
 #help-window .url .highlight { font-weight: bold; color: red; }
 #help-window .url .highlight2 { font-weight: bold; color: green; }
 
+#help-window img.inline { display:inline-block; }
+
 /* debug button */
 
 #manual-update-button {
