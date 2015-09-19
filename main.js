@@ -350,6 +350,7 @@ var PoEdit = new function()
 
 	function onAddItemButton() {
 		PoEdit.addItemDialog.show();
+		PoEdit.addItemDialog.focus();
 	}
 
 	function onAddItemCancel() {

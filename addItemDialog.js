@@ -70,6 +70,10 @@ function AddItemDialog() {
         this.inventorySizeInput.value = "";
     }
 
+    this.focus = function() {
+        this.nameInput.focus();
+    }
+
     this.getItem = function() {
         var inventorySize = parseInventorySize( this.inventorySizeInput.value );
         var result = {
