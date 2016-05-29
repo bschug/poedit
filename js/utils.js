@@ -210,6 +210,11 @@ var DomUtils = {
 var MathUtils = {
 	clamp: function (value, min, max) {
 		return Math.min( max, Math.max( min, value ) );
+	},
+
+	remap: function (value, oldmin, oldmax, newmin, newmax) {
+		var t = (value - oldmin) / (oldmax - oldmin);
+		return newmin + t * (newmax - newmin);
 	}
 };
 

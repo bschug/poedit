@@ -489,6 +489,7 @@ var PoEdit = new function()
 		}
 		this.dirty = false;
 
+		var startTime = performance.now();
 		var code = getCode();
 
 		// Save code changes only if not in Pastebin mode
@@ -506,6 +507,8 @@ var PoEdit = new function()
 
 		updateItems();
 		this.itemDetails.update();
+
+		console.log("update took " + (performance.now() - startTime) + " ms");
 	}
 
 	function normalizeWhitespace( lines ) {

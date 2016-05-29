@@ -193,7 +193,8 @@ function Item (itemdata)
 	}
 
 	this.setFontSize = function (size) {
-		getLabel( this ).style.fontSize = (size / 2).toString() + 'px';
+		var actualSize = MathUtils.remap( size, 18, 45, 9, 30 );
+		getLabel( this ).style.fontSize = (actualSize).toString() + 'px';
 	}
 
 	function buildCssColor (color) {

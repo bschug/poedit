@@ -140,6 +140,6 @@ function PlayAlertSoundModifier (soundId, volume) {
 
 function SetFontSizeModifier (fontSize) {
 	this.applyTo = function (item) {
-		item.setFontSize( fontSize );
+		item.setFontSize( MathUtils.clamp(fontSize, 18, 45) );
 	}
 }
