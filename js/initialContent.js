@@ -728,7 +728,7 @@ function getDefaultItems() {
     	},
     	{
     		name: 'Torture Chamber Map',
-    		itemLevel: 72,
+    		itemLevel: 80,
     		dropLevel: 72,
     		quality: 0,
     		itemClass: 'Maps',
@@ -738,6 +738,18 @@ function getDefaultItems() {
             height: 1,
     		sockets: []
     	},
+        {
+            name:'Core Map',
+            itemLevel: 82,
+            dropLevel: 82,
+            quality: 0,
+            itemClass: 'Maps',
+            baseType: 'Core Map',
+            rarity: Rarity.Normal,
+            width:1,
+            height:1,
+            sockets:[]
+        },
         {
     		name: 'Sacrifice at Midnight',
     		itemLevel: 21,
@@ -971,6 +983,30 @@ function getDefaultItems() {
             height: 2,
     		sockets: []
         },
+        {
+            name: 'Golden Key',
+            itemLevel: 68,
+            dropLevel: 1,
+            quality: 0,
+            itemClass: 'Labyrinth Item',
+            baseType: 'Golden Key',
+            rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
+            sockets:[]
+        },
+        {
+            name: 'Portal Shredder',
+            itemLevel: 55,
+            dropLevel: 1,
+            quality: 0,
+            itemClass: 'Labyrinth Trinket',
+            baseType: 'Portal Shredder',
+            rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
+            sockets: []
+        }
     ]
 
     return weapons.concat( armor, jewelry, gems, currency, maps, jewels, flasks, divinationCards, fishingRods, questItems );

@@ -26,26 +26,29 @@ var PoEdit = new function()
 
 		var color = WHITE;
 
-		if (item.rarity == Rarity.Magic) {
+		if (item.rarity === Rarity.Magic) {
 			color = BLUE;
 		}
-		else if (item.rarity == Rarity.Rare) {
+		else if (item.rarity === Rarity.Rare) {
 			color = YELLOW;
 		}
-		else if (item.rarity == Rarity.Unique) {
+		else if (item.rarity === Rarity.Unique) {
 			color = ORANGE;
 		}
-		else if (item.itemClass == 'Currency') {
+		else if (item.itemClass === 'Currency') {
 			color = GOLD;
 		}
 		else if (StrUtils.contains( 'Gem', item.itemClass )) {
 			color = CYAN;
 		}
-		else if (item.itemClass == 'Quest Items') {
+		else if (item.itemClass === 'Quest Items') {
 			color = GREEN;
 		}
-		else if (item.itemClass == 'Divination Card') {
+		else if (item.itemClass === 'Divination Card') {
 			color = LIGHT_CYAN;
+		}
+		else if (item.itemClass === 'Labyrinth Item' || item.itemClass === 'Labyrinth Trinket') {
+			color = GOLD;
 		}
 
 		item.setVisibility( true );
