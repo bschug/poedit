@@ -66,8 +66,9 @@ var PoEdit = new function()
 
 	}
 
-	this.scrollToLine = function(lineNr) {
-		PoEdit.editor.scrollTo(lineNr);
+	this.scrollIntoView = function( firstLine, lastLine ) {
+		PoEdit.editor.scrollIntoView( { line:firstLine, ch:0 }, 50 );
+		PoEdit.editor.scrollIntoView( { line:lastLine, ch:0 }, 50 );
 	}
 
 	function createItems (itemDefinitions) {
@@ -150,7 +151,7 @@ var PoEdit = new function()
 	function showItemDetails (item) {
 		if (item.matchingRule !== null) {
 			PoEdit.highlightLines( item.matchingRule.codeLines );
-			PoEdit.scrollToLine( item.matchingRule.codeLines[0] );
+			PoEdit.scrollIntoView( item.matchingRule.codeLines[0], item.matchingRule.codeLines[ item.matchingRule.codeLines.length - 1 ] );
 			PoEdit.dirty = true;
 		}
 		PoEdit.itemDetails.item = item;
