@@ -147,9 +147,8 @@
 	font-style: italic;
 }
 
-#code-window > .highlighted {
-	color: black;
-	background-color: rgba(220, 180, 80, 0.75);
+.highlighted {
+	background-color: rgba(255, 255, 255, 0.25);
 }
 
 #colorpicker {

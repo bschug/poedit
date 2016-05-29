@@ -63,7 +63,24 @@ var PoEdit = new function()
 	}
 
 	this.highlightLines = function(lines) {
+		if (PoEdit.highlightedLines) {
+			PoEdit.highlightedLines.clear();
+			PoEdit.highlightedLines = null;
+		}
 
+		if (lines.length === 0) {
+			return;
+		}
+
+		var firstLine = lines[0];
+		var lastLine = lines[lines.length-1];
+		var lastLineLength = PoEdit.editor.getLine(lastLine).length;
+
+		PoEdit.highlightedLines = PoEdit.editor.markText(
+			{ line:firstLine, ch:0 },
+		 	{ line:lastLine, ch:lastLineLength },
+			{ className:'highlighted' }
+		);
 	}
 
 	this.scrollIntoView = function( firstLine, lastLine ) {
@@ -336,18 +353,19 @@ var PoEdit = new function()
 
 	this.items = null;
 	this.itemsDefinition = null;
+	this.showHiddenItems = false;
+	this.itemMouseoverTimeout = null;
+	this.highlightedLines = null;
+
 	this.parser = new Parser();
 	this.editor = null;
 	this.itemsEditor = new ItemsEditor();
 	this.urlArgs = new UrlArgs();
 	this.itemDetails = new ItemDetails();
 	this.addItemDialog = new AddItemDialog();
-	this.codeCursorPos = null;
-	this.previousCode = '';
-	this.showHiddenItems = false;
+
 	this.dirty = true;
 	this.initSteps = [];
-	this.itemMouseoverTimeout = null;
 
 	function AsyncOperation (name, operation, callback) {
 		this.name = name;
