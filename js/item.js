@@ -172,6 +172,9 @@ function Item (itemdata)
 	}
 
 	this.setVisibility = function (visibility) {
+		if (this.itemClass === 'Quest Items' || this.itemClass === 'Labyrinth Item' || this.itemClass === 'Labyrinth Trinket') {
+			visibility = true;
+		}
 		this.outerElement.className = (visibility ? 'item-container' : 'hidden-item-container');
 		this.domElement.style.visibility = (visibility ? 'visible' : 'hidden');
 	}
