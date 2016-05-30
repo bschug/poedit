@@ -8,6 +8,13 @@ var PoEdit = new function()
 			lineWrapping:true
 		});
 		editor.on('change', function() { PoEdit.dirty = true; } );
+
+		editor.setOption('extraKeys', {
+			"Shift-Ctrl-C": function(editor) {
+				editor.toggleComment();
+			}
+		});
+
 		return editor;
 	}
 
@@ -196,6 +203,7 @@ var PoEdit = new function()
 			return event.which;
 		}
 	}
+
 
 	function onKeyDown_Global (event) {
 		var code = getKeyCode( event );

@@ -165,7 +165,8 @@ function matchKeyword(stream, keywords) {
 CodeMirror.defineMode("poe", function() {
     return {
         startState: startState,
-        token: token
+        token: token,
+        lineComment: '#'
     }
 });
 
