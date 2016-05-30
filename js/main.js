@@ -7,19 +7,45 @@ var PoEdit = new function()
 			theme:'bschug',
 			lineWrapping:true
 		});
-		editor.on('change', function() { PoEdit.dirty = true; } );
+		editor.on('change', function() {
+			PoEdit.dirty = true;
+			showHintWhenTyping();
+		} );
 
 		editor.setOption('extraKeys', {
 			"Shift-Ctrl-C": function(editor) {
 				editor.toggleComment();
 			},
 			"Ctrl-Space": function(editor) {
-				editor.showHint();
+				showHint(true);
 			}
 		});
 		editor.setOption('continueComments', true);
 
 		return editor;
+	}
+
+	function showHintWhenTyping() {
+		var cursor = PoEdit.editor.getCursor();
+		if (PoEdit.editor.getLine(cursor.line).trim().length === 0) {
+			return;
+		}
+		if (PoEdit.editor.getLine(cursor.line).length > cursor.ch) {
+			return;
+		}
+		showHint(false);
+	}
+
+	function showHint(completeSingle) {
+		PoEdit.editor.showHint( {
+			completeSingle: completeSingle,
+			customKeys: {
+				Space: function(cm,handle) {
+					handle.pick(cm);
+					cm.replaceSelection(' ');
+				}
+			}
+		} );
 	}
 
 	var MANUAL_UPDATE = false;

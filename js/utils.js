@@ -76,6 +76,11 @@ var ArrayUtils = {
 			if (a[i] !== b[i]) return false;
 		}
 		return true;
+	},
+
+	contains: function (a,x) {
+		var idx = a.indexOf(x);
+		return idx >= 0;
 	}
 };
 
