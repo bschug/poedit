@@ -137,6 +137,9 @@ function token(stream, state) {
     }
 
     if (expected === 'SOCKETS') {
+        if (stream.match(/^\"[RGBW]+\"/)) {
+            return 'string';
+        }
         if (stream.match(/^[RGBW]+/)) {
             return 'string';
         }
