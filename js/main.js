@@ -12,8 +12,12 @@ var PoEdit = new function()
 		editor.setOption('extraKeys', {
 			"Shift-Ctrl-C": function(editor) {
 				editor.toggleComment();
+			},
+			"Ctrl-Space": function(editor) {
+				editor.showHint();
 			}
 		});
+		editor.setOption('continueComments', true);
 
 		return editor;
 	}
