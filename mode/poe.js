@@ -22,17 +22,41 @@ function startState() {
         // SOCKETS
         // RARITY_FORMULA - rarity or operator and rarity
         // RARITY
-        expected: ['KEYWORD']
+        expected: ['KEYWORD'],
+
+        isVisibility: false,
+        previousLineWasVisibility: false,
+        isEmptyLine: false,
+        previousLineWasEmpty: true,
+        currentIndentation: 0,
+        lastIndentation: 0
     };
 }
 
 function token(stream, state) {
     if (stream.sol()) {
         state.expected = ['KEYWORD'];
+        state.previousLineWasEmpty = state.isEmptyLine;
+        state.isEmptyLine = false;
+        state.previousLineWasVisibility = state.isVisibility;
+        state.isVisibility = false;
+        state.lastIndentation = state.currentIndentation;
+        state.currentIndentation = stream.indentation();
+
+        if (stream.eatSpace()) {
+            if (stream.eol()) {
+                state.isEmptyLine = true;
+            }
+            return null;
+        }
     }
 
     // ignore whitespace
     if (stream.eatSpace()) {
+        return null;
+    }
+
+    if (stream.eol()) {
         return null;
     }
 
@@ -52,6 +76,7 @@ function token(stream, state) {
     if (expected === 'KEYWORD') {
         if (matchKeyword(stream, ['Show','Hide'])) {
             state.hasVisibilityToken = true;
+            state.isVisibility = true;
             state.expected = [];
             return 'keyword';
         }
@@ -162,11 +187,26 @@ function matchKeyword(stream, keywords) {
     return false;
 }
 
-CodeMirror.defineMode("poe", function() {
+function indent(state, textAfter) {
+    if (textAfter.startsWith('Show') || textAfter.startsWith('Hide')) {
+        return 0;
+    }
+    if (textAfter.trim().length === 0 || textAfter.trim().startsWith('#')) {
+        return CodeMirror.Pass;
+    }
+    return 4;
+}
+function dontIndent(state, textAfter) {
+    return CodeMirror.Pass;
+}
+
+CodeMirror.defineMode("poe", function(options, modeOptions) {
     return {
         startState: startState,
         token: token,
-        lineComment: '#'
+        indent: (modeOptions.autoIndent ? indent : dontIndent),
+        lineComment: '#',
+        electricInput: /((Show)|(Hide))$/
     }
 });
 

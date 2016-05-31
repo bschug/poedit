@@ -3,13 +3,14 @@ var PoEdit = new function()
 	function createCodeEditor() {
 		var codeWindow = document.getElementById('code-window');
 		var editor = CodeMirror.fromTextArea( codeWindow, {
-			mode:'poe',
+			mode:{ name:'poe', autoIndent:true },
 			theme:'bschug',
 			lineWrapping:true
 		});
 		editor.on('change', function() {
 			PoEdit.dirty = true;
 			showHintWhenTyping();
+			indentIfNonEmptyLine();
 		} );
 
 		editor.setOption('extraKeys', {
@@ -43,9 +44,20 @@ var PoEdit = new function()
 				Space: function(cm,handle) {
 					handle.pick(cm);
 					cm.replaceSelection(' ');
+				},
+				Enter: function(cm,handle) {
+					handle.pick(cm);
 				}
 			}
 		} );
+	}
+
+	function indentIfNonEmptyLine() {
+		var lineNr = PoEdit.editor.getCursor().line;
+		var line = PoEdit.editor.getLine(lineNr);
+		if (line.trim().length > 0) {
+			PoEdit.editor.indentLine( lineNr, 'smart' );
+		}
 	}
 
 	var MANUAL_UPDATE = false;
