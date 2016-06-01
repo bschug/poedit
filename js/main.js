@@ -416,6 +416,10 @@ var PoEdit = new function()
 		PoEdit.settingsDialog.show();
 	}
 
+	function onFeedbackButton() {
+		window.location = 'https://www.reddit.com/message/compose/?to=bschug';
+	}
+
 	var AVAILABLE_COLOR_SCHEMES = [
 		{ name:'Dark/subtle', theme:'bschug' },
 		{ name:'Dark/contrast', theme:'rubyblue' },
@@ -599,6 +603,7 @@ var PoEdit = new function()
 		}
 
 		document.getElementById( 'settings-button' ).addEventListener( 'click', onSettingsButton );
+		document.getElementById( 'feedback-button' ).addEventListener( 'click', onFeedbackButton );
 		document.getElementById( 'help-button' ).addEventListener( 'click', onHelpButton );
 		document.getElementById( 'reset-button' ).addEventListener( 'click', onResetButton );
 		document.getElementById( 'items-edit-button' ).addEventListener( 'click', onItemsEditButton );
