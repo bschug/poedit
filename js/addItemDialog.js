@@ -186,8 +186,16 @@ function AddItemDialog() {
     function onKeyDown(event) {
         var keyCode = EventUtils.getKeyCode(event);
 
+        // Enter
         if (keyCode === 13) {
             PoEdit.addItemDialog.onPressEnter();
+            return;
+        }
+
+        // Esc
+        if (keyCode === 27) {
+            PoEdit.addItemDialog.hide();
+            PoEdit.addItemDialog.clear();
         }
     }
 }
