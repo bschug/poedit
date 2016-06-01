@@ -202,6 +202,8 @@ var PoEdit = new function()
 		removeAddItemButton();
 		drawItem( item );
 		drawAddItemButton();
+
+		saveItems( PoEdit.itemsDefinition );
 	}
 
 	function deleteItem (item) {
