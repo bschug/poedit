@@ -241,19 +241,8 @@ var PoEdit = new function()
 		return PoEdit.editor.getValue();
 	}
 
-	// There are different ways how the key code may be stored in the event on different browsers
-	function getKeyCode (event) {
-		if (event.keyCode) {
-			return event.keyCode;
-		}
-		else if (event.which) {
-			return event.which;
-		}
-	}
-
-
 	function onKeyDown_Global (event) {
-		var code = getKeyCode( event );
+		var code = EventUtils.getKeyCode( event );
 
 		// Alt
 		if (code === 18) {
@@ -264,7 +253,7 @@ var PoEdit = new function()
 	}
 
 	function onKeyUp_Global (event) {
-		var code = getKeyCode( event );
+		var code = EventUtils.getKeyCode( event );
 
 		// Alt
 		if (code === 18) {
@@ -598,6 +587,8 @@ var PoEdit = new function()
 		document.addEventListener( 'keyup', onKeyUp_Global, true );
 		document.getElementById( 'additem-ok-button' ).addEventListener( 'click', onAddItemOk );
 		document.getElementById( 'additem-cancel-button' ).addEventListener( 'click', onAddItemCancel );
+
+		this.addItemDialog.onPressEnter = onAddItemOk;
 	}
 
 	this.update = function() {

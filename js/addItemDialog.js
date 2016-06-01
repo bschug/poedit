@@ -1,6 +1,5 @@
 function AddItemDialog() {
     this.dialog = null;
-    this.nameInput = null;
     this.itemLevelInput = null;
     this.dropLevelInput = null;
     this.qualityInput = null;
@@ -16,32 +15,37 @@ function AddItemDialog() {
         for (var i=0; i < this.dialog.children.length; i++) {
             var p = this.dialog.children[i];
             switch (p.getAttribute('data')) {
-                case 'name':
-                    this.nameInput = getTextField( p );
-                    break;
-                case 'item-level':
-                    this.itemLevelInput = getTextField( p );
-                    break;
-                case 'drop-level':
-                    this.dropLevelInput = getTextField( p );
-                    break;
-                case 'quality':
-                    this.qualityInput = getTextField( p );
-                    break;
-                case 'rarity':
-                    this.raritySelect = getSelect( p );
+                case 'base-type':
+                    this.baseTypeInput = getTextField( p );
+                    this.baseTypeInput.addEventListener('keydown', onKeyDown);
                     break;
                 case 'class':
                     this.itemClassInput = getTextField( p );
+                    this.itemClassInput.addEventListener('keydown', onKeyDown);
                     break;
-                case 'base-type':
-                    this.baseTypeInput = getTextField( p );
+                case 'item-level':
+                    this.itemLevelInput = getTextField( p );
+                    this.itemLevelInput.addEventListener('keydown', onKeyDown);
                     break;
-                case 'sockets':
-                    this.socketsInput = getTextField( p );
+                case 'drop-level':
+                    this.dropLevelInput = getTextField( p );
+                    this.dropLevelInput.addEventListener('keydown', onKeyDown);
+                    break;
+                case 'rarity':
+                    this.raritySelect = getSelect( p );
+                    this.raritySelect.addEventListener('keydown', onKeyDown);
                     break;
                 case 'inventory-size':
                     this.inventorySizeInput = getTextField( p );
+                    this.inventorySizeInput.addEventListener('keydown', onKeyDown);
+                    break;
+                case 'sockets':
+                    this.socketsInput = getTextField( p );
+                    this.socketsInput.addEventListener('keydown', onKeyDown);
+                    break;
+                case 'quality':
+                    this.qualityInput = getTextField( p );
+                    this.qualityInput.addEventListener('keydown', onKeyDown);
                     break;
             }
         }
@@ -58,8 +62,11 @@ function AddItemDialog() {
         this.dialog.style.display = 'none';
     }
 
+    this.isOpen = function() {
+        return this.dialog.style.display !== 'none';
+    }
+
     this.clear = function() {
-        this.nameInput.value = "";
         this.itemLevelInput.value = "";
         this.dropLevelInput.value = "";
         this.qualityInput.value = "";
@@ -71,13 +78,13 @@ function AddItemDialog() {
     }
 
     this.focus = function() {
-        this.nameInput.focus();
+        this.baseTypeInput.focus();
     }
 
     this.getItem = function() {
         var inventorySize = parseInventorySize( this.inventorySizeInput.value );
         var result = {
-            name: this.nameInput.value,
+            name: this.baseTypeInput.value,
             itemLevel: parseInt( this.itemLevelInput.value ),
             dropLevel: parseInt( this.dropLevelInput.value ),
             quality: StrUtils.parseIntOrDefault( this.qualityInput.value, 0 ),
@@ -174,5 +181,13 @@ function AddItemDialog() {
             x: optimalX,
             y: optimalY
         };
+    }
+
+    function onKeyDown(event) {
+        var keyCode = EventUtils.getKeyCode(event);
+
+        if (keyCode === 13) {
+            PoEdit.addItemDialog.onPressEnter();
+        }
     }
 }

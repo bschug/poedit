@@ -254,3 +254,15 @@ var UrlUtils = {
 		window.location.href = protocol + ':' + window.location.href.substring( window.location.protocol.length );
 	}
 };
+
+var EventUtils = {
+	// There are different ways how the key code may be stored in the event on different browsers
+	getKeyCode: function (event) {
+		if (event.keyCode) {
+			return event.keyCode;
+		}
+		else if (event.which) {
+			return event.which;
+		}
+	}
+}
