@@ -250,6 +250,12 @@ var PoEdit = new function()
 			PoEdit.showHiddenItems = true;
 			updateItems();
 		}
+
+		// Ctrl-I
+		if (code === 73 && event.ctrlKey) {
+			event.preventDefault();
+			onAddItemButton();
+		}
 	}
 
 	function onKeyUp_Global (event) {
