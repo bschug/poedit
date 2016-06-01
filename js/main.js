@@ -414,9 +414,11 @@ var PoEdit = new function()
 
 	function onSettingsButton() {
 		PoEdit.settingsDialog.show();
+		ga('send', 'event', 'settings');
 	}
 
 	function onFeedbackButton() {
+		ga('send', 'event', 'feedback');
 		window.location = 'https://www.reddit.com/message/compose/?to=bschug';
 	}
 
@@ -444,11 +446,13 @@ var PoEdit = new function()
 	this.setCurrentColorScheme = function(colorScheme) {
 		PoEdit.editor.setOption('theme', colorScheme.theme);
 		StorageUtils.save('colorScheme', colorScheme.name);
+		ga('set', 'dimension1', colorScheme.name);
 	}
 
 	this.getAutoIndentEnabled = function() {
 		if (!('autoIndentEnabled' in PoEdit)) {
 			PoEdit.autoIndentEnabled = StorageUtils.load('autoIndent', 'true') == 'true';
+			ga('set', 'dimension2', value);
 		}
 		return PoEdit.autoIndentEnabled;
 	}
@@ -456,11 +460,13 @@ var PoEdit = new function()
 		PoEdit.editor.setOption('mode', { name:'poe', autoIndent:value });
 		PoEdit.autoIndentEnabled = value;
 		StorageUtils.save('autoIndent', value);
+		ga('set', 'dimension2', value);
 	}
 
 	this.getLineNumbersEnabled = function() {
 		if (!('lineNumbersEnabled' in PoEdit)) {
 			PoEdit.lineNumbersEnabled = StorageUtils.load('lineNumbers', 'true') == 'true';
+			ga('set', 'dimension3', value);
 		}
 		return PoEdit.lineNumbersEnabled;
 	}
@@ -468,6 +474,7 @@ var PoEdit = new function()
 		PoEdit.editor.setOption('lineNumbers', value);
 		PoEdit.lineNumbersEnabled = value;
 		StorageUtils.save('lineNumbers', value);
+		ga('set', 'dimension3', value);
 	}
 
 	this.getAvailableItemSets = function() {
