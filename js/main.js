@@ -224,9 +224,9 @@ var PoEdit = new function()
 		if (item.matchingRule !== null) {
 			PoEdit.highlightLines( item.matchingRule.codeLines );
 			PoEdit.scrollIntoView( item.matchingRule.codeLines[0], item.matchingRule.codeLines[ item.matchingRule.codeLines.length - 1 ] );
-			PoEdit.dirty = true;
 		}
 		PoEdit.itemDetails.item = item;
+		PoEdit.dirty = true;
 	}
 
 	function hideItemDetails() {
