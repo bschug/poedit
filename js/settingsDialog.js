@@ -35,7 +35,7 @@ function SettingsDialog() {
             PoEdit.settingsDialog.itemSetSelect.appendChild(option);
         });
         this.itemSetSelect.onchange = function() {
-            // TODO
+            selectItemSet( getSelectedOption(PoEdit.settingsDialog.itemSetSelect).data.id );
         }
 
         this.closeButton.onclick = function() {
@@ -69,5 +69,15 @@ function SettingsDialog() {
 
     function getSelectedOption (select) {
         return select.item( select.selectedIndex );
+    }
+
+    function selectItemSet (id) {
+        if (id === 'custom') {
+            PoEdit.setItems( loadItemsLocal() );
+        }
+
+        $.get( 'itemSets/' + id + '.json', function(json) {
+            PoEdit.setItems( ItemsEditor.jsonToItems(json) );
+        } );
     }
 }

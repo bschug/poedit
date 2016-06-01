@@ -1075,6 +1075,7 @@ function getDefaultScript() {
         '# You see the effects of your filter on the right side.\n' +
         '# Hover over an item to see the filter rule that applied to it.\n' +
         '# Press Alt to see hidden items.\n' +
+        '# Press the Settings button to select a different item set.\n' +
         '# Click the Help button on the bottom right for more tips and instructions.';
     return result;
 }

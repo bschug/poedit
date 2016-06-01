@@ -310,6 +310,10 @@ var PoEdit = new function()
 		saveItems( itemsDefinition );
 	}
 
+	this.setItems = function(itemsDefinition) {
+		setItems(itemsDefinition);
+	}
+
 	// Save items definition to local storage
 	function saveItems (itemsDefinition) {
 		StorageUtils.save( 'poedit-items', ItemsEditor.itemsToJson( itemsDefinition ) );
@@ -451,7 +455,9 @@ var PoEdit = new function()
 
 	this.getAvailableItemSets = function() {
 		return [
-			{ name:'default', items:getDefaultItems() }
+			{ name:'Default', id:'default' },
+			{ name:'Custom', id:'custom' },
+			{ name:'Maps', id:'maps' }
 		];
 	}
 
