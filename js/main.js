@@ -455,8 +455,8 @@ var PoEdit = new function()
 
 	this.getAvailableItemSets = function() {
 		return [
-			{ name:'Default', id:'default' },
 			{ name:'Custom', id:'custom' },
+			{ name:'Default', id:'default' },
 			{ name:'Maps', id:'maps' }
 		];
 	}
