@@ -4,7 +4,7 @@ function AddItemDialog() {
     this.itemLevelInput = null;
     this.dropLevelInput = null;
     this.qualityInput = null;
-    this.rarityInput = null;
+    this.raritySelect = null;
     this.itemClassInput = null;
     this.baseTypeInput = null;
     this.socketsInput = null;
@@ -29,7 +29,7 @@ function AddItemDialog() {
                     this.qualityInput = getTextField( p );
                     break;
                 case 'rarity':
-                    this.rarityInput = getTextField( p );
+                    this.raritySelect = getSelect( p );
                     break;
                 case 'class':
                     this.itemClassInput = getTextField( p );
@@ -63,7 +63,7 @@ function AddItemDialog() {
         this.itemLevelInput.value = "";
         this.dropLevelInput.value = "";
         this.qualityInput.value = "";
-        this.rarityInput.value = "";
+        this.raritySelect.selectedIndex = 0;
         this.itemClassInput.value = "";
         this.baseTypeInput.value = "";
         this.socketsInput.value = "";
@@ -80,8 +80,8 @@ function AddItemDialog() {
             name: this.nameInput.value,
             itemLevel: parseInt( this.itemLevelInput.value ),
             dropLevel: parseInt( this.dropLevelInput.value ),
-            quality: parseInt( this.qualityInput.value ),
-            rarity: Rarity.parse( this.rarityInput.value ),
+            quality: StrUtils.parseIntOrDefault( this.qualityInput.value, 0 ),
+            rarity: Rarity.parse( getSelectedText( this.raritySelect ) ),
             itemClass: this.itemClassInput.value,
             baseType: this.baseTypeInput.value,
             width: inventorySize.width,
@@ -126,6 +126,20 @@ function AddItemDialog() {
                 return child;
             }
         }
+    }
+
+    function getSelect (elem) {
+        for (var i=0; i < elem.children.length; i++) {
+            var child = elem.children[i];
+            if (child.nodeName === 'SELECT') {
+                return child;
+            }
+        }
+    }
+
+    function getSelectedText (select) {
+        var i = select.selectedIndex;
+        return select.options[i].text;
     }
 
     this.findOptimalPosition = function() {

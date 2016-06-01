@@ -59,6 +59,11 @@ var StrUtils = {
 
 	replaceAll: function (str, old, replacement) {
 		return str.split( old ).join( replacement );
+	},
+
+	parseIntOrDefault: function (str, defaultValue) {
+		var result = parseInt(str);
+		return isNaN(result) ? defaultValue : result;
 	}
 };
 
