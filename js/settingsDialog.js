@@ -77,7 +77,7 @@ function SettingsDialog() {
         }
 
         $.get( 'itemSets/' + id + '.json', function(json) {
-            PoEdit.setItems( ItemsEditor.jsonToItems(json) );
+            PoEdit.setItems( ItemsEditor.jsonToItems(json), false );
         } );
     }
 }

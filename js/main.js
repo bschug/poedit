@@ -295,7 +295,10 @@ var PoEdit = new function()
 		ga('send', 'event', 'items-editor', 'reset');
 	}
 
-	function setItems (itemsDefinition) {
+	function setItems (itemsDefinition, saveToLocalStorage) {
+		if (saveToLocalStorage === undefined)
+			saveToLocalStorage = true;
+
 		// Store the new items definition
 		PoEdit.itemsDefinition = itemsDefinition;
 		PoEdit.items = createItems( itemsDefinition );
@@ -307,12 +310,12 @@ var PoEdit = new function()
 		PoEdit.dirty = true;
 		this.innerHTML = 'Edit';
 
-		saveItems( itemsDefinition );
+		if (saveToLocalStorage) {
+			saveItems( itemsDefinition );
+		}
 	}
 
-	this.setItems = function(itemsDefinition) {
-		setItems(itemsDefinition);
-	}
+	this.setItems = setItems;
 
 	// Save items definition to local storage
 	function saveItems (itemsDefinition) {
