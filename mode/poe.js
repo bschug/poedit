@@ -196,18 +196,20 @@ function indent(state, textAfter) {
     }
     return 4;
 }
-function dontIndent(state, textAfter) {
-    return CodeMirror.Pass;
-}
 
 CodeMirror.defineMode("poe", function(options, modeOptions) {
-    return {
+    var mode = {
         startState: startState,
         token: token,
-        indent: (modeOptions.autoIndent ? indent : dontIndent),
-        lineComment: '#',
-        electricInput: /((Show)|(Hide))$/
+        lineComment: '#'
+    };
+
+    if (modeOptions.autoIndent) {
+        mode.indent = indent,
+        mode.electricInput = /((Show)|(Hide))$/
     }
+
+    return mode;
 });
 
 });

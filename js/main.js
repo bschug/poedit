@@ -3,8 +3,8 @@ var PoEdit = new function()
 	function createCodeEditor() {
 		var codeWindow = document.getElementById('code-window');
 		var editor = CodeMirror.fromTextArea( codeWindow, {
-			mode:{ name:'poe', autoIndent:true },
-			theme:'bschug',
+			mode:{ name:'poe', autoIndent: PoEdit.getAutoIndentEnabled() },
+			theme: PoEdit.getCurrentColorScheme().theme,
 			lineWrapping:true
 		});
 		editor.on('change', function() {
@@ -53,10 +53,12 @@ var PoEdit = new function()
 	}
 
 	function indentIfNonEmptyLine() {
-		var lineNr = PoEdit.editor.getCursor().line;
-		var line = PoEdit.editor.getLine(lineNr);
-		if (line.trim().length > 0) {
-			PoEdit.editor.indentLine( lineNr, 'smart' );
+		if (PoEdit.getAutoIndentEnabled()) {
+			var lineNr = PoEdit.editor.getCursor().line;
+			var line = PoEdit.editor.getLine(lineNr);
+			if (line.trim().length > 0) {
+				PoEdit.editor.indentLine( lineNr, 'smart' );
+			}
 		}
 	}
 
@@ -405,6 +407,54 @@ var PoEdit = new function()
 		ga('send', 'event', 'help');
 	}
 
+	function onSettingsButton() {
+		PoEdit.settingsDialog.show();
+	}
+
+	var AVAILABLE_COLOR_SCHEMES = [
+		{ name:'Dark/subtle', theme:'bschug' },
+		{ name:'Dark/contrast', theme:'rubyblue' },
+		{ name:'Light/subtle', theme:'elegant' },
+		{ name:'Light/contrast', theme:'neat' },
+		{ name:'Solarized', theme:'solarized' }
+	];
+	this.getAvailableColorSchemes = function() {
+		return AVAILABLE_COLOR_SCHEMES;
+	}
+	this.getColorSchemeByName = function(name) {
+		return AVAILABLE_COLOR_SCHEMES.filter( function(x) { return x.name === name; } )[0];
+	}
+	this.getCurrentColorScheme = function() {
+		var name = StorageUtils.load('colorScheme', AVAILABLE_COLOR_SCHEMES[0].name);
+		var colorScheme = this.getColorSchemeByName( name );
+		if (colorScheme) {
+			return colorScheme;
+		}
+		return AVAILABLE_COLOR_SCHEMES[0];
+	}
+	this.setCurrentColorScheme = function(colorScheme) {
+		PoEdit.editor.setOption('theme', colorScheme.theme);
+		StorageUtils.save('colorScheme', colorScheme.name);
+	}
+
+	this.getAutoIndentEnabled = function() {
+		if (!('autoIndentEnabled' in PoEdit)) {
+			PoEdit.autoIndentEnabled = StorageUtils.load('autoIndent', 'true') == 'true';
+		}
+		return PoEdit.autoIndentEnabled;
+	}
+	this.setAutoIndentEnabled = function(value) {
+		PoEdit.editor.setOption('mode', { name:'poe', autoIndent:value });
+		PoEdit.autoIndentEnabled = value;
+		StorageUtils.save('autoIndent', value);
+	}
+
+	this.getAvailableItemSets = function() {
+		return [
+			{ name:'default', items:getDefaultItems() }
+		];
+	}
+
 	this.items = null;
 	this.itemsDefinition = null;
 	this.showHiddenItems = false;
@@ -417,6 +467,7 @@ var PoEdit = new function()
 	this.urlArgs = new UrlArgs();
 	this.itemDetails = new ItemDetails();
 	this.addItemDialog = new AddItemDialog();
+	this.settingsDialog = new SettingsDialog();
 
 	this.dirty = true;
 	this.initSteps = [];
@@ -516,6 +567,7 @@ var PoEdit = new function()
 		this.itemsEditor.init();
 		this.itemDetails.init();
 		this.addItemDialog.init();
+		this.settingsDialog.init();
 
 		var self = this;
 		if (MANUAL_UPDATE) {
@@ -527,6 +579,7 @@ var PoEdit = new function()
 			setInterval( function() { self.update(); }, 250 );
 		}
 
+		document.getElementById( 'settings-button' ).addEventListener( 'click', onSettingsButton );
 		document.getElementById( 'help-button' ).addEventListener( 'click', onHelpButton );
 		document.getElementById( 'reset-button' ).addEventListener( 'click', onResetButton );
 		document.getElementById( 'items-edit-button' ).addEventListener( 'click', onItemsEditButton );

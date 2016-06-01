@@ -6,6 +6,10 @@
 <link rel="stylesheet" href="css/poedit.css"/>
 <link rel="stylesheet" href="css/codemirror.css"/>
 <link rel="stylesheet" href="css/theme/bschug.css"/>
+<link rel="stylesheet" href="css/theme/elegant.css"/>
+<link rel="stylesheet" href="css/theme/neat.css"/>
+<link rel="stylesheet" href="css/theme/rubyblue.css"/>
+<link rel="stylesheet" href="css/theme/solarized.css"/>
 <link rel="stylesheet" href="lib/hint/show-hint.css"/>
 
 <script type="text/javascript" src="lib/codemirror.js"></script>
@@ -25,6 +29,7 @@
 <script type="text/javascript" src="js/parser.js"></script>
 <script type="text/javascript" src="js/pastebin.js"></script>
 <script type="text/javascript" src="js/rule.js"></script>
+<script type="text/javascript" src="js/settingsDialog.js"></script>
 <script type="text/javascript" src="js/urlArgs.js"></script>
 <script type="text/javascript" src="js/utils.js"></script>
 
@@ -60,6 +65,7 @@
  <div id="items-area"></div>
  <div id="items-editor" contenteditable="true"></div>
  <div id="buttons">
+     <button id="settings-button">Settings</button>
      <button id="feedback-button">Feedback</button>
      <button id="help-button">Help</button>
      <button id="reset-button">Reset</button>
@@ -87,6 +93,18 @@
     <p data="sockets"><span class="label">Sockets: </span><input type="text"></input></p>
     <p data="inventory-size"><span class="label">Size: </span><input type="text"></input></p>
     <p><button id="additem-cancel-button">Cancel</button> <button id="additem-ok-button">OK</button></p>
+</div>
+
+<div id="settings-dialog">
+    <h1>Settings</h1>
+    <h2>Editor Settings</h2>
+    <p><span>Color Scheme</span><select id="editor-settings-colorscheme"></select></p>
+    <p><span>Auto-indent while typing<input id="editor-settings-autoindent" type="checkbox" checked="false"></input></p>
+
+    <h2>Item Settings</h2>
+    <p><span>Item Set</span><select id="item-settings-itemset"></select></p>
+
+    <p><button id="settings-dialog-close">Close</button></p>
 </div>
 
 <div id="help-window">
