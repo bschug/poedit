@@ -6,7 +6,7 @@ var PoEdit = new function()
 			mode:{ name:'poe', autoIndent: PoEdit.getAutoIndentEnabled() },
 			theme: PoEdit.getCurrentColorScheme().theme,
 			lineWrapping:true,
-			lineNumbers:true
+			lineNumbers: PoEdit.getLineNumbersEnabled()
 		});
 		editor.on('change', function() {
 			PoEdit.dirty = true;
@@ -452,6 +452,18 @@ var PoEdit = new function()
 		PoEdit.editor.setOption('mode', { name:'poe', autoIndent:value });
 		PoEdit.autoIndentEnabled = value;
 		StorageUtils.save('autoIndent', value);
+	}
+
+	this.getLineNumbersEnabled = function() {
+		if (!('lineNumbersEnabled' in PoEdit)) {
+			PoEdit.lineNumbersEnabled = StorageUtils.load('lineNumbers', 'true') == 'true';
+		}
+		return PoEdit.lineNumbersEnabled;
+	}
+	this.setLineNumbersEnabled = function(value) {
+		PoEdit.editor.setOption('lineNumbers', value);
+		PoEdit.lineNumbersEnabled = value;
+		StorageUtils.save('lineNumbers', value);
 	}
 
 	this.getAvailableItemSets = function() {

@@ -2,6 +2,7 @@ function SettingsDialog() {
     this.dialog = null;
     this.colorSchemeSelect = null;
     this.autoIndentCheckbox = null;
+    this.lineNumbersCheckbox = null;
     this.itemSetSelect = null;
     this.closeButton = null;
 
@@ -9,6 +10,7 @@ function SettingsDialog() {
         this.dialog = document.getElementById( 'settings-dialog' );
         this.colorSchemeSelect = document.getElementById( 'editor-settings-colorscheme' );
         this.autoIndentCheckbox = document.getElementById( 'editor-settings-autoindent' );
+        this.lineNumbersCheckbox = document.getElementById( 'editor-settings-linenumbers' );
         this.itemSetSelect = document.getElementById( 'item-settings-itemset' );
         this.closeButton = document.getElementById( 'settings-dialog-close' );
 
@@ -25,6 +27,10 @@ function SettingsDialog() {
 
         this.autoIndentCheckbox.onchange = function() {
             PoEdit.setAutoIndentEnabled( PoEdit.settingsDialog.autoIndentCheckbox.checked );
+        }
+
+        this.lineNumbersCheckbox.onchange = function() {
+            PoEdit.setLineNumbersEnabled( PoEdit.settingsDialog.lineNumbersCheckbox.checked );
         }
 
         PoEdit.getAvailableItemSets().forEach( function(set) {
@@ -56,6 +62,7 @@ function SettingsDialog() {
     function loadSettings(dialog) {
         selectItem( dialog.colorSchemeSelect, function(option) { return option.name === PoEdit.getCurrentColorScheme().name } );
         dialog.autoIndentCheckbox.checked = PoEdit.getAutoIndentEnabled();
+        dialog.lineNumbersCheckbox.checked = PoEdit.getLineNumbersEnabled();
     }
 
     function selectItem (select, condition) {
