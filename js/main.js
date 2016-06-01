@@ -5,7 +5,8 @@ var PoEdit = new function()
 		var editor = CodeMirror.fromTextArea( codeWindow, {
 			mode:{ name:'poe', autoIndent: PoEdit.getAutoIndentEnabled() },
 			theme: PoEdit.getCurrentColorScheme().theme,
-			lineWrapping:true
+			lineWrapping:true,
+			lineNumbers:true
 		});
 		editor.on('change', function() {
 			PoEdit.dirty = true;
