@@ -306,6 +306,7 @@
 
 	border: 1px solid white;
 	background-color: rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 0px 15px #888;
 
 	font-family: Fontin;
 	font-size: 15px;
@@ -394,21 +395,22 @@
 	left:50%;
 	top:50%;
 	width:300px;
-	height:240px;
+	height:200px;
 	margin-left:-150px;
 	margin-top:-200px;
 	z-index: 1000;
 
 	border:2px solid black;
+	box-shadow: 0px 0px 15px #888;
 	background-color: white;
 	color: black;
-	font-family: Verdana,Arial,sans-serif;
+	font-family: Tahoma,Verdana,Arial,sans-serif;
 }
 
 #settings-dialog > h1 {
 	padding:0px 0px 2px 5px;
 	margin:0px;
-	font-size: 20pt;
+	font-size: 16pt;
 	background-color: grey;
 }
 
