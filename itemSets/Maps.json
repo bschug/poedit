@@ -1,53 +1,4 @@
-
 [
-     {
-        "name": "Crypt Map",
-        "itemLevel": 67,
-        "dropLevel": 60,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Crypt Map",
-        "rarity": "Normal",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-    },
-    {
-        "name": "Tropical Island Map",
-        "itemLevel": 67,
-        "dropLevel": 66,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Tropical Island Map",
-        "rarity": "Magic",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-    },
-    {
-        "name": "Pit Map",
-        "itemLevel": 60,
-        "dropLevel": 60,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Pit Map",
-        "rarity": "Rare",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-    },
-    {
-        "name": "Dunes Map",
-        "itemLevel": 60,
-        "dropLevel": 60,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Dunes Map",
-        "rarity": "Normal",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-    },
     {
         "name": "Desert Map",
         "itemLevel": 60,
@@ -55,14 +6,38 @@
         "quality": 0,
         "itemClass": "Maps",
         "baseType": "Desert Map",
+        "rarity": "Normal",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
+        "name": "Dunes Map",
+        "itemLevel": 68,
+        "dropLevel": 60,
+        "quality": 0,
+        "itemClass": "Maps",
+        "baseType": "Dunes Map",
         "rarity": "Magic",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
     {
+        "name": "Crypt Map",
+        "itemLevel": 71,
+        "dropLevel": 60,
+        "quality": 0,
+        "itemClass": "Maps",
+        "baseType": "Crypt Map",
+        "rarity": "Unique",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
         "name": "Dungeon Map",
-        "itemLevel": 60,
+        "itemLevel": 69,
         "dropLevel": 60,
         "quality": 0,
         "itemClass": "Maps",
@@ -74,7 +49,7 @@
     },
     {
         "name": "Grotto Map",
-        "itemLevel": 60,
+        "itemLevel": 65,
         "dropLevel": 60,
         "quality": 0,
         "itemClass": "Maps",
@@ -84,131 +59,155 @@
         "height": 1,
         "sockets": ""
     },
-	{
+    {
+        "name": "Pit Map",
+        "itemLevel": 70,
+        "dropLevel": 60,
+        "quality": 7,
+        "itemClass": "Maps",
+        "baseType": "Pit Map",
+        "rarity": "Normal",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
+        "name": "Tropical Island Map",
+        "itemLevel": 71,
+        "dropLevel": 60,
+        "quality": 19,
+        "itemClass": "Maps",
+        "baseType": "Tropical Island Map",
+        "rarity": "Magic",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
         "name": "Arcade Map",
-        "itemLevel": 60,
+        "itemLevel": 69,
         "dropLevel": 69,
         "quality": 0,
         "itemClass": "Maps",
         "baseType": "Arcade Map",
-        "rarity": "Magic",
+        "rarity": "Normal",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
+    {
         "name": "Cemetery Map",
-        "itemLevel": 60,
+        "itemLevel": 70,
         "dropLevel": 69,
         "quality": 0,
         "itemClass": "Maps",
         "baseType": "Cemetery Map",
-        "rarity": "Rare",
+        "rarity": "Magic",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
+    {
         "name": "Channel Map",
-        "itemLevel": 60,
+        "itemLevel": 71,
         "dropLevel": 69,
         "quality": 0,
         "itemClass": "Maps",
         "baseType": "Channel Map",
-        "rarity": "Normal",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-    },
-	{
-        "name": "Mountain Ledge Map",
-        "itemLevel": 60,
-        "dropLevel": 69,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Mountain Ledge Map",
-        "rarity": "Magic",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-    },
-	{
-        "name": "Sewer Map",
-        "itemLevel": 60,
-        "dropLevel": 69,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Sewer Map",
         "rarity": "Rare",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
+    {
+        "name": "Mountain Ledge Map",
+        "itemLevel": 72,
+        "dropLevel": 69,
+        "quality": 9,
+        "itemClass": "Maps",
+        "baseType": "Mountain Ledge Map",
+        "rarity": "Unique",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
+        "name": "Sewer Map",
+        "itemLevel": 72,
+        "dropLevel": 69,
+        "quality": 13,
+        "itemClass": "Maps",
+        "baseType": "Sewer Map",
+        "rarity": "Normal",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
         "name": "Thicket Map",
-        "itemLevel": 60,
+        "itemLevel": 73,
         "dropLevel": 69,
         "quality": 0,
         "itemClass": "Maps",
         "baseType": "Thicket Map",
-        "rarity": "Normal",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-    },
-	{
-        "name": "Wharf Map",
-        "itemLevel": 60,
-        "dropLevel": 69,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Wharf Map",
         "rarity": "Magic",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
-        "name": "Ghetto Map",
-        "itemLevel": 60,
-        "dropLevel": 70,
+    {
+        "name": "Wharf Map",
+        "itemLevel": 74,
+        "dropLevel": 69,
         "quality": 0,
         "itemClass": "Maps",
-        "baseType": "Ghetto Map",
+        "baseType": "Wharf Map",
         "rarity": "Rare",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
-        "name": "Mud Geyser Map",
-        "itemLevel": 60,
+    {
+        "name": "Ghetto Map",
+        "itemLevel": 70,
         "dropLevel": 70,
         "quality": 0,
         "itemClass": "Maps",
-        "baseType": "Mud Geyser Map",
+        "baseType": "Ghetto Map",
         "rarity": "Normal",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
-        "name": "Museum Map",
-        "itemLevel": 60,
+    {
+        "name": "Mud Geyser Map",
+        "itemLevel": 71,
         "dropLevel": 70,
         "quality": 0,
         "itemClass": "Maps",
-        "baseType": "Museum Map",
+        "baseType": "Mud Geyser Map",
         "rarity": "Magic",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
-        "name": "Quarry Map",
-        "itemLevel": 60,
+    {
+        "name": "Museum Map",
+        "itemLevel": 70,
         "dropLevel": 70,
         "quality": 0,
+        "itemClass": "Maps",
+        "baseType": "Museum Map",
+        "rarity": "Rare",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
+        "name": "Quarry Map",
+        "itemLevel": 72,
+        "dropLevel": 70,
+        "quality": 10,
         "itemClass": "Maps",
         "baseType": "Quarry Map",
         "rarity": "Rare",
@@ -216,9 +215,9 @@
         "height": 1,
         "sockets": ""
     },
-	{
+    {
         "name": "Reef Map",
-        "itemLevel": 60,
+        "itemLevel": 75,
         "dropLevel": 70,
         "quality": 0,
         "itemClass": "Maps",
@@ -228,33 +227,45 @@
         "height": 1,
         "sockets": ""
     },
-	{
+    {
+        "name": "Reef Map",
+        "itemLevel": 70,
+        "dropLevel": 70,
+        "quality": 0,
+        "itemClass": "Maps",
+        "baseType": "Reef Map",
+        "rarity": "Unique",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
         "name": "Spider Lair Map",
-        "itemLevel": 60,
+        "itemLevel": 73,
         "dropLevel": 70,
         "quality": 0,
         "itemClass": "Maps",
         "baseType": "Spider Lair Map",
-        "rarity": "Magic",
+        "rarity": "Normal",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
+    {
         "name": "Vaal Pyramid Map",
-        "itemLevel": 60,
+        "itemLevel": 74,
         "dropLevel": 70,
         "quality": 0,
         "itemClass": "Maps",
         "baseType": "Vaal Pyramid Map",
-        "rarity": "Rare",
+        "rarity": "Unique",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
+    {
         "name": "Arena Map",
-        "itemLevel": 60,
+        "itemLevel": 71,
         "dropLevel": 71,
         "quality": 0,
         "itemClass": "Maps",
@@ -264,45 +275,57 @@
         "height": 1,
         "sockets": ""
     },
-	{
+    {
         "name": "Overgrown Shrine Map",
-        "itemLevel": 60,
+        "itemLevel": 72,
         "dropLevel": 71,
         "quality": 0,
         "itemClass": "Maps",
         "baseType": "Overgrown Shrine Map",
-        "rarity": "Magic",
+        "rarity": "Unique",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
+    {
         "name": "Promenade Map",
-        "itemLevel": 60,
+        "itemLevel": 73,
         "dropLevel": 71,
         "quality": 0,
         "itemClass": "Maps",
         "baseType": "Promenade Map",
-        "rarity": "Rare",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-    },
-	{
-        "name": "Phantasmagoria Map",
-        "itemLevel": 60,
-        "dropLevel": 71,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Phantasmagoria Map",
         "rarity": "Normal",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
+    {
+        "name": "Promenade Map",
+        "itemLevel": 73,
+        "dropLevel": 71,
+        "quality": 0,
+        "itemClass": "Maps",
+        "baseType": "Promenade Map",
+        "rarity": "Unique",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
+        "name": "Phantasmagoria Map",
+        "itemLevel": 73,
+        "dropLevel": 71,
+        "quality": 0,
+        "itemClass": "Maps",
+        "baseType": "Phantasmagoria Map",
+        "rarity": "Rare",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
         "name": "Shore Map",
-        "itemLevel": 60,
+        "itemLevel": 74,
         "dropLevel": 71,
         "quality": 0,
         "itemClass": "Maps",
@@ -312,45 +335,45 @@
         "height": 1,
         "sockets": ""
     },
-	{
+    {
         "name": "Spider Forest Map",
-        "itemLevel": 60,
+        "itemLevel": 75,
         "dropLevel": 71,
         "quality": 0,
         "itemClass": "Maps",
         "baseType": "Spider Forest Map",
-        "rarity": "Rare",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-    },
-	{
-        "name": "Tunnel Map",
-        "itemLevel": 60,
-        "dropLevel": 71,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Tunnel Map",
         "rarity": "Normal",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
-        "name": "Bog Map",
-        "itemLevel": 60,
-        "dropLevel": 72,
+    {
+        "name": "Tunnel Map",
+        "itemLevel": 76,
+        "dropLevel": 71,
         "quality": 0,
         "itemClass": "Maps",
-        "baseType": "Bog Map",
+        "baseType": "Tunnel Map",
         "rarity": "Magic",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
+    {
+        "name": "Bog Map",
+        "itemLevel": 72,
+        "dropLevel": 72,
+        "quality": 0,
+        "itemClass": "Maps",
+        "baseType": "Bog Map",
+        "rarity": "Unique",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
         "name": "Coves Map",
-        "itemLevel": 60,
+        "itemLevel": 73,
         "dropLevel": 72,
         "quality": 0,
         "itemClass": "Maps",
@@ -360,47 +383,47 @@
         "height": 1,
         "sockets": ""
     },
-	{
+    {
         "name": "Graveyard Map",
-        "itemLevel": 60,
+        "itemLevel": 74,
         "dropLevel": 72,
-        "quality": 0,
+        "quality": 5,
         "itemClass": "Maps",
         "baseType": "Graveyard Map",
-        "rarity": "Normal",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-    },
-	{
-        "name": "Pier Map",
-        "itemLevel": 60,
-        "dropLevel": 72,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Pier Map",
         "rarity": "Magic",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
-        "name": "Underground Sea Map",
-        "itemLevel": 60,
+    {
+        "name": "Pier Map",
+        "itemLevel": 74,
         "dropLevel": 72,
         "quality": 0,
         "itemClass": "Maps",
-        "baseType": "Underground Sea Map",
-        "rarity": "Rare",
+        "baseType": "Pier Map",
+        "rarity": "Normal",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
-        "name": "Villa Map",
-        "itemLevel": 60,
+    {
+        "name": "Underground Sea Map",
+        "itemLevel": 76,
         "dropLevel": 72,
         "quality": 0,
+        "itemClass": "Maps",
+        "baseType": "Underground Sea Map",
+        "rarity": "Normal",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
+        "name": "Villa Map",
+        "itemLevel": 77,
+        "dropLevel": 72,
+        "quality": 9,
         "itemClass": "Maps",
         "baseType": "Villa Map",
         "rarity": "Normal",
@@ -408,9 +431,9 @@
         "height": 1,
         "sockets": ""
     },
-	{
+    {
         "name": "Arachnid Nest Map",
-        "itemLevel": 60,
+        "itemLevel": 73,
         "dropLevel": 73,
         "quality": 0,
         "itemClass": "Maps",
@@ -420,21 +443,33 @@
         "height": 1,
         "sockets": ""
     },
-	{
+    {
         "name": "Catacomb Map",
-        "itemLevel": 60,
+        "itemLevel": 74,
         "dropLevel": 73,
         "quality": 0,
         "itemClass": "Maps",
         "baseType": "Catacomb Map",
-        "rarity": "Rare",
+        "rarity": "Unique",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
+    {
+        "name": "Catacomb Map",
+        "itemLevel": 79,
+        "dropLevel": 73,
+        "quality": 0,
+        "itemClass": "Maps",
+        "baseType": "Catacomb Map",
+        "rarity": "Magic",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
         "name": "Colonnade Map",
-        "itemLevel": 60,
+        "itemLevel": 74,
         "dropLevel": 73,
         "quality": 0,
         "itemClass": "Maps",
@@ -444,33 +479,45 @@
         "height": 1,
         "sockets": ""
     },
-	{
+    {
         "name": "Dry Woods Map",
-        "itemLevel": 60,
+        "itemLevel": 75,
         "dropLevel": 73,
         "quality": 0,
         "itemClass": "Maps",
         "baseType": "Dry Woods Map",
-        "rarity": "Magic",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-    },
-	{
-        "name": "Strand Map",
-        "itemLevel": 60,
-        "dropLevel": 73,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Strand Map",
         "rarity": "Rare",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
+    {
+        "name": "Strand Map",
+        "itemLevel": 76,
+        "dropLevel": 73,
+        "quality": 16,
+        "itemClass": "Maps",
+        "baseType": "Strand Map",
+        "rarity": "Normal",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
+        "name": "Strand Map",
+        "itemLevel": 76,
+        "dropLevel": 73,
+        "quality": 0,
+        "itemClass": "Maps",
+        "baseType": "Strand Map",
+        "rarity": "Unique",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
         "name": "Temple Map",
-        "itemLevel": 60,
+        "itemLevel": 77,
         "dropLevel": 73,
         "quality": 0,
         "itemClass": "Maps",
@@ -480,69 +527,93 @@
         "height": 1,
         "sockets": ""
     },
-	{
+    {
+        "name": "Temple Map",
+        "itemLevel": 78,
+        "dropLevel": 73,
+        "quality": 0,
+        "itemClass": "Maps",
+        "baseType": "Temple Map",
+        "rarity": "Unique",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
         "name": "Jungle Valley Map",
-        "itemLevel": 60,
+        "itemLevel": 74,
         "dropLevel": 74,
         "quality": 0,
         "itemClass": "Maps",
         "baseType": "Jungle Valley Map",
-        "rarity": "Magic",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-    },
-	{
-        "name": "Terrace Map",
-        "itemLevel": 60,
-        "dropLevel": 74,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Terrace Map",
-        "rarity": "Rare",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-    },
-	{
-        "name": "Abandoned Cavern Map",
-        "itemLevel": 60,
-        "dropLevel": 74,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Abandoned Cavern Map",
         "rarity": "Normal",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
-        "name": "Torture Chamber Map",
-        "itemLevel": 60,
+    {
+        "name": "Terrace Map",
+        "itemLevel": 75,
         "dropLevel": 74,
         "quality": 0,
         "itemClass": "Maps",
-        "baseType": "Torture Chamber Map",
+        "baseType": "Terrace Map",
+        "rarity": "Normal",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
+        "name": "Abandoned Cavern Map",
+        "itemLevel": 76,
+        "dropLevel": 74,
+        "quality": 0,
+        "itemClass": "Maps",
+        "baseType": "Abandoned Cavern Map",
         "rarity": "Magic",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
-        "name": "Waste Pool Map",
-        "itemLevel": 60,
+    {
+        "name": "Torture Chamber Map",
+        "itemLevel": 74,
         "dropLevel": 74,
         "quality": 0,
         "itemClass": "Maps",
-        "baseType": "Waste Pool Map",
+        "baseType": "Torture Chamber Map",
+        "rarity": "Unique",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
+        "name": "Torture Chamber Map",
+        "itemLevel": 76,
+        "dropLevel": 74,
+        "quality": 0,
+        "itemClass": "Maps",
+        "baseType": "Torture Chamber Map",
         "rarity": "Rare",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
+    {
+        "name": "Waste Pool Map",
+        "itemLevel": 78,
+        "dropLevel": 74,
+        "quality": 0,
+        "itemClass": "Maps",
+        "baseType": "Waste Pool Map",
+        "rarity": "Normal",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
         "name": "Canyon Map",
-        "itemLevel": 60,
+        "itemLevel": 75,
         "dropLevel": 75,
         "quality": 0,
         "itemClass": "Maps",
@@ -552,9 +623,9 @@
         "height": 1,
         "sockets": ""
     },
-	{
+    {
         "name": "Cells Map",
-        "itemLevel": 60,
+        "itemLevel": 76,
         "dropLevel": 75,
         "quality": 0,
         "itemClass": "Maps",
@@ -564,57 +635,57 @@
         "height": 1,
         "sockets": ""
     },
-	{
+    {
         "name": "Dark Forest Map",
-        "itemLevel": 60,
+        "itemLevel": 77,
         "dropLevel": 75,
         "quality": 0,
         "itemClass": "Maps",
         "baseType": "Dark Forest Map",
-        "rarity": "Rare",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-    },
-	{
-        "name": "Dry Peninsula Map",
-        "itemLevel": 60,
-        "dropLevel": 75,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Dry Peninsula Map",
         "rarity": "Normal",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
-        "name": "Orchard Map",
-        "itemLevel": 60,
+    {
+        "name": "Dry Peninsula Map",
+        "itemLevel": 78,
         "dropLevel": 75,
         "quality": 0,
         "itemClass": "Maps",
-        "baseType": "Orchard Map",
-        "rarity": "Magic",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-    },
-	{
-        "name": "Arid Lake Map",
-        "itemLevel": 60,
-        "dropLevel": 76,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Arid Lake Map",
+        "baseType": "Dry Peninsula Map",
         "rarity": "Rare",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
+    {
+        "name": "Orchard Map",
+        "itemLevel": 78,
+        "dropLevel": 75,
+        "quality": 0,
+        "itemClass": "Maps",
+        "baseType": "Orchard Map",
+        "rarity": "Normal",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
+        "name": "Arid Lake Map",
+        "itemLevel": 76,
+        "dropLevel": 76,
+        "quality": 0,
+        "itemClass": "Maps",
+        "baseType": "Arid Lake Map",
+        "rarity": "Magic",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
         "name": "Gorge Map",
-        "itemLevel": 60,
+        "itemLevel": 77,
         "dropLevel": 76,
         "quality": 0,
         "itemClass": "Maps",
@@ -624,33 +695,33 @@
         "height": 1,
         "sockets": ""
     },
-	{
+    {
         "name": "Malformation Map",
-        "itemLevel": 60,
+        "itemLevel": 78,
         "dropLevel": 76,
         "quality": 0,
         "itemClass": "Maps",
         "baseType": "Malformation Map",
-        "rarity": "Magic",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-    },
-	{
-        "name": "Residence Map",
-        "itemLevel": 60,
-        "dropLevel": 76,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Residence Map",
         "rarity": "Rare",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
+    {
+        "name": "Residence Map",
+        "itemLevel": 79,
+        "dropLevel": 76,
+        "quality": 0,
+        "itemClass": "Maps",
+        "baseType": "Residence Map",
+        "rarity": "Normal",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
         "name": "Underground River Map",
-        "itemLevel": 60,
+        "itemLevel": 81,
         "dropLevel": 76,
         "quality": 0,
         "itemClass": "Maps",
@@ -660,69 +731,93 @@
         "height": 1,
         "sockets": ""
     },
-	{
+    {
         "name": "Bazaar Map",
-        "itemLevel": 60,
+        "itemLevel": 77,
         "dropLevel": 77,
-        "quality": 0,
+        "quality": 20,
         "itemClass": "Maps",
         "baseType": "Bazaar Map",
-        "rarity": "Magic",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-    },
-	{
-        "name": "Chateau Map",
-        "itemLevel": 60,
-        "dropLevel": 77,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Chateau Map",
-        "rarity": "Rare",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-    },
-	{
-        "name": "Necropolis Map",
-        "itemLevel": 60,
-        "dropLevel": 77,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Necropolis Map",
         "rarity": "Normal",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
-        "name": "Plateau Map",
-        "itemLevel": 60,
+    {
+        "name": "Chateau Map",
+        "itemLevel": 78,
         "dropLevel": 77,
         "quality": 0,
         "itemClass": "Maps",
-        "baseType": "Plateau Map",
+        "baseType": "Chateau Map",
         "rarity": "Magic",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
-        "name": "Volcano Map",
-        "itemLevel": 60,
+    {
+        "name": "Necropolis Map",
+        "itemLevel": 79,
         "dropLevel": 77,
         "quality": 0,
         "itemClass": "Maps",
-        "baseType": "Volcano Map",
-        "rarity": "Rare",
+        "baseType": "Necropolis Map",
+        "rarity": "Magic",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
+    {
+        "name": "Necropolis Map",
+        "itemLevel": 80,
+        "dropLevel": 77,
+        "quality": 0,
+        "itemClass": "Maps",
+        "baseType": "Necropolis Map",
+        "rarity": "Unique",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
+        "name": "Plateau Map",
+        "itemLevel": 79,
+        "dropLevel": 77,
+        "quality": 0,
+        "itemClass": "Maps",
+        "baseType": "Plateau Map",
+        "rarity": "Normal",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
+        "name": "Volcano Map",
+        "itemLevel": 80,
+        "dropLevel": 77,
+        "quality": 8,
+        "itemClass": "Maps",
+        "baseType": "Volcano Map",
+        "rarity": "Normal",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
+        "name": "Chateau Map",
+        "itemLevel": 77,
+        "dropLevel": 77,
+        "quality": 0,
+        "itemClass": "Maps",
+        "baseType": "Chateau Map",
+        "rarity": "Unique",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
         "name": "Academy Map",
-        "itemLevel": 60,
+        "itemLevel": 78,
         "dropLevel": 78,
         "quality": 0,
         "itemClass": "Maps",
@@ -732,35 +827,35 @@
         "height": 1,
         "sockets": ""
     },
-	{
+    {
         "name": "Crematorium Map",
-        "itemLevel": 60,
+        "itemLevel": 79,
         "dropLevel": 78,
         "quality": 0,
         "itemClass": "Maps",
         "baseType": "Crematorium Map",
-        "rarity": "Magic",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-    },
-	{
-        "name": "Precinct Map",
-        "itemLevel": 60,
-        "dropLevel": 78,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Precinct Map",
         "rarity": "Rare",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
-        "name": "Springs Map",
-        "itemLevel": 60,
+    {
+        "name": "Precinct Map",
+        "itemLevel": 80,
         "dropLevel": 78,
         "quality": 0,
+        "itemClass": "Maps",
+        "baseType": "Precinct Map",
+        "rarity": "Magic",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
+        "name": "Springs Map",
+        "itemLevel": 81,
+        "dropLevel": 78,
+        "quality": 11,
         "itemClass": "Maps",
         "baseType": "Springs Map",
         "rarity": "Normal",
@@ -768,105 +863,93 @@
         "height": 1,
         "sockets": ""
     },
-	{
+    {
         "name": "Arsenal Map",
-        "itemLevel": 60,
+        "itemLevel": 79,
         "dropLevel": 79,
         "quality": 0,
         "itemClass": "Maps",
         "baseType": "Arsenal Map",
-        "rarity": "Magic",
+        "rarity": "Normal",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
+    {
         "name": "Overgrown Ruin Map",
-        "itemLevel": 60,
+        "itemLevel": 80,
         "dropLevel": 79,
         "quality": 0,
         "itemClass": "Maps",
         "baseType": "Overgrown Ruin Map",
-        "rarity": "Rare",
+        "rarity": "Magic",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
+    {
         "name": "Shipyard Map",
-        "itemLevel": 60,
+        "itemLevel": 81,
         "dropLevel": 79,
         "quality": 0,
         "itemClass": "Maps",
         "baseType": "Shipyard Map",
-        "rarity": "Normal",
+        "rarity": "Rare",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
+    {
         "name": "Village Ruin Map",
-        "itemLevel": 60,
+        "itemLevel": 82,
         "dropLevel": 79,
         "quality": 0,
         "itemClass": "Maps",
         "baseType": "Village Ruin Map",
-        "rarity": "Magic",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-    },
-	{
-        "name": "Courtyard Map",
-        "itemLevel": 60,
-        "dropLevel": 80,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Courtyard Map",
-        "rarity": "Rare",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-    },
-	{
-        "name": "Excavation Map",
-        "itemLevel": 60,
-        "dropLevel": 80,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Excavation Map",
         "rarity": "Normal",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
-        "name": "Wasteland Map",
-        "itemLevel": 60,
+    {
+        "name": "Courtyard Map",
+        "itemLevel": 80,
         "dropLevel": 80,
         "quality": 0,
         "itemClass": "Maps",
-        "baseType": "Wasteland Map",
+        "baseType": "Courtyard Map",
+        "rarity": "Normal",
+        "width": 1,
+        "height": 1,
+        "sockets": ""
+    },
+    {
+        "name": "Excavation Map",
+        "itemLevel": 81,
+        "dropLevel": 80,
+        "quality": 0,
+        "itemClass": "Maps",
+        "baseType": "Excavation Map",
         "rarity": "Magic",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
-        "name": "Waterways Map",
-        "itemLevel": 60,
+    {
+        "name": "Wasteland Map",
+        "itemLevel": 82,
         "dropLevel": 80,
         "quality": 0,
         "itemClass": "Maps",
-        "baseType": "Waterways Map",
+        "baseType": "Wasteland Map",
         "rarity": "Rare",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
+    {
         "name": "Conservatory Map",
-        "itemLevel": 60,
+        "itemLevel": 81,
         "dropLevel": 81,
         "quality": 0,
         "itemClass": "Maps",
@@ -876,11 +959,11 @@
         "height": 1,
         "sockets": ""
     },
-	{
+    {
         "name": "Palace Map",
-        "itemLevel": 60,
+        "itemLevel": 82,
         "dropLevel": 81,
-        "quality": 0,
+        "quality": 17,
         "itemClass": "Maps",
         "baseType": "Palace Map",
         "rarity": "Magic",
@@ -888,9 +971,9 @@
         "height": 1,
         "sockets": ""
     },
-	{
+    {
         "name": "Shrine Map",
-        "itemLevel": 60,
+        "itemLevel": 81,
         "dropLevel": 81,
         "quality": 0,
         "itemClass": "Maps",
@@ -900,10 +983,10 @@
         "height": 1,
         "sockets": ""
     },
-	{
+    {
         "name": "Vaal Temple Map",
-        "itemLevel": 60,
-        "dropLevel": 81,
+        "itemLevel": 81,
+        "dropLevel": 80,
         "quality": 0,
         "itemClass": "Maps",
         "baseType": "Vaal Temple Map",
@@ -912,206 +995,74 @@
         "height": 1,
         "sockets": ""
     },
-	{
-        "name": "Plaza Map",
-        "itemLevel": 60,
-        "dropLevel": 81,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Plaza Map",
-        "rarity": "Magic",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-    },
-	{
+    {
         "name": "Abyss Map",
-        "itemLevel": 60,
+        "itemLevel": 82,
         "dropLevel": 82,
         "quality": 0,
         "itemClass": "Maps",
         "baseType": "Abyss Map",
-        "rarity": "Rare",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-    },
-	{
-        "name": "Colosseum Map",
-        "itemLevel": 60,
-        "dropLevel": 82,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Colosseum Map",
         "rarity": "Normal",
         "width": 1,
         "height": 1,
         "sockets": ""
     },
-	{
-        "name": "Core Map",
-        "itemLevel": 80,
-        "dropLevel": 82,
+    {
+        "name": "Colosseum Map",
+        "itemLevel": 82,
+        "dropLevel": 83,
         "quality": 0,
         "itemClass": "Maps",
-        "baseType": "Core Map",
+        "baseType": "Colosseum Map",
         "rarity": "Magic",
         "width": 1,
         "height": 1,
         "sockets": ""
-	},
-	{
-        "name": "Crypt Map",
-        "itemLevel": 80,
-        "dropLevel": 60,
-        "quality": 0,
+    },
+    {
+        "name": "Core Map",
+        "itemLevel": 84,
+        "dropLevel": 82,
+        "quality": 12,
         "itemClass": "Maps",
-        "baseType": "Crypt Map",
-        "rarity": "Unique",
+        "baseType": "Core Map",
+        "rarity": "Rare",
         "width": 1,
         "height": 1,
         "sockets": ""
-	},
-	{
+    },
+    {
         "name": "Mountain Ledge Map",
-        "itemLevel": 80,
+        "itemLevel": 71,
         "dropLevel": 69,
         "quality": 0,
         "itemClass": "Maps",
         "baseType": "Mountain Ledge Map",
-        "rarity": "Unique",
+        "rarity": "Normal",
         "width": 1,
         "height": 1,
         "sockets": ""
-	},
-	{
-        "name": "Reef Map",
-        "itemLevel": 80,
-        "dropLevel": 70,
+    },
+    {
+        "name": "Crypt Map",
+        "itemLevel": 66,
+        "dropLevel": 60,
         "quality": 0,
         "itemClass": "Maps",
-        "baseType": "Reef Map",
-        "rarity": "Unique",
+        "baseType": "Crypt Map",
+        "rarity": "Normal",
         "width": 1,
         "height": 1,
         "sockets": ""
-	},
-	{
+    },
+    {
         "name": "Vaal Pyramid Map",
-        "itemLevel": 70,
+        "itemLevel": 73,
         "dropLevel": 70,
         "quality": 0,
         "itemClass": "Maps",
         "baseType": "Vaal Pyramid Map",
-        "rarity": "Unique",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-	},
-	{
-        "name": "Overgrown Shrine Map",
-        "itemLevel": 71,
-        "dropLevel": 71,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Overgrown Shrine Map",
-        "rarity": "Unique",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-	},
-	{
-        "name": "Promenade Map",
-        "itemLevel": 71,
-        "dropLevel": 71,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Promenade Map",
-        "rarity": "Unique",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-	},
-	{
-        "name": "Underground Sea Map",
-        "itemLevel": 72,
-        "dropLevel": 72,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Underground Sea Map",
-        "rarity": "Unique",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-	},
-	{
-        "name": "Catacomb Map",
-        "itemLevel": 80,
-        "dropLevel": 73,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Catacomb Map",
-        "rarity": "Unique",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-	},
-	{
-        "name": "Strand Map",
-        "itemLevel": 80,
-        "dropLevel": 73,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Strand Map",
-        "rarity": "Unique",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-	},
-	{
-        "name": "Temple Map",
-        "itemLevel": 80,
-        "dropLevel": 73,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Temple Map",
-        "rarity": "Unique",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-	},
-	{
-        "name": "Torture Chamber Map",
-        "itemLevel": 80,
-        "dropLevel": 74,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Torture Chamber Map",
-        "rarity": "Unique",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-	},
-	{
-        "name": "Necropolis Map",
-        "itemLevel": 80,
-        "dropLevel": 77,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Necropolis Map",
-        "rarity": "Unique",
-        "width": 1,
-        "height": 1,
-        "sockets": ""
-	},
-	{
-        "name": "Chateau Map",
-        "itemLevel": 80,
-        "dropLevel": 77,
-        "quality": 0,
-        "itemClass": "Maps",
-        "baseType": "Chateau Map",
-        "rarity": "Unique",
+        "rarity": "Magic",
         "width": 1,
         "height": 1,
         "sockets": ""
