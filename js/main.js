@@ -452,7 +452,7 @@ var PoEdit = new function()
 	this.getAutoIndentEnabled = function() {
 		if (!('autoIndentEnabled' in PoEdit)) {
 			PoEdit.autoIndentEnabled = StorageUtils.load('autoIndent', 'true') == 'true';
-			ga('set', 'dimension2', value);
+			ga('set', 'dimension2', PoEdit.autoIndentEnabled);
 		}
 		return PoEdit.autoIndentEnabled;
 	}
@@ -466,7 +466,7 @@ var PoEdit = new function()
 	this.getLineNumbersEnabled = function() {
 		if (!('lineNumbersEnabled' in PoEdit)) {
 			PoEdit.lineNumbersEnabled = StorageUtils.load('lineNumbers', 'true') == 'true';
-			ga('set', 'dimension3', value);
+			ga('set', 'dimension3', PoEdit.lineNumbersEnabled);
 		}
 		return PoEdit.lineNumbersEnabled;
 	}
