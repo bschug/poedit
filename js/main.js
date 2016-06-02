@@ -20,6 +20,12 @@ var PoEdit = new function()
 			},
 			"Ctrl-Space": function(editor) {
 				showHint(true);
+			},
+			"Ctrl-Up": function(editor) {
+				moveLines("up");
+			},
+			"Ctrl-Down": function(editor) {
+				moveLines("down");
 			}
 		});
 		editor.setOption('continueComments', true);
@@ -60,6 +66,48 @@ var PoEdit = new function()
 			if (line.trim().length > 0) {
 				PoEdit.editor.indentLine( lineNr, 'smart' );
 			}
+		}
+	}
+
+	// taken from https://groups.google.com/forum/#!topic/codemirror/NvQGVEq30lU
+	function moveLines(dir) {
+		var cM, lineStart, lineEnd, swapLineNo, swapLine;
+
+		cM = PoEdit.editor;
+
+		// Get start & end lines plus the line we'll swap with
+		lineStart = cM.getCursor('start');
+		lineEnd = cM.getCursor('end');
+		if (dir == "up" && lineStart.line > 0) {swapLineNo = lineStart.line-1}
+		if (dir == "down" && lineEnd.line < cM.lineCount() - 1) {swapLineNo = lineEnd.line+1}
+
+		// If we have a line to swap with
+		if (!isNaN(swapLineNo)) {
+	    	// Get the content of the swap line and carry out the swap in a single operation
+	    	swapLine = cM.getLine(swapLineNo);
+	    	cM.operation(function() {
+			    // Move lines in turn up
+			    if (dir=="up") {
+					for (var i=lineStart.line; i<=lineEnd.line; i++) {
+						cM.replaceRange( cM.getLine(i), {line:i-1,ch:0}, {line:i-1,ch:1000000} );
+					}
+			    // ...or down
+			    } else {
+					for (var i=lineEnd.line; i>=lineStart.line; i--) {
+						cM.replaceRange( cM.getLine(i), {line:i+1,ch:0}, {line:i+1,ch:1000000} );
+					}
+			    }
+			    // Now swap our final line with the swap line to complete the move
+			    cM.replaceRange(swapLine,
+					{line: dir=="up" ? lineEnd.line : lineStart.line, ch: 0},
+					{line: dir=="up" ? lineEnd.line : lineStart.line, ch:1000000}
+				);
+			    // Finally set the moved selection
+			    cM.setSelection(
+			    	{line: lineStart.line+(dir=="up" ? -1 : 1), ch: lineStart.ch},
+			    	{line: lineEnd.line+(dir=="up" ? -1 : 1), ch: lineEnd.ch}
+			    );
+	   		});
 		}
 	}
 
