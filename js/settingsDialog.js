@@ -83,9 +83,13 @@ function SettingsDialog() {
             PoEdit.setItems( loadItemsLocal() );
         }
 
-        $.get( 'itemSets/' + id + '.json', function(json) {
-            PoEdit.setItems( ItemsEditor.jsonToItems(json), false );
-        } );
+        $.ajax( {
+            url: 'itemSets/' + id + '.json',
+            dataType: 'text',
+            success: function(json) {
+                PoEdit.setItems( ItemsEditor.jsonToItems(json), false);
+            }
+        });
 
         ga('send', 'event', 'itemset');
     }
