@@ -436,12 +436,13 @@ var PoEdit = new function()
 		return AVAILABLE_COLOR_SCHEMES.filter( function(x) { return x.name === name; } )[0];
 	}
 	this.getCurrentColorScheme = function() {
-		var name = StorageUtils.load('colorScheme', AVAILABLE_COLOR_SCHEMES[0].name);
-		var colorScheme = this.getColorSchemeByName( name );
-		if (colorScheme) {
-			return colorScheme;
+		if (!('currentColorScheme' in PoEdit)) {
+			var name = StorageUtils.load('colorScheme', AVAILABLE_COLOR_SCHEMES[0].name);
+			var colorScheme = this.getColorSchemeByName( name );
+			PoEdit.currentColorScheme = colorScheme ? colorScheme : AVAILABLE_COLOR_SCHEMES[0];
+			ga('set', 'dimension1', colorScheme.name);
 		}
-		return AVAILABLE_COLOR_SCHEMES[0];
+		return PoEdit.currentColorScheme;
 	}
 	this.setCurrentColorScheme = function(colorScheme) {
 		PoEdit.editor.setOption('theme', colorScheme.theme);
