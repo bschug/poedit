@@ -1,10 +1,11 @@
 function Parser() {
 
 	var VISIBILITY_TOKENS = [ 'Show', 'Hide' ];
-	var FILTER_TOKENS = [ 'ItemLevel', 'DropLevel', 'Quality', 'Rarity', 'Class', 'BaseType', 'Sockets', 'LinkedSockets', 'SocketGroup', 'Width', 'Height' ];
+	var FILTER_TOKENS = [ 'ItemLevel', 'DropLevel', 'Quality', 'Rarity', 'Class', 'BaseType', 'Sockets', 'LinkedSockets', 'SocketGroup', 'Width', 'Height', 'Identified', 'Corrupted' ];
 	var MODIFIER_TOKENS = [ 'SetBackgroundColor', 'SetBorderColor', 'SetTextColor', 'PlayAlertSound', 'SetFontSize' ];
 	var OPERATOR_TOKENS = [ '=', '<', '>', '<=', '>=' ];
 	var RARITY_TOKENS = [ 'Normal', 'Magic', 'Rare', 'Unique' ];
+	var BOOL_TOKENS = [ 'True', 'False' ];
 
 	this.currentLineNr = 0;
 	this.currentRule = null;
@@ -137,7 +138,9 @@ function Parser() {
 			'LinkedSockets': LinkedSocketsFilter,
 			'SocketGroup': SocketGroupFilter,
 			'Width': WidthFilter,
-			'Height': HeightFilter
+			'Height': HeightFilter,
+			'Identified': IdentifiedFilter,
+			'Corrupted': CorruptedFilter,
 		};
 
 		switch (token) {
@@ -162,6 +165,11 @@ function Parser() {
 
 			case 'SocketGroup':
 				parseSocketGroupFilter( self, filters[token], arguments );
+				return;
+
+			case 'Identified':
+			case 'Corrupted':
+				parseBoolFilter( self, filters[token], arguments );
 				return;
 
 			default:
@@ -232,6 +240,24 @@ function Parser() {
 		if (!isInvalid) {
 			self.currentRule.filters.push( new filter( args ) );
 		}
+	}
+
+	function parseBoolFilter (self, filter, arguments) {
+		var args = parseStringArguments( self, arguments );
+		if (args === null) return;
+		if (args.length === 0) {
+			reportUnexpectedEndOfLine( self, 'expected True or False' );
+			return;
+		}
+
+		args = args.map( function(a) { return a.toUpperCase(); } );
+
+		if (args[0] !== 'TRUE' && args[0] !== 'FALSE') {
+			reportTokenError( self, arguments, 'True or False' );
+			return;
+		}
+
+		self.currentRule.filters.push( new filter( args[0] === 'TRUE' ) );
 	}
 
 	// ----------- MODIFIERS ---------------------------------------------------

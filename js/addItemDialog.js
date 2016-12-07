@@ -8,6 +8,8 @@ function AddItemDialog() {
     this.baseTypeInput = null;
     this.socketsInput = null;
     this.inventorySizeInput = null;
+    this.identifiedInput = null;
+    this.corruptedInput = null;
 
     this.init = function() {
         this.dialog = document.getElementById( 'additem-dialog' );
@@ -47,6 +49,14 @@ function AddItemDialog() {
                     this.qualityInput = getTextField( p );
                     this.qualityInput.addEventListener('keydown', onKeyDown);
                     break;
+                case 'identified':
+                    this.identifiedInput = $(p).find('span > input')[0];
+                    this.identifiedInput.addEventListener('keydown', onKeyDown);
+                    break;
+                case 'corrupted':
+                    this.corruptedInput = $(p).find('span > input')[0];
+                    this.corruptedInput.addEventListener('keydown', onKeyDown);
+                    break;
             }
         }
     }
@@ -75,6 +85,8 @@ function AddItemDialog() {
         this.baseTypeInput.value = "";
         this.socketsInput.value = "";
         this.inventorySizeInput.value = "";
+        this.identifiedInput.checked = false;
+        this.corruptedInput.checked = false;
     }
 
     this.focus = function() {
@@ -93,7 +105,9 @@ function AddItemDialog() {
             baseType: this.baseTypeInput.value,
             width: inventorySize.width,
             height: inventorySize.height,
-            sockets: parseSockets( this.socketsInput.value )
+            sockets: parseSockets( this.socketsInput.value ),
+            identified: this.identifiedInput.checked,
+            corrupted: this.corruptedInput.checked,
         };
 
         ItemData.validate( result );
@@ -127,18 +141,21 @@ function AddItemDialog() {
     }
 
     function getTextField (elem) {
-        for (var i=0; i < elem.children.length; i++) {
-            var child = elem.children[i];
-            if (child.nodeName === 'INPUT') {
-                return child;
-            }
-        }
+        return getChildOfType( elem, 'INPUT' );
+    }
+
+    function getInput (elem) {
+        return getChildOfType( elem, 'INPUT' );
     }
 
     function getSelect (elem) {
+        return getChildOfType( elem, 'SELECT' );
+    }
+
+    function getChildOfType (elem, type) {
         for (var i=0; i < elem.children.length; i++) {
             var child = elem.children[i];
-            if (child.nodeName === 'SELECT') {
+            if (child.nodeName === type) {
                 return child;
             }
         }

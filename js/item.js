@@ -38,6 +38,8 @@ function ItemData() {
 
 	this.width = 1;
 	this.height = 1;
+	this.identified = false;
+	this.corrupted = false;
 
 	// Sockets are stored as an array of linked socket groups.
 	// An item with a single red socket and linked red and blue sockets (R R=B)
@@ -60,6 +62,12 @@ ItemData.validate = function (item) {
         }
     }
 
+	function assertInArray (value, array, msg) {
+		if (!ArrayUtils.contains(array, value)) {
+			throw msg;
+		}
+	}
+
 	assertNotNullOrEmpty( item.name, 'Item has no name' );
     assertInRange( item.itemLevel, 1, 100, 'Invalid ItemLevel' );
     assertInRange( item.dropLevel, 1, 100, 'Invalid DropLevel' );
@@ -69,6 +77,8 @@ ItemData.validate = function (item) {
     assertNotNullOrEmpty( item.baseType, 'Item has no BaseType' );
     assertInRange( item.width, 1, 3, 'Invalid width' );
     assertInRange( item.height, 1, 5, 'Invalid height' );
+	assertInArray( item.identified, [true, false], 'Invalid Identified property' );
+	assertInArray( item.corrupted, [true, false], 'Invalid Corrupted property' );
 	var maxSockets = Math.min( 6, item.width * item.height );
 	assertInRange( ItemData.countSockets( item.sockets ), 0, maxSockets, 'Too many sockets for this item size' );
 }
@@ -83,6 +93,8 @@ ItemData.areEqual = function (data, item) {
 		&& data.baseType === item.baseType
 		&& data.width === item.width
 		&& data.height === item.height
+		&& data.identified === item.identified
+		&& data.corrupted === item.corrupted
 		&& ArrayUtils.areEqual( data.sockets, item.sockets );
 }
 
@@ -106,6 +118,8 @@ function Item (itemdata)
 
 	this.itemClass = itemdata.itemClass;
 	this.baseType = itemdata.baseType;
+	this.identified = itemdata.identified;
+	this.corrupted = itemdata.corrupted;
 
 	this.width = itemdata.width;
 	this.height = itemdata.height;

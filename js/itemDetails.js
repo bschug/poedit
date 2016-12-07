@@ -9,6 +9,8 @@ function ItemDetails() {
     this.itemClassLabel = null;
     this.baseTypeLabel = null;
     this.socketsLabel = null;
+    this.identifiedLabel = null;
+    this.corruptedLabel = null;
 
     this.init = function() {
         this.div = document.getElementById( 'item-details' );
@@ -36,6 +38,12 @@ function ItemDetails() {
                 case 'sockets':
                     this.socketsLabel = getValueLabel( child );
                     break;
+                case 'identified':
+                    this.identifiedLabel = child;
+                    break;
+                case 'corrupted':
+                    this.corruptedLabel = child;
+                    break;
             }
         }
     }
@@ -58,6 +66,8 @@ function ItemDetails() {
         this.itemClassLabel.innerHTML = this.item.itemClass;
         this.baseTypeLabel.innerHTML = this.item.baseType;
         this.socketsLabel.innerHTML = this.item.sockets.join(' ');
+        $(this.identifiedLabel).toggle( this.item.identified );
+        $(this.corruptedLabel).toggle( this.item.corrupted );
     }
 
     function getValueLabel (elem) {

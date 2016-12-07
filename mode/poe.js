@@ -102,6 +102,10 @@ function token(stream, state) {
             state.expected = ['SOCKETS'];
             return 'keyword';
         }
+        if (matchKeyword(stream, ['Identified', 'Corrupted'])) {
+            state.expected = ['BOOLEAN'];
+            return 'keyword';
+        }
         if (matchKeyword(stream, ['SetBackgroundColor','SetBorderColor','SetTextColor'])) {
             state.expected = ['NUMBER','NUMBER','NUMBER','NUMBER'];
             return 'keyword';
@@ -152,6 +156,12 @@ function token(stream, state) {
     if (expected === 'NUMBER') {
         if (stream.match(/^[0-9]+/)) {
             return 'number';
+        }
+    }
+
+    if (expected === 'BOOLEAN') {
+        if (matchKeyword(stream, [ 'True', 'False' ])) {
+            return 'atom';
         }
     }
 

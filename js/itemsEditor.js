@@ -111,13 +111,27 @@ function ItemsEditor() {
             rarity: 'string',
             width: 'number',
             height: 'number',
-            sockets: 'string'
+            sockets: 'string',
+            identified: 'boolean',
+            corrupted: 'boolean',
         };
 
+        // Defaults for newly added item properties. This preserves backwards
+        // compatibility with old data.
+        var defaultValues = {
+            identified: false,
+            corrupted: false,
+        }
+
         for (var key in propertyTypes) {
-            if (!key in data) {
-                alert( 'Item number ' + itemNr + '(' + data['name'] + ') has no ' + key);
-                return false;
+            if (!(key in data)) {
+                if (key in defaultValues) {
+                    data[key] = defaultValues[key];
+                }
+                else {
+                    alert( 'Item number ' + itemNr + '(' + data['name'] + ') has no ' + key);
+                    return false;
+                }
             }
 
             if (typeof data[key] !== propertyTypes[key]) {
@@ -161,6 +175,8 @@ function ItemsEditor() {
             width: item.width,
             height: item.height,
             sockets: item.sockets.join(' '),
+            identified: item.identified,
+            corrupted: item.corrupted,
         };
     }
 
@@ -176,6 +192,8 @@ function ItemsEditor() {
             width: data.width,
             height: data.height,
             sockets: data.sockets.split(' '),
+            identified: data.identified,
+            corrupted: data.corrupted,
         };
     }
 }

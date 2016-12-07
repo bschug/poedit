@@ -325,8 +325,15 @@
 	color: white;
 }
 
-#additem-dialog > p > input {
+#additem-dialog > p > input[type=text] {
 	width: 170px;
+}
+#additem-dialog > p > .checkbox-align {
+	width: 170px;
+	margin: 0px;
+	padding: 0px;
+	text-align: left;
+	display: inline-block;
 }
 #additem-dialog > p > select {
 	width: 170px;

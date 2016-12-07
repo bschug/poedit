@@ -112,6 +112,18 @@ function HeightFilter (comparer, height) {
 	}
 }
 
+function IdentifiedFilter (value) {
+	this.match = function(item) {
+		return item.identified === value;
+	}
+}
+
+function CorruptedFilter (value) {
+	this.match = function(item) {
+		return item.corrupted === value;
+	}
+}
+
 // ------------------------ Modifiers --------------------------------------
 
 function SetBackgroundColorModifier (color) {

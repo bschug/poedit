@@ -1009,7 +1009,17 @@ function getDefaultItems() {
         }
     ]
 
-    return weapons.concat( armor, jewelry, gems, currency, maps, jewels, flasks, divinationCards, fishingRods, questItems );
+    var all = [].concat(weapons, armor, jewelry, gems, currency, maps, jewels, flasks, divinationCards, fishingRods, questItems );
+    fillOptionalPropertiesWithDefaults(all);
+    return all;
+}
+
+function fillOptionalPropertiesWithDefaults(items) {
+    for (var i=0; i < items.length; i++) {
+        items[i].identified = items[i].identified || false;
+        items[i].corrupted = items[i].corrupted || false;
+    }
+    return items;
 }
 
 function loadItemsLocal() {
