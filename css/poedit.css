@@ -224,6 +224,8 @@
 	margin: 0px;
 	margin-top: -2px;
 	padding: 0px;
+	text-align: center;
+	vertical-align: middle;
 
 	color: white;
 	font-family: Fontin;
@@ -238,6 +240,8 @@
 	width: 10px;
 	height: 16px;
 	margin-left: 2px;
+	margin-top: -5px;
+	vertical-align: middle;
 }
 
 .item > .sockets > .socket {

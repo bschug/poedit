@@ -131,11 +131,14 @@ function Item (itemdata)
 	this.matchingRule = null;
 
 	this.getDisplayName = function() {
-		if (this.quality > 0) {
-			return 'Superior ' + this.name;
+		if (!this.identified && this.quality > 0) {
+			return 'Superior ' + this.baseType;
+		}
+		if (!this.identified) {
+			return this.baseType;
 		}
 		else {
-			return this.name;
+			return this.name + "<BR>" + this.baseType;
 		}
 	}
 
