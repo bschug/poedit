@@ -168,7 +168,19 @@ function getDefaultItems() {
             height: 3,
     		sockets: ['B','G']
     	},
-
+        {
+    		name: 'Dragon Slicer',
+    		itemLevel: 71,
+    		dropLevel: 68,
+    		quality: 0,
+    		itemClass: 'One Hand Swords',
+    		baseType: 'Midnight Blade',
+    		rarity: Rarity.Rare,
+            width: 2,
+            height: 3,
+    		sockets: ['RR','G'],
+            identified: true
+    	},
     ];
 
     var armor = [
@@ -280,6 +292,21 @@ function getDefaultItems() {
             height: 3,
     		sockets: ['RRB','G']
     	},
+        {
+    		name: "Rage Fist",
+    		itemLevel: 69,
+    		dropLevel: 53,
+    		quality: 0,
+    		itemClass: 'Gloves',
+    		baseType: 'Vaal Gauntlets',
+    		rarity: Rarity.Rare,
+            width: 2,
+            height: 3,
+    		sockets: ['R'],
+            identified: true,
+            corrupted: true
+    	},
+
     ];
 
     var jewelry = [
@@ -1009,7 +1036,8 @@ function getDefaultItems() {
         }
     ]
 
-    var all = [].concat(weapons, armor, jewelry, gems, currency, maps, jewels, flasks, divinationCards, fishingRods, questItems );
+    var all = [].concat(weapons, armor, jewelry, gems, currency, maps, jewels,
+                        flasks, divinationCards, fishingRods, questItems );
     fillOptionalPropertiesWithDefaults(all);
     return all;
 }
