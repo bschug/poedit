@@ -266,6 +266,20 @@ function Item (itemdata)
 		return result;
 	}
 
+	function computeSocketPaddingSingleColumn (numSockets) {
+		// 1: 4
+		// 2: 10
+		// 3: 16
+
+		var width = 4;
+		var height = (numSockets - 1) * 6 + 4;
+
+		var result = {};
+		result.x = 2 + ( 10 - width ) / 2;
+		result.y = 2 + ( 16 - height ) / 2;
+		return result;
+	}
+
 	function drawSocket (socketColor) {
 		var socket = document.createElement( 'div' );
 		socket.className = 'socket';
@@ -313,6 +327,14 @@ function Item (itemdata)
 		return link;
 	}
 
+	function drawLinkSingleColumn (y, padding) {
+		var link = document.createElement( 'div' );
+		link.className = 'link-vertical';
+		link.style.left = (1 + padding.x).toString() + 'px';
+		link.style.top = (((y-1) * 6) + 3 + padding.y).toString() + 'px';
+		return link;
+	}
+
 	function incrementSocketPos (x, y) {
 		// x0 y0 -> x+1
 		// x1 y0 -> y+1
@@ -334,6 +356,14 @@ function Item (itemdata)
 	}
 
 	function drawSockets (item) {
+		if (item.width === 1) {
+			return drawSocketsSingleColumn( item );
+		} else {
+			return drawSocketsTwoColumns( item );
+		}
+	}
+
+	function drawSocketsTwoColumns (item) {
 		var socketsDiv = document.createElement( 'div' );
 		socketsDiv.className = 'sockets';
 
@@ -361,6 +391,37 @@ function Item (itemdata)
 				x = newXY.x;
 				y = newXY.y;
 
+				linked = true;
+			});
+		});
+
+		return socketsDiv;
+	}
+
+	function drawSocketsSingleColumn (item) {
+		var socketsDiv = document.createElement( 'div' );
+		socketsDiv.className = 'sockets';
+
+		var padding = computeSocketPaddingSingleColumn( item.getNumSockets() );
+
+		var y = 0;
+		var linked = false;
+
+		item.sockets.forEach( function (group) {
+			linked = false;
+			var chars = group.split('');
+			chars.forEach( function(socketColor) {
+				var socket = drawSocket( socketColor );
+				socket.style.left = (padding.x).toString() + 'px';
+				socket.style.top = (padding.y + (y * 6)).toString() + 'px';
+				socketsDiv.appendChild( socket );
+
+				if (linked) {
+					var link = drawLinkSingleColumn( y, padding );
+					socketsDiv.appendChild( link );
+				}
+
+				y += 1
 				linked = true;
 			});
 		});
