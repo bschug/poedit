@@ -8,8 +8,12 @@ function AddItemDialog() {
     this.baseTypeInput = null;
     this.socketsInput = null;
     this.inventorySizeInput = null;
-    this.identifiedInput = null;
     this.corruptedInput = null;
+    this.identifiedInput = null;
+    this.nameInput = null;
+
+    this.identifiedLine = null;
+    this.nameLine = null;
 
     this.init = function() {
         this.dialog = document.getElementById( 'additem-dialog' );
@@ -20,6 +24,7 @@ function AddItemDialog() {
                 case 'base-type':
                     this.baseTypeInput = getTextField( p );
                     this.baseTypeInput.addEventListener('keydown', onKeyDown);
+                    this.baseTypeInput.addEventListener('change', onChange);
                     break;
                 case 'class':
                     this.itemClassInput = getTextField( p );
@@ -36,6 +41,7 @@ function AddItemDialog() {
                 case 'rarity':
                     this.raritySelect = getSelect( p );
                     this.raritySelect.addEventListener('keydown', onKeyDown);
+                    this.raritySelect.addEventListener('change', onChange);
                     break;
                 case 'inventory-size':
                     this.inventorySizeInput = getTextField( p );
@@ -49,16 +55,26 @@ function AddItemDialog() {
                     this.qualityInput = getTextField( p );
                     this.qualityInput.addEventListener('keydown', onKeyDown);
                     break;
-                case 'identified':
-                    this.identifiedInput = $(p).find('span > input')[0];
-                    this.identifiedInput.addEventListener('keydown', onKeyDown);
-                    break;
                 case 'corrupted':
                     this.corruptedInput = $(p).find('span > input')[0];
                     this.corruptedInput.addEventListener('keydown', onKeyDown);
+                    this.corruptedInput.addEventListener('change', onChange);
+                    break;
+                case 'identified':
+                    this.identifiedLine = p;
+                    this.identifiedInput = $(p).find('span > input')[0];
+                    this.identifiedInput.addEventListener('keydown', onKeyDown);
+                    this.identifiedInput.addEventListener('change', onChange);
+                    break;
+                case 'name':
+                    this.nameLine = p;
+                    this.nameInput = getTextField( p );
+                    this.nameInput.addEventListener('keydown', onKeyDown);
                     break;
             }
         }
+
+        this.clear();
     }
 
     this.show = function() {
@@ -87,6 +103,45 @@ function AddItemDialog() {
         this.inventorySizeInput.value = "";
         this.identifiedInput.checked = false;
         this.corruptedInput.checked = false;
+        this.nameInput.value = "";
+        this.identifiedLine.style.display = "none";
+        this.nameLine.style.display = "none";
+    }
+
+    // This is called whenever any value that affects visibility of identified
+    // checkbox or name text field is changed.
+    this.onChange = function(event) {
+        // For non-magic items, never show idenfied or name.
+        // They always count as not identified for the game.
+        // We don't show the name separately even if they're corrupted.
+        if (getSelectedText(this.raritySelect) === "Normal") {
+            this.identifiedInput.checked = false;
+            this.identifiedLine.style.display = "none";
+            this.nameInput.value = this.baseTypeInput.value;
+            this.nameLine.style.display = "none";
+            return;
+        }
+        // Corrupted items are always identified.
+        // We remove the identified checkbox and show the name input.
+        // Note that this applies only to non-normal items.
+        if (this.corruptedInput.checked) {
+            this.identifiedInput.checked = true;
+            this.identifiedLine.style.display = "block";
+            this.nameLine.style.display = "block";
+            return;
+        }
+        // Non-normal, non-corrupted items always display the id checkbox.
+        this.identifiedLine.style.display = "block";
+
+        // Show name input field only for identified items.
+        if (this.identifiedInput.checked) {
+            this.nameLine.style.display = "block";
+            return;
+        }
+        else {
+            this.nameLine.style.display = "none";
+            this.nameInput.value = this.baseTypeInput.value;
+        }
     }
 
     this.focus = function() {
@@ -96,7 +151,7 @@ function AddItemDialog() {
     this.getItem = function() {
         var inventorySize = parseInventorySize( this.inventorySizeInput.value );
         var result = {
-            name: this.baseTypeInput.value,
+            name: this.nameInput.value,
             itemLevel: parseInt( this.itemLevelInput.value ),
             dropLevel: parseInt( this.dropLevelInput.value ),
             quality: StrUtils.parseIntOrDefault( this.qualityInput.value, 0 ),
@@ -214,5 +269,9 @@ function AddItemDialog() {
             PoEdit.addItemDialog.hide();
             PoEdit.addItemDialog.clear();
         }
+    }
+
+    function onChange(event) {
+        PoEdit.addItemDialog.onChange(event);
     }
 }
