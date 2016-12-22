@@ -10,6 +10,11 @@ var StrUtils = {
 		return str.indexOf( prefix ) === 0;
 	},
 
+	// Checks if str ends with the suffix.
+	endsWith: function (str, suffix) {
+		return str.indexOf( suffix ) === str.length - suffix.length;
+	},
+
 	// Alphabetically sorts all characters in the string.
 	// Characters must either be all uppercase or all lowercase.
 	// Does not take locale into account.
