@@ -470,6 +470,24 @@ var PoEdit = new function()
 		window.location = 'https://www.reddit.com/message/compose/?to=bschug';
 	}
 
+	function onDownloadButton() {
+		ga('send', 'event', 'download');
+		var file = new Blob([getCode()], {type: 'text/plain'});
+		var url = URL.createObjectURL(file);
+		
+		var a = document.createElement('a');
+		a.style = 'display: none';
+		a.id = 'download-placeholder'
+		a.href = url;
+		a.download = 'Filter.filter';
+		document.body.appendChild(a);
+
+		a.click();
+
+		document.body.removeChild(a);
+		window.URL.revokeObjectURL(url);
+	}
+
 	var AVAILABLE_COLOR_SCHEMES = [
 		{ name:'Dark/subtle', theme:'bschug' },
 		{ name:'Dark/contrast', theme:'rubyblue' },
@@ -667,6 +685,7 @@ var PoEdit = new function()
 		document.addEventListener( 'keyup', onKeyUp_Global, true );
 		document.getElementById( 'additem-ok-button' ).addEventListener( 'click', onAddItemOk );
 		document.getElementById( 'additem-cancel-button' ).addEventListener( 'click', onAddItemCancel );
+		document.getElementById( 'download-button' ).addEventListener( 'click', onDownloadButton );
 
 		this.addItemDialog.onPressEnter = onAddItemOk;
 	}
