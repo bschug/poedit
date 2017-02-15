@@ -54,6 +54,11 @@ var PoEdit = new function()
 				},
 				Enter: function(cm,handle) {
 					handle.pick(cm);
+					cm.replaceSelection(' ');
+				},
+				Tab: function(cm,handle) {
+					handle.pick(cm);
+					cm.replaceSelection(' ');
 				}
 			}
 		} );
