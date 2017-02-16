@@ -484,7 +484,7 @@ var PoEdit = new function()
 		a.style = 'display: none';
 		a.id = 'download-placeholder'
 		a.href = url;
-		a.download = 'Filter.filter';
+		a.download = 'poedit.filter';
 		document.body.appendChild(a);
 
 		a.click();
