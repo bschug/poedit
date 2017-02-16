@@ -54,11 +54,14 @@
    <!--div id="code-window" contenteditable="true"></div-->
    <textarea id="code-window"></textarea>
   </div>
-  <div id="colorpicker">
-    <form id="RGB-picker">
-      <input type="color" name="colorchooser" id="color-picker" onchange="getRGB();">
-      <div id="RGB-color" contenteditable="true"></div>
-    </form>
+  <div id="code-toolbar">
+    <div id="colorpicker">
+	  <form id="RGB-picker">
+	    <input type="color" name="colorchooser" id="color-picker" onchange="getRGB();">
+        <div id="RGB-color" contenteditable="true"></div>
+      </form>
+    </div>
+    <button id="download-button">Download</button>
   </div>
   <div id="log-window">This is a log message</div>
  </div>
@@ -70,7 +73,6 @@
      <button id="help-button">Help</button>
      <button id="reset-button">Reset</button>
      <button id="items-edit-button">Edit</button>
-     <button id="download-button">Download</button>
  </div>
 
 <div id="item-details">
