@@ -105,13 +105,25 @@
 	margin: 0px;
 }
 
-#colorpicker {
+#code-toolbar {
 	position: absolute;
 	height: 30px;
-
 	left: 0px;
 	right: 0px;
 	bottom: 60px;
+}
+
+#colorpicker {
+	position: absolute;
+	height: 30px;
+	left: 0px;
+	right: 100px;
+}
+
+#download-button {
+	position: absolute;
+	width: 90px;
+	right: 5px;
 }
 
 #RGB-color {
@@ -151,7 +163,7 @@
 	background-color: rgba(255, 255, 255, 0.25);
 }
 
-#colorpicker {
+#code-toolbar {
 	padding: 2px 0px 0px 2px;
 	background-color: white;
 	border: 1px solid black;
