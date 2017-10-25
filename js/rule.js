@@ -150,6 +150,12 @@ function PlayAlertSoundModifier (soundId, volume) {
 	}
 }
 
+function PlayAlertSoundPositionalModifier (soundId, volume) {
+	this.applyTo = function (item) {
+		// not implemented
+	}
+}
+
 function SetFontSizeModifier (fontSize) {
 	this.applyTo = function (item) {
 		item.setFontSize( MathUtils.clamp(fontSize, 18, 45) );

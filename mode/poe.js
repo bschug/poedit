@@ -114,7 +114,10 @@ function token(stream, state) {
             state.expected = ['NUMBER'];
             return 'keyword';
         }
-        if (matchKeyword(stream, ['PlayAlertSound'])) {
+        // NOTE: Order is important here because otherwise PlayAlertSound would always be a partial match of
+        // PlayAlertSoundPositional, and CodeMirror would always think that there's an invalid 'Positional' token
+        // that doesn't belong there
+        if (matchKeyword(stream, ['PlayAlertSoundPositional','PlayAlertSound'])) {
             state.expected = ['NUMBER','NUMBER'];
             return 'keyword';
         }
