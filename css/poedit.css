@@ -7,13 +7,35 @@
 
 /* positioning */
 
+#header {
+	position: absolute;
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	height: 32px;
+	
+	background-color: yellow;
+}
+
+#header > a {
+	color: red;
+	font-family: Fontin;
+	font-size: 32px;
+	text-decoration: None;
+	text-align: center;
+}
+
 #main {
 	position: absolute;
 	margin: 10px;
 
 	left: 0px;
 	right: 0px;
-	top: 0px;
+	top: 30px;
 	bottom: 0px;
 }
 
