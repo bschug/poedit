@@ -114,6 +114,8 @@ function ItemsEditor() {
             sockets: 'string',
             identified: 'boolean',
             corrupted: 'boolean',
+            influence: 'string',
+            shapedMap: 'boolean'
         };
 
         // Defaults for newly added item properties. This preserves backwards
@@ -121,6 +123,8 @@ function ItemsEditor() {
         var defaultValues = {
             identified: false,
             corrupted: false,
+            influence: 'None',
+            shapedMap: false
         }
 
         for (var key in propertyTypes) {
@@ -144,6 +148,11 @@ function ItemsEditor() {
 
         if (['Normal','Magic','Rare','Unique'].indexOf( data.rarity ) < 0) {
             alert( 'Item number ' + itemNr + '(' + data['name'] + ') has invalid rarity ' + data.rarity );
+            return false;
+        }
+
+        if (['None', 'Shaper', 'Elder'].indexOf( data.influence ) < 0) {
+            alert( 'Item number ' + itemNr + '(' + data['name'] + ') has invalid influence ' + data.influence );
             return false;
         }
 
@@ -177,6 +186,8 @@ function ItemsEditor() {
             sockets: item.sockets.join(' '),
             identified: item.identified,
             corrupted: item.corrupted,
+            influence: Influence.getName( item.influence ),
+            shapedMap: item.shapedMap
         };
     }
 
@@ -194,6 +205,8 @@ function ItemsEditor() {
             sockets: data.sockets.split(' '),
             identified: data.identified,
             corrupted: data.corrupted,
+            influence: Influence[ data.influence ],
+            shapedMap: data.shapedMap
         };
     }
 }

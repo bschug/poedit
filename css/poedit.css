@@ -246,6 +246,18 @@
 	cursor: default;
 }
 
+.item > .influence-none {
+    display: none;
+}
+.item > .influence-shaper {
+    color: red;
+    margin-right: 3px;
+}
+.item > .influence-elder {
+    color: red;
+    margin-right: 3px
+}
+
 .item > .sockets {
 	position: relative;
 	display: inline-block;

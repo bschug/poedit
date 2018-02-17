@@ -1,7 +1,7 @@
 function Parser() {
 
 	var VISIBILITY_TOKENS = [ 'Show', 'Hide' ];
-	var FILTER_TOKENS = [ 'ItemLevel', 'DropLevel', 'Quality', 'Rarity', 'Class', 'BaseType', 'Sockets', 'LinkedSockets', 'SocketGroup', 'Width', 'Height', 'Identified', 'Corrupted' ];
+	var FILTER_TOKENS = [ 'ItemLevel', 'DropLevel', 'Quality', 'Rarity', 'Class', 'BaseType', 'Sockets', 'LinkedSockets', 'SocketGroup', 'Width', 'Height', 'Identified', 'Corrupted', 'ElderItem', 'ShaperItem', 'ShapedMap' ];
 	var MODIFIER_TOKENS = [ 'SetBackgroundColor', 'SetBorderColor', 'SetTextColor', 'PlayAlertSound', 'SetFontSize' ];
 	var OPERATOR_TOKENS = [ '=', '<', '>', '<=', '>=' ];
 	var RARITY_TOKENS = [ 'Normal', 'Magic', 'Rare', 'Unique' ];
@@ -141,6 +141,9 @@ function Parser() {
 			'Height': HeightFilter,
 			'Identified': IdentifiedFilter,
 			'Corrupted': CorruptedFilter,
+			'ElderItem': ElderItemFilter,
+			'ShaperItem': ShaperItemFilter,
+			'ShapedMap': ShapedMapFilter
 		};
 
 		switch (token) {
@@ -169,6 +172,9 @@ function Parser() {
 
 			case 'Identified':
 			case 'Corrupted':
+			case 'ElderItem':
+			case 'ShaperItem':
+			case 'ShapedMap':
 				parseBoolFilter( self, filters[token], arguments );
 				return;
 

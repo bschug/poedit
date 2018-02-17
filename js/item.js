@@ -10,7 +10,12 @@ var Rarity = {
 			case 1: return "Magic";
 			case 2: return "Rare";
 			case 3: return "Unique";
+			default: throw 'Invalid Rarity: ' + i
 		}
+	},
+
+	isValid: function (i) {
+	    return 0 <= i && i <= 3
 	},
 
 	parse: function (str) {
@@ -23,6 +28,25 @@ var Rarity = {
 		}
 	}
 };
+
+var Influence = {
+    None: 0,
+    Shaper: 1,
+    Elder: 2,
+
+    getName: function (i) {
+        switch (i) {
+            case 0: return 'None';
+            case 1: return 'Shaper';
+            case 2: return 'Elder';
+            default: throw 'Invalid Influence: ' + i
+        }
+    },
+
+    isValid: function (i) {
+        return 0 <= i && i <= 2
+    }
+}
 
 function ItemData() {
 	this.name = '';
@@ -40,6 +64,8 @@ function ItemData() {
 	this.height = 1;
 	this.identified = false;
 	this.corrupted = false;
+	this.influence = Influence.None;
+	this.shapedMap = false;
 
 	// Sockets are stored as an array of linked socket groups.
 	// An item with a single red socket and linked red and blue sockets (R R=B)
@@ -50,6 +76,12 @@ function ItemData() {
 }
 
 ItemData.validate = function (item) {
+    function assertTrue (expr, msg) {
+        if (!expr) {
+            throw msg;
+        }
+    }
+
 	function assertNotNullOrEmpty (str, msg) {
         if (!str || (str === '')) {
             throw msg;
@@ -72,13 +104,15 @@ ItemData.validate = function (item) {
     assertInRange( item.itemLevel, 1, 100, 'Invalid ItemLevel' );
     assertInRange( item.dropLevel, 1, 100, 'Invalid DropLevel' );
     assertInRange( item.quality, 0, 20, 'Invalid Quality' );
-	assertInRange( item.rarity, 0, 3, 'Invalid Rarity' );
+	assertTrue( Rarity.isValid( item.rarity, 'Invalid Rarity' ));
     assertNotNullOrEmpty( item.itemClass, 'Item has no Class' );
     assertNotNullOrEmpty( item.baseType, 'Item has no BaseType' );
     assertInRange( item.width, 1, 3, 'Invalid width' );
     assertInRange( item.height, 1, 5, 'Invalid height' );
 	assertInArray( item.identified, [true, false], 'Invalid Identified property' );
 	assertInArray( item.corrupted, [true, false], 'Invalid Corrupted property' );
+	assertTrue( Influence.isValid( item.influence, 'Invalid Influence' ));
+	assertInArray( item.shapedMap, [true, false], 'Invalid ShapedMap property' );
 	var maxSockets = Math.min( 6, item.width * item.height );
 	assertInRange( ItemData.countSockets( item.sockets ), 0, maxSockets, 'Too many sockets for this item size' );
 }
@@ -120,6 +154,8 @@ function Item (itemdata)
 	this.baseType = itemdata.baseType;
 	this.identified = itemdata.identified;
 	this.corrupted = itemdata.corrupted;
+	this.influence = itemdata.influence;
+	this.shapedMap = itemdata.shapedMap;
 
 	this.width = itemdata.width;
 	this.height = itemdata.height;
@@ -153,7 +189,13 @@ function Item (itemdata)
 		var itemDiv = document.createElement( 'div' );
 		itemDiv.className = 'item';
 
+        var influenceDiv = document.createElement( 'span' )
+        influenceDiv.innerHTML = "⏺"
+        influenceDiv.classList.add("influence-" + Influence.getName( this.influence ).toLowerCase())
+        itemDiv.append(influenceDiv);
+
 		var itemName = document.createElement( 'span' );
+		itemName.classList.add('name');
 		itemName.innerHTML = this.getDisplayName();
 		itemDiv.appendChild( itemName );
 
@@ -231,7 +273,7 @@ function Item (itemdata)
 	function getLabel (self) {
 		for (var i=0; i < self.domElement.children.length; i++) {
 			var child = self.domElement.children[i];
-			if (child.tagName.toLowerCase() === 'span') {
+			if ((child.tagName.toLowerCase() === 'span') && child.classList.contains('name')) {
 				return child;
 			}
 		}

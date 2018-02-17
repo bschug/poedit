@@ -2,6 +2,7 @@
 <head>
 <title>PoE Item Filter Debugger</title>
 <meta property='og:image' content='https://bschug.github.io/poedit/poedit.png'/>
+<meta charset="UTF-8"/>
 
 <link rel="stylesheet" href="css/poedit.css"/>
 <link rel="stylesheet" href="css/codemirror.css"/>
@@ -85,6 +86,8 @@
     <p data="sockets"><span class="label">Sockets: </span><span class="value">?</span></p>
     <p data="identified"><span class="value">(Identified)</span></p>
     <p data="corrupted"><span class="value">(Corrupted)</span></p>
+    <p data="influence"><span class="label">(<span class="value"></span>)</span></p>
+    <p data="shaped-map"><span class="value">(Shaped Map)</span></p>
 </div>
 
 <div id="additem-dialog">
@@ -103,8 +106,17 @@
     <p data="inventory-size"><span class="label">Size: </span><input type="text"></p>
     <p data="sockets"><span class="label">Sockets: </span><input type="text"></p>
     <p data="quality"><span class="label">Quality: </span><input type="text"></p>
-    <p data="corrupted"><span class="label">Corrupted: </span><span class="checkbox-align"><input type="checkbox"></span></p-->
-    <p data="identified"><span class="label">Identified: </span><span class="checkbox-align"><input type="checkbox">test</span></p-->
+    <p data="corrupted"><span class="label">Corrupted: </span><span class="checkbox-align"><input type="checkbox"></span></p>
+    <p data="identified"><span class="label">Identified: </span><span class="checkbox-align"><input type="checkbox">test</span></p>
+    <p data="influence"><span class="label">Influence: </span>
+        <select>
+            <option selected>None</option>
+            <option>Shaper</option>
+            <option>Elder</option>
+        </select>
+    </p>
+    <p data="shaped-map"><span class="label">Shaped Map: </span><span class="checkbox-align"><input type="checkbox"></span></p>
+
     <p data="name"><span class="label">Name: </span><input type="text"></p>
     <p><button id="additem-cancel-button">Cancel</button> <button id="additem-ok-button">OK</button></p>
 </div>

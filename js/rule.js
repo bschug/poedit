@@ -124,6 +124,24 @@ function CorruptedFilter (value) {
 	}
 }
 
+function ElderItemFilter (value) {
+    this.match = function (item) {
+        return (item.influence === Influence.Elder) === value;
+    }
+}
+
+function ShaperItemFilter (value) {
+    this.match = function (item) {
+        return (item.influence === Influence.Shaper) === value;
+    }
+}
+
+function ShapedMapFilter (value) {
+    this.match = function (item) {
+        return item.shapedMap === value;
+    }
+}
+
 // ------------------------ Modifiers --------------------------------------
 
 function SetBackgroundColorModifier (color) {

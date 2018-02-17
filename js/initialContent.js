@@ -58,7 +58,8 @@ function getDefaultItems() {
     		rarity: Rarity.Rare,
             width: 2,
             height: 4,
-    		sockets: ['G','GG','B']
+    		sockets: ['G','GG','B'],
+    		influence: Influence.Elder
     	},
     	{
     		name: 'Royal Bow',
@@ -166,7 +167,8 @@ function getDefaultItems() {
     		rarity: Rarity.Rare,
             width: 2,
             height: 3,
-    		sockets: ['B','G']
+    		sockets: ['B','G'],
+    		influence: Influence.Shaper
     	},
         {
     		name: 'Dragon Slicer',
@@ -730,48 +732,48 @@ function getDefaultItems() {
 
     var maps = [
         {
-    		name: 'Crypt Map',
-    		itemLevel: 67,
-    		dropLevel: 66,
+    		name: 'Cursed Crypt Map',
+    		itemLevel: 79,
+    		dropLevel: 76,
     		quality: 0,
     		itemClass: 'Maps',
-    		baseType: 'Crypt Map',
+    		baseType: 'Cursed Crypt Map',
     		rarity: Rarity.Unique,
             width: 1,
             height: 1,
     		sockets: []
     	},
         {
-    		name: 'Tropical Island Map',
+    		name: 'Alleyways Map',
     		itemLevel: 67,
     		dropLevel: 66,
     		quality: 0,
     		itemClass: 'Maps',
-    		baseType: 'Tropical Island Map',
+    		baseType: 'Alleyways Map',
     		rarity: Rarity.Magic,
             width: 1,
             height: 1,
     		sockets: []
     	},
     	{
-    		name: 'Torture Chamber Map',
+    		name: 'Phantasmagoria Map',
     		itemLevel: 80,
-    		dropLevel: 72,
+    		dropLevel: 73,
     		quality: 0,
     		itemClass: 'Maps',
-    		baseType: 'Torture Chamber Map',
+    		baseType: 'Phantasmagoria Map',
     		rarity: Rarity.Normal,
             width: 1,
             height: 1,
     		sockets: []
     	},
         {
-            name:'Core Map',
+            name:'Reef Map',
             itemLevel: 82,
             dropLevel: 82,
             quality: 0,
             itemClass: 'Maps',
-            baseType: 'Core Map',
+            baseType: 'Reef Map',
             rarity: Rarity.Normal,
             width:1,
             height:1,
@@ -1046,6 +1048,8 @@ function fillOptionalPropertiesWithDefaults(items) {
     for (var i=0; i < items.length; i++) {
         items[i].identified = items[i].identified || false;
         items[i].corrupted = items[i].corrupted || false;
+        items[i].influence = items[i].influence !== undefined ? items[i].influence : Influence.None;
+        items[i].shapedMap = items[i].shapedMap || false;
     }
     return items;
 }

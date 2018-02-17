@@ -11,6 +11,9 @@ function ItemDetails() {
     this.socketsLabel = null;
     this.identifiedLabel = null;
     this.corruptedLabel = null;
+    this.influenceLabelOuter = null;
+    this.influenceLabelInner = null;
+    this.shapedMapLabel = null;
 
     this.init = function() {
         this.div = document.getElementById( 'item-details' );
@@ -44,6 +47,13 @@ function ItemDetails() {
                 case 'corrupted':
                     this.corruptedLabel = child;
                     break;
+                case 'influence':
+                    this.influenceLabelOuter = child;
+                    this.influenceLabelInner = getValueLabel(child);
+                    break;
+                case 'shaped-map':
+                    this.shapedMapLabel = child;
+                    break;
             }
         }
     }
@@ -68,14 +78,25 @@ function ItemDetails() {
         this.socketsLabel.innerHTML = this.item.sockets.join(' ');
         $(this.identifiedLabel).toggle( this.item.identified );
         $(this.corruptedLabel).toggle( this.item.corrupted );
+        $(this.influenceLabelOuter).toggle( this.item.influence !== Influence.None );
+        this.influenceLabelInner.innerHTML = Influence.getName( this.item.influence );
+        $(this.shapedMapLabel).toggle( this.item.shapedMap );
     }
 
-    function getValueLabel (elem) {
+    function getValueLabel (elem, dontwarn) {
         for (var i=0; i < elem.children.length; i++) {
             var child = elem.children[i];
             if (child.className === 'value') {
                 return child;
             }
+            var inner = getValueLabel(child, true);
+            if (inner !== null) {
+                return inner;
+            }
         }
+        if (!dontwarn) {
+            console.warn("Couldn't find value label for ", elem);
+        }
+        return null;
     }
 }
