@@ -118,7 +118,7 @@ function token(stream, state) {
         // PlayAlertSoundPositional, and CodeMirror would always think that there's an invalid 'Positional' token
         // that doesn't belong there
         if (matchKeyword(stream, ['PlayAlertSoundPositional','PlayAlertSound'])) {
-            state.expected = ['NUMBER','NUMBER'];
+            state.expected = ['NUMBER','SOUND_ID']; // This is a stack, so it must be in reverse order!
             return 'keyword';
         }
 
@@ -189,6 +189,19 @@ function token(stream, state) {
         }
     }
 
+    if (expected === 'SOUND_ID') {
+        var shaperSounds = [
+            'ShAlchemy', 'ShBlessed', 'ShChaos', 'ShDivine', 'ShExalted', 'ShFusing', 'ShGeneral', 'ShMirror',
+            'ShRegal', 'ShVaal'];
+
+        if (matchKeyword(stream, shaperSounds)) {
+            return 'atom';
+        }
+
+        if (stream.match(/^[0-9]+/)) {
+            return 'number';
+        }
+    }
 }
 
 function matchKeyword(stream, keywords) {

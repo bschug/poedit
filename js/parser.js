@@ -324,28 +324,46 @@ function Parser() {
 	}
 
 	function parseAlertSoundModifier (self, modifier, arguments) {
-		var numbers = parseNumbers( self, arguments );
-		if (numbers === null) return;
-		if (numbers.length < 1 || numbers.length > 2) {
-			reportTokenError( self, arguments, 'two numbers' );
-			return;
-		}
+	    var tokens = getArgumentTokens( arguments );
+	    if (tokens.length < 1 || tokens.length > 2) {
+	        reportTokenError( self, arguments, 'sound id + optional volume' );
+	        return;
+	    }
 
-		if (numbers[0] < 1 || numbers[0] > 9) {
-			reportParseError( self, arguments, 'sound ID must be between 1 and 9' );
-			return;
-		}
+	    var soundId = parseSoundId( self, tokens[0] );
+	    if (soundId === null) return;
 
-		if (numbers[1] < 0 || numbers[1] > 300) {
-			reportParseError( self, arguments, 'volume must be between 0 and 300' );
-			return;
-		}
+	    var volume = 100;
+	    if (tokens.length === 2) {
+	        if (isNaN(tokens[1])) {
+	            reportParseError( self, arguments, 'volume must be a number' );
+	            return;
+	        }
 
-		var soundId = numbers[0];
-		var volume = numbers.length < 2 ? 100 : numbers[1];
+	        volume = parseInt(tokens[1]);
+	        if (volume < 0 || volume > 300) {
+	            reportParseError( self, arguments, 'volume must be between 0 and 300' );
+	            return;
+	        }
+	    }
 
-		self.currentRule.modifiers.push( new modifier( volume ) );
+		self.currentRule.modifiers.push( new modifier( soundId, volume ) );
 	}
+
+    function parseSoundId (self, token) {
+        var shaperSounds = [
+            'ShAlchemy', 'ShBlessed', 'ShChaos', 'ShDivine', 'ShExalted', 'ShFusing', 'ShGeneral', 'ShMirror',
+            'ShRegal', 'ShVaal']
+        if (shaperSounds.indexOf( token ) >= 0) {
+            return token;
+        }
+
+        if (isNaN(token)) {
+            reportParseError( self, token, 'Sound ID must be a number between 1 and 16, or a valid Sound ID name' );
+            return;
+        }
+        return parseInt( token );
+    }
 
 	function parseNumericModifier (self, modifier, arguments) {
 		var numbers = parseNumbers( self, arguments );
@@ -360,12 +378,15 @@ function Parser() {
 
 	// ------------------------ GENERIC PARSING ---------------------------------
 
-	function parseOperatorAndValue (self, arguments) {
-		var tokens = arguments
+    function getArgumentTokens (arguments) {
+        return arguments
 			.trim()
 			.split(' ')
 			.filter( function (element, index, array) { return element.trim().length > 0; } );
+    }
 
+	function parseOperatorAndValue (self, arguments) {
+		var tokens = getArgumentTokens( arguments );
 		var operator, value;
 
 		if (tokens.length == 1) {
@@ -399,10 +420,7 @@ function Parser() {
 	}
 
 	function parseNumbers (self, arguments) {
-		var tokens = arguments
-			.trim()
-			.split(' ')
-			.filter( function (element, index, array) { return element.trim().length > 0; } );
+		var tokens = getArgumentTokens( arguments );
 
 		if (tokens.some( isNaN )) {
 			reportTokenError( self, arguments, 'numbers' );
