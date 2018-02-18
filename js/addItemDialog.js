@@ -11,9 +11,12 @@ function AddItemDialog() {
     this.corruptedInput = null;
     this.identifiedInput = null;
     this.nameInput = null;
+    this.influenceSelect = null;
+    this.shapedMapInput = null;
 
     this.identifiedLine = null;
     this.nameLine = null;
+    this.shapedMapLine = null;
 
     this.init = function() {
         this.dialog = document.getElementById( 'additem-dialog' );
@@ -71,6 +74,17 @@ function AddItemDialog() {
                     this.nameInput = getTextField( p );
                     this.nameInput.addEventListener('keydown', onKeyDown);
                     break;
+                case 'influence':
+                    this.influenceSelect = getSelect( p );
+                    this.influenceSelect.addEventListener('keydown', onKeyDown);
+                    this.influenceSelect.addEventListener('change', onChange);
+                    break;
+                case 'shaped-map':
+                    this.shapedMapLine = p;
+                    this.shapedMapInput = $(p).find('span > input')[0];
+                    this.shapedMapInput.addEventListener('keydown', onKeyDown);
+                    this.shapedMapInput.addEventListener('change', onChange);
+                    break;
             }
         }
 
@@ -106,11 +120,21 @@ function AddItemDialog() {
         this.nameInput.value = "";
         this.identifiedLine.style.display = "none";
         this.nameLine.style.display = "none";
+        this.influenceSelect.selectedIndex = 0;
+        this.shapedMapLine.style.display = 'none';
+        this.shapedMapInput.checked = false;
     }
 
     // This is called whenever any value that affects visibility of identified
     // checkbox or name text field is changed.
     this.onChange = function(event) {
+        // Show Shaped Map checkbox only for maps
+        if (this.itemClassInput.value === 'Maps' || this.itemClassInput === 'Map') {
+            this.shapedMapLine.style.display = 'block'
+        } else {
+            this.shapedMapLine.style.display = 'none';
+        }
+
         // For non-magic items, never show idenfied or name.
         // They always count as not identified for the game.
         // We don't show the name separately even if they're corrupted.
@@ -128,15 +152,14 @@ function AddItemDialog() {
             this.identifiedInput.checked = true;
             this.identifiedLine.style.display = "block";
             this.nameLine.style.display = "block";
-            return;
+        } else {
+            // Non-normal, non-corrupted items always display the id checkbox.
+            this.identifiedLine.style.display = "block";
         }
-        // Non-normal, non-corrupted items always display the id checkbox.
-        this.identifiedLine.style.display = "block";
 
         // Show name input field only for identified items.
         if (this.identifiedInput.checked) {
             this.nameLine.style.display = "block";
-            return;
         }
         else {
             this.nameLine.style.display = "none";
@@ -163,6 +186,8 @@ function AddItemDialog() {
             sockets: parseSockets( this.socketsInput.value ),
             identified: this.identifiedInput.checked,
             corrupted: this.corruptedInput.checked,
+            influence: Influence.parse( getSelectedText( this.influenceSelect ) ),
+            shapedMap: this.shapedMapInput.checked,
         };
 
         ItemData.validate( result );

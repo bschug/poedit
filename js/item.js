@@ -45,6 +45,15 @@ var Influence = {
 
     isValid: function (i) {
         return 0 <= i && i <= 2
+    },
+
+    parse: function (str) {
+        switch (str.toLowerCase()) {
+            case 'none': return 0;
+            case 'shaper': return 1;
+            case 'elder': return 2;
+            default: throw 'Invalid Influence: ' + str
+        }
     }
 }
 
