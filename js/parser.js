@@ -2,10 +2,11 @@ function Parser() {
 
 	var VISIBILITY_TOKENS = [ 'Show', 'Hide' ];
 	var FILTER_TOKENS = [ 'ItemLevel', 'DropLevel', 'Quality', 'Rarity', 'Class', 'BaseType', 'Sockets', 'LinkedSockets', 'SocketGroup', 'Width', 'Height', 'Identified', 'Corrupted', 'ElderItem', 'ShaperItem', 'ShapedMap' ];
-	var MODIFIER_TOKENS = [ 'SetBackgroundColor', 'SetBorderColor', 'SetTextColor', 'PlayAlertSound', 'PlayAlertSoundPositional', 'SetFontSize' ];
+	var MODIFIER_TOKENS = [ 'SetBackgroundColor', 'SetBorderColor', 'SetTextColor', 'PlayAlertSound', 'PlayAlertSoundPositional', 'SetFontSize', 'DisableDropSound'];
 	var OPERATOR_TOKENS = [ '=', '<', '>', '<=', '>=' ];
 	var RARITY_TOKENS = [ 'Normal', 'Magic', 'Rare', 'Unique' ];
 	var BOOL_TOKENS = [ 'True', 'False' ];
+	var SOUND_TOKENS = [ 'ShAlchemy', 'ShBlessed', 'ShChaos', 'ShDivine', 'ShExalted', 'ShFusing', 'ShGeneral', 'ShMirror', 'ShRegal', 'ShVaal' ];
 
 	this.currentLineNr = 0;
 	this.currentRule = null;
@@ -19,7 +20,7 @@ function Parser() {
 		this.currentRule = null;
 		this.ruleSet = [];
 		this.errors = [];
-		this.warnings = []
+		this.warnings = [];
 		this.lineTypes = [];
 
 		for (var i = 0; i < lines.length; i++) {
@@ -278,6 +279,7 @@ function Parser() {
 			'PlayAlertSound': PlayAlertSoundModifier,
 			'PlayAlertSoundPositional': PlayAlertSoundPositionalModifier,
 			'SetFontSize': SetFontSizeModifier,
+			'DisableDropSound': DisableDropSoundModifier
 		};
 
 		switch (token) {
@@ -294,6 +296,10 @@ function Parser() {
 
 			case 'SetFontSize':
 				parseNumericModifier( self, modifiers[token], arguments );
+				break;
+
+			case 'DisableDropSound':
+				parseKeywordModifier( self, modifiers[token], arguments );
 				break;
 
 			default:
@@ -351,10 +357,7 @@ function Parser() {
 	}
 
     function parseSoundId (self, token) {
-        var shaperSounds = [
-            'ShAlchemy', 'ShBlessed', 'ShChaos', 'ShDivine', 'ShExalted', 'ShFusing', 'ShGeneral', 'ShMirror',
-            'ShRegal', 'ShVaal']
-        if (shaperSounds.indexOf( token ) >= 0) {
+        if (SOUND_TOKENS.indexOf( token ) >= 0) {
             return token;
         }
 
@@ -374,6 +377,15 @@ function Parser() {
 		}
 
 		self.currentRule.modifiers.push( new modifier( numbers[0] ) );
+	}
+
+	function parseKeywordModifier (self, modifier, arguments) {
+		if (arguments.trim().length > 0) {
+			reportTokenError( self, arguments, 'Unexpected argument' );
+			return;
+		}
+
+		self.currentRule.modifiers.push( new modifier() );
 	}
 
 	// ------------------------ GENERIC PARSING ---------------------------------

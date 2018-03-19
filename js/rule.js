@@ -179,3 +179,9 @@ function SetFontSizeModifier (fontSize) {
 		item.setFontSize( MathUtils.clamp(fontSize, 18, 45) );
 	}
 }
+
+function DisableDropSoundModifier () {
+	this.applyTo = function (item) {
+		// not implemented
+	}
+}

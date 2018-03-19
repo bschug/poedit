@@ -121,6 +121,9 @@ function token(stream, state) {
             state.expected = ['NUMBER','SOUND_ID']; // This is a stack, so it must be in reverse order!
             return 'keyword';
         }
+        if (matchKeyword(stream, ['DisableDropSound'])) {
+            return 'keyword';
+        }
 
         stream.skipToEnd();
         return 'error';
