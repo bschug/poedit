@@ -76,6 +76,8 @@ function ItemData() {
 	this.influence = Influence.None;
 	this.shapedMap = false;
 
+	this.explicitMods = [];
+
 	// Sockets are stored as an array of linked socket groups.
 	// An item with a single red socket and linked red and blue sockets (R R=B)
 	// would store ['R','RB'] here.
@@ -124,6 +126,7 @@ ItemData.validate = function (item) {
 	assertInArray( item.shapedMap, [true, false], 'Invalid ShapedMap property' );
 	var maxSockets = Math.min( 6, item.width * item.height );
 	assertInRange( ItemData.countSockets( item.sockets ), 0, maxSockets, 'Too many sockets for this item size' );
+	assertTrue( 'explicitMods' in item, 'Item has no ExplicitMods list' );
 }
 
 ItemData.areEqual = function (data, item) {
@@ -138,6 +141,7 @@ ItemData.areEqual = function (data, item) {
 		&& data.height === item.height
 		&& data.identified === item.identified
 		&& data.corrupted === item.corrupted
+		&& ArrayUtils.areEqual( data.explicitMods, item.explicitMods )
 		&& ArrayUtils.areEqual( data.sockets, item.sockets );
 }
 
@@ -148,6 +152,7 @@ ItemData.countSockets = function (sockets) {
 	});
 	return result;
 }
+
 
 function Item (itemdata)
 {
@@ -165,6 +170,7 @@ function Item (itemdata)
 	this.corrupted = itemdata.corrupted;
 	this.influence = itemdata.influence;
 	this.shapedMap = itemdata.shapedMap;
+	this.explicitMods = itemdata.explicitMods;
 
 	this.width = itemdata.width;
 	this.height = itemdata.height;
@@ -189,6 +195,10 @@ function Item (itemdata)
 
 	this.getNumSockets = function() {
 		return ItemData.countSockets( this.sockets );
+	}
+
+	this.hasExplicitMod = function(mod) {
+	    this.explicitMods.includes( mod );
 	}
 
 	this.draw = function() {

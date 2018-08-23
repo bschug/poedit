@@ -94,7 +94,7 @@ function token(stream, state) {
             state.expected = ['RARITY_FORMULA'];
             return 'keyword';
         }
-        if (matchKeyword(stream, ['Class','BaseType'])) {
+        if (matchKeyword(stream, ['Class','BaseType', 'HasExplicitMod'])) {
             state.expected = ['STRINGS'];
             return 'keyword';
         }

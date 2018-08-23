@@ -115,7 +115,8 @@ function ItemsEditor() {
             identified: 'boolean',
             corrupted: 'boolean',
             influence: 'string',
-            shapedMap: 'boolean'
+            shapedMap: 'boolean',
+            explicitMods: 'object'
         };
 
         // Defaults for newly added item properties. This preserves backwards
@@ -124,7 +125,8 @@ function ItemsEditor() {
             identified: false,
             corrupted: false,
             influence: 'None',
-            shapedMap: false
+            shapedMap: false,
+            explicitMods: []
         }
 
         for (var key in propertyTypes) {
@@ -169,6 +171,12 @@ function ItemsEditor() {
             return false;
         }
 
+        for (var i=0; i < data.explicitMods.length; i++) {
+            if (typeof data.explicitMods[i] !== 'string') {
+                return false;
+            }
+        }
+
         return true;
     }
 
@@ -187,7 +195,8 @@ function ItemsEditor() {
             identified: item.identified,
             corrupted: item.corrupted,
             influence: Influence.getName( item.influence ),
-            shapedMap: item.shapedMap
+            shapedMap: item.shapedMap,
+            explicitMods: item.explicitMods
         };
     }
 
@@ -206,7 +215,8 @@ function ItemsEditor() {
             identified: data.identified,
             corrupted: data.corrupted,
             influence: Influence[ data.influence ],
-            shapedMap: data.shapedMap
+            shapedMap: data.shapedMap,
+            explicitMods: data.explicitMods
         };
     }
 }

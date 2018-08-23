@@ -142,6 +142,12 @@ function ShapedMapFilter (value) {
     }
 }
 
+function HasExplicitModFilter (mods) {
+    this.match = function (item) {
+        return mods.some( function(mod) { item.hasExplicitMod( mod ); } );
+    }
+}
+
 // ------------------------ Modifiers --------------------------------------
 
 function SetBackgroundColorModifier (color) {

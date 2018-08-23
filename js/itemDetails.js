@@ -14,6 +14,8 @@ function ItemDetails() {
     this.influenceLabelOuter = null;
     this.influenceLabelInner = null;
     this.shapedMapLabel = null;
+    this.explicitModsLine = null;
+    this.explicitModsLabel = null;
 
     this.init = function() {
         this.div = document.getElementById( 'item-details' );
@@ -54,6 +56,10 @@ function ItemDetails() {
                 case 'shaped-map':
                     this.shapedMapLabel = child;
                     break;
+                case 'explicit-mods':
+                    this.explicitModsLine = child;
+                    this.explicitModsLabel = getValueLabel( child );
+                    break;
             }
         }
     }
@@ -81,6 +87,12 @@ function ItemDetails() {
         $(this.influenceLabelOuter).toggle( this.item.influence !== Influence.None );
         this.influenceLabelInner.innerHTML = Influence.getName( this.item.influence );
         $(this.shapedMapLabel).toggle( this.item.shapedMap );
+
+        $(this.explicitModsLine).toggle( this.item.explicitMods.length > 0 );
+        $(this.explicitModsLabel).empty();
+        for (var i=0; i < this.item.explicitMods.length; i++) {
+            $("<li>" + this.item.explicitMods[i] + "</li>").appendTo(this.explicitModsLabel);
+        }
     }
 
     function getValueLabel (elem, dontwarn) {

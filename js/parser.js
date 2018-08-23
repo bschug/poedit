@@ -1,7 +1,9 @@
 function Parser() {
 
 	var VISIBILITY_TOKENS = [ 'Show', 'Hide' ];
-	var FILTER_TOKENS = [ 'ItemLevel', 'DropLevel', 'Quality', 'Rarity', 'Class', 'BaseType', 'Sockets', 'LinkedSockets', 'SocketGroup', 'Width', 'Height', 'Identified', 'Corrupted', 'ElderItem', 'ShaperItem', 'ShapedMap' ];
+	var FILTER_TOKENS = [
+	    'ItemLevel', 'DropLevel', 'Quality', 'Rarity', 'Class', 'BaseType', 'Sockets', 'LinkedSockets', 'SocketGroup',
+	    'Width', 'Height', 'Identified', 'Corrupted', 'ElderItem', 'ShaperItem', 'ShapedMap', 'HasExplicitMod' ];
 	var MODIFIER_TOKENS = [ 'SetBackgroundColor', 'SetBorderColor', 'SetTextColor', 'PlayAlertSound', 'PlayAlertSoundPositional', 'SetFontSize', 'DisableDropSound'];
 	var OPERATOR_TOKENS = [ '=', '<', '>', '<=', '>=' ];
 	var RARITY_TOKENS = [ 'Normal', 'Magic', 'Rare', 'Unique' ];
@@ -144,7 +146,8 @@ function Parser() {
 			'Corrupted': CorruptedFilter,
 			'ElderItem': ElderItemFilter,
 			'ShaperItem': ShaperItemFilter,
-			'ShapedMap': ShapedMapFilter
+			'ShapedMap': ShapedMapFilter,
+			'HasExplicitMod': HasExplicitModFilter
 		};
 
 		switch (token) {
@@ -164,6 +167,7 @@ function Parser() {
 
 			case 'Class':
 			case 'BaseType':
+			case 'HasExplicitMod':
 				parseMultiStringFilter( self, filters[token], arguments );
 				return;
 

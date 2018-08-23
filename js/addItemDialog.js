@@ -13,6 +13,7 @@ function AddItemDialog() {
     this.nameInput = null;
     this.influenceSelect = null;
     this.shapedMapInput = null;
+    this.explicitModsInput = null;
 
     this.identifiedLine = null;
     this.nameLine = null;
@@ -85,6 +86,10 @@ function AddItemDialog() {
                     this.shapedMapInput.addEventListener('keydown', onKeyDown);
                     this.shapedMapInput.addEventListener('change', onChange);
                     break;
+                case 'explicit-mods':
+                    this.explicitModsInput = getTextField( p );
+                    this.explicitModsInput.addEventListener('keydown', onKeyDown);
+                    break;
             }
         }
 
@@ -123,6 +128,7 @@ function AddItemDialog() {
         this.influenceSelect.selectedIndex = 0;
         this.shapedMapLine.style.display = 'none';
         this.shapedMapInput.checked = false;
+        this.explicitModsInput.value = "";
     }
 
     // This is called whenever any value that affects visibility of identified
@@ -188,6 +194,7 @@ function AddItemDialog() {
             corrupted: this.corruptedInput.checked,
             influence: Influence.parse( getSelectedText( this.influenceSelect ) ),
             shapedMap: this.shapedMapInput.checked,
+            explicitMods: this.explicitModsInput.value.split(',')
         };
 
         ItemData.validate( result );
