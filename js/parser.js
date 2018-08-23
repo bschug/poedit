@@ -213,15 +213,38 @@ function Parser() {
 	}
 
 	function parseRarityFilter (self, filter, arguments) {
-		var args = parseOperatorAndValue( self, arguments );
-		if (args != null) {
-			if (RARITY_TOKENS.indexOf( args.value ) < 0) {
-				reportTokenError( self, args.value, 'rarity' );
-				return;
-			}
+	    var tokens = getArgumentTokens(arguments);
+	    if (tokens.length == 0) {
+	        reportTokenError( self, arguments, 'rarity')
+	        return;
+	    }
 
-			self.currentRule.filters.push( new filter( args.comparer, Rarity[args.value] ) );
-		}
+	    // If the first argument is an operator, we can use the parseOperatorAndValue function
+	    if (OPERATOR_TOKENS.includes( tokens[0] )) {
+	        args = parseOperatorAndValue( self, arguments );
+            if (args != null) {
+                if (RARITY_TOKENS.indexOf( args.value ) < 0) {
+                    reportTokenError( self, args.value, 'operator or rarity' );
+                    return;
+                }
+                self.currentRule.filters.push( new filter( args.comparer, Rarity[args.value] ) );
+                return;
+            }
+        }
+
+        // Otherwise, the arguments must be a list of rarities.
+        var rarities = [];
+        for (var i=0; i < tokens.length; i++) {
+            if (!RARITY_TOKENS.includes(tokens[i])) {
+                reportTokenError( self, tokens[i], 'rarity')
+                return;
+            }
+            rarities.push( Rarity[tokens[i]] );
+        }
+
+        // In that case, we create a custom comparer that checks if a rarity is in that list
+        var comparer = function(a,b) { return b.includes(a); }
+        self.currentRule.filters.push( new filter( comparer, rarities ) );
 	}
 
 	function parseSocketGroupFilter (self, filter, arguments) {
