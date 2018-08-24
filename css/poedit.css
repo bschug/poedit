@@ -248,6 +248,7 @@
 }
 
 .item {
+    position: relative;
 	margin: 0px;
 	padding: 1px 6px;
 	background-color: rgba(0, 0, 0, 0.75);
@@ -314,6 +315,16 @@
 	height: 2px;
 	background-color: white;
 	/* position is set by script */
+}
+
+.item > .beam {
+    position: absolute;
+    width: 40px;
+    height: 57px;
+    left: 50%;
+    margin-left: -20px;
+    top: 50%;
+    margin-top: -40px;
 }
 
 /* item details */
