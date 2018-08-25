@@ -161,11 +161,6 @@ var PoEdit = new function()
 		item.setBackgroundColor( BLACK_75 );
 		item.setTextColor( color );
 		item.setFontSize( 32 );
-		item.setBeamColor( {r:230, g: 140, b: 110} );
-
-		if (Math.random() > 0.9) {
-    		item.setMapIcon( 'Diamond', {r:240, g: 220, b: 100} )
-    	}
 
 		if (item.itemClass === 'Maps' || item.itemClass === 'Map Fragments') {
 			item.setBorderColor( color );
