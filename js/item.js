@@ -636,3 +636,10 @@ function createHexagon(color) {
     return hexagon;
 }
 
+function createStar(color) {
+    var star = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+    star.setAttributeNS(null, 'data-icon', 'Star');
+    star.setAttributeNS(null, 'points', '0.5,0.12 0.4,0.42 0.09,0.42 0.34,0.6 0.24,0.9 0.5,0.72 0.75,0.9 0.66,0.6 0.91,0.42 0.6,0.42')
+    star.setAttributeNS(null, 'style', 'stroke:black; stroke-width:0.075; fill:rgb(' + color.r + ',' + color.g + ',' + color.b + ')');
+    return star;
+}
