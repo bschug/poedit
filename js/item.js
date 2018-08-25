@@ -180,6 +180,7 @@ function Item (itemdata)
 	this.outerElement = null;
 	this.domElement = null;
 	this.beamElement = null;
+	this.mapIconElement = null;
 
 	this.matchingRule = null;
 
@@ -298,6 +299,12 @@ function Item (itemdata)
             this.mapIconElement = createMapIcon(icon);
             this.domElement.appendChild(this.mapIconElement);
         }
+        if (this.mapIconElement.getAttributeNS(null, 'data-icon') !== icon) {
+            this.domElement.removeChild(this.mapIconElement);
+            this.mapIconElement = createMapIcon(icon);
+            this.domElement.appendChild(this.mapIconElement);
+        }
+
         this.mapIconElement.style.fill = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
     }
 
@@ -523,7 +530,7 @@ function createRadialGradient(gradientId, innerColorId, outerColorId) {
 
     var innerColor = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
     innerColor.id = innerColorId;
-    innerColor.offset = '0%';
+    innerColor.setAttributeNS(null, 'offset', '0%');
     innerColor.style = 'stop-color:rgb(255,255,255); stop-opacity:1';
     gradient.appendChild(innerColor);
 
@@ -571,6 +578,18 @@ function createBeam() {
 }
 
 function createMapIcon(icon) {
+    var iconElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    iconElement.setAttributeNS(null, 'viewBox', '0 0 1 1');
+    iconElement.setAttributeNS(null, 'width', 20);
+    iconElement.setAttributeNS(null, 'height', 20);
+    iconElement.setAttributeNS(null, 'class', 'mapIcon');
+
+    var iconSVG = drawMapIcon(icon);
+    iconElement.appendChild(iconSVG);
+    return iconElement;
+}
+
+function drawMapIcon(icon) {
     switch (icon) {
         case 'Circle':
             return createCircle();
@@ -585,7 +604,12 @@ function createMapIcon(icon) {
     }
 }
 
-function createCircle() {
+function createCircle(color) {
     var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    circle.style.stroke = 'black';
+    circle.setAttributeNS(null, 'data-icon', 'Circle');
+    circle.setAttributeNS(null, 'cx', 0.5);
+    circle.setAttributeNS(null, 'cy', 0.5);
+    circle.setAttributeNS(null, 'r', 0.35);
+    circle.setAttributeNS(null, 'style', 'stroke:black; stroke-width:0.075; ');
+    return circle;
 }

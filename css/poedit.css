@@ -319,11 +319,16 @@
 
 .item > .beam {
     position: absolute;
-    width: 40px;
-    height: 60px;
     left: 50%;
     margin-left: -20px;
     bottom: -10px;
+}
+
+.item > .mapIcon {
+    position: absolute;
+    left: 50%;
+    margin-left: 30px;
+    bottom: 0px;
 }
 
 /* item details */
