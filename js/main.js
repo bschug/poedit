@@ -162,7 +162,7 @@ var PoEdit = new function()
 		item.setTextColor( color );
 		item.setFontSize( 32 );
 		item.setBeamColor( {r:230, g: 140, b: 110} );
-		item.setMapIcon( 'Circle', {r:100, g: 100, b: 250} )
+		item.setMapIcon( 'Triangle', {r:100, g: 100, b: 250} )
 
 		if (item.itemClass === 'Maps' || item.itemClass === 'Map Fragments') {
 			item.setBorderColor( color );

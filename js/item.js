@@ -295,17 +295,11 @@ function Item (itemdata)
     }
 
     this.setMapIcon = function (icon, color) {
-        if (this.mapIconElement === null) {
-            this.mapIconElement = createMapIcon(icon);
-            this.domElement.appendChild(this.mapIconElement);
-        }
-        if (this.mapIconElement.getAttributeNS(null, 'data-icon') !== icon) {
+        if (this.mapIconElement !== null) {
             this.domElement.removeChild(this.mapIconElement);
-            this.mapIconElement = createMapIcon(icon);
-            this.domElement.appendChild(this.mapIconElement);
         }
-
-        this.mapIconElement.style.fill = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+        this.mapIconElement = createMapIcon(icon, color);
+        this.domElement.appendChild(this.mapIconElement);
     }
 
 	function buildCssColor (color) {
@@ -577,30 +571,30 @@ function createBeam() {
     return beamElement;
 }
 
-function createMapIcon(icon) {
+function createMapIcon(icon, color) {
     var iconElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     iconElement.setAttributeNS(null, 'viewBox', '0 0 1 1');
     iconElement.setAttributeNS(null, 'width', 20);
     iconElement.setAttributeNS(null, 'height', 20);
     iconElement.setAttributeNS(null, 'class', 'mapIcon');
 
-    var iconSVG = drawMapIcon(icon);
+    var iconSVG = drawMapIcon(icon, color);
     iconElement.appendChild(iconSVG);
     return iconElement;
 }
 
-function drawMapIcon(icon) {
+function drawMapIcon(icon, color) {
     switch (icon) {
         case 'Circle':
-            return createCircle();
+            return createCircle(color);
         case 'Triangle':
-            return createTriangle();
+            return createTriangle(color);
         case 'Hexagon':
-            return createHexagon();
+            return createHexagon(color);
         case 'Star':
-            return createStar();
+            return createStar(color);
         case 'Diamond':
-            return createDiamond();
+            return createDiamond(color);
     }
 }
 
@@ -610,6 +604,30 @@ function createCircle(color) {
     circle.setAttributeNS(null, 'cx', 0.5);
     circle.setAttributeNS(null, 'cy', 0.5);
     circle.setAttributeNS(null, 'r', 0.35);
-    circle.setAttributeNS(null, 'style', 'stroke:black; stroke-width:0.075; ');
+    circle.setAttributeNS(null, 'style', 'stroke:black; stroke-width:0.075; fill:rgb(' + color.r + ',' + color.g + ',' + color.b + ')');
     return circle;
+}
+
+function createTriangle(color) {
+    var group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+
+    var triangle = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+    triangle.setAttributeNS(null, 'data-icon', 'Triangle');
+    triangle.setAttributeNS(null, 'points', '0.1,0.9 0.5,0.1 0.9,0.9');
+    triangle.setAttributeNS(null, 'style', 'stroke:black; stroke-width:0.075; fill:rgb(' + color.r + ',' + color.g + ',' + color.b + ')');
+    group.appendChild(triangle);
+
+    var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttributeNS(null, 'x1', 0.27);
+    line.setAttributeNS(null, 'y1', 0.55);
+    line.setAttributeNS(null, 'x2', 0.73);
+    line.setAttributeNS(null, 'y2', 0.55);
+    line.setAttributeNS(null, 'style', 'stroke:black; stroke-width:0.04;');
+    group.appendChild(line);
+
+    return group;
+}
+
+function createHexagon(color) {
+    var hexagon = document.createElementNS()
 }
