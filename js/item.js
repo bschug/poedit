@@ -610,9 +610,9 @@ function createCircle(color) {
 
 function createTriangle(color) {
     var group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    group.setAttributeNS(null, 'data-icon', 'Triangle');
 
     var triangle = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-    triangle.setAttributeNS(null, 'data-icon', 'Triangle');
     triangle.setAttributeNS(null, 'points', '0.1,0.9 0.5,0.1 0.9,0.9');
     triangle.setAttributeNS(null, 'style', 'stroke:black; stroke-width:0.075; fill:rgb(' + color.r + ',' + color.g + ',' + color.b + ')');
     group.appendChild(triangle);
@@ -629,5 +629,10 @@ function createTriangle(color) {
 }
 
 function createHexagon(color) {
-    var hexagon = document.createElementNS()
+    var hexagon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+    hexagon.setAttributeNS(null, 'data-icon', 'Hexagon');
+    hexagon.setAttributeNS(null, 'points', '0.5,0.08 0.14,0.29 0.14,0.71 0.5,0.92 0.86,0.71 0.86,0.29');
+    hexagon.setAttributeNS(null, 'style', 'stroke:black; stroke-width:0.075; fill:rgb(' + color.r + ',' + color.g + ',' + color.b + ')');
+    return hexagon;
 }
+
