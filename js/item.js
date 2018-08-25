@@ -285,76 +285,45 @@ function Item (itemdata)
 	        this.beamElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 	        this.beamElement.setAttributeNS(null, 'viewBox', '0 0 1 1');
 	        this.beamElement.setAttributeNS(null, 'width', 40);
-	        this.beamElement.setAttributeNS(null, 'height', 57);
+	        this.beamElement.setAttributeNS(null, 'height', 60);
 	        this.beamElement.setAttributeNS(null, 'class', 'beam');
 	        this.domElement.appendChild(this.beamElement);
 
-	        var baseGradient = document.createElementNS('http://www.w3.org/2000/svg', 'radialGradient');
-	        baseGradient.setAttributeNS(null, 'id', 'baseGradient');
-	        baseGradient.setAttributeNS(null, 'cx', '50%');
-	        baseGradient.setAttributeNS(null, 'cy', '50%');
-	        baseGradient.setAttributeNS(null, 'r', '50%');
+            var baseGradient = createRadialGradient('baseGradient', 'baseGradientInner', 'baseGradientOuter');
 	        this.beamElement.appendChild(baseGradient);
-
-	        var innerColor = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
-	        innerColor.setAttributeNS(null, 'id', 'baseGradientInnerColor');
-	        innerColor.setAttributeNS(null, 'offset', '0%');
-	        innerColor.setAttributeNS(null, 'style', 'stop-color:rgb(255,255,255); stop-opacity:1');
-	        baseGradient.appendChild(innerColor);
-
-	        var outerColor = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
-	        outerColor.setAttributeNS(null, 'id', 'baseGradientOuterColor');
-	        outerColor.setAttributeNS(null, 'offset', '100%');
-	        outerColor.setAttributeNS(null, 'style', 'stop-color:rgb(255,255,255); stop-opacity:0');
-	        baseGradient.appendChild(outerColor);
 
 	        var beamBase = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
 	        beamBase.setAttributeNS(null, 'id', 'base');
 	        beamBase.setAttributeNS(null, 'cx', 0.5);
-	        beamBase.setAttributeNS(null, 'cy', 0.875);
+	        beamBase.setAttributeNS(null, 'cy', 0.9);
 	        beamBase.setAttributeNS(null, 'rx', 0.5);
-	        beamBase.setAttributeNS(null, 'ry', 0.125);
+	        beamBase.setAttributeNS(null, 'ry', 0.1);
 	        beamBase.setAttributeNS(null, 'fill', 'url(#baseGradient)');
 	        this.beamElement.appendChild(beamBase);
 
-            var rayGradient = document.createElementNS('http://www.w3.org/2000/svg', 'radialGradient');
-            rayGradient.setAttributeNS(null, 'id', 'rayGradient')
-            rayGradient.setAttributeNS(null, 'cx', '50%');
-            rayGradient.setAttributeNS(null, 'cy', '100%');
-            rayGradient.setAttributeNS(null, 'r', '110%');
+            var rayGradient = createRadialGradient('rayGradient', 'rayGradientInner', 'rayGradientOuter');
+            rayGradient.setAttributeNS(null, 'gradientTransform', 'scale(1, 3)');
             this.beamElement.appendChild(rayGradient);
 
-	        var innerColor = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
-	        innerColor.setAttributeNS(null, 'id', 'rayGradientInnerColor');
-	        innerColor.setAttributeNS(null, 'offset', '0%');
-	        innerColor.setAttributeNS(null, 'style', 'stop-color:rgb(255,255,255); stop-opacity:1');
-	        rayGradient.appendChild(innerColor);
-
-	        var outerColor = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
-	        outerColor.setAttributeNS(null, 'id', 'rayGradientOuterColor');
-	        outerColor.setAttributeNS(null, 'offset', '100%');
-	        outerColor.setAttributeNS(null, 'style', 'stop-color:rgb(255,255,255); stop-opacity:0');
-	        rayGradient.appendChild(outerColor);
-
             var ray = document.createElementNS('http://www.w3.org/2000/svg', 'rect')
-            ray.setAttributeNS(null, 'width', 0.33);
-            ray.setAttributeNS(null, 'height', 0.875);
+            ray.setAttributeNS(null, 'width', 0.25);
+            ray.setAttributeNS(null, 'height', 0.9);
             ray.setAttributeNS(null, 'x', 0.5 - (0.33/2));
             ray.setAttributeNS(null, 'y', 0);
             ray.setAttributeNS(null, 'fill', 'url(#rayGradient)');
             this.beamElement.appendChild(ray);
         }
 
-	    var innerBaseColor = this.beamElement.getElementById('baseGradientInnerColor');
+	    var innerBaseColor = this.beamElement.getElementById('baseGradientInner');
 	    innerBaseColor.setAttributeNS(null, 'style', 'stop-color:rgb(' + color.r + ',' + color.g + ',' + color.b + '); stop-opacity:1');
 
-	    var outerBaseColor = this.beamElement.getElementById('baseGradientOuterColor');
+	    var outerBaseColor = this.beamElement.getElementById('baseGradientOuter');
 	    outerBaseColor.setAttributeNS(null, 'style', 'stop-color:rgb(' + color.r + ',' + color.g + ',' + color.b + '); stop-opacity:0');
 
-	    var innerRayColor = this.beamElement.getElementById('rayGradientInnerColor');
+	    var innerRayColor = this.beamElement.getElementById('rayGradientInner');
 	    innerRayColor.setAttributeNS(null, 'style', 'stop-color:rgb(' + color.r + ',' + color.g + ',' + color.b + '); stop-opacity:1');
 
-	    var outerRayColor = this.beamElement.getElementById('rayGradientOuterColor');
+	    var outerRayColor = this.beamElement.getElementById('rayGradientOuter');
 	    outerRayColor.setAttributeNS(null, 'style', 'stop-color:rgb(' + color.r + ',' + color.g + ',' + color.b + '); stop-opacity:0');
     }
 
@@ -571,3 +540,26 @@ function Item (itemdata)
 	}
 };
 
+function createRadialGradient(gradientId, innerColorId, outerColorId) {
+    var gradient = document.createElementNS('http://www.w3.org/2000/svg', 'radialGradient');
+    gradient.setAttributeNS(null, 'id', gradientId);
+    gradient.setAttributeNS(null, 'cx', '50%');
+    gradient.setAttributeNS(null, 'cy', '50%');
+    gradient.setAttributeNS(null, 'r', '50%');
+    gradient.setAttributeNS(null, 'fx', '50%');
+    gradient.setAttributeNS(null, 'fy', '50%');
+
+    var innerColor = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    innerColor.setAttributeNS(null, 'id', innerColorId);
+    innerColor.setAttributeNS(null, 'offset', '0%');
+    innerColor.setAttributeNS(null, 'style', 'stop-color:rgb(255,255,255); stop-opacity:1');
+    gradient.appendChild(innerColor);
+
+    var outerColor = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    outerColor.setAttributeNS(null, 'id', outerColorId);
+    outerColor.setAttributeNS(null, 'offset', '100%');
+    outerColor.setAttributeNS(null, 'style', 'stop-color:rgb(255,255,255); stop-opacity:0');
+    gradient.appendChild(outerColor);
+
+    return gradient;
+}

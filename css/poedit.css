@@ -320,11 +320,10 @@
 .item > .beam {
     position: absolute;
     width: 40px;
-    height: 57px;
+    height: 60px;
     left: 50%;
     margin-left: -20px;
-    top: 50%;
-    margin-top: -40px;
+    bottom: -10px;
 }
 
 /* item details */
