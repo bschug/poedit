@@ -164,7 +164,7 @@ var PoEdit = new function()
 		item.setBeamColor( {r:230, g: 140, b: 110} );
 
 		if (Math.random() > 0.9) {
-    		item.setMapIcon( 'Star', {r:240, g: 220, b: 100} )
+    		item.setMapIcon( 'Diamond', {r:240, g: 220, b: 100} )
     	}
 
 		if (item.itemClass === 'Maps' || item.itemClass === 'Map Fragments') {

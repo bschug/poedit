@@ -643,3 +643,30 @@ function createStar(color) {
     star.setAttributeNS(null, 'style', 'stroke:black; stroke-width:0.075; fill:rgb(' + color.r + ',' + color.g + ',' + color.b + ')');
     return star;
 }
+
+function createDiamond(color) {
+    var group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    group.setAttributeNS(null, 'data-icon', 'Diamond');
+
+    var top = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+    top.setAttributeNS(null, 'points', '0.5,0.96 0.27,0.73 0.5,0.5 0.73,0.73');
+    top.setAttributeNS(null, 'style', 'stroke:black; stroke-width:0.075; fill:rgb(' + color.r + ',' + color.g + ',' + color.b + ')');
+    group.appendChild(top);
+
+    var bottom = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+    bottom.setAttributeNS(null, 'points', '0.5,0.5 0.27,0.27 0.5,0.04 0.73,0.27');
+    bottom.setAttributeNS(null, 'style', 'stroke:black; stroke-width:0.075; fill:rgb(' + color.r + ',' + color.g + ',' + color.b + ')');
+    group.appendChild(bottom);
+
+    var left = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+    left.setAttributeNS(null, 'points', '0.42,0.5 0.24,0.69 0.04,0.5 0.23,0.31');
+    left.setAttributeNS(null, 'style', 'stroke:black; stroke-width:0.06; fill:rgb(' + color.r + ',' + color.g + ',' + color.b + ')');
+    group.appendChild(left);
+
+    var right = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+    right.setAttributeNS(null, 'points', '0.58,0.5 0.77,0.31 0.96,0.5 0.77,0.69');
+    right.setAttributeNS(null, 'style', 'stroke:black; stroke-width:0.06; fill:rgb(' + color.r + ',' + color.g + ',' + color.b + ')');
+    group.appendChild(right);
+
+    return group;
+}
