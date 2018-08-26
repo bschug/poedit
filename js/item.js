@@ -282,16 +282,11 @@ function Item (itemdata)
 	}
 
 	this.setBeamColor = function (color) {
-	    if (this.beamElement === null) {
-	        this.beamElement = createBeam();
-	        this.domElement.appendChild(this.beamElement);
+	    if (this.beamElement !== null) {
+	        this.domElement.removeChild(this.beamElement);
         }
-
-        var colorStr = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
-	    this.beamElement.getElementById('baseGradientInner').style.stopColor = colorStr;
-	    this.beamElement.getElementById('baseGradientOuter').style.stopColor = colorStr;
-	    this.beamElement.getElementById('rayGradientInner').style.stopColor = colorStr;
-	    this.beamElement.getElementById('rayGradientOuter').style.stopColor = colorStr;
+	    this.beamElement = createBeam(color);
+	    this.domElement.appendChild(this.beamElement);
     }
 
     this.setMapIcon = function (icon, color) {
@@ -515,7 +510,7 @@ function Item (itemdata)
 	}
 };
 
-function createRadialGradient(gradientId, innerColorId, outerColorId) {
+function createRadialGradient(gradientId, color) {
     var gradient = document.createElementNS('http://www.w3.org/2000/svg', 'radialGradient');
     gradient.id = gradientId;
     gradient.cx = '50%';
@@ -523,28 +518,26 @@ function createRadialGradient(gradientId, innerColorId, outerColorId) {
     gradient.r = '50%';
 
     var innerColor = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
-    innerColor.id = innerColorId;
     innerColor.setAttributeNS(null, 'offset', '0%');
-    innerColor.style = 'stop-color:rgb(255,255,255); stop-opacity:1';
+    innerColor.style = 'stop-color:rgb(' + color.r + ',' + color.g + ',' + color.b + '); stop-opacity:1';
     gradient.appendChild(innerColor);
 
     var outerColor = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
-    outerColor.id = outerColorId;
     outerColor.setAttributeNS(null, 'offset', '100%');
-    outerColor.style = 'stop-color:rgb(255,255,255); stop-opacity:0';
+    outerColor.style = 'stop-color:rgb(' + color.r + ',' + color.g + ',' + color.b + '); stop-opacity:0';
     gradient.appendChild(outerColor);
 
     return gradient;
 }
 
-function createBeam() {
+function createBeam(color) {
     var beamElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     beamElement.setAttributeNS(null, 'viewBox', '0 0 1 1');
     beamElement.setAttributeNS(null, 'width', 40);
     beamElement.setAttributeNS(null, 'height', 60);
     beamElement.setAttributeNS(null, 'class', 'beam');
 
-    var baseGradient = createRadialGradient('baseGradient', 'baseGradientInner', 'baseGradientOuter');
+    var baseGradient = createRadialGradient('baseGradient', color);
     beamElement.appendChild(baseGradient);
 
     var beamBase = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
@@ -556,7 +549,7 @@ function createBeam() {
     beamBase.setAttributeNS(null, 'fill', 'url(#baseGradient)');
     beamElement.appendChild(beamBase);
 
-    var rayGradient = createRadialGradient('rayGradient', 'rayGradientInner', 'rayGradientOuter');
+    var rayGradient = createRadialGradient('rayGradient', color);
     rayGradient.setAttributeNS(null, 'gradientTransform', 'scale(1, 3)');
     beamElement.appendChild(rayGradient);
 
