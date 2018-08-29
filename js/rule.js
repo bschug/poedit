@@ -197,3 +197,18 @@ function CustomAlertSoundModifier (path) {
         // not implemented
     }
 }
+
+function MinimapIconModifier (size, color, shape) {
+    var colors = {
+        'Red': {r:250, g:120, b: 100},
+        'Green': {r:140, g:250, b:120},
+        'Blue': {r:130, g:170, b:250},
+        'Brown': {r:200, g:130, b:80},
+        'White': {r:250, g:250, b:250},
+        'Yellow': {r:220, g:220, b:100}
+    };
+
+    this.applyTo = function (item) {
+        item.setMapIcon( shape, colors[color], size );
+    }
+}

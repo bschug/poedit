@@ -289,11 +289,11 @@ function Item (itemdata)
 	    this.domElement.appendChild(this.beamElement);
     }
 
-    this.setMapIcon = function (icon, color) {
+    this.setMapIcon = function (shape, color, size) {
         if (this.mapIconElement !== null) {
             this.domElement.removeChild(this.mapIconElement);
         }
-        this.mapIconElement = createMapIcon(icon, color);
+        this.mapIconElement = createMapIcon(shape, color, size);
         this.domElement.appendChild(this.mapIconElement);
     }
 
@@ -564,22 +564,24 @@ function createBeam(color) {
     return beamElement;
 }
 
-function createMapIcon(icon, color) {
+function createMapIcon(shape, color, size) {
     var iconElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     iconElement.setAttributeNS(null, 'viewBox', '0 0 1 1');
-    iconElement.setAttributeNS(null, 'width', 20);
-    iconElement.setAttributeNS(null, 'height', 20);
+    iconElement.setAttributeNS(null, 'width', 10 + 10 * size);
+    iconElement.setAttributeNS(null, 'height', 10 + 10 * size);
     iconElement.setAttributeNS(null, 'class', 'mapIcon');
 
-    var iconSVG = drawMapIcon(icon, color);
+    var iconSVG = drawMapIcon(shape, color);
     iconElement.appendChild(iconSVG);
     return iconElement;
 }
 
-function drawMapIcon(icon, color) {
-    switch (icon) {
+function drawMapIcon(shape, color) {
+    switch (shape) {
         case 'Circle':
             return createCircle(color);
+        case 'Square':
+            return createSquare(color);
         case 'Triangle':
             return createTriangle(color);
         case 'Hexagon':
@@ -599,6 +601,14 @@ function createCircle(color) {
     circle.setAttributeNS(null, 'r', 0.35);
     circle.setAttributeNS(null, 'style', 'stroke:black; stroke-width:0.075; fill:rgb(' + color.r + ',' + color.g + ',' + color.b + ')');
     return circle;
+}
+
+function createSquare(color) {
+    var square = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+    square.setAttributeNS(null, 'data-icon', 'Square');
+    square.setAttributeNS(null, 'points', '0.15,0.15 0.15,0.85 0.85,0.85 0.85,0.15')
+    square.setAttributeNS(null, 'style', 'stroke:black; stroke-width:0.075; fill:rgb(' + color.r + ',' + color.g + ',' + color.b + ')');
+    return square;
 }
 
 function createTriangle(color) {

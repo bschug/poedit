@@ -12,7 +12,7 @@ var StrUtils = {
 
 	// Checks if str ends with the suffix.
 	endsWith: function (str, suffix) {
-		return str.indexOf( suffix ) === str.length - suffix.length;
+		return str.endsWith( suffix );
 	},
 
 	// Alphabetically sorts all characters in the string.

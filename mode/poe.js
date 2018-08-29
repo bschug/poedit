@@ -124,6 +124,10 @@ function token(stream, state) {
         if (matchKeyword(stream, ['DisableDropSound'])) {
             return 'keyword';
         }
+        if (matchKeyword(stream, ['MinimapIcon'])) {
+            state.expected = ['ICON_SHAPE','COLOR_NAME','NUMBER']; // This is a stack, so it must be in reverse order!
+            return 'keyword';
+        }
 
         stream.skipToEnd();
         return 'error';
@@ -203,6 +207,18 @@ function token(stream, state) {
 
         if (stream.match(/^[0-9]+/)) {
             return 'number';
+        }
+    }
+
+    if (expected === 'COLOR_NAME') {
+        if (matchKeyword(stream, ['Red', 'Green', 'Blue', 'Brown', 'White', 'Yellow'])) {
+            return 'atom';
+        }
+    }
+
+    if (expected === 'ICON_SHAPE') {
+        if (matchKeyword(stream, ['Circle', 'Diamond', 'Hexagon', 'Square', 'Star', 'Triangle'])) {
+            return 'atom';
         }
     }
 }

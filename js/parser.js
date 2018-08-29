@@ -6,11 +6,13 @@ function Parser() {
 	    'Width', 'Height', 'Identified', 'Corrupted', 'ElderItem', 'ShaperItem', 'ShapedMap', 'HasExplicitMod' ];
 	var MODIFIER_TOKENS = [
 	    'SetBackgroundColor', 'SetBorderColor', 'SetTextColor', 'PlayAlertSound', 'PlayAlertSoundPositional',
-	    'SetFontSize', 'DisableDropSound', 'CustomAlertSound'];
+	    'SetFontSize', 'DisableDropSound', 'CustomAlertSound', 'MinimapIcon' ];
 	var OPERATOR_TOKENS = [ '=', '<', '>', '<=', '>=' ];
 	var RARITY_TOKENS = [ 'Normal', 'Magic', 'Rare', 'Unique' ];
 	var BOOL_TOKENS = [ 'True', 'False' ];
 	var SOUND_TOKENS = [ 'ShAlchemy', 'ShBlessed', 'ShChaos', 'ShDivine', 'ShExalted', 'ShFusing', 'ShGeneral', 'ShMirror', 'ShRegal', 'ShVaal' ];
+    var COLOR_TOKENS = [ 'Red', 'Green', 'Blue', 'Brown', 'White', 'Yellow' ]
+    var ICON_SHAPE_TOKENS = [ 'Circle', 'Diamond', 'Hexagon', 'Square', 'Star', 'Triangle' ]
 
 	this.currentLineNr = 0;
 	this.currentRule = null;
@@ -310,6 +312,7 @@ function Parser() {
 			'SetFontSize': SetFontSizeModifier,
 			'DisableDropSound': DisableDropSoundModifier,
 			'CustomAlertSound': CustomAlertSoundModifier,
+			'MinimapIcon': MinimapIconModifier,
 		};
 
 		switch (token) {
@@ -318,6 +321,10 @@ function Parser() {
 			case 'SetTextColor':
 				parseColorModifier( self, modifiers[token], arguments );
 				break;
+
+            case 'MinimapIcon':
+                parseMinimapIconModifier( self, modifiers[token], arguments );
+                break;
 
 			case 'PlayAlertSound':
 			case 'PlayAlertSoundPositional':
@@ -361,6 +368,34 @@ function Parser() {
 		}
 
 		self.currentRule.modifiers.push( new modifier( color ) );
+	}
+
+	function parseMinimapIconModifier (self, modifier, arguments) {
+	    var tokens = arguments.trim().split(' ');
+	    if (tokens.length !== 3) {
+	        reportTokenError( self, arguments, 'SIZE COLOR SHAPE' );
+	        return;
+	    }
+
+	    var size = tokens[0];
+	    if (size !== '0' && size !== '1' && size !== '2') {
+	        reportParseError( self, size, 'SIZE must be 0, 1 or 2' );
+	        return;
+	    }
+
+	    var color = tokens[1];
+	    if (!COLOR_TOKENS.includes(color)) {
+	        reportParseError( self, color, 'COLOR must be one of: ' + COLOR_TOKENS.join(', '));
+	        return;
+	    }
+
+	    var shape = tokens[2];
+	    if (!ICON_SHAPE_TOKENS.includes(shape)) {
+	        reportParseError( self, shape, 'SHAPE must be one of: ' + ICON_SHAPE_TOKENS.join(', '));
+	        return;
+	    }
+
+	    self.currentRule.modifiers.push( new modifier( parseInt(size), color, shape ) );
 	}
 
 	function parseAlertSoundModifier (self, modifier, arguments) {
