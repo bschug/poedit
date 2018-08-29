@@ -4,7 +4,9 @@ function Parser() {
 	var FILTER_TOKENS = [
 	    'ItemLevel', 'DropLevel', 'Quality', 'Rarity', 'Class', 'BaseType', 'Sockets', 'LinkedSockets', 'SocketGroup',
 	    'Width', 'Height', 'Identified', 'Corrupted', 'ElderItem', 'ShaperItem', 'ShapedMap', 'HasExplicitMod' ];
-	var MODIFIER_TOKENS = [ 'SetBackgroundColor', 'SetBorderColor', 'SetTextColor', 'PlayAlertSound', 'PlayAlertSoundPositional', 'SetFontSize', 'DisableDropSound'];
+	var MODIFIER_TOKENS = [
+	    'SetBackgroundColor', 'SetBorderColor', 'SetTextColor', 'PlayAlertSound', 'PlayAlertSoundPositional',
+	    'SetFontSize', 'DisableDropSound', 'CustomAlertSound'];
 	var OPERATOR_TOKENS = [ '=', '<', '>', '<=', '>=' ];
 	var RARITY_TOKENS = [ 'Normal', 'Magic', 'Rare', 'Unique' ];
 	var BOOL_TOKENS = [ 'True', 'False' ];
@@ -306,7 +308,8 @@ function Parser() {
 			'PlayAlertSound': PlayAlertSoundModifier,
 			'PlayAlertSoundPositional': PlayAlertSoundPositionalModifier,
 			'SetFontSize': SetFontSizeModifier,
-			'DisableDropSound': DisableDropSoundModifier
+			'DisableDropSound': DisableDropSoundModifier,
+			'CustomAlertSound': CustomAlertSoundModifier,
 		};
 
 		switch (token) {
@@ -328,6 +331,10 @@ function Parser() {
 			case 'DisableDropSound':
 				parseKeywordModifier( self, modifiers[token], arguments );
 				break;
+
+            case 'CustomAlertSound':
+                parseFilenameModifier( self, modifiers[token], arguments );
+                break;
 
 			default:
 				// We can only get to this function if token is valid
@@ -413,6 +420,20 @@ function Parser() {
 		}
 
 		self.currentRule.modifiers.push( new modifier() );
+	}
+
+	function parseFilenameModifier (self, modifier, arguments) {
+	    var argumentTokens = parseStringArguments( self, arguments );
+	    if (argumentTokens.length == 0) {
+	        reportUnexpectedEndOfLine( self, arguments, 'Path or Filename' );
+	        return;
+	    }
+	    if (argumentTokens.length > 1) {
+	        reportParseError( self, arguments, 'Unexpected argument: "' + argumentTokens[1] + '"' );
+	        return;
+	    }
+
+	    self.currentRule.modifiers.push( new modifier(argumentTokens[0]) );
 	}
 
 	// ------------------------ GENERIC PARSING ---------------------------------

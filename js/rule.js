@@ -191,3 +191,9 @@ function DisableDropSoundModifier () {
 		// not implemented
 	}
 }
+
+function CustomAlertSoundModifier (path) {
+    this.applyTo = function (item) {
+        // not implemented
+    }
+}
