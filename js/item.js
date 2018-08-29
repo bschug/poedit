@@ -281,7 +281,7 @@ function Item (itemdata)
 		getLabel( this ).style.fontSize = (actualSize).toString() + 'px';
 	}
 
-	this.setBeamColor = function (color) {
+	this.setBeam = function (color, temp) {
 	    if (this.beamElement !== null) {
 	        this.domElement.removeChild(this.beamElement);
         }

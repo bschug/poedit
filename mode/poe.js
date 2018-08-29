@@ -128,6 +128,10 @@ function token(stream, state) {
             state.expected = ['ICON_SHAPE','COLOR_NAME','NUMBER']; // This is a stack, so it must be in reverse order!
             return 'keyword';
         }
+        if (matchKeyword(stream, ['PlayEffect'])) {
+            state.expected = ['STRING', 'COLOR_NAME'];
+            return 'keyword';
+        }
 
         stream.skipToEnd();
         return 'error';

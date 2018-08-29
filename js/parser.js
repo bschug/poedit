@@ -6,7 +6,7 @@ function Parser() {
 	    'Width', 'Height', 'Identified', 'Corrupted', 'ElderItem', 'ShaperItem', 'ShapedMap', 'HasExplicitMod' ];
 	var MODIFIER_TOKENS = [
 	    'SetBackgroundColor', 'SetBorderColor', 'SetTextColor', 'PlayAlertSound', 'PlayAlertSoundPositional',
-	    'SetFontSize', 'DisableDropSound', 'CustomAlertSound', 'MinimapIcon' ];
+	    'SetFontSize', 'DisableDropSound', 'CustomAlertSound', 'MinimapIcon', 'PlayEffect' ];
 	var OPERATOR_TOKENS = [ '=', '<', '>', '<=', '>=' ];
 	var RARITY_TOKENS = [ 'Normal', 'Magic', 'Rare', 'Unique' ];
 	var BOOL_TOKENS = [ 'True', 'False' ];
@@ -151,7 +151,7 @@ function Parser() {
 			'ElderItem': ElderItemFilter,
 			'ShaperItem': ShaperItemFilter,
 			'ShapedMap': ShapedMapFilter,
-			'HasExplicitMod': HasExplicitModFilter
+			'HasExplicitMod': HasExplicitModFilter,
 		};
 
 		switch (token) {
@@ -313,6 +313,7 @@ function Parser() {
 			'DisableDropSound': DisableDropSoundModifier,
 			'CustomAlertSound': CustomAlertSoundModifier,
 			'MinimapIcon': MinimapIconModifier,
+			'PlayEffect': PlayEffectModifier,
 		};
 
 		switch (token) {
@@ -324,6 +325,10 @@ function Parser() {
 
             case 'MinimapIcon':
                 parseMinimapIconModifier( self, modifiers[token], arguments );
+                break;
+
+            case 'PlayEffect':
+                parsePlayEffectModifier( self, modifiers[token], arguments );
                 break;
 
 			case 'PlayAlertSound':
@@ -369,6 +374,31 @@ function Parser() {
 
 		self.currentRule.modifiers.push( new modifier( color ) );
 	}
+
+    function parsePlayEffectModifier (self, modifier, arguments) {
+        var tokens = arguments.trim().split(' ');
+        if (tokens.length > 2) {
+            reportTokenError( self, arguments, 'COLOR Temp' );
+            return;
+        }
+
+        var color = tokens[0].trim();
+        if (!COLOR_TOKENS.includes(color)) {
+            reportTokenError( self, color, 'Color name');
+            return;
+        }
+
+        var temp = false;
+        if (tokens.length > 1) {
+            if (tokens[1] !== 'Temp') {
+                reportTokenError( self, tokens[1], 'Temp');
+                return;
+            }
+            temp = true;
+        }
+
+        self.currentRule.modifiers.push( new modifier( color, temp ));
+    }
 
 	function parseMinimapIconModifier (self, modifier, arguments) {
 	    var tokens = arguments.trim().split(' ');
