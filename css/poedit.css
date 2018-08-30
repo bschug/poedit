@@ -269,16 +269,9 @@
 	cursor: default;
 }
 
-.item > .influence-none {
-    display: none;
-}
-.item > .influence-shaper {
-    color: red;
+.item > .influence {
     margin-right: 3px;
-}
-.item > .influence-elder {
-    color: red;
-    margin-right: 3px
+    height: 16px;
 }
 
 .item > .sockets {

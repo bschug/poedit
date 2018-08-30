@@ -43,6 +43,14 @@ var Influence = {
         }
     },
 
+    getIconUrl: function (i) {
+        switch (i) {
+            case 1: return 'img/ShaperItemSymbol.png';
+            case 2: return 'img/ElderItemSymbol.png';
+            default: throw 'No icon for Influence ' + i;
+        }
+    },
+
     isValid: function (i) {
         return 0 <= i && i <= 2
     },
@@ -215,10 +223,12 @@ function Item (itemdata)
 		var itemDiv = document.createElement( 'div' );
 		itemDiv.className = 'item';
 
-        var influenceDiv = document.createElement( 'span' )
-        influenceDiv.innerHTML = "⏺"
-        influenceDiv.classList.add("influence-" + Influence.getName( this.influence ).toLowerCase())
-        itemDiv.append(influenceDiv);
+        if ( this.influence !== Influence.None ) {
+            var influenceImg = document.createElement( 'img' );
+            influenceImg.src = Influence.getIconUrl( this.influence );
+            influenceImg.classList.add('influence');
+            itemDiv.appendChild( influenceImg );
+        }
 
 		var itemName = document.createElement( 'span' );
 		itemName.classList.add('name');
