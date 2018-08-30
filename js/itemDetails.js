@@ -14,9 +14,13 @@ function ItemDetails() {
     this.influenceLabelOuter = null;
     this.influenceLabelInner = null;
     this.shapedMapLabel = null;
-    this.mapTier = null;
-    this.explicitModsLine = null;
+    this.mapTierLabel = null;
+    this.gemLevelLabel = null;
     this.explicitModsLabel = null;
+
+    this.mapTierLine = null;
+    this.gemLevelLine = null;
+    this.explicitModsLine = null;
 
     this.init = function() {
         this.div = document.getElementById( 'item-details' );
@@ -58,7 +62,12 @@ function ItemDetails() {
                     this.shapedMapLabel = child;
                     break;
                 case 'map-tier':
-                    this.mapTierLabel = child;
+                    this.mapTierLine = child;
+                    this.mapTierLabel = getValueLabel(child);
+                    break;
+                case 'gem-level':
+                    this.gemLevelLine = child;
+                    this.gemLevelLabel = getValueLabel(child);
                     break;
                 case 'explicit-mods':
                     this.explicitModsLine = child;
@@ -91,7 +100,10 @@ function ItemDetails() {
         $(this.influenceLabelOuter).toggle( this.item.influence !== Influence.None );
         this.influenceLabelInner.innerHTML = Influence.getName( this.item.influence );
         $(this.shapedMapLabel).toggle( this.item.shapedMap );
-        $(this.mapTierLabel).innerHTML = this.item.mapTier.toString();
+        this.mapTierLabel.innerHTML = this.item.mapTier.toString();
+        $(this.mapTierLine).toggle( this.item.itemClass === 'Maps' );
+        this.gemLevelLabel.innerHTML = this.item.gemLevel.toString();
+        $(this.gemLevelLine).toggle( this.item.gemLevel > 0 );
         $(this.explicitModsLine).toggle( this.item.explicitMods.length > 0 );
         $(this.explicitModsLabel).empty();
         for (var i=0; i < this.item.explicitMods.length; i++) {

@@ -1051,7 +1051,16 @@ function fillOptionalPropertiesWithDefaults(items) {
         items[i].influence = items[i].influence !== undefined ? items[i].influence : Influence.None;
         items[i].shapedMap = items[i].shapedMap || false;
         items[i].mapTier = items[i].mapTier !== undefined ? items[i].mapTier : (items[i].itemClass === 'Maps' ? items[i].dropLevel - 67 : 0);
+        //items[i].gemLevel = items[i].gemLevel !== undefined ? items[i].gemLevel : (['Active Skill Gems', 'Support Skill Gems'].includes(items[i].itemClass) ? 1 : 0);
         items[i].explicitMods = items[i].explicitMods !== undefined ? items[i].explicitMods : [];
+
+        if (items[i].gemLevel === undefined) {
+            if (items[i].itemClass.endsWith('Skill Gems')) {
+                items[i].gemLevel = 1;
+            } else {
+                items[i].gemLevel = 0;
+            }
+        }
     }
     return items;
 }
@@ -1063,6 +1072,7 @@ function loadItemsLocal() {
         var items = ItemsEditor.jsonToItems( json );
         if (items !== null) {
             ga('send', 'event', 'performance', 'items', 'local', items.length);
+            fillOptionalPropertiesWithDefaults( items );
             return items;
         }
         else {
@@ -1080,6 +1090,7 @@ function loadItemsPastebin (urlArgs, successCb, errorCb) {
             var items = ItemsEditor.jsonToItems( json );
             if (items !== null) {
 				ga('send', 'event', 'performance', 'items', 'pastebin', items.length);
+				fillOptionalPropertiesWithDefaults( items );
                 successCb( items );
                 return;
             }

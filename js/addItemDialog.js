@@ -14,12 +14,14 @@ function AddItemDialog() {
     this.influenceSelect = null;
     this.shapedMapInput = null;
     this.mapTierInput = null;
+    this.gemLevelInput = null;
     this.explicitModsInput = null;
 
     this.identifiedLine = null;
     this.nameLine = null;
     this.shapedMapLine = null;
     this.mapTierLine = null;
+    this.gemLevelLine = null;
 
     this.init = function() {
         this.dialog = document.getElementById( 'additem-dialog' );
@@ -92,6 +94,11 @@ function AddItemDialog() {
                     this.mapTierLine = p;
                     this.mapTierInput = getTextField(p);
                     this.mapTierInput.addEventListener('keydown', onKeyDown);
+                    break;
+                case 'gem-level':
+                    this.gemLevelLine = p;
+                    this.gemLevelInput = getTextField(p);
+                    this.gemLevelInput.addEventListener('keydown', onKeyDown);
                     break;
                 case 'explicit-mods':
                     this.explicitModsInput = getTextField( p );

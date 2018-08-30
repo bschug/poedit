@@ -117,6 +117,7 @@ function ItemsEditor() {
             influence: 'string',
             shapedMap: 'boolean',
             mapTier: 'number',
+            gemLevel: 'number',
             explicitMods: 'object'
         };
 
@@ -127,6 +128,7 @@ function ItemsEditor() {
             corrupted: false,
             influence: 'None',
             shapedMap: false,
+            gemLevel: 0,
             explicitMods: []
         }
 
@@ -200,6 +202,8 @@ function ItemsEditor() {
             corrupted: item.corrupted,
             influence: Influence.getName( item.influence ),
             shapedMap: item.shapedMap,
+            mapTier: item.mapTier,
+            gemLevel: item.gemLevel,
             explicitMods: item.explicitMods
         };
     }
@@ -220,6 +224,8 @@ function ItemsEditor() {
             corrupted: data.corrupted,
             influence: Influence[ data.influence ],
             shapedMap: data.shapedMap,
+            mapTier: data.mapTier,
+            gemLevel: data.gemLevel,
             explicitMods: data.explicitMods
         };
     }

@@ -150,7 +150,13 @@ function HasExplicitModFilter (mods) {
 
 function MapTierFilter (comparer, tier) {
     this.match = function (item) {
-        return comparer( item.mapTier, tier );
+        return item.mapTier !== 0 && comparer( item.mapTier, tier );
+    }
+}
+
+function GemLevelFilter (comparer, level) {
+    this.match = function (item) {
+        return item.gemLevel !== 0 && comparer( item.gemLevel, level );
     }
 }
 
