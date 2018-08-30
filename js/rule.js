@@ -148,6 +148,12 @@ function HasExplicitModFilter (mods) {
     }
 }
 
+function MapTierFilter (comparer, tier) {
+    this.match = function (item) {
+        return comparer( item.mapTier, tier );
+    }
+}
+
 // ------------------------ Modifiers --------------------------------------
 
 function SetBackgroundColorModifier (color) {

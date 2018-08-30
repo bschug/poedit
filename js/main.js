@@ -161,6 +161,8 @@ var PoEdit = new function()
 		item.setBackgroundColor( BLACK_75 );
 		item.setTextColor( color );
 		item.setFontSize( 32 );
+		item.removeMapIcon();
+		item.removeBeam();
 
 		if (item.itemClass === 'Maps' || item.itemClass === 'Map Fragments') {
 			item.setBorderColor( color );

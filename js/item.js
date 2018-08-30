@@ -75,6 +75,7 @@ function ItemData() {
 	this.corrupted = false;
 	this.influence = Influence.None;
 	this.shapedMap = false;
+	this.mapTier = 0;
 
 	this.explicitMods = [];
 
@@ -124,6 +125,7 @@ ItemData.validate = function (item) {
 	assertInArray( item.corrupted, [true, false], 'Invalid Corrupted property' );
 	assertTrue( Influence.isValid( item.influence, 'Invalid Influence' ));
 	assertInArray( item.shapedMap, [true, false], 'Invalid ShapedMap property' );
+	assertInRange( item.mapTier, 0, 20, 'Invalid MapTier' );
 	var maxSockets = Math.min( 6, item.width * item.height );
 	assertInRange( ItemData.countSockets( item.sockets ), 0, maxSockets, 'Too many sockets for this item size' );
 	assertTrue( 'explicitMods' in item, 'Item has no ExplicitMods list' );
@@ -141,6 +143,7 @@ ItemData.areEqual = function (data, item) {
 		&& data.height === item.height
 		&& data.identified === item.identified
 		&& data.corrupted === item.corrupted
+		&& data.mapTier === item.mapTier
 		&& ArrayUtils.areEqual( data.explicitMods, item.explicitMods )
 		&& ArrayUtils.areEqual( data.sockets, item.sockets );
 }
@@ -170,6 +173,7 @@ function Item (itemdata)
 	this.corrupted = itemdata.corrupted;
 	this.influence = itemdata.influence;
 	this.shapedMap = itemdata.shapedMap;
+	this.mapTier = itemdata.mapTier;
 	this.explicitMods = itemdata.explicitMods;
 
 	this.width = itemdata.width;
@@ -282,19 +286,29 @@ function Item (itemdata)
 	}
 
 	this.setBeam = function (color, temp) {
-	    if (this.beamElement !== null) {
-	        this.domElement.removeChild(this.beamElement);
-        }
+	    this.removeBeam();
 	    this.beamElement = createBeam(color);
 	    this.domElement.appendChild(this.beamElement);
     }
 
-    this.setMapIcon = function (shape, color, size) {
-        if (this.mapIconElement !== null) {
-            this.domElement.removeChild(this.mapIconElement);
+    this.removeBeam = function() {
+        if (this.beamElement !== null) {
+            this.domElement.removeChild(this.beamElement);
+            this.beamElement = null;
         }
+    }
+
+    this.setMapIcon = function (shape, color, size) {
+        this.removeMapIcon();
         this.mapIconElement = createMapIcon(shape, color, size);
         this.domElement.appendChild(this.mapIconElement);
+    }
+
+    this.removeMapIcon = function() {
+        if (this.mapIconElement !== null) {
+            this.domElement.removeChild(this.mapIconElement);
+            this.mapIconElement = null;
+        }
     }
 
 	function buildCssColor (color) {

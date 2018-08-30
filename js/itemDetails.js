@@ -14,6 +14,7 @@ function ItemDetails() {
     this.influenceLabelOuter = null;
     this.influenceLabelInner = null;
     this.shapedMapLabel = null;
+    this.mapTier = null;
     this.explicitModsLine = null;
     this.explicitModsLabel = null;
 
@@ -56,6 +57,9 @@ function ItemDetails() {
                 case 'shaped-map':
                     this.shapedMapLabel = child;
                     break;
+                case 'map-tier':
+                    this.mapTierLabel = child;
+                    break;
                 case 'explicit-mods':
                     this.explicitModsLine = child;
                     this.explicitModsLabel = getValueLabel( child );
@@ -87,7 +91,7 @@ function ItemDetails() {
         $(this.influenceLabelOuter).toggle( this.item.influence !== Influence.None );
         this.influenceLabelInner.innerHTML = Influence.getName( this.item.influence );
         $(this.shapedMapLabel).toggle( this.item.shapedMap );
-
+        $(this.mapTierLabel).innerHTML = this.item.mapTier.toString();
         $(this.explicitModsLine).toggle( this.item.explicitMods.length > 0 );
         $(this.explicitModsLabel).empty();
         for (var i=0; i < this.item.explicitMods.length; i++) {

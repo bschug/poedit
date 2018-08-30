@@ -116,6 +116,7 @@ function ItemsEditor() {
             corrupted: 'boolean',
             influence: 'string',
             shapedMap: 'boolean',
+            mapTier: 'number',
             explicitMods: 'object'
         };
 
@@ -133,6 +134,9 @@ function ItemsEditor() {
             if (!(key in data)) {
                 if (key in defaultValues) {
                     data[key] = defaultValues[key];
+                }
+                else if (key === 'mapTier') {
+                    data[key] = data.dropLevel - 67;
                 }
                 else {
                     alert( 'Item number ' + itemNr + '(' + data['name'] + ') has no ' + key);

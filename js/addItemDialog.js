@@ -13,11 +13,13 @@ function AddItemDialog() {
     this.nameInput = null;
     this.influenceSelect = null;
     this.shapedMapInput = null;
+    this.mapTierInput = null;
     this.explicitModsInput = null;
 
     this.identifiedLine = null;
     this.nameLine = null;
     this.shapedMapLine = null;
+    this.mapTierLine = null;
 
     this.init = function() {
         this.dialog = document.getElementById( 'additem-dialog' );
@@ -86,6 +88,11 @@ function AddItemDialog() {
                     this.shapedMapInput.addEventListener('keydown', onKeyDown);
                     this.shapedMapInput.addEventListener('change', onChange);
                     break;
+                case 'map-tier':
+                    this.mapTierLine = p;
+                    this.mapTierInput = getTextField(p);
+                    this.mapTierInput.addEventListener('keydown', onKeyDown);
+                    break;
                 case 'explicit-mods':
                     this.explicitModsInput = getTextField( p );
                     this.explicitModsInput.addEventListener('keydown', onKeyDown);
@@ -128,6 +135,7 @@ function AddItemDialog() {
         this.influenceSelect.selectedIndex = 0;
         this.shapedMapLine.style.display = 'none';
         this.shapedMapInput.checked = false;
+        this.mapTierInput.value = "";
         this.explicitModsInput.value = "";
     }
 
@@ -136,9 +144,12 @@ function AddItemDialog() {
     this.onChange = function(event) {
         // Show Shaped Map checkbox only for maps
         if (this.itemClassInput.value === 'Maps' || this.itemClassInput === 'Map') {
-            this.shapedMapLine.style.display = 'block'
+            this.shapedMapLine.style.display = 'block';
+            this.mapTierLine.style.display = 'block';
         } else {
             this.shapedMapLine.style.display = 'none';
+            this.mapTierLine.style.display = 'none';
+            this.mapTierInput.value = '0';
         }
 
         // For non-magic items, never show idenfied or name.
@@ -194,6 +205,7 @@ function AddItemDialog() {
             corrupted: this.corruptedInput.checked,
             influence: Influence.parse( getSelectedText( this.influenceSelect ) ),
             shapedMap: this.shapedMapInput.checked,
+            mapTier: parseInt( this.mapTierInput.value ),
             explicitMods: this.explicitModsInput.value.split(',')
         };
 

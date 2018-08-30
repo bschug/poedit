@@ -1050,6 +1050,7 @@ function fillOptionalPropertiesWithDefaults(items) {
         items[i].corrupted = items[i].corrupted || false;
         items[i].influence = items[i].influence !== undefined ? items[i].influence : Influence.None;
         items[i].shapedMap = items[i].shapedMap || false;
+        items[i].mapTier = items[i].mapTier !== undefined ? items[i].mapTier : (items[i].itemClass === 'Maps' ? items[i].dropLevel - 67 : 0);
         items[i].explicitMods = items[i].explicitMods !== undefined ? items[i].explicitMods : [];
     }
     return items;
