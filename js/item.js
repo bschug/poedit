@@ -605,8 +605,8 @@ function createBeam(color) {
 function createMapIcon(shape, color, size) {
     var iconElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     iconElement.setAttributeNS(null, 'viewBox', '0 0 1 1');
-    iconElement.setAttributeNS(null, 'width', 10 + 10 * size);
-    iconElement.setAttributeNS(null, 'height', 10 + 10 * size);
+    iconElement.setAttributeNS(null, 'width', 10 + 10 * (2 - size));
+    iconElement.setAttributeNS(null, 'height', 10 + 10 * (2 - size));
     iconElement.setAttributeNS(null, 'class', 'mapIcon');
 
     var iconSVG = drawMapIcon(shape, color);
