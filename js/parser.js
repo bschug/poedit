@@ -4,7 +4,7 @@ function Parser() {
 	var FILTER_TOKENS = [
 	    'ItemLevel', 'DropLevel', 'Quality', 'Rarity', 'Class', 'BaseType', 'Sockets', 'LinkedSockets', 'SocketGroup',
 	    'Width', 'Height', 'Identified', 'Corrupted', 'ElderItem', 'ShaperItem', 'ShapedMap', 'HasExplicitMod', 'MapTier',
-	    'GemLevel'];
+	    'GemLevel', 'StackSize'];
 	var MODIFIER_TOKENS = [
 	    'SetBackgroundColor', 'SetBorderColor', 'SetTextColor', 'PlayAlertSound', 'PlayAlertSoundPositional',
 	    'SetFontSize', 'DisableDropSound', 'CustomAlertSound', 'MinimapIcon', 'PlayEffect' ];
@@ -155,6 +155,7 @@ function Parser() {
 			'HasExplicitMod': HasExplicitModFilter,
 			'MapTier': MapTierFilter,
 			'GemLevel': GemLevelFilter,
+			'StackSize': StackSizeFilter,
 		};
 
 		switch (token) {
@@ -167,6 +168,7 @@ function Parser() {
 			case 'Height':
 			case 'MapTier':
 			case 'GemLevel':
+			case 'StackSize':
 				parseNumericFilter( self, filters[token], arguments );
 				return;
 

@@ -118,6 +118,7 @@ function ItemsEditor() {
             shapedMap: 'boolean',
             mapTier: 'number',
             gemLevel: 'number',
+            stackSize: 'number',
             explicitMods: 'object'
         };
 
@@ -129,6 +130,7 @@ function ItemsEditor() {
             influence: 'None',
             shapedMap: false,
             gemLevel: 0,
+            stackSize: 1,
             explicitMods: []
         }
 
@@ -204,6 +206,7 @@ function ItemsEditor() {
             shapedMap: item.shapedMap,
             mapTier: item.mapTier,
             gemLevel: item.gemLevel,
+            stackSize: item.stackSize,
             explicitMods: item.explicitMods
         };
     }
@@ -226,6 +229,7 @@ function ItemsEditor() {
             shapedMap: data.shapedMap,
             mapTier: data.mapTier,
             gemLevel: data.gemLevel,
+            stackSize: data.stackSize,
             explicitMods: data.explicitMods
         };
     }

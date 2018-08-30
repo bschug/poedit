@@ -15,6 +15,7 @@ function AddItemDialog() {
     this.shapedMapInput = null;
     this.mapTierInput = null;
     this.gemLevelInput = null;
+    this.stackSizeInput = null;
     this.explicitModsInput = null;
 
     this.identifiedLine = null;
@@ -22,6 +23,7 @@ function AddItemDialog() {
     this.shapedMapLine = null;
     this.mapTierLine = null;
     this.gemLevelLine = null;
+    this.stackSizeLine = null;
 
     this.init = function() {
         this.dialog = document.getElementById( 'additem-dialog' );
@@ -100,6 +102,11 @@ function AddItemDialog() {
                     this.gemLevelInput = getTextField(p);
                     this.gemLevelInput.addEventListener('keydown', onKeyDown);
                     break;
+                case 'stack-size':
+                    this.stackSizeLine = p;
+                    this.stackSizeInput = getTextField(p);
+                    this.stackSizeInput.addEventListener('keydown', onKeyDown);
+                    break;
                 case 'explicit-mods':
                     this.explicitModsInput = getTextField( p );
                     this.explicitModsInput.addEventListener('keydown', onKeyDown);
@@ -143,6 +150,7 @@ function AddItemDialog() {
         this.shapedMapLine.style.display = 'none';
         this.shapedMapInput.checked = false;
         this.mapTierInput.value = "";
+        this.stackSizeInput.value = "";
         this.explicitModsInput.value = "";
     }
 
@@ -213,6 +221,8 @@ function AddItemDialog() {
             influence: Influence.parse( getSelectedText( this.influenceSelect ) ),
             shapedMap: this.shapedMapInput.checked,
             mapTier: parseInt( this.mapTierInput.value ),
+            gemLevel: parseInt( this.gemLevelInput.value ),
+            stackSize: parseInt( this.stackSizeInput.value ),
             explicitMods: this.explicitModsInput.value.split(',')
         };
 

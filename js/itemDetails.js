@@ -16,10 +16,12 @@ function ItemDetails() {
     this.shapedMapLabel = null;
     this.mapTierLabel = null;
     this.gemLevelLabel = null;
+    this.stackSizeLabel = null;
     this.explicitModsLabel = null;
 
     this.mapTierLine = null;
     this.gemLevelLine = null;
+    this.stackSizeLine = null;
     this.explicitModsLine = null;
 
     this.init = function() {
@@ -69,6 +71,10 @@ function ItemDetails() {
                     this.gemLevelLine = child;
                     this.gemLevelLabel = getValueLabel(child);
                     break;
+                case 'stack-size':
+                    this.stackSizeLine = child;
+                    this.stackSizeLabel = getValueLabel(child);
+                    break;
                 case 'explicit-mods':
                     this.explicitModsLine = child;
                     this.explicitModsLabel = getValueLabel( child );
@@ -104,6 +110,8 @@ function ItemDetails() {
         $(this.mapTierLine).toggle( this.item.itemClass === 'Maps' );
         this.gemLevelLabel.innerHTML = this.item.gemLevel.toString();
         $(this.gemLevelLine).toggle( this.item.gemLevel > 0 );
+        this.stackSizeLabel.innerHTML = this.item.stackSize.toString();
+        $(this.stackSizeLine).toggle( this.item.stackSize > 1 );
         $(this.explicitModsLine).toggle( this.item.explicitMods.length > 0 );
         $(this.explicitModsLabel).empty();
         for (var i=0; i < this.item.explicitMods.length; i++) {

@@ -160,6 +160,12 @@ function GemLevelFilter (comparer, level) {
     }
 }
 
+function StackSizeFilter (comparer, size) {
+    this.match = function (item) {
+        return comparer( item.stackSize, size );
+    }
+}
+
 // ------------------------ Modifiers --------------------------------------
 
 function SetBackgroundColorModifier (color) {

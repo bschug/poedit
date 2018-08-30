@@ -85,6 +85,7 @@ function ItemData() {
 	this.shapedMap = false;
 	this.mapTier = 0;
 	this.gemLevel = 0;
+	this.stackSize = 1;
 
 	this.explicitMods = [];
 
@@ -134,7 +135,9 @@ ItemData.validate = function (item) {
 	assertInArray( item.corrupted, [true, false], 'Invalid Corrupted property' );
 	assertTrue( Influence.isValid( item.influence, 'Invalid Influence' ));
 	assertInArray( item.shapedMap, [true, false], 'Invalid ShapedMap property' );
+	item.mapTier = item.mapTier ? item.mapTier : 0;
 	assertInRange( item.mapTier, 0, 20, 'Invalid MapTier' );
+	item.gemLevel = item.gemLevel ? item.gemLevel : 0;
 	assertInRange( item.gemLevel, 0, 23, 'Invalid Gem Level')
 	var maxSockets = Math.min( 6, item.width * item.height );
 	assertInRange( ItemData.countSockets( item.sockets ), 0, maxSockets, 'Too many sockets for this item size' );
@@ -155,6 +158,7 @@ ItemData.areEqual = function (data, item) {
 		&& data.corrupted === item.corrupted
 		&& data.mapTier === item.mapTier
 		&& data.gemLevel === item.gemLevel
+		&& data.stackSize === item.stackSize
 		&& ArrayUtils.areEqual( data.explicitMods, item.explicitMods )
 		&& ArrayUtils.areEqual( data.sockets, item.sockets );
 }
@@ -186,6 +190,7 @@ function Item (itemdata)
 	this.shapedMap = itemdata.shapedMap;
 	this.mapTier = itemdata.mapTier;
 	this.gemLevel = itemdata.gemLevel;
+	this.stackSize = itemdata.stackSize;
 	this.explicitMods = itemdata.explicitMods;
 
 	this.width = itemdata.width;
@@ -201,14 +206,19 @@ function Item (itemdata)
 	this.matchingRule = null;
 
 	this.getDisplayName = function() {
+	    var suffix = '';
+	    if (this.stackSize > 1) {
+	        suffix = ' (' + this.stackSize + ')';
+	    }
+
 		if (!this.identified && this.quality > 0) {
-			return 'Superior ' + this.baseType;
+			return 'Superior ' + this.baseType + suffix;
 		}
 		if (!this.identified) {
-			return this.baseType;
+			return this.baseType + suffix;
 		}
 		else {
-			return this.name + "<BR>" + this.baseType;
+			return this.name + suffix + "<BR>" + this.baseType;
 		}
 	}
 

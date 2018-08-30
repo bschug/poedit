@@ -86,7 +86,7 @@ function token(stream, state) {
             return 'error';
         }
 
-        if (matchKeyword(stream, ['ItemLevel','DropLevel','Quality','Sockets','LinkedSockets','Width','Height','MapTier','GemLevel'])) {
+        if (matchKeyword(stream, ['ItemLevel','DropLevel','Quality','Sockets','LinkedSockets','Width','Height','MapTier','GemLevel','StackSize'])) {
             state.expected = ['NUMBER_FORMULA'];
             return 'keyword';
         }
