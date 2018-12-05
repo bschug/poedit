@@ -4,7 +4,7 @@ function Parser() {
 	var FILTER_TOKENS = [
 	    'ItemLevel', 'DropLevel', 'Quality', 'Rarity', 'Class', 'BaseType', 'Sockets', 'LinkedSockets', 'SocketGroup',
 	    'Width', 'Height', 'Identified', 'Corrupted', 'ElderItem', 'ShaperItem', 'ShapedMap', 'HasExplicitMod', 'MapTier',
-	    'GemLevel', 'StackSize'];
+	    'GemLevel', 'StackSize', 'Prophecy'];
 	var MODIFIER_TOKENS = [
 	    'SetBackgroundColor', 'SetBorderColor', 'SetTextColor', 'PlayAlertSound', 'PlayAlertSoundPositional',
 	    'SetFontSize', 'DisableDropSound', 'CustomAlertSound', 'MinimapIcon', 'PlayEffect' ];
@@ -156,6 +156,7 @@ function Parser() {
 			'MapTier': MapTierFilter,
 			'GemLevel': GemLevelFilter,
 			'StackSize': StackSizeFilter,
+			'Prophecy': ProphecyFilter,
 		};
 
 		switch (token) {
@@ -179,6 +180,7 @@ function Parser() {
 			case 'Class':
 			case 'BaseType':
 			case 'HasExplicitMod':
+			case 'Prophecy':
 				parseMultiStringFilter( self, filters[token], arguments );
 				return;
 

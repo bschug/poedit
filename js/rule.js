@@ -144,7 +144,7 @@ function ShapedMapFilter (value) {
 
 function HasExplicitModFilter (mods) {
     this.match = function (item) {
-        return mods.some( function(mod) { item.hasExplicitMod( mod ); } );
+        return mods.some( function(mod) { return item.hasExplicitMod( mod ); } );
     }
 }
 
@@ -163,6 +163,12 @@ function GemLevelFilter (comparer, level) {
 function StackSizeFilter (comparer, size) {
     this.match = function (item) {
         return comparer( item.stackSize, size );
+    }
+}
+
+function ProphecyFilter (names) {
+    this.match = function (item) {
+        return names.some( function(name) { return item.baseType == 'Prophecy' && StrUtils.contains( name, item.name ); } );
     }
 }
 

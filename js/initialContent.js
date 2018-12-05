@@ -1036,10 +1036,37 @@ function getDefaultItems() {
             height: 1,
             sockets: []
         }
-    ]
+    ];
+
+    var prophecies = [
+        {
+            name: 'Monstrous Treasure',
+            itemLevel: 43,
+            dropLevel: 1,
+            quality: 0,
+            itemClass: 'Stackable Currency',
+            baseType: 'Prophecy',
+            rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
+            sockets: []
+        },
+        {
+            name: 'The Cursed Choir',
+            itemLevel: 1,
+            dropLevel: 1,
+            quality: 0,
+            itemClass: 'Stackable Currency',
+            baseType: 'Prophecy',
+            rarity: Rarity.Normal,
+            width: 1,
+            height: 1,
+            sockets: []
+        }
+    ];
 
     var all = [].concat(weapons, armor, jewelry, gems, currency, maps, jewels,
-                        flasks, divinationCards, fishingRods, questItems );
+                        flasks, divinationCards, fishingRods, questItems, prophecies );
     fillOptionalPropertiesWithDefaults(all);
     return all;
 }

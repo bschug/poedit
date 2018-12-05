@@ -211,11 +211,11 @@ function Item (itemdata)
 	        suffix = ' (' + this.stackSize + ')';
 	    }
 
-		if (!this.identified && this.quality > 0) {
+		if (this.quality > 0) {
 			return 'Superior ' + this.baseType + suffix;
 		}
 		if (!this.identified) {
-			return this.baseType + suffix;
+			return this.name + suffix;
 		}
 		else {
 			return this.name + suffix + "<BR>" + this.baseType;

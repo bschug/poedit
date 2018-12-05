@@ -94,7 +94,7 @@ function token(stream, state) {
             state.expected = ['RARITY_FORMULA'];
             return 'keyword';
         }
-        if (matchKeyword(stream, ['Class','BaseType', 'HasExplicitMod', 'CustomAlertSound'])) {
+        if (matchKeyword(stream, ['Class','BaseType', 'HasExplicitMod', 'CustomAlertSound', 'Prophecy'])) {
             state.expected = ['STRINGS'];
             return 'keyword';
         }
