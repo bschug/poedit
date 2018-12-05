@@ -129,7 +129,7 @@ function token(stream, state) {
             return 'keyword';
         }
         if (matchKeyword(stream, ['PlayEffect'])) {
-            state.expected = ['STRING', 'COLOR_NAME'];
+            state.expected = ['TEMP', 'COLOR_NAME'];
             return 'keyword';
         }
 
@@ -216,6 +216,12 @@ function token(stream, state) {
 
     if (expected === 'COLOR_NAME') {
         if (matchKeyword(stream, ['Red', 'Green', 'Blue', 'Brown', 'White', 'Yellow'])) {
+            return 'atom';
+        }
+    }
+
+    if (expected === 'TEMP') {
+        if (matchKeyword(stream, ['Temp'])) {
             return 'atom';
         }
     }
