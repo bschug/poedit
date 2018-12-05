@@ -128,6 +128,7 @@ var PoEdit = new function()
 		var CYAN = {r:27, g:162, b:155};
 		var GREEN = {r:74, g:230, b:58};
 		var LIGHT_CYAN = {r:170, g:230, b:230};
+		var PURPLE = {r:181, g:75, b:255};
 
 		var color = WHITE;
 
@@ -140,7 +141,10 @@ var PoEdit = new function()
 		else if (item.rarity === Rarity.Unique) {
 			color = ORANGE;
 		}
-		else if (item.itemClass === 'Currency') {
+		else if (item.baseType === 'Prophecy') {
+		    color = PURPLE;
+		}
+		else if (item.itemClass === 'Currency' || item.itemClass === 'Stackable Currency') {
 			color = GOLD;
 		}
 		else if (StrUtils.contains( 'Gem', item.itemClass )) {
