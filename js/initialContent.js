@@ -704,12 +704,12 @@ function getDefaultItems() {
     		sockets: []
     	},
         {
-    		name: 'Eternal Orb',
+    		name: 'Ancient Orb',
     		itemLevel: 52,
     		dropLevel: 1,
     		quality: 0,
     		itemClass: 'Stackable Currency',
-    		baseType: 'Eternal Orb',
+    		baseType: 'Ancient Orb',
     		rarity: Rarity.Normal,
             width: 1,
             height: 1,
