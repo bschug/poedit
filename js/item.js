@@ -81,6 +81,8 @@ function ItemData() {
 	this.height = 1;
 	this.identified = false;
 	this.corrupted = false;
+	this.fracturedItem = false;
+	this.synthesisedItem = false;
 	this.influence = Influence.None;
 	this.shapedMap = false;
 	this.mapTier = 0;
@@ -133,6 +135,8 @@ ItemData.validate = function (item) {
     assertInRange( item.height, 1, 5, 'Invalid height' );
 	assertInArray( item.identified, [true, false], 'Invalid Identified property' );
 	assertInArray( item.corrupted, [true, false], 'Invalid Corrupted property' );
+	assertInArray( item.fracturedItem, [true, false], 'Invalid FracturedItem property' );
+	assertInArray( item.synthesisedItem, [true, false], 'Invalid SynthesisedItem property' );
 	assertTrue( Influence.isValid( item.influence, 'Invalid Influence' ));
 	assertInArray( item.shapedMap, [true, false], 'Invalid ShapedMap property' );
 	item.mapTier = item.mapTier ? item.mapTier : 0;
@@ -156,6 +160,8 @@ ItemData.areEqual = function (data, item) {
 		&& data.height === item.height
 		&& data.identified === item.identified
 		&& data.corrupted === item.corrupted
+		&& data.fracturedItem === item.fracturedItem
+		&& data.synthesisedItem === item.synthesisedItem
 		&& data.mapTier === item.mapTier
 		&& data.gemLevel === item.gemLevel
 		&& data.stackSize === item.stackSize
@@ -186,6 +192,8 @@ function Item (itemdata)
 	this.baseType = itemdata.baseType;
 	this.identified = itemdata.identified;
 	this.corrupted = itemdata.corrupted;
+	this.fracturedItem = itemdata.fracturedItem;
+	this.synthesisedItem = itemdata.synthesisedItem;
 	this.influence = itemdata.influence;
 	this.shapedMap = itemdata.shapedMap;
 	this.mapTier = itemdata.mapTier;

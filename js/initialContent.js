@@ -303,12 +303,24 @@ function getDefaultItems() {
     		baseType: 'Vaal Gauntlets',
     		rarity: Rarity.Rare,
             width: 2,
-            height: 3,
+            height: 2,
     		sockets: ['R'],
             identified: true,
             corrupted: true
     	},
-
+    	{
+    	    name: 'Glorious Plate',
+    	    itemLevel: 77,
+    	    dropLevel: 68,
+    	    quality: 0,
+    	    itemClass: 'Body Armours',
+    	    baseType: 'Glorious Plate',
+    	    rarity: Rarity.Rare,
+    	    width: 2,
+    	    height: 3,
+    	    sockets: ['RR','R','G'],
+    	    fracturedItem: true
+    	}
     ];
 
     var jewelry = [
@@ -809,7 +821,7 @@ function getDefaultItems() {
         {
     		name: 'Crimson Jewel',
     		itemLevel: 20,
-    		dropLevel: 12,
+    		dropLevel: 1,
     		quality: 0,
     		itemClass: 'Jewels',
     		baseType: 'Crimson Jewel',
@@ -821,7 +833,7 @@ function getDefaultItems() {
     	{
     		name: 'Viridian Jewel',
     		itemLevel: 72,
-    		dropLevel: 61,
+    		dropLevel: 1,
     		quality: 0,
     		itemClass: 'Jewels',
     		baseType: 'Viridian Jewel',
@@ -830,7 +842,19 @@ function getDefaultItems() {
             height: 1,
     		sockets: []
     	},
-
+        {
+            name: 'Cobalt Jewel',
+            itemLevel: 50,
+            dropLevel: 1,
+            quality: 0,
+            itemClass: 'Jewels',
+            baseType: 'Cobalt Jewel',
+            rarity: Rarity.Magic,
+            width: 1,
+            height: 1,
+            sockets: [],
+            synthesisedItem: true
+        }
     ];
 
     var flasks = [

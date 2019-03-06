@@ -11,6 +11,8 @@ function ItemDetails() {
     this.socketsLabel = null;
     this.identifiedLabel = null;
     this.corruptedLabel = null;
+    this.fracturedItemLabel = null;
+    this.synthesisedItemLabel = null;
     this.influenceLabelOuter = null;
     this.influenceLabelInner = null;
     this.shapedMapLabel = null;
@@ -55,6 +57,12 @@ function ItemDetails() {
                     break;
                 case 'corrupted':
                     this.corruptedLabel = child;
+                    break;
+                case 'fractured-item':
+                    this.fracturedItemLabel = child;
+                    break;
+                case 'synthesised-item':
+                    this.synthesisedItemLabel = child;
                     break;
                 case 'influence':
                     this.influenceLabelOuter = child;
@@ -103,6 +111,8 @@ function ItemDetails() {
         this.socketsLabel.innerHTML = this.item.sockets.join(' ');
         $(this.identifiedLabel).toggle( this.item.identified );
         $(this.corruptedLabel).toggle( this.item.corrupted );
+        $(this.fracturedItemLabel).toggle( this.item.fracturedItem );
+        $(this.synthesisedItemLabel).toggle( this.item.synthesisedItem );
         $(this.influenceLabelOuter).toggle( this.item.influence !== Influence.None );
         this.influenceLabelInner.innerHTML = Influence.getName( this.item.influence );
         $(this.shapedMapLabel).toggle( this.item.shapedMap );

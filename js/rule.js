@@ -136,6 +136,18 @@ function ShaperItemFilter (value) {
     }
 }
 
+function FracturedItemFilter (value) {
+    this.match = function (item) {
+        return item.fracturedItem === value;
+    }
+}
+
+function SynthesisedItemFilter (value) {
+    this.match = function (item) {
+        return item.synthesisedItem === value;
+    }
+}
+
 function ShapedMapFilter (value) {
     this.match = function (item) {
         return item.shapedMap === value;

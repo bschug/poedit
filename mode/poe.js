@@ -102,7 +102,7 @@ function token(stream, state) {
             state.expected = ['SOCKETS'];
             return 'keyword';
         }
-        if (matchKeyword(stream, ['Identified', 'Corrupted', 'ShaperItem', 'ElderItem', 'ShapedMap'])) {
+        if (matchKeyword(stream, ['Identified', 'Corrupted', 'ShaperItem', 'ElderItem', 'ShapedMap', 'FracturedItem', 'SynthesisedItem'])) {
             state.expected = ['BOOLEAN'];
             return 'keyword';
         }
