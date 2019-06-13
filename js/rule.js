@@ -184,6 +184,12 @@ function ProphecyFilter (names) {
     }
 }
 
+function AnyEnchantmentFilter (value) {
+    this.match = function (item) {
+        return !value;
+    }
+}
+
 // ------------------------ Modifiers --------------------------------------
 
 function SetBackgroundColorModifier (color) {

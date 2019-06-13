@@ -4,7 +4,7 @@ function Parser() {
 	var FILTER_TOKENS = [
 	    'ItemLevel', 'DropLevel', 'Quality', 'Rarity', 'Class', 'BaseType', 'Sockets', 'LinkedSockets', 'SocketGroup',
 	    'Width', 'Height', 'Identified', 'Corrupted', 'ElderItem', 'ShaperItem', 'ShapedMap', 'HasExplicitMod', 'MapTier',
-	    'GemLevel', 'StackSize', 'Prophecy', 'FracturedItem', 'SynthesisedItem'];
+	    'GemLevel', 'StackSize', 'Prophecy', 'FracturedItem', 'SynthesisedItem', 'AnyEnchantment'];
 	var MODIFIER_TOKENS = [
 	    'SetBackgroundColor', 'SetBorderColor', 'SetTextColor', 'PlayAlertSound', 'PlayAlertSoundPositional',
 	    'SetFontSize', 'DisableDropSound', 'CustomAlertSound', 'MinimapIcon', 'PlayEffect' ];
@@ -159,6 +159,7 @@ function Parser() {
 			'Prophecy': ProphecyFilter,
 			'FracturedItem': FracturedItemFilter,
 			'SynthesisedItem': SynthesisedItemFilter,
+			'AnyEnchantment': AnyEnchantmentFilter,
 		};
 
 		switch (token) {
@@ -197,6 +198,7 @@ function Parser() {
 			case 'ShapedMap':
 			case 'FracturedItem':
 			case 'SynthesisedItem':
+			case 'AnyEnchantment':
 				parseBoolFilter( self, filters[token], arguments );
 				return;
 
