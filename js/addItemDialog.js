@@ -12,18 +12,25 @@ function AddItemDialog() {
     this.identifiedInput = null;
     this.nameInput = null;
     this.influenceSelect = null;
+    this.fracturedItemInput = null;
+    this.synthesisedItemInput = null;
     this.shapedMapInput = null;
     this.mapTierInput = null;
     this.gemLevelInput = null;
     this.stackSizeInput = null;
     this.explicitModsInput = null;
+    this.showHiddenInput = null;
 
     this.identifiedLine = null;
     this.nameLine = null;
+    this.fracturedItemLine = null;
+    this.synthesisedItemLine = null;
     this.shapedMapLine = null;
     this.mapTierLine = null;
     this.gemLevelLine = null;
     this.stackSizeLine = null;
+
+    this.areHiddenStatsShown = false;
 
     this.init = function() {
         this.dialog = document.getElementById( 'additem-dialog' );
@@ -86,6 +93,18 @@ function AddItemDialog() {
                     this.influenceSelect.addEventListener('keydown', onKeyDown);
                     this.influenceSelect.addEventListener('change', onChange);
                     break;
+                case 'fracturedItem':
+                    this.fracturedItemLine = p;
+                    this.fracturedItemInput = $(p).find('span > input')[0];
+                    this.fracturedItemInput.addEventListener('keydown', onKeyDown);
+                    this.fracturedItemInput.addEventListener('change', onChange);
+                    break;
+                case 'synthesisedItem':
+                    this.synthesisedItemLine = p;
+                    this.synthesisedItemInput = $(p).find('span > input')[0];
+                    this.synthesisedItemInput.addEventListener('keydown', onKeyDown);
+                    this.synthesisedItemInput.addEventListener('change', onChange);
+                    break;
                 case 'shaped-map':
                     this.shapedMapLine = p;
                     this.shapedMapInput = $(p).find('span > input')[0];
@@ -113,6 +132,10 @@ function AddItemDialog() {
                     break;
             }
         }
+
+        this.showHiddenInput = document.getElementById( 'show-hidden-stats-checkbox' );
+        this.showHiddenInput.addEventListener('keydown', onKeyDown);
+        this.showHiddenInput.addEventListener('change', onChange);
 
         this.clear();
     }
@@ -147,16 +170,23 @@ function AddItemDialog() {
         this.identifiedLine.style.display = "none";
         this.nameLine.style.display = "none";
         this.influenceSelect.selectedIndex = 0;
+        this.fracturedItemLine.style.display = this.areHiddenStatsShown;
+        this.fracturedItemInput.checked = false;
+        this.synthesisedItemLine.style.display = this.areHiddenStatsShown;
+        this.synthesisedItemInput.checked = false;
         this.shapedMapLine.style.display = 'none';
         this.shapedMapInput.checked = false;
         this.mapTierInput.value = "";
         this.stackSizeInput.value = "";
         this.explicitModsInput.value = "";
+        this.showHiddenInput.checked = this.areHiddenStatsShown;
     }
 
     // This is called whenever any value that affects visibility of identified
     // checkbox or name text field is changed.
     this.onChange = function(event) {
+        this.areHiddenStatsShown = this.showHiddenInput.checked;
+
         // Show Shaped Map checkbox only for maps
         if (this.itemClassInput.value === 'Maps' || this.itemClassInput === 'Map') {
             this.shapedMapLine.style.display = 'block';
@@ -175,7 +205,6 @@ function AddItemDialog() {
             this.identifiedLine.style.display = "none";
             this.nameInput.value = this.baseTypeInput.value;
             this.nameLine.style.display = "none";
-            return;
         }
         // Corrupted items are always identified.
         // We remove the identified checkbox and show the name input.
@@ -196,6 +225,18 @@ function AddItemDialog() {
         else {
             this.nameLine.style.display = "none";
             this.nameInput.value = this.baseTypeInput.value;
+        }
+
+        // Show Synthesis-exclusive stats only when Show Hidden is enabled
+        if (this.areHiddenStatsShown) {
+            this.fracturedItemLine.style.display = "block";
+            this.synthesisedItemLine.style.display = "block";
+        }
+        else {
+            this.fracturedItemLine.style.display = "none";
+            this.fracturedItemInput.checked = false;
+            this.synthesisedItemLine.style.display = "none";
+            this.synthesisedItemInput.checked = false;
         }
     }
 
@@ -219,6 +260,8 @@ function AddItemDialog() {
             identified: this.identifiedInput.checked,
             corrupted: this.corruptedInput.checked,
             influence: Influence.parse( getSelectedText( this.influenceSelect ) ),
+            fracturedItem: this.fracturedItemInput.checked,
+            synthesisedItem: this.synthesisedItemInput.checked,
             shapedMap: this.shapedMapInput.checked,
             mapTier: parseInt( this.mapTierInput.value ),
             gemLevel: parseInt( this.gemLevelInput.value ),
