@@ -85,6 +85,7 @@ function ItemData() {
 	this.synthesisedItem = false;
 	this.influence = Influence.None;
 	this.shapedMap = false;
+	this.blightedMap = false;
 	this.mapTier = 0;
 	this.gemLevel = 0;
 	this.stackSize = 1;
@@ -139,6 +140,7 @@ ItemData.validate = function (item) {
 	assertInArray( item.synthesisedItem, [true, false], 'Invalid SynthesisedItem property' );
 	assertTrue( Influence.isValid( item.influence, 'Invalid Influence' ));
 	assertInArray( item.shapedMap, [true, false], 'Invalid ShapedMap property' );
+	assertInArray( item.blightedMap, [true, false], 'Invalid BlightedMap property' );
 	item.mapTier = item.mapTier ? item.mapTier : 0;
 	assertInRange( item.mapTier, 0, 20, 'Invalid MapTier' );
 	item.gemLevel = item.gemLevel ? item.gemLevel : 0;
@@ -162,6 +164,9 @@ ItemData.areEqual = function (data, item) {
 		&& data.corrupted === item.corrupted
 		&& data.fracturedItem === item.fracturedItem
 		&& data.synthesisedItem === item.synthesisedItem
+		&& data.influence === item.influence
+		&& data.shapedMap === item.shapedMap
+		&& data.blightedMap === item.blightedMap
 		&& data.mapTier === item.mapTier
 		&& data.gemLevel === item.gemLevel
 		&& data.stackSize === item.stackSize
@@ -196,6 +201,7 @@ function Item (itemdata)
 	this.synthesisedItem = itemdata.synthesisedItem;
 	this.influence = itemdata.influence;
 	this.shapedMap = itemdata.shapedMap;
+	this.blightedMap = itemdata.blightedMap;
 	this.mapTier = itemdata.mapTier;
 	this.gemLevel = itemdata.gemLevel;
 	this.stackSize = itemdata.stackSize;

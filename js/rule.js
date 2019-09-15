@@ -190,6 +190,12 @@ function AnyEnchantmentFilter (value) {
     }
 }
 
+function BlightedMapFilter (value) {
+    this.match = function (item) {
+        return item.blightedMap === value;
+    }
+}
+
 // ------------------------ Modifiers --------------------------------------
 
 function SetBackgroundColorModifier (color) {

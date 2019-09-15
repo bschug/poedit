@@ -15,6 +15,7 @@ function AddItemDialog() {
     this.fracturedItemInput = null;
     this.synthesisedItemInput = null;
     this.shapedMapInput = null;
+    this.blightedMapInput = null;
     this.mapTierInput = null;
     this.gemLevelInput = null;
     this.stackSizeInput = null;
@@ -26,6 +27,7 @@ function AddItemDialog() {
     this.fracturedItemLine = null;
     this.synthesisedItemLine = null;
     this.shapedMapLine = null;
+    this.blightedMapLine == null;
     this.mapTierLine = null;
     this.gemLevelLine = null;
     this.stackSizeLine = null;
@@ -46,6 +48,7 @@ function AddItemDialog() {
                 case 'class':
                     this.itemClassInput = getTextField( p );
                     this.itemClassInput.addEventListener('keydown', onKeyDown);
+                    this.itemClassInput.addEventListener('change', onChange);
                     break;
                 case 'item-level':
                     this.itemLevelInput = getTextField( p );
@@ -97,19 +100,21 @@ function AddItemDialog() {
                     this.fracturedItemLine = p;
                     this.fracturedItemInput = $(p).find('span > input')[0];
                     this.fracturedItemInput.addEventListener('keydown', onKeyDown);
-                    this.fracturedItemInput.addEventListener('change', onChange);
                     break;
                 case 'synthesisedItem':
                     this.synthesisedItemLine = p;
                     this.synthesisedItemInput = $(p).find('span > input')[0];
                     this.synthesisedItemInput.addEventListener('keydown', onKeyDown);
-                    this.synthesisedItemInput.addEventListener('change', onChange);
                     break;
                 case 'shaped-map':
                     this.shapedMapLine = p;
                     this.shapedMapInput = $(p).find('span > input')[0];
                     this.shapedMapInput.addEventListener('keydown', onKeyDown);
-                    this.shapedMapInput.addEventListener('change', onChange);
+                    break;
+                case 'blighted-map':
+                    this.blightedMapLine = p;
+                    this.blightedMapInput = $(p).find('span > input')[0];
+                    this.blightedMapInput.addEventListener('keydown', onKeyDown);
                     break;
                 case 'map-tier':
                     this.mapTierLine = p;
@@ -170,14 +175,17 @@ function AddItemDialog() {
         this.identifiedLine.style.display = "none";
         this.nameLine.style.display = "none";
         this.influenceSelect.selectedIndex = 0;
-        this.fracturedItemLine.style.display = this.areHiddenStatsShown;
+        this.fracturedItemLine.style.display = this.areHiddenStatsShown ? "block" : "none";
         this.fracturedItemInput.checked = false;
-        this.synthesisedItemLine.style.display = this.areHiddenStatsShown;
+        this.synthesisedItemLine.style.display = this.areHiddenStatsShown ? "block" : "none";
         this.synthesisedItemInput.checked = false;
         this.shapedMapLine.style.display = 'none';
         this.shapedMapInput.checked = false;
-        this.mapTierInput.value = "";
-        this.stackSizeInput.value = "";
+        this.blightedMapLine.style.display = 'none';
+        this.blightedMapInput.checked = false;
+        this.mapTierLine.style.display = 'none';
+        this.mapTierInput.value = "1";
+        this.stackSizeInput.value = "1";
         this.explicitModsInput.value = "";
         this.showHiddenInput.checked = this.areHiddenStatsShown;
     }
@@ -190,9 +198,11 @@ function AddItemDialog() {
         // Show Shaped Map checkbox only for maps
         if (this.itemClassInput.value === 'Maps' || this.itemClassInput === 'Map') {
             this.shapedMapLine.style.display = 'block';
+            this.blightedMapLine.style.display = 'block';
             this.mapTierLine.style.display = 'block';
         } else {
             this.shapedMapLine.style.display = 'none';
+            this.blightedMapLine.style.display = 'none';
             this.mapTierLine.style.display = 'none';
             this.mapTierInput.value = '0';
         }
@@ -263,6 +273,7 @@ function AddItemDialog() {
             fracturedItem: this.fracturedItemInput.checked,
             synthesisedItem: this.synthesisedItemInput.checked,
             shapedMap: this.shapedMapInput.checked,
+            blightedMap: this.blightedMapInput.checked,
             mapTier: parseInt( this.mapTierInput.value ),
             gemLevel: parseInt( this.gemLevelInput.value ),
             stackSize: parseInt( this.stackSizeInput.value ),
