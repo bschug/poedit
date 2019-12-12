@@ -125,14 +125,18 @@ function CorruptedFilter (value) {
 }
 
 function ElderItemFilter (value) {
-    this.match = function (item) {
-        return (item.influence === Influence.Elder) === value;
+	this.filter = new HasInfluenceFilter('OR', ['Elder']);
+
+	this.match = function (item) {
+        return this.filter.match(item) === value;
     }
 }
 
 function ShaperItemFilter (value) {
+	this.filter = new HasInfluenceFilter('OR', ['Shaper']);
+
     this.match = function (item) {
-        return (item.influence === Influence.Shaper) === value;
+        return this.filter.match(item) === value;
     }
 }
 
