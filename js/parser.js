@@ -3,7 +3,7 @@ function Parser() {
 	var VISIBILITY_TOKENS = [ 'Show', 'Hide' ];
 	var FILTER_TOKENS = [
 	    'ItemLevel', 'DropLevel', 'Quality', 'Rarity', 'Class', 'BaseType', 'Sockets', 'LinkedSockets', 'SocketGroup',
-	    'Width', 'Height', 'Identified', 'Corrupted', 'ElderItem', 'ShaperItem', 'ShapedMap', 'HasExplicitMod', 'MapTier',
+	    'Width', 'Height', 'Identified', 'Corrupted', 'ElderItem', 'ShaperItem', 'HasInfluence', 'ShapedMap', 'HasExplicitMod', 'MapTier',
 	    'GemLevel', 'StackSize', 'Prophecy', 'FracturedItem', 'SynthesisedItem', 'AnyEnchantment', 'BlightedMap'];
 	var MODIFIER_TOKENS = [
 	    'SetBackgroundColor', 'SetBorderColor', 'SetTextColor', 'PlayAlertSound', 'PlayAlertSoundPositional',
@@ -151,6 +151,7 @@ function Parser() {
 			'Corrupted': CorruptedFilter,
 			'ElderItem': ElderItemFilter,
 			'ShaperItem': ShaperItemFilter,
+			'HasInfluence': HasInfluenceFilter,
 			'ShapedMap': ShapedMapFilter,
 			'HasExplicitMod': HasExplicitModFilter,
 			'MapTier': MapTierFilter,
@@ -202,6 +203,10 @@ function Parser() {
 			case 'AnyEnchantment':
 			case 'BlightedMap':
 				parseBoolFilter( self, filters[token], arguments );
+				return;
+
+			case 'HasInfluence':
+				parseHasInfluenceFilter( self, filters[token], arguments );
 				return;
 
 			default:
@@ -313,6 +318,23 @@ function Parser() {
 		}
 
 		self.currentRule.filters.push( new filter( args[0] === 'TRUE' ) );
+	}
+
+	function parseHasInfluenceFilter (self, filter, arguments) {
+		var args = parseStringArguments( self, arguments );
+		if (args === null) return;
+		if (args.length === 0) { 
+			reportUnexpectedEndOfLine( self, 'expected Influence list' );
+			return;
+		}
+
+		var mode = 'OR';
+		if (args[0] == '==') {
+			mode = 'AND';
+			args = args.slice( 1 );
+		}
+
+		self.currentRule.filters.push( new filter( mode, args ) );
 	}
 
 	// ----------- MODIFIERS ---------------------------------------------------

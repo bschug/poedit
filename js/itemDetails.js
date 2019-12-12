@@ -113,7 +113,7 @@ function ItemDetails() {
         $(this.corruptedLabel).toggle( this.item.corrupted );
         $(this.fracturedItemLabel).toggle( this.item.fracturedItem );
         $(this.synthesisedItemLabel).toggle( this.item.synthesisedItem );
-        $(this.influenceLabelOuter).toggle( this.item.influence !== Influence.None );
+        $(this.influenceLabelOuter).toggle( this.item.influence.length !== 0 );
         this.influenceLabelInner.innerHTML = Influence.getName( this.item.influence );
         $(this.shapedMapLabel).toggle( this.item.shapedMap );
         this.mapTierLabel.innerHTML = this.item.mapTier.toString();

@@ -30,38 +30,29 @@ var Rarity = {
 };
 
 var Influence = {
-    None: 0,
-    Shaper: 1,
-    Elder: 2,
+    None: [],
+    Shaper: ['Shaper'],
+    Elder: ['Elder'],
 
-    getName: function (i) {
-        switch (i) {
-            case 0: return 'None';
-            case 1: return 'Shaper';
-            case 2: return 'Elder';
-            default: throw 'Invalid Influence: ' + i
-        }
+    getName: function (influenceList) {
+		if (Array.isArray(influenceList)) {
+			return influenceList.join(' ');
+		}
     },
 
-    getIconUrl: function (i) {
-        switch (i) {
-            case 1: return 'img/ShaperItemSymbol.png';
-            case 2: return 'img/ElderItemSymbol.png';
-            default: throw 'No icon for Influence ' + i;
-        }
-    },
-
-    isValid: function (i) {
-        return 0 <= i && i <= 2
+    getIconUrl: function (influenceList) {
+		for (var i=0; i < influenceList.length; i++) {
+			var influence = influenceList[i];
+			switch (influence) {
+				case 'Shaper': return 'img/ShaperItemSymbol.png';
+				case 'Elder': return 'img/ElderItemSymbol.png';
+			}
+		}
+		return null;
     },
 
     parse: function (str) {
-        switch (str.toLowerCase()) {
-            case 'none': return 0;
-            case 'shaper': return 1;
-            case 'elder': return 2;
-            default: throw 'Invalid Influence: ' + str
-        }
+		return str.split(' ');
     }
 }
 
@@ -106,7 +97,6 @@ ItemDefinition.validate = function (item) {
 	assertInArray( item.corrupted, [true, false], 'Invalid Corrupted property' );
 	assertInArray( item.fracturedItem, [true, false], 'Invalid FracturedItem property' );
 	assertInArray( item.synthesisedItem, [true, false], 'Invalid SynthesisedItem property' );
-	assertTrue( Influence.isValid( item.influence, 'Invalid Influence' ));
 	assertInArray( item.shapedMap, [true, false], 'Invalid ShapedMap property' );
 	assertInArray( item.blightedMap, [true, false], 'Invalid BlightedMap property' );
 	item.mapTier = item.mapTier ? item.mapTier : 0;
@@ -132,7 +122,7 @@ ItemDefinition.areEqual = function (data, item) {
 		&& data.corrupted === item.corrupted
 		&& data.fracturedItem === item.fracturedItem
 		&& data.synthesisedItem === item.synthesisedItem
-		&& data.influence === item.influence
+		&& ArrayUtils.areEqual( data.influence, item.influence )
 		&& data.shapedMap === item.shapedMap
 		&& data.blightedMap === item.blightedMap
 		&& data.mapTier === item.mapTier
@@ -219,9 +209,10 @@ function Item (itemDefinition)
 		var itemDiv = document.createElement( 'div' );
 		itemDiv.className = 'item';
 
-        if ( this.influence !== Influence.None ) {
+		var influenceIcon = Influence.getIconUrl( this.influence );
+        if (influenceIcon !== null) {
             var influenceImg = document.createElement( 'img' );
-            influenceImg.src = Influence.getIconUrl( this.influence );
+            influenceImg.src = influenceIcon;
             influenceImg.classList.add('influence');
             itemDiv.appendChild( influenceImg );
         }

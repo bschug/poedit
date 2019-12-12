@@ -167,11 +167,6 @@ function ItemsEditor() {
             return false;
         }
 
-        if (['None', 'Shaper', 'Elder'].indexOf( data.influence ) < 0) {
-            alert( 'Item number ' + itemNr + '(' + data['name'] + ') has invalid influence ' + data.influence );
-            return false;
-        }
-
         if (!StrUtils.consistsOf( data.sockets, 'RGBW ')) {
             alert( 'Item number ' + itemNr + '(' + data['name'] + ') has invalid sockets "' + data.sockets + '"' );
             return false;
@@ -236,7 +231,7 @@ function ItemsEditor() {
             corrupted: data.corrupted,
             fracturedItem: data.fracturedItem,
             synthesisedItem: data.synthesisedItem,
-            influence: Influence[ data.influence ],
+            influence: Influence.parse( data.influence ),
             shapedMap: data.shapedMap,
             blightedMap: data.blightedMap,
             mapTier: data.mapTier,

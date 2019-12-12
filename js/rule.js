@@ -136,6 +136,38 @@ function ShaperItemFilter (value) {
     }
 }
 
+function HasInfluenceFilter (mode, influenceList) {
+	this.reqInfluences = influenceList;
+	this.mode = mode;
+
+	this.match = function (item) {
+		for (var i=0; i < this.reqInfluences.length; i++) {
+			var hasThisInfluence = false;
+			for (var j=0; j < item.influence.length; j++) {
+				if (this.reqInfluences[i].toLowerCase() === item.influence[j].toLowerCase()) {
+					hasThisInfluence = true;
+
+					// If mode is OR, just one match is enough
+					if (this.mode === 'OR') {
+						return true;
+					}
+				}
+			}
+			// If mode is AND, just one required influence without match fails the whole rule
+			if (this.mode === 'AND' && !hasThisInfluence) {
+				return false;
+			}
+		}
+		// If we have compared everything and haven't early exited,
+		// it means we haven't found a success in the OR case,
+		// or we haven't found a failure in the AND case
+		if (mode === 'OR') {
+			return false;
+		}
+		return true;
+	}
+}
+
 function FracturedItemFilter (value) {
     this.match = function (item) {
         return item.fracturedItem === value;

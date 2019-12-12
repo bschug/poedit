@@ -11,7 +11,7 @@ function AddItemDialog() {
     this.corruptedInput = null;
     this.identifiedInput = null;
     this.nameInput = null;
-    this.influenceSelect = null;
+    this.influenceInput = null;
     this.fracturedItemInput = null;
     this.synthesisedItemInput = null;
     this.shapedMapInput = null;
@@ -92,9 +92,8 @@ function AddItemDialog() {
                     this.nameInput.addEventListener('keydown', onKeyDown);
                     break;
                 case 'influence':
-                    this.influenceSelect = getSelect( p );
-                    this.influenceSelect.addEventListener('keydown', onKeyDown);
-                    this.influenceSelect.addEventListener('change', onChange);
+                    this.influenceInput = getTextField( p );
+                    this.influenceInput.addEventListener('keydown', onKeyDown);
                     break;
                 case 'fracturedItem':
                     this.fracturedItemLine = p;
@@ -174,7 +173,7 @@ function AddItemDialog() {
         this.nameInput.value = "";
         this.identifiedLine.style.display = "none";
         this.nameLine.style.display = "none";
-        this.influenceSelect.selectedIndex = 0;
+        this.influenceInput.value = "";
         this.fracturedItemLine.style.display = this.areHiddenStatsShown ? "block" : "none";
         this.fracturedItemInput.checked = false;
         this.synthesisedItemLine.style.display = this.areHiddenStatsShown ? "block" : "none";
@@ -269,7 +268,7 @@ function AddItemDialog() {
             sockets: parseSockets( this.socketsInput.value ),
             identified: this.identifiedInput.checked,
             corrupted: this.corruptedInput.checked,
-            influence: Influence.parse( getSelectedText( this.influenceSelect ) ),
+            influence: Influence.parse( getSelectedText( this.influenceInput.value ) ),
             fracturedItem: this.fracturedItemInput.checked,
             synthesisedItem: this.synthesisedItemInput.checked,
             shapedMap: this.shapedMapInput.checked,
