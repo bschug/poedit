@@ -268,7 +268,7 @@ function AddItemDialog() {
             sockets: parseSockets( this.socketsInput.value ),
             identified: this.identifiedInput.checked,
             corrupted: this.corruptedInput.checked,
-            influence: Influence.parse( getSelectedText( this.influenceInput.value ) ),
+            influence: Influence.parse( this.influenceInput.value ),
             fracturedItem: this.fracturedItemInput.checked,
             synthesisedItem: this.synthesisedItemInput.checked,
             shapedMap: this.shapedMapInput.checked,
