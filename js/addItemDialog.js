@@ -280,7 +280,7 @@ function AddItemDialog() {
             explicitMods: this.explicitModsInput.value.split(',')
         };
 
-        ItemData.validate( result );
+        ItemDefinition.validate( result );
         return result;
     }
 

@@ -65,42 +65,10 @@ var Influence = {
     }
 }
 
-function ItemData() {
-	this.name = '';
-
-	this.itemLevel = 0;
-	this.dropLevel = 0;
-
-	this.quality = 0;
-	this.rarity = Rarity.Normal;
-
-	this.itemClass = '';
-	this.baseType = '';
-
-	this.width = 1;
-	this.height = 1;
-	this.identified = false;
-	this.corrupted = false;
-	this.fracturedItem = false;
-	this.synthesisedItem = false;
-	this.influence = Influence.None;
-	this.shapedMap = false;
-	this.blightedMap = false;
-	this.mapTier = 0;
-	this.gemLevel = 0;
-	this.stackSize = 1;
-
-	this.explicitMods = [];
-
-	// Sockets are stored as an array of linked socket groups.
-	// An item with a single red socket and linked red and blue sockets (R R=B)
-	// would store ['R','RB'] here.
-	this.sockets = [];
-
-	return this;
+function ItemDefinition() {
 }
 
-ItemData.validate = function (item) {
+ItemDefinition.validate = function (item) {
     function assertTrue (expr, msg) {
         if (!expr) {
             throw msg;
@@ -146,11 +114,11 @@ ItemData.validate = function (item) {
 	item.gemLevel = item.gemLevel ? item.gemLevel : 0;
 	assertInRange( item.gemLevel, 0, 23, 'Invalid Gem Level')
 	var maxSockets = Math.min( 6, item.width * item.height );
-	assertInRange( ItemData.countSockets( item.sockets ), 0, maxSockets, 'Too many sockets for this item size' );
+	assertInRange( ItemDefinition.countSockets( item.sockets ), 0, maxSockets, 'Too many sockets for this item size' );
 	assertTrue( 'explicitMods' in item, 'Item has no ExplicitMods list' );
 }
 
-ItemData.areEqual = function (data, item) {
+ItemDefinition.areEqual = function (data, item) {
 	return data.name === item.name
 		&& data.itemLevel === item.itemLevel
 		&& data.dropLevel === item.dropLevel
@@ -174,7 +142,7 @@ ItemData.areEqual = function (data, item) {
 		&& ArrayUtils.areEqual( data.sockets, item.sockets );
 }
 
-ItemData.countSockets = function (sockets) {
+ItemDefinition.countSockets = function (sockets) {
 	var result = 0;
 	sockets.forEach( function(group) {
 		result += group.length;
@@ -237,7 +205,7 @@ function Item (itemDefinition)
 	}
 
 	this.getNumSockets = function() {
-		return ItemData.countSockets( this.sockets );
+		return ItemDefinition.countSockets( this.sockets );
 	}
 
 	this.hasExplicitMod = function(mod) {

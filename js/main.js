@@ -273,10 +273,10 @@ var PoEdit = new function()
 		// then we would need to shuffle the input to setItems (the actual item
 		// definitions) instead of just the output.
 		PoEdit.items = PoEdit.items.filter( function(e) {
-			return !ItemData.areEqual( item, e );
+			return !ItemDefinition.areEqual( item, e );
 		});
 		PoEdit.itemsDefinition = PoEdit.itemsDefinition.filter( function(e) {
-			return !ItemData.areEqual( item, e );
+			return !ItemDefinition.areEqual( item, e );
 		});
 		item.outerElement.parentNode.removeChild( item.outerElement );
 		saveItems( PoEdit.itemsDefinition );
