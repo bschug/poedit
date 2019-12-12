@@ -183,34 +183,34 @@ ItemData.countSockets = function (sockets) {
 }
 
 
-function Item (itemdata)
+function Item (itemDefinition)
 {
-	this.name = itemdata.name;
+	this.name = itemDefinition.name;
 
-	this.itemLevel = itemdata.itemLevel;
-	this.dropLevel = itemdata.dropLevel;
+	this.itemLevel = itemDefinition.itemLevel;
+	this.dropLevel = itemDefinition.dropLevel;
 
-	this.quality = itemdata.quality;
-	this.rarity = itemdata.rarity;
+	this.quality = itemDefinition.quality;
+	this.rarity = itemDefinition.rarity;
 
-	this.itemClass = itemdata.itemClass;
-	this.baseType = itemdata.baseType;
-	this.identified = itemdata.identified;
-	this.corrupted = itemdata.corrupted;
-	this.fracturedItem = itemdata.fracturedItem;
-	this.synthesisedItem = itemdata.synthesisedItem;
-	this.influence = itemdata.influence;
-	this.shapedMap = itemdata.shapedMap;
-	this.blightedMap = itemdata.blightedMap;
-	this.mapTier = itemdata.mapTier;
-	this.gemLevel = itemdata.gemLevel;
-	this.stackSize = itemdata.stackSize;
-	this.explicitMods = itemdata.explicitMods;
+	this.itemClass = itemDefinition.itemClass;
+	this.baseType = itemDefinition.baseType;
+	this.identified = itemDefinition.identified;
+	this.corrupted = itemDefinition.corrupted;
+	this.fracturedItem = itemDefinition.fracturedItem;
+	this.synthesisedItem = itemDefinition.synthesisedItem;
+	this.influence = itemDefinition.influence;
+	this.shapedMap = itemDefinition.shapedMap;
+	this.blightedMap = itemDefinition.blightedMap;
+	this.mapTier = itemDefinition.mapTier;
+	this.gemLevel = itemDefinition.gemLevel;
+	this.stackSize = itemDefinition.stackSize;
+	this.explicitMods = itemDefinition.explicitMods;
 
-	this.width = itemdata.width;
-	this.height = itemdata.height;
+	this.width = itemDefinition.width;
+	this.height = itemDefinition.height;
 
-	this.sockets = itemdata.sockets;
+	this.sockets = itemDefinition.sockets;
 
 	this.outerElement = null;
 	this.domElement = null;
