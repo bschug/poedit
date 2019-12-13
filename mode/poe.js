@@ -94,6 +94,10 @@ function token(stream, state) {
             state.expected = ['RARITY_FORMULA'];
             return 'keyword';
         }
+        if (matchKeyword(stream, ['HasInfluence'])) {
+            state.expected = ['INFLUENCE_FORMULA'];
+            return 'keyword';
+        }
         if (matchKeyword(stream, ['Class','BaseType', 'HasExplicitMod', 'CustomAlertSound', 'Prophecy'])) {
             state.expected = ['STRINGS'];
             return 'keyword';
@@ -162,6 +166,14 @@ function token(stream, state) {
     if (expected === 'RARITY_FORMULA') {
         state.expected.push('RARITY');
         if (matchKeyword(stream, [ '<=', '>=', '=', '<', '>' ])) {
+            return 'operator';
+        }
+        return null;
+    }
+
+    if (expected === 'INFLUENCE_FORMULA') {
+        state.expected.push('STRINGS');
+        if (matchKeyword(stream, ['=='])) {
             return 'operator';
         }
         return null;
