@@ -19,6 +19,7 @@
 	height: 32px;
 	
 	background-color: yellow;
+	display:none;
 }
 
 #header > a {
@@ -35,7 +36,7 @@
 
 	left: 0px;
 	right: 0px;
-	top: 30px;
+	top: 0px;
 	bottom: 0px;
 }
 
