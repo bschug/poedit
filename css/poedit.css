@@ -114,6 +114,25 @@
 	display: none; /* initially hidden */
 }
 
+#area-level-form {
+	position: absolute;
+	margin: 2px;
+	bottom: 0px;
+	left: 50%;
+
+	padding-left: 2px;
+
+	border: 1px solid white;
+	background-color: black;
+	font-family: Fontin;
+	color: white;
+}
+
+#area-level-form > input {
+	width: 40px;
+	margin-left: 2px;
+}
+
 #buttons {
 	position: absolute;
 	margin: 2px;

@@ -2,7 +2,7 @@ function Parser() {
 
 	var VISIBILITY_TOKENS = [ 'Show', 'Hide' ];
 	var FILTER_TOKENS = [
-	    'ItemLevel', 'DropLevel', 'Quality', 'Rarity', 'Class', 'BaseType', 'Sockets', 'LinkedSockets', 'SocketGroup',
+	    'ItemLevel', 'DropLevel', 'AreaLevel', 'Quality', 'Rarity', 'Class', 'BaseType', 'Sockets', 'LinkedSockets', 'SocketGroup',
 	    'Width', 'Height', 'Identified', 'Corrupted', 'ElderItem', 'ShaperItem', 'HasInfluence', 'ShapedMap', 'HasExplicitMod', 'MapTier',
 	    'GemLevel', 'StackSize', 'Prophecy', 'FracturedItem', 'SynthesisedItem', 'AnyEnchantment', 'BlightedMap'];
 	var MODIFIER_TOKENS = [
@@ -138,6 +138,7 @@ function Parser() {
 		var filters = {
 			'ItemLevel': ItemLevelFilter,
 			'DropLevel': DropLevelFilter,
+			'AreaLevel': AreaLevelFilter,
 			'Quality': QualityFilter,
 			'Rarity': RarityFilter,
 			'Class': ClassFilter,
@@ -167,6 +168,7 @@ function Parser() {
 		switch (token) {
 			case 'ItemLevel':
 			case 'DropLevel':
+			case 'AreaLevel':
 			case 'Quality':
 			case 'Sockets':
 			case 'LinkedSockets':
@@ -287,7 +289,7 @@ function Parser() {
 
 		// Then check for invalid characters.
 		var isInvalid = args.some( function(socketGroup) {
-			if (!StrUtils.consistsOf( socketGroup, 'RGBW' )) {
+			if (!StrUtils.consistsOf( socketGroup, 'RGBWDA' )) {
 				reportInvalidSocketGroup( self, socketGroup );
 				return true;
 			}

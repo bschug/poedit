@@ -499,6 +499,12 @@ var PoEdit = new function()
 		window.URL.revokeObjectURL(url);
 	}
 
+	function onAreaLevelInput() {
+		var input = document.getElementById('area-level-input');
+		PoEdit.areaLevel = parseInt(input.value);
+		PoEdit.dirty = true;
+	}
+
 	var AVAILABLE_COLOR_SCHEMES = [
 		{ name:'Dark/subtle', theme:'bschug' },
 		{ name:'Dark/contrast', theme:'rubyblue' },
@@ -568,6 +574,7 @@ var PoEdit = new function()
 	this.showHiddenItems = false;
 	this.itemMouseoverTimeout = null;
 	this.highlightedLines = null;
+	this.areaLevel = 1;
 
 	this.parser = new Parser();
 	this.editor = null;
@@ -697,6 +704,7 @@ var PoEdit = new function()
 		document.getElementById( 'additem-ok-button' ).addEventListener( 'click', onAddItemOk );
 		document.getElementById( 'additem-cancel-button' ).addEventListener( 'click', onAddItemCancel );
 		document.getElementById( 'download-button' ).addEventListener( 'click', onDownloadButton );
+		document.getElementById( 'area-level-input' ).addEventListener( 'change', onAreaLevelInput );
 
 		this.addItemDialog.onPressEnter = onAddItemOk;
 	}

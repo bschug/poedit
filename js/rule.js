@@ -30,6 +30,12 @@ function DropLevelFilter (comparer, dropLevel) {
 	};
 }
 
+function AreaLevelFilter (comparer, areaLevel) {
+	this.match = function (item) {
+		return comparer( PoEdit.areaLevel, areaLevel );
+	}
+}
+
 function QualityFilter (comparer, quality) {
 	this.match = function (item) {
 		return comparer( item.quality, quality );
