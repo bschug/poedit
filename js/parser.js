@@ -7,7 +7,8 @@ function Parser() {
 	    'GemLevel', 'StackSize', 'Prophecy', 'FracturedItem', 'SynthesisedItem', 'AnyEnchantment', 'BlightedMap'];
 	var MODIFIER_TOKENS = [
 	    'SetBackgroundColor', 'SetBorderColor', 'SetTextColor', 'PlayAlertSound', 'PlayAlertSoundPositional',
-	    'SetFontSize', 'DisableDropSound', 'CustomAlertSound', 'MinimapIcon', 'PlayEffect' ];
+		'SetFontSize', 'DisableDropSound', 'CustomAlertSound', 'MinimapIcon', 'PlayEffect' ];
+	var META_TOKENS = [ 'Continue' ];
 	var OPERATOR_TOKENS = [ '=', '<', '>', '<=', '>=' ];
 	var RARITY_TOKENS = [ 'Normal', 'Magic', 'Rare', 'Unique' ];
 	var BOOL_TOKENS = [ 'True', 'False' ];
@@ -125,12 +126,29 @@ function Parser() {
 		else if (MODIFIER_TOKENS.indexOf( token ) >= 0) {
 			parseModifier( self, token, arguments );
 		}
+		else if (META_TOKENS.indexOf( token ) >= 0) {
+			parseMetaRule( self, token, arguments );
+		}
 		else {
 			reportTokenError( self, token, 'filter or modifier' );
 		}
 	}
 
 	// ----------- FILTERS ---------------------------------------------------
+
+	function parseMetaRule (self, token, arguments) {
+		if (token === 'Continue') {
+			if (arguments.length > 0) {
+				reportTokenError( self, arguments[0], 'unexpected argument' );
+				return;
+			}
+
+			self.currentRule.continues = true;
+			return;
+		}
+
+		reportTokenError( self, token, 'Meta Rule ' + token + ' not implemented - this is a bug, please report' );
+	}
 
 	function parseFilter (self, token, arguments) {
 		self.lineTypes[self.currentLineNr] = 'Filter';

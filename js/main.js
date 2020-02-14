@@ -177,25 +177,68 @@ var PoEdit = new function()
 		PoEdit.editor.setValue(code);
 	}
 
-	this.highlightLines = function(lines) {
-		if (PoEdit.highlightedLines) {
-			PoEdit.highlightedLines.clear();
-			PoEdit.highlightedLines = null;
-		}
+	function collapseCodeRange (from, to) {
+		var lastChar = PoEdit.editor.getLine(to).length;
+		return PoEdit.editor.markText(
+			{ line:from, ch:0 }, 
+			{ line:to, ch:lastChar },
+			{ inclusiveRight: true, inclusiveLeft: true, collapsed: true }
+		);
+	}
 
-		if (lines.length === 0) {
+	this.showOnlyTheseCodeRanges = function(ranges) {
+		this.clearCollapsedCode();
+		var lastLine = PoEdit.editor.lineCount() - 1;
+
+		if (ranges.length === 0) {
+			PoEdit.collapsedCodeRanges = [collapseCodeRange(0, lastLine)];
 			return;
 		}
 
-		var firstLine = lines[0];
-		var lastLine = lines[lines.length-1];
-		var lastLineLength = PoEdit.editor.getLine(lastLine).length;
+		// Collapse everything between the given ranges
+		var startLine = 0;
+		for (var i=0; i < ranges.length; i++) {
+			if (startLine < ranges[i].from) {
+				PoEdit.collapsedCodeRanges.push( collapseCodeRange(startLine, ranges[i].from - 1) );
+			}
+			startLine = ranges[i].to + 1;
+		}
 
-		PoEdit.highlightedLines = PoEdit.editor.markText(
-			{ line:firstLine, ch:0 },
-		 	{ line:lastLine, ch:lastLineLength },
+		if (startLine < lastLine) {
+			// Collapse everything after the last range
+			PoEdit.collapsedCodeRanges.push( collapseCodeRange(startLine, lastLine) );
+		}
+	}
+
+	this.clearCollapsedCode = function() {
+		for (var i=0; i < PoEdit.collapsedCodeRanges.length; i++) {
+			PoEdit.collapsedCodeRanges[i].clear();
+		}
+		PoEdit.collapsedCodeRanges = [];
+	}
+
+	function highlightCodeRange (from, to) {
+		var lastChar = PoEdit.editor.getLine(to).length;
+		PoEdit.highlightedCodeRanges.push(PoEdit.editor.markText(
+			{ line:from, ch:0 },
+		 	{ line:to, ch:lastChar },
 			{ className:'highlighted' }
-		);
+		));
+	}
+
+	this.highlightCodeRanges = function(ranges) {
+		this.clearHighlightedCode();
+		
+		for (var i=0; i < ranges.length; i++) {
+			highlightCodeRange(ranges[i].from, ranges[i].to);
+		}
+	}
+
+	this.clearHighlightedCode = function() {
+		for (var i=0; i < PoEdit.highlightedCodeRanges.length; i++) {
+			PoEdit.highlightedCodeRanges[i].clear();
+		}
+		PoEdit.highlightedCodeRanges = [];
 	}
 
 	this.scrollIntoView = function( firstLine, lastLine ) {
@@ -242,13 +285,16 @@ var PoEdit = new function()
 		if (PoEdit.hoverItemTimeout !== null) {
 			clearTimeout( PoEdit.hoverItemTimeout );
 		}
-		PoEdit.hoverItemTimeout = setTimeout( function() { showItemDetails( item ); }, 250 );
+		PoEdit.hoverItemTimeout = setTimeout( function() { 
+			showItemDetails( item ); 
+		}, 250 );
 	}
 
 	function onHoverItemEnd (item) {
 		if (PoEdit.hoverItemTimeout !== null) {
 			clearTimeout( PoEdit.hoverItemTimeout );
 		}
+		PoEdit.highlightedItem = null;
 		hideItemDetails();
 	}
 
@@ -282,19 +328,50 @@ var PoEdit = new function()
 		saveItems( PoEdit.itemsDefinition );
 	}
 
-	function showItemDetails (item) {
-		if (item.matchingRule !== null) {
-			PoEdit.highlightLines( item.matchingRule.codeLines );
-			PoEdit.scrollIntoView( item.matchingRule.codeLines[0], item.matchingRule.codeLines[ item.matchingRule.codeLines.length - 1 ] );
+	function updateCodeHighlight() {
+		PoEdit.clearHighlightedCode();
+		PoEdit.clearCollapsedCode();
+
+		var item = PoEdit.highlightedItem;
+		if (item === null) {
+			return;
 		}
+
+		var itemCodeRanges = [];
+		for (var i=0; i < item.previousMatchingRules.length; i++) {
+			var lines = item.previousMatchingRules[i].codeLines;
+			itemCodeRanges.push({
+				from: lines[0],
+				to: lines[lines.length - 1]
+			});
+		}
+
+		itemCodeRanges.push({
+			from: item.matchingRule.codeLines[0],
+			to: item.matchingRule.codeLines[item.matchingRule.codeLines.length - 1]
+		});
+
+		if (PoEdit.itemCodeDisplayMode === 'HIGHLIGHT') {
+			PoEdit.highlightCodeRanges( itemCodeRanges );
+			PoEdit.scrollIntoView( item.matchingRule.codeLines[0] );
+		}
+		else {
+			PoEdit.showOnlyTheseCodeRanges( itemCodeRanges );
+			PoEdit.scrollIntoView( item.matchingRule.codeLines[0] );
+		}
+
+	}
+
+	function showItemDetails (item) {
+		PoEdit.highlightedItem = item;
+		updateCodeHighlight();
+
 		PoEdit.itemDetails.item = item;
 		PoEdit.dirty = true;
 	}
 
 	function hideItemDetails() {
-		PoEdit.highlightLines( [] );
-		PoEdit.itemDetails.item = null;
-		PoEdit.dirty = true;
+		showItemDetails(null);
 	}
 
 	function getCode() {
@@ -307,8 +384,16 @@ var PoEdit = new function()
 		// Alt
 		if (code === 18) {
 			event.preventDefault();
-			PoEdit.showHiddenItems = true;
-			updateItems();
+			// NOTE: Alt fires KeyDown in every frame
+
+			if (!PoEdit.showHiddenItems) {
+				updateItems();
+				PoEdit.showHiddenItems = true;
+			}
+			if (PoEdit.itemCodeDisplayMode !== 'COLLAPSE') {
+				PoEdit.itemCodeDisplayMode = 'COLLAPSE';
+				updateCodeHighlight();
+			}
 		}
 
 		// Ctrl-I
@@ -325,23 +410,34 @@ var PoEdit = new function()
 		if (code === 18) {
 			PoEdit.showHiddenItems = false;
 			updateItems();
+
+			PoEdit.itemCodeDisplayMode = 'HIGHLIGHT';
+			updateCodeHighlight();
 		}
 	}
 
 	function updateItems () {
 		PoEdit.items.forEach( function(item) {
 			applyDefaultStyle( item );
+			item.previousMatchingRules = [];
+			item.matchingRule = null;
 
 			for (var i=0; i < PoEdit.parser.ruleSet.length; i++) {
 				var rule = PoEdit.parser.ruleSet[i];
 				if (rule.match( item )) {
+					if (item.matchingRule !== null) {
+						item.previousMatchingRules.push( item.matchingRule );
+					}
 					item.matchingRule = rule;
 					rule.applyTo( item );
 
 					if (PoEdit.showHiddenItems) {
 						item.setVisibility( true );
 					}
-					break;
+
+					if (!rule.continues) {
+						break;
+					}
 				}
 			}
 		} );
@@ -572,8 +668,11 @@ var PoEdit = new function()
 	this.items = null;
 	this.itemsDefinition = null;
 	this.showHiddenItems = false;
+	this.itemCodeDisplayMode = 'HIGHLIGHT';
 	this.itemMouseoverTimeout = null;
-	this.highlightedLines = null;
+	this.highlightedItem = null;
+	this.highlightedCodeRanges = [];
+	this.collapsedCodeRanges = [];
 	this.areaLevel = 1;
 
 	this.parser = new Parser();

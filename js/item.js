@@ -176,6 +176,7 @@ function Item (itemDefinition)
 	this.mapIconElement = null;
 
 	this.matchingRule = null;
+	this.previousMatchingRules = [];
 
 	this.getDisplayName = function() {
 	    var suffix = '';

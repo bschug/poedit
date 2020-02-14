@@ -74,7 +74,7 @@ function token(stream, state) {
     var expected = state.expected.pop();
 
     if (expected === 'KEYWORD') {
-        if (matchKeyword(stream, ['Show','Hide'])) {
+        if (matchKeyword(stream, ['Show','Hide','Continue'])) {
             state.hasVisibilityToken = true;
             state.isVisibility = true;
             state.expected = [];

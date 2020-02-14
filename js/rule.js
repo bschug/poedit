@@ -4,6 +4,7 @@ function Rule (visibility) {
 	this.filters = [];
 	this.modifiers = [];
 	this.codeLines = [];
+	this.continues = false;
 
 	this.match = function (item) {
 		return this.filters.every( function (filter) { return filter.match( item ); } );
