@@ -682,6 +682,7 @@ var PoEdit = new function()
 	this.itemDetails = new ItemDetails();
 	this.addItemDialog = new AddItemDialog();
 	this.settingsDialog = new SettingsDialog();
+	this.tips = new Tips();
 
 	this.dirty = true;
 	this.initSteps = [];
@@ -762,6 +763,9 @@ var PoEdit = new function()
 			UrlUtils.redirectToProtocol( 'http' );
 			return;
 		}
+
+		this.tips.populateTipsList();
+		this.tips.beginCycleTipsInHeader();
 
 		// must do this before loading the script
 		this.editor = createCodeEditor();

@@ -12,22 +12,18 @@
 	margin: 0px;
 	padding: 0px;
 	text-align: center;
+	vertical-align: middle;
 
 	left: 0px;
 	right: 0px;
 	top: 0px;
 	height: 32px;
+	line-height: 32px;
 	
-	background-color: yellow;
-	display:none;
-}
-
-#header > a {
-	color: red;
+	background-color: black;
+	color: white;
 	font-family: Fontin;
-	font-size: 24px;
-	text-decoration: None;
-	text-align: center;
+	font-size: 16px;
 }
 
 #main {
@@ -36,7 +32,7 @@
 
 	left: 0px;
 	right: 0px;
-	top: 0px;
+	top: 32px;
 	bottom: 0px;
 }
 

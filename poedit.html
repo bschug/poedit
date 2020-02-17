@@ -33,6 +33,7 @@
 <script type="text/javascript" src="js/settingsDialog.js"></script>
 <script type="text/javascript" src="js/urlArgs.js"></script>
 <script type="text/javascript" src="js/utils.js"></script>
+<script type="text/javascript" src="js/tips.js"></script>
 
 <script type="text/javascript" src="js/main.js"></script>
 
@@ -49,11 +50,10 @@
 
 </head>
 <body>
-<p id="header"><a href="https://filter.poe.gg/index.html">Looking For FilterCloud? Click Here</a></p>
+<p id="header"></p>
 <div id="main">
  <div id="code-area">
   <div id="code-window-container">
-   <!--div id="code-window" contenteditable="true"></div-->
    <textarea id="code-window"></textarea>
   </div>
   <div id="code-toolbar">
@@ -168,13 +168,7 @@
     <p><a href="https://www.youtube.com/watch?v=cHUJUygz-l8">Video of the Alert Sounds</a></p>
     <br>
     <h1>Tips</h1>
-    <list>
-        <li>Press Ctrl+Shift+C to comment / uncomment the selected lines.</li>
-        <li>Press Ctrl+Space on an empty line to show a list of available commands.</li>
-        <li>Hold down Alt to show hidden items.</li>
-        <li>Move the mouse over an item to show the rule that shows or hides it.</li>
-        <li>Hold down Alt while hovering over an item to show all rules that affect this item (when using Continue).</li>
-        <li>Color values can have a fourth number for opacity, ranging from 0 = fully transparent to 255 = fully opaque.</li>
+    <list id="tips-list">
     </list>
     <br>
     <h1>Changing the Item Set</h1>
