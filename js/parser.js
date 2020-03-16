@@ -14,7 +14,7 @@ function Parser() {
 	var BOOL_TOKENS = [ 'True', 'False' ];
 	var SOUND_TOKENS = [ 'ShAlchemy', 'ShBlessed', 'ShChaos', 'ShDivine', 'ShExalted', 'ShFusing', 'ShGeneral', 'ShMirror', 'ShRegal', 'ShVaal' ];
     var COLOR_TOKENS = [ 'Red', 'Green', 'Blue', 'Brown', 'White', 'Yellow' ]
-    var ICON_SHAPE_TOKENS = [ 'Circle', 'Diamond', 'Hexagon', 'Square', 'Star', 'Triangle' ]
+    var ICON_SHAPE_TOKENS = [ 'Circle', 'Diamond', 'Hexagon', 'Square', 'Star', 'Triangle', 'Kite' ]
 
 	this.currentLineNr = 0;
 	this.currentRule = null;
@@ -343,7 +343,7 @@ function Parser() {
 	function parseHasInfluenceFilter (self, filter, arguments) {
 		var args = parseStringArguments( self, arguments );
 		if (args === null) return;
-		if (args.length === 0) { 
+		if (args.length === 0) {
 			reportUnexpectedEndOfLine( self, 'expected Influence list' );
 			return;
 		}

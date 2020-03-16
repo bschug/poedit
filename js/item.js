@@ -523,23 +523,27 @@ function Item (itemDefinition)
 };
 
 function createRadialGradient(gradientId, color) {
-    var gradient = document.createElementNS('http://www.w3.org/2000/svg', 'radialGradient');
-    gradient.id = gradientId;
-    gradient.cx = '50%';
-    gradient.cy = '50%';
-    gradient.r = '50%';
+		return createRadialGradient2Colors(gradientId, '50%', {r:color.r, g:color.g, b:color.b, a:1}, {r:color.r, g:color.g, b:color.b, a:0});
+}
 
-    var innerColor = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
-    innerColor.setAttributeNS(null, 'offset', '0%');
-    innerColor.style = 'stop-color:rgb(' + color.r + ',' + color.g + ',' + color.b + '); stop-opacity:1';
-    gradient.appendChild(innerColor);
+function createRadialGradient2Colors(gradientId, size, innerColor, outerColor) {
+	var gradient = document.createElementNS('http://www.w3.org/2000/svg', 'radialGradient');
+	gradient.id = gradientId;
+	gradient.cx = size;
+	gradient.cy = size;
+	gradient.r = size;
 
-    var outerColor = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
-    outerColor.setAttributeNS(null, 'offset', '100%');
-    outerColor.style = 'stop-color:rgb(' + color.r + ',' + color.g + ',' + color.b + '); stop-opacity:0';
-    gradient.appendChild(outerColor);
+	var innerColorElem = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+	innerColorElem.setAttributeNS(null, 'offset', '0%');
+	innerColorElem.style = 'stop-color:rgb(' + innerColor.r + ',' + innerColor.g + ',' + innerColor.b + '); stop-opacity:' + innerColor.a;
+	gradient.appendChild(innerColorElem);
 
-    return gradient;
+	var outerColorElem = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+	outerColorElem.setAttributeNS(null, 'offset', '100%');
+	outerColorElem.style = 'stop-color:rgb(' + outerColor.r + ',' + outerColor.g + ',' + outerColor.b + '); stop-opacity:' + outerColor.a;
+	gradient.appendChild(outerColorElem);
+
+	return gradient;
 }
 
 function createBeam(color) {
@@ -602,6 +606,8 @@ function drawMapIcon(shape, color) {
             return createStar(color);
         case 'Diamond':
             return createDiamond(color);
+				case 'Kite':
+					  return createKite(color);
     }
 }
 
@@ -684,4 +690,24 @@ function createDiamond(color) {
     group.appendChild(right);
 
     return group;
+}
+
+function createKite(color) {
+		var group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+		var points = '0.5,0.1 0.8,0.35 0.5,0.9 0.2,0.35';
+		var fillColor = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+		var innerStrokeColor = 'rgb(' + (255 - (255 - color.r) * 0.25) + ',' + (255 - (255 - color.g) * 0.25) + ',' + (255 - (255 - color.b) * 0.25) + ')';
+
+		var background = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+		background.setAttributeNS(null, 'points', points);
+		background.setAttributeNS(null, 'transform', 'scale(0.85) translate(0.08, 0.08) ');
+		background.setAttributeNS(null, 'style', 'fill:' + fillColor + '; stroke:' + innerStrokeColor + '; stroke-width: 0.15;');
+		group.appendChild(background);
+
+		var stroke = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+		stroke.setAttributeNS(null, 'points', points);
+		stroke.setAttributeNS(null, 'style', 'stroke:black; stroke-width:0.06; fill:none');
+		group.appendChild(stroke);
+
+		return group;
 }
