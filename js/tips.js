@@ -5,7 +5,8 @@ function Tips() {
         "Hold down Alt to show hidden items.",
         "Move the mouse over an item to show the rule that shows or hides it.",
         "Hold down Alt while hovering over an item to show all rules that affect this item (when using Continue).",
-        "Click the Plus icon to add a new item to the preview set."
+        "Click the Plus icon to add a new item to the preview set.",
+        "Right-click an item to remove it from the item set."
     ];
     this.durationPerTip = 7500;
 
