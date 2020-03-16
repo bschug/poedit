@@ -608,6 +608,8 @@ function drawMapIcon(shape, color) {
             return createDiamond(color);
 				case 'Kite':
 					  return createKite(color);
+				case 'Pentagon':
+						return createPentagon(color);
     }
 }
 
@@ -698,4 +700,12 @@ function createKite(color) {
 		kite.setAttributeNS(null, 'points', '0.5,0.1 0.8,0.35 0.5,0.9 0.2,0.35');
 		kite.setAttributeNS(null, 'style', 'stroke:black; stroke-width:0.06; fill:' + fillColor);
 		return kite;
+}
+
+function createPentagon(color) {
+		var fillColor = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+		var pentagon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+		pentagon.setAttributeNS(null, 'points', '0.5,0.1 0.85,0.4 0.7,0.8 0.3,0.8 0.15,0.4');
+		pentagon.setAttributeNS(null, 'style', 'stroke:black; stroke-width:0.06; fill:' + fillColor);
+		return pentagon;
 }
