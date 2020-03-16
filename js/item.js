@@ -616,6 +616,8 @@ function drawMapIcon(shape, color) {
 						return createRaindrop(color);
 				case 'Moon':
 						return createMoon(color);
+				case 'Cross':
+						return createCross(color);
     }
 }
 
@@ -738,4 +740,12 @@ function createMoon(color) {
 		moon.setAttributeNS(null, 'd', 'M 0.1 0.3  C 0.4,0.55 0.6,0.55 0.9,0.3  C 0.95,0.9 0.05,0.9 0.1,0.3  Z');
 		moon.setAttributeNS(null, 'style', 'stroke:black; stroke-width:0.06; fill:' + fillColor);
 		return moon;
+}
+
+function createCross(color) {
+		var fillColor = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+		var cross = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+		cross.setAttributeNS(null, 'points', '0.5,0.1 0.6,0.4 0.9,0.5 0.6,0.6 0.5,0.9 0.4,0.6 0.1,0.5 0.4,0.4 0.5,0.1');
+		cross.setAttributeNS(null, 'style', 'stroke:black; stroke-width:0.06; fill:' + fillColor);
+		return cross;
 }
