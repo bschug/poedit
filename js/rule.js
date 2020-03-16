@@ -296,7 +296,12 @@ function MinimapIconModifier (size, color, shape) {
         'Blue': {r:130, g:170, b:250},
         'Brown': {r:200, g:130, b:80},
         'White': {r:250, g:250, b:250},
-        'Yellow': {r:220, g:220, b:100}
+        'Yellow': {r:220, g:220, b:100},
+				'Grey': {r:180, g:180, b:180},
+				'Pink': {r:230, g:130, b:190},
+				'Cyan': {r:100, g:210, b:210},
+				'Purple': {r:140, g:50, b:200},
+				'Orange': {r:240, g:140, b:40}
     };
 
     this.applyTo = function (item) {
@@ -311,7 +316,12 @@ function PlayEffectModifier (color) {
         'Blue': {r:130, g:170, b:250},
         'Brown': {r:200, g:130, b:80},
         'White': {r:250, g:250, b:250},
-        'Yellow': {r:220, g:220, b:100}
+        'Yellow': {r:220, g:220, b:100},
+				'Grey': {r:180, g:180, b:180},
+				'Pink': {r:230, g:130, b:190},
+				'Cyan': {r:100, g:210, b:210},
+				'Purple': {r:140, g:50, b:200},
+				'Orange': {r:240, g:140, b:40}
     };
 
     this.applyTo = function (item, temp) {
