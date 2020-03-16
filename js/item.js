@@ -693,21 +693,9 @@ function createDiamond(color) {
 }
 
 function createKite(color) {
-		var group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-		var points = '0.5,0.1 0.8,0.35 0.5,0.9 0.2,0.35';
 		var fillColor = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
-		var innerStrokeColor = 'rgb(' + (255 - (255 - color.r) * 0.25) + ',' + (255 - (255 - color.g) * 0.25) + ',' + (255 - (255 - color.b) * 0.25) + ')';
-
-		var background = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-		background.setAttributeNS(null, 'points', points);
-		background.setAttributeNS(null, 'transform', 'scale(0.85) translate(0.08, 0.08) ');
-		background.setAttributeNS(null, 'style', 'fill:' + fillColor + '; stroke:' + innerStrokeColor + '; stroke-width: 0.15;');
-		group.appendChild(background);
-
-		var stroke = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-		stroke.setAttributeNS(null, 'points', points);
-		stroke.setAttributeNS(null, 'style', 'stroke:black; stroke-width:0.06; fill:none');
-		group.appendChild(stroke);
-
-		return group;
+		var kite = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+		kite.setAttributeNS(null, 'points', '0.5,0.1 0.8,0.35 0.5,0.9 0.2,0.35');
+		kite.setAttributeNS(null, 'style', 'stroke:black; stroke-width:0.06; fill:' + fillColor);
+		return kite;
 }
