@@ -610,6 +610,8 @@ function drawMapIcon(shape, color) {
 					  return createKite(color);
 				case 'Pentagon':
 						return createPentagon(color);
+				case 'UpsideDownHouse':
+						return createUpsideDownHouse(color);
     }
 }
 
@@ -708,4 +710,12 @@ function createPentagon(color) {
 		pentagon.setAttributeNS(null, 'points', '0.5,0.1 0.85,0.4 0.7,0.8 0.3,0.8 0.15,0.4');
 		pentagon.setAttributeNS(null, 'style', 'stroke:black; stroke-width:0.06; fill:' + fillColor);
 		return pentagon;
+}
+
+function createUpsideDownHouse(color) {
+		var fillColor = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+		var usdh = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+		usdh.setAttributeNS(null, 'points', '0.2,0.2 0.8,0.2 0.8,0.6 0.5,0.9 0.2,0.6');
+		usdh.setAttributeNS(null, 'style', 'stroke:black; stroke-width:0.06; fill:' + fillColor);
+		return usdh;
 }
