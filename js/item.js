@@ -614,6 +614,8 @@ function drawMapIcon(shape, color) {
 						return createUpsideDownHouse(color);
 				case 'Raindrop':
 						return createRaindrop(color);
+				case 'Moon':
+						return createMoon(color);
     }
 }
 
@@ -726,7 +728,14 @@ function createRaindrop(color) {
 		var fillColor = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
 		var raindrop = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 		raindrop.setAttributeNS(null, 'd', 'M 0.5 0.2  L 0.7 0.6  C 0.7,0.95 0.3,0.95 0.3,0.6  L 0.5 0.2  Z');
-		raindrop.setAttributeNS(null, 'style', 'stroke:white; stroke-width:0.06; fill:' + fillColor);
+		raindrop.setAttributeNS(null, 'style', 'stroke:black; stroke-width:0.06; fill:' + fillColor);
 		return raindrop;
+}
 
+function createMoon(color) {
+		var fillColor = 'rgb(' + color.r + ',' + color.g + ',' + color.b + ')';
+		var moon = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+		moon.setAttributeNS(null, 'd', 'M 0.1 0.3  C 0.4,0.55 0.6,0.55 0.9,0.3  C 0.95,0.9 0.05,0.9 0.1,0.3  Z');
+		moon.setAttributeNS(null, 'style', 'stroke:black; stroke-width:0.06; fill:' + fillColor);
+		return moon;
 }
