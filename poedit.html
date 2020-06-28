@@ -70,8 +70,7 @@
  <div id="items-area"></div>
  <div id="items-editor" contenteditable="true"></div>
  <div id="area-level-form">Area Level:
-     <!-- keyCode 8: Backspace; keyCode 46: Delete-->
-    <input id="area-level-input" type="number" value="1" min="1" max="100" onkeydown="return (event.keyCode === 8 || event.keyCode === 46) ? true : !isNaN(Number(event.key))">
+    <input id="area-level-input" type="number" value="1" min="1" max="100" oninput="limitInput.call(this, 100)" onkeydown="isValidNumberEntry()">
  </div>
  <div id="buttons">
      <button id="settings-button">Settings</button>
@@ -213,6 +212,17 @@
 <script type='text/javascript'>
 getRGB();
 PoEdit.init();
+
+function limitInput(limit) {
+    if(this.value > limit) {
+        this.value = limit;
+    }
+}
+
+function isValidNumberEntry() {
+    // keyCode 8: Backspace; keyCode 46: Delete
+    return (event.keyCode === 8 || event.keyCode === 46) ? true : !isNaN(Number(event.key));
+}
 </script>
 
 </body>
