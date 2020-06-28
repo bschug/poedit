@@ -69,7 +69,10 @@
  </div>
  <div id="items-area"></div>
  <div id="items-editor" contenteditable="true"></div>
- <div id="area-level-form">Area Level:<input id="area-level-input" type="number" value="1"></div>
+ <div id="area-level-form">Area Level:
+     <!-- keyCode 8: Backspace; keyCode 46: Delete-->
+    <input id="area-level-input" type="number" value="1" min="1" max="100" onkeydown="return (event.keyCode === 8 || event.keyCode === 46) ? true : !isNaN(Number(event.key))">
+ </div>
  <div id="buttons">
      <button id="settings-button">Settings</button>
      <button id="feedback-button">Feedback</button>
