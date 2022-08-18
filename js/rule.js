@@ -229,8 +229,17 @@ function ProphecyFilter (names) {
 
 function AnyEnchantmentFilter (value) {
     this.match = function (item) {
-        return !value;
+		var itemHasEnchantment = item.enchantment.length > 0;
+        return value === itemHasEnchantment;
     }
+}
+
+function HasEnchantmentFilter (enchantments) {
+	var lowercaseFilters = enchantments.map(x => x.toLowerCase());
+	this.match = function (item) {
+		var lowercaseItemEnchantment = item.enchantment.toLowerCase();
+		return lowercaseFilters.some( function (ench) { return StrUtils.contains( ench, lowercaseItemEnchantment); } );
+	}
 }
 
 function BlightedMapFilter (value) {

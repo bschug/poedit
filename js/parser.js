@@ -4,7 +4,7 @@ function Parser() {
 	var FILTER_TOKENS = [
 	    'ItemLevel', 'DropLevel', 'AreaLevel', 'Quality', 'Rarity', 'Class', 'BaseType', 'Sockets', 'LinkedSockets', 'SocketGroup',
 	    'Width', 'Height', 'Identified', 'Corrupted', 'ElderItem', 'ShaperItem', 'HasInfluence', 'ShapedMap', 'HasExplicitMod', 'MapTier',
-	    'GemLevel', 'StackSize', 'Prophecy', 'FracturedItem', 'SynthesisedItem', 'AnyEnchantment', 'BlightedMap', 'Replica'];
+	    'GemLevel', 'StackSize', 'Prophecy', 'FracturedItem', 'SynthesisedItem', 'AnyEnchantment', 'HasEnchantment', 'BlightedMap', 'Replica'];
 	var MODIFIER_TOKENS = [
 	    'SetBackgroundColor', 'SetBorderColor', 'SetTextColor', 'PlayAlertSound', 'PlayAlertSoundPositional',
 		'SetFontSize', 'DisableDropSound', 'CustomAlertSound', 'MinimapIcon', 'PlayEffect' ];
@@ -180,6 +180,7 @@ function Parser() {
 			'FracturedItem': FracturedItemFilter,
 			'SynthesisedItem': SynthesisedItemFilter,
 			'AnyEnchantment': AnyEnchantmentFilter,
+			'HasEnchantment': HasEnchantmentFilter,
 			'BlightedMap': BlightedMapFilter,
 			'Replica': ReplicaFilter
 		};
@@ -207,6 +208,7 @@ function Parser() {
 			case 'BaseType':
 			case 'HasExplicitMod':
 			case 'Prophecy':
+			case 'HasEnchantment':
 				parseMultiStringFilter( self, filters[token], arguments );
 				return;
 

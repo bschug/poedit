@@ -16,6 +16,7 @@ function ItemDetails() {
     this.replicaLabel = null;
     this.influenceLabelOuter = null;
     this.influenceLabelInner = null;
+    this.enchantmentLabel = null;
     this.shapedMapLabel = null;
     this.mapTierLabel = null;
     this.gemLevelLabel = null;
@@ -72,6 +73,9 @@ function ItemDetails() {
                     this.influenceLabelOuter = child;
                     this.influenceLabelInner = getValueLabel(child);
                     break;
+                case 'enchantment':
+                    this.enchantmentLabel = getValueLabel(child);
+                    break;
                 case 'shaped-map':
                     this.shapedMapLabel = child;
                     break;
@@ -120,6 +124,7 @@ function ItemDetails() {
         $(this.replicaLabel).toggle( this.item.replica );
         $(this.influenceLabelOuter).toggle( this.item.influence.length !== 0 );
         this.influenceLabelInner.innerHTML = Influence.getName( this.item.influence );
+        this.enchantmentLabel.innerHTML = this.item.enchantment;
         $(this.shapedMapLabel).toggle( this.item.shapedMap );
         this.mapTierLabel.innerHTML = this.item.mapTier.toString();
         $(this.mapTierLine).toggle( this.item.itemClass === 'Maps' );

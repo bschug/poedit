@@ -207,6 +207,7 @@ function getDefaultItems() {
 			quality: 0,
 			itemClass: 'Helmets',
 			baseType: 'Ezomyte Burgonet',
+			enchantment: 'Enchantment Bane Damage 2',
 			rarity: Rarity.Unique,
 			width: 2,
 			height: 2,

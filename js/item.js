@@ -128,6 +128,7 @@ ItemDefinition.areEqual = function (data, item) {
 		&& data.synthesisedItem === item.synthesisedItem
 		&& data.replica === item.replica
 		&& ArrayUtils.areEqual( data.influence, item.influence )
+		&& data.enchantment === item.enchantment
 		&& data.shapedMap === item.shapedMap
 		&& data.blightedMap === item.blightedMap
 		&& data.mapTier === item.mapTier
@@ -164,6 +165,7 @@ function Item (itemDefinition)
 	this.synthesisedItem = itemDefinition.synthesisedItem;
 	this.replica = itemDefinition.replica;
 	this.influence = itemDefinition.influence;
+	this.enchantment = itemDefinition.enchantment;
 	this.shapedMap = itemDefinition.shapedMap;
 	this.blightedMap = itemDefinition.blightedMap;
 	this.mapTier = itemDefinition.mapTier;

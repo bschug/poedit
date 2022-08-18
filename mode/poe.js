@@ -98,7 +98,7 @@ function token(stream, state) {
             state.expected = ['INFLUENCE_FORMULA'];
             return 'keyword';
         }
-        if (matchKeyword(stream, ['Class','BaseType', 'HasExplicitMod', 'CustomAlertSound', 'Prophecy'])) {
+        if (matchKeyword(stream, ['Class','BaseType','HasExplicitMod','CustomAlertSound','Prophecy','HasEnchantment'])) {
             state.expected = ['STRINGS'];
             return 'keyword';
         }
@@ -106,7 +106,7 @@ function token(stream, state) {
             state.expected = ['SOCKETS'];
             return 'keyword';
         }
-        if (matchKeyword(stream, ['Identified', 'Corrupted', 'ShaperItem', 'ElderItem', 'ShapedMap', 'BlightedMap', 'FracturedItem', 'SynthesisedItem'])) {
+        if (matchKeyword(stream, ['Identified','Corrupted','ShaperItem','ElderItem','ShapedMap','BlightedMap','FracturedItem','SynthesisedItem','AnyEnchantment','Replica'])) {
             state.expected = ['BOOLEAN'];
             return 'keyword';
         }
