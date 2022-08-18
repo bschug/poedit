@@ -52,6 +52,9 @@ var Influence = {
     },
 
     parse: function (str) {
+		if (str === '') {
+			return [];
+		}
 		return str.split(' ');
     }
 }
@@ -97,6 +100,7 @@ ItemDefinition.validate = function (item) {
 	assertInArray( item.corrupted, [true, false], 'Invalid Corrupted property' );
 	assertInArray( item.fracturedItem, [true, false], 'Invalid FracturedItem property' );
 	assertInArray( item.synthesisedItem, [true, false], 'Invalid SynthesisedItem property' );
+	assertInArray( item.replica, [true, false], 'Invalid Replica property');
 	assertInArray( item.shapedMap, [true, false], 'Invalid ShapedMap property' );
 	assertInArray( item.blightedMap, [true, false], 'Invalid BlightedMap property' );
 	item.mapTier = item.mapTier ? item.mapTier : 0;
@@ -122,6 +126,7 @@ ItemDefinition.areEqual = function (data, item) {
 		&& data.corrupted === item.corrupted
 		&& data.fracturedItem === item.fracturedItem
 		&& data.synthesisedItem === item.synthesisedItem
+		&& data.replica === item.replica
 		&& ArrayUtils.areEqual( data.influence, item.influence )
 		&& data.shapedMap === item.shapedMap
 		&& data.blightedMap === item.blightedMap
@@ -157,6 +162,7 @@ function Item (itemDefinition)
 	this.corrupted = itemDefinition.corrupted;
 	this.fracturedItem = itemDefinition.fracturedItem;
 	this.synthesisedItem = itemDefinition.synthesisedItem;
+	this.replica = itemDefinition.replica;
 	this.influence = itemDefinition.influence;
 	this.shapedMap = itemDefinition.shapedMap;
 	this.blightedMap = itemDefinition.blightedMap;
@@ -179,19 +185,24 @@ function Item (itemDefinition)
 	this.previousMatchingRules = [];
 
 	this.getDisplayName = function() {
-	    var suffix = '';
+	    var prefix = '';
+		if (this.replica) {
+			prefix = 'Replica ';
+		}
+		else if (this.quality > 0) {
+			prefix = 'Superior ';
+		}
+		
+		var suffix = '';
 	    if (this.stackSize > 1) {
 	        suffix = ' (' + this.stackSize + ')';
 	    }
 
-		if (this.quality > 0) {
-			return 'Superior ' + this.baseType + suffix;
-		}
 		if (!this.identified) {
-			return this.name + suffix;
+			return prefix + this.name + suffix;
 		}
 		else {
-			return this.name + suffix + "<BR>" + this.baseType;
+			return prefix + this.name + suffix + "<BR>" + this.baseType;
 		}
 	}
 
@@ -210,7 +221,13 @@ function Item (itemDefinition)
 		var itemDiv = document.createElement( 'div' );
 		itemDiv.className = 'item';
 
-		var influenceIcon = Influence.getIconUrl( this.influence );
+		var influenceIcon = null;
+		if (this.replica) {
+			influenceIcon = 'img/ReplicaItemSymbol.png';
+		}
+		else {
+			influenceIcon = Influence.getIconUrl( this.influence );
+		}
         if (influenceIcon !== null) {
             var influenceImg = document.createElement( 'img' );
             influenceImg.src = influenceIcon;

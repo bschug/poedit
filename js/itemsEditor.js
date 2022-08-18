@@ -116,6 +116,7 @@ function ItemsEditor() {
             corrupted: 'boolean',
             fracturedItem: 'boolean',
             synthesisedItem: 'boolean',
+            replica: 'boolean',
             influence: 'string',
             shapedMap: 'boolean',
             blightedMap: 'boolean',
@@ -132,6 +133,7 @@ function ItemsEditor() {
             corrupted: false,
             fracturedItem: false,
             synthesisedItem: false,
+            replica: false,
             influence: 'None',
             shapedMap: false,
             blightedMap: false,
@@ -141,7 +143,7 @@ function ItemsEditor() {
         }
 
         for (var key in propertyTypes) {
-            if (!(key in data)) {
+            if (!(key in data) || data[key] === undefined) {
                 if (key in defaultValues) {
                     data[key] = defaultValues[key];
                 }
@@ -205,6 +207,7 @@ function ItemsEditor() {
             corrupted: item.corrupted,
             fracturedItem: item.fracturedItem,
             synthesisedItem: item.synthesisedItem,
+            replica: item.replica,
             influence: Influence.getName( item.influence ),
             shapedMap: item.shapedMap,
             blightedMap: item.blightedMap,
@@ -231,6 +234,7 @@ function ItemsEditor() {
             corrupted: data.corrupted,
             fracturedItem: data.fracturedItem,
             synthesisedItem: data.synthesisedItem,
+            replica: data.replica,
             influence: Influence.parse( data.influence ),
             shapedMap: data.shapedMap,
             blightedMap: data.blightedMap,

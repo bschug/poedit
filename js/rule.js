@@ -239,6 +239,15 @@ function BlightedMapFilter (value) {
     }
 }
 
+function ReplicaFilter (value) {
+	this.match = function (item) {
+		if (item.replica){
+			return true;
+		}
+		return item.replica === value;
+	}
+}
+
 // ------------------------ Modifiers --------------------------------------
 
 function SetBackgroundColorModifier (color) {

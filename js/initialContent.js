@@ -198,6 +198,20 @@ function getDefaultItems() {
             height: 3,
     		sockets: ['RRRRRR']
     	},
+		{
+			name: 'Abyssus',
+			identified: true,
+			replica: true,
+			itemLevel: 71,
+			dropLevel: 60,
+			quality: 0,
+			itemClass: 'Helmets',
+			baseType: 'Ezomyte Burgonet',
+			rarity: Rarity.Unique,
+			width: 2,
+			height: 2,
+			sockets: ['RRG']
+		},
         {
     		name: 'Occultist\'s Vestment',
     		itemLevel: 67,
